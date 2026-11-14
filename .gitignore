@@ -1,0 +1,21 @@
+# Python and experiment artifacts
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local data and generated outputs
+data/
+datasets/
+outputs/
+results/
+*.tif
+*.tiff
+*.h5
+*.hdf5
+*.pt
+*.pth
+*.onnx
