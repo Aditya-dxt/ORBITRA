@@ -53,24 +53,36 @@ Drone energy consumption during a verification sortie is modeled across five ope
 4. **Onboard Computation ($E_{\text{compute}}$):** Energy consumed by embedded inference hardware during verification analysis.
 5. **Telemetry / Comms ($E_{\text{comms}}$):** Energy consumed transmitting verification payloads and telemetry to the ground station.
 
-### 3.2 Starting Assumptions ($k=2$, Importance Weights)
-- **Kinematic Drag Exponent ($k = 2$):** Aerodynamic power scaling assumption where power relates quadratically to relative airspeed in transit calculations ($P \propto v^k$). Configurable starting assumption tagged `ASSUMED`.
-- **Operational Importance Weights ($w \in \{1, 2, 4\}$):**
+### 3.2 Starting Assumptions & Parameter Meanings
+- **Kinematic Drag Exponent ($k_{\text{drag}} = 2$):** Aerodynamic power scaling assumption where cruising power relates quadratically to airspeed ($P \propto v^2$). Tagged `ASSUMED`.
+- **Operational Importance Weights ($w \in \{1.0, 2.0, 4.0\}$):**
   - Low priority = $1.0$ (tagged `ASSUMED`)
   - Medium priority = $2.0$ (tagged `ASSUMED`)
   - High priority = $4.0$ (tagged `ASSUMED`)
 
-### 3.3 Return-Reserve Guardrail Rule
-To prevent drone loss, ARES enforces a mandatory safe-return reserve before committing to any action:
-1. **Post-Action Position Evaluation:** The return trajectory energy $E_{\text{return}}$ must be evaluated from the **candidate's coordinates after the proposed action**, not from the initial launch origin or current position.
-2. **Single Uncertainty Allowance ($\alpha_{\text{reserve}}$):** To prevent double-counting safety margins, a single reserve uncertainty multiplier (e.g., $\alpha = 0.20$ or $20\%$) is applied to nominal return energy.
-3. **Explicit Wind Margin ($E_{\text{wind}}$):** Headwinds and adverse gusts are parameterized as a dedicated additive energy parameter $E_{\text{wind}}$ (in Joules), cleanly decoupled from distance uncertainty.
+### 3.3 Return-Reserve Guardrail Rule & Reconciliation of $k=2$ vs. 20% Allowance
+The technical blueprint proposes:
+$$E_{\text{reserve}} = E_{\text{return}}(\mathbf{x}) + k \cdot \sigma_E$$
+where $k \in [1.5, 2.0]$ is a statistical coverage factor representing the number of standard deviations $\sigma_E$ of flight energy estimation uncertainty.
 
-$$\text{Reserve Required: } E_{\text{reserve}}(\mathbf{x}_{\text{after}}) = (1 + \alpha_{\text{reserve}}) \cdot E_{\text{return\_nominal}}(\mathbf{x}_{\text{after}} \to \mathbf{x}_{\text{home}}) + E_{\text{wind}}$$
+#### Reconciliation & Implementation:
+1. **Statistical Meaning of $k=2$:** In Gaussian estimation error models, $k = 2.0$ corresponds to a two-sided $\approx 95\%$ confidence coverage interval.
+2. **Reconciliation with 20% Relative Allowance:** When absolute standard deviation $\sigma_E$ (in Joules) is not yet calibrated from physical flight logs, uncertainty is modeled as a relative estimation error. Assuming a coefficient of variation $\text{CoV} = \sigma_E / E_{\text{return\_nominal}} \approx 10\%$ ($0.10$), applying coverage factor $k = 2.0$ gives:
+   $$\text{Uncertainty Allowance} = k \cdot \sigma_E = 2.0 \cdot (0.10 \cdot E_{\text{return\_nominal}}) = 0.20 \cdot E_{\text{return\_nominal}} \quad (20\%)$$
+3. **Flexible Single Allowance in Code:**
+   The implementation in `ReturnReserveCalculator` accepts either:
+   - **Absolute uncertainty standard deviation in Joules:** $\text{UncertaintyAllowance} = k \cdot \sigma_E$ (when $\sigma_E > 0$ is provided from flight telemetry).
+   - **Relative uncertainty fraction:** $\text{UncertaintyAllowance} = \alpha_{\text{margin}} \cdot E_{\text{return\_nominal}}$ (default $\alpha = 0.20$, representing $k=2$ with $10\%$ CoV).
+   **Crucially, only ONE uncertainty allowance is applied**; they are never combined to prevent double-counting.
+4. **Separate Additive Wind Margin ($E_{\text{wind}}$):** Headwinds and adverse gusts are parameterized as a dedicated additive energy parameter $E_{\text{wind}}$ (in Joules), cleanly decoupled from distance/flight-time uncertainty.
+5. **Post-Action Position Evaluation:** The return trajectory energy $E_{\text{return}}$ must be evaluated from the **candidate's coordinates after the proposed action**, not from the initial launch origin or current position.
+
+$$\text{Reserve Required: } E_{\text{reserve}}(\mathbf{x}_{\text{after}}) = E_{\text{return\_nominal}}(\mathbf{x}_{\text{after}} \to \mathbf{x}_{\text{home}}) + \text{UncertaintyAllowance} + E_{\text{wind}}$$
 
 $$\text{Feasibility Gate: } E_{\text{remaining}} - E_{\text{action\_total}} \ge E_{\text{reserve}}(\mathbf{x}_{\text{after}})$$
 
-If this inequality is violated, the action is marked **INFEASIBLE**, candidate status is marked **DEFERRED**, and the drone initiates immediate return to home base.
+> [!WARNING]
+> All reserve allowances, $k=2$ coverage, and wind margins are **unvalidated engineering assumptions** (`ASSUMED`), not certified physical safety guarantees. Flights must never rely on software simulation models for real-world aviation safety.
 
 ---
 

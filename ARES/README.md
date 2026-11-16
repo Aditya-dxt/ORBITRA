@@ -15,7 +15,7 @@ ARES/
 ├── README.md                     # Module documentation & running implementation log
 ├── docs/
 │   ├── DESIGN.md                 # Architecture, energy kinematics, reserve math, policy arena
-│   └── INTERFACE_PROPOSAL.md     # Provisional schema proposal for SatQuery owner review
+│   └── INTERFACE_PROPOSAL.md     # Provisional schema proposal & 7-point review checklist
 ├── ares/
 │   ├── schemas/                  # Pydantic validation (SatQueryRecord vs AresCandidateState)
 │   ├── energy/                   # Joule-based accounting, kinematics, post-action return reserve
@@ -31,8 +31,14 @@ ARES/
 
 1. **Internal Joules:** All energy math, kinematics, and internal states operate strictly in **Joules (J)**. Watt-hours (Wh) are derived solely for user display ($1\text{ Wh} = 3600\text{ J}$).
 2. **Decoupled Importance:** Operational importance weights ($\{1.0, 2.0, 4.0\}$) are assigned by mission rules and decoupled from vision confidence ($[0.0, 1.0]$). Tagged as `ASSUMED`.
-3. **Protected Return Reserve:** Evaluated strictly from the **candidate's coordinates after the action** back to home base, applying a **single uncertainty multiplier** ($\alpha_{\text{reserve}} = 20\%$) and an explicit headwind margin ($E_{\text{wind}}$ in Joules) to avoid double-counting.
-4. **Data Provenance:** Every metric, assumption, and outcome is explicitly categorized as `ASSUMED`, `SIMULATED`, or `MEASURED`. No fake real-world flights or measurements are claimed.
+3. **Protected Return Reserve & $k=2$ / 20% Reconciliation:**
+   - Evaluated strictly from the **candidate's coordinates after the action** back to home base.
+   - Enforces **exactly one uncertainty allowance** to prevent double-counting:
+     - When absolute standard deviation $\sigma_E$ (in Joules) is provided: $\text{Allowance} = k \cdot \sigma_E$ (with $k=2.0$ coverage factor).
+     - Otherwise, uses a relative return energy fraction $\alpha = 0.20$ ($20\%$), which reconciles $k=2.0$ with an assumed $10\%$ coefficient of variation ($\text{CoV} = 0.10 \implies k \times \text{CoV} = 2.0 \times 0.10 = 0.20$).
+   - A separate, explicit additive headwind margin parameter ($E_{\text{wind}}$ in Joules) is included.
+   - All parameters are unvalidated starting assumptions (`ASSUMED`), not physical flight safety guarantees.
+4. **Data Provenance:** Every metric, assumption, and outcome is explicitly categorized as `ASSUMED`, `SIMULATED`, or `MEASURED`. No physical drone flights or unverified measurements are claimed.
 
 ---
 
@@ -81,25 +87,15 @@ python -m unittest discover -s tests -v
 
 ## Running Implementation Log
 
-### Milestone 1 — 2026-11-16
-- **Summary:** Built initial ARES module foundation, provisional candidate schema validation, Joule-based energy accounting, post-action return-reserve guardrail, decision audit ledger, B0/B1 policies, and discrete-event synthetic simulator.
+### Reserve Rule Reconciliation & Interface Checklist — 2026-11-16
+- **Summary:** Reconciled $k=2$ statistical coverage with the 20% relative reserve allowance in `ares/energy/reserve.py` and `docs/DESIGN.md`, ensuring strict single-uncertainty math without double-counting. Expanded `docs/INTERFACE_PROPOSAL.md` with a comprehensive 7-point review checklist for the SatQuery lead.
 - **Changed Files:**
-  - `ARES/docs/DESIGN.md`: Technical architecture document.
-  - `ARES/docs/INTERFACE_PROPOSAL.md`: Provisional SatQuery-to-ARES contract proposal (`v1.0.0-provisional`).
-  - `ARES/ares/schemas/`: Data provenance, SatQueryCandidateRecord, AresCandidateState, and ActionType models.
-  - `ARES/ares/energy/`: Joule/Wh conversions, DroneEnergyModel ($k=2$), and ReturnReserveCalculator.
-  - `ARES/ares/ledger/`: DecisionLedger and DecisionRecord audit trail.
-  - `ARES/ares/policies/`: BasePolicy, B0FixedPassPolicy, B1UncertaintyFirstPolicy, and registry catalog.
-  - `ARES/ares/simulation/`: Synthetic candidate generator with `[SYNTHETIC EXAMPLE]` tags and MissionSimulator.
-  - `ARES/tests/`: 23 automated unit tests covering all components.
+  - `ARES/ares/energy/reserve.py`: Added explicit dual support for $k \cdot \sigma_E$ (Joules) or relative fraction ($0.20$), guaranteeing only one allowance is applied.
+  - `ARES/docs/DESIGN.md`: Documented reconciliation between $k=2$ coverage, $10\%$ relative flight uncertainty standard deviation, and the resulting $20\%$ allowance.
+  - `ARES/docs/INTERFACE_PROPOSAL.md`: Added 7-point review checklist (field names/types, calibration, uncertainty meaning, CRS/axis order, image pair IDs, schema versioning, missing-value handling).
+  - `ARES/tests/test_reserve.py`: Added test `test_k_sigma_explicit_energy_allowance_without_double_counting`.
 - **Checks Actually Performed:**
-  - Ran `python -m unittest discover -s ARES/tests -t ARES -v`: all 23 tests passed cleanly.
-  - Verified bounds checking: confidence and uncertainty outside $[0, 1]$ properly raise validation errors.
-  - Verified reserve constraint: actions that leave less than post-action return reserve trigger an immediate abort/deferral.
-  - Verified B1 ordering: confirmed candidates are sorted by highest uncertainty first.
-- **Known Limitations:**
-  - Synthetic data only: no real SatQuery detector records or paired image tiles are available yet.
-  - Simulation only: energy models and capture costs are theoretical starting assumptions (`ASSUMED`), not empirical flight measurements.
-  - Local Cartesian grid: 3D Euclidean distances are used; geodetic GIS transformations (EPSG:4326) will be added in Phase 4.
+  - Ran `python -m unittest discover -s ARES/tests -t ARES -v`: all 24 tests passed cleanly.
+  - Verified that setting `sigma_return_energy_joules` activates $k \cdot \sigma_E$ without adding the 20% relative fraction.
 - **Action Needed from SatQuery Owner:**
-  - Review `ARES/docs/INTERFACE_PROPOSAL.md` and confirm candidate schema fields, coordinate formats, and uncertainty normalization.
+  - Review the 7 checklist items in `ARES/docs/INTERFACE_PROPOSAL.md` once SatQuery begins candidate generation.

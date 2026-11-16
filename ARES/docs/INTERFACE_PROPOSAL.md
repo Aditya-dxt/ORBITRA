@@ -58,7 +58,7 @@ To support both planar local drone test grids and geographic satellite coordinat
 }
 ```
 
-*Note:* For early synthetic simulation milestones, `local_grid` (Euclidean distance in meters from home base $[0, 0, 0]$) is utilized for kinematics and transit energy calculations. Geodetic transformations will be supported in Phase 4.
+*Note:* For early synthetic simulation milestones, `local_grid` (Euclidean distance in meters from home base $[0, 0, 0]$ with axes $x=\text{East}$, $y=\text{North}$, $z=\text{Altitude}$) is utilized for kinematics and transit energy calculations. Geodetic transformations will be supported in Phase 4.
 
 ---
 
@@ -87,9 +87,14 @@ To support both planar local drone test grids and geographic satellite coordinat
 
 ---
 
-## 5. Handoff Contract Checklist for Review
+## 5. SatQuery Owner Review & Agreement Checklist
 
-- [ ] Confirm field names, types, and capitalization conventions.
-- [ ] Confirm uncertainty range semantics ($0.0 = \text{certain}$, $1.0 = \text{maximally uncertain}$).
-- [ ] Confirm coordinate conventions (local Cartesian meter grid for simulation vs. EPSG:4326 for GIS pairs).
-- [ ] Confirm error handling when fields are missing or out of bounds (strict validation with rejection vs. fallback defaults).
+Before finalizing this schema for end-to-end integration, the SatQuery and ARES module leads must confirm agreement on the following 7 technical items:
+
+- [ ] **1. Field Names & Types:** Confirm exact casing and types (`candidate_id: str`, `image_pair_id: str`, `confidence: float`, `uncertainty: float`, `region: dict`).
+- [ ] **2. Confidence Calibration:** Confirm whether `confidence` represents a calibrated probability $P(\text{real change}) \in [0.0, 1.0]$ (e.g. from temperature scaling or isotonic regression) or a raw neural network softmax score.
+- [ ] **3. Uncertainty Semantics:** Confirm mathematical meaning of `uncertainty` $\in [0.0, 1.0]$ (e.g., normalized predictive entropy, MC-dropout variance, or ensemble spread, where $0.0 = \text{completely certain}$ and $1.0 = \text{maximum entropy/ambiguity}$).
+- [ ] **4. Coordinate Reference, Axis Order & Units:** Confirm local coordinate axis convention ($x=\text{East}$, $y=\text{North}$, $z=\text{Altitude}$ in meters), geodetic axis order (`[latitude, longitude]` vs `[longitude, latitude]`), and pixel bounding box format (`[xmin, ymin, xmax, ymax]`).
+- [ ] **5. Image & Pair Identifiers:** Confirm standard string naming convention for `image_pair_id` (e.g., `pair_<site_id>_<date1>_<date2>`).
+- [ ] **6. Schema Versioning:** Confirm SemVer convention (`v1.0.0-provisional` transitioning to `v1.0.0` upon mutual agreement) and whether backward-compatible minor bumps are supported without code breakage.
+- [ ] **7. Missing-Value Behavior & Validation Errors:** Confirm strict fail-fast validation behavior (rejecting any candidate missing required coordinates or with out-of-bound confidence/uncertainty) versus providing fallback defaults.
