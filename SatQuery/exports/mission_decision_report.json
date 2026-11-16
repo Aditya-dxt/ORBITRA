@@ -1,0 +1,79 @@
+{
+  "mission_summary": {
+    "policy_id": "B1",
+    "policy_name": "Uncertainty First",
+    "provenance": "SIMULATED",
+    "initial_battery_joules": 74988.0,
+    "initial_battery_wh": 20.83,
+    "final_battery_joules": 53259.0,
+    "final_battery_wh": 14.79,
+    "total_energy_spent_actions_joules": 16429.0,
+    "total_energy_spent_actions_wh": 4.56,
+    "return_flight_energy_joules": 5300.0,
+    "return_flight_energy_wh": 1.47,
+    "safe_return_completed": true,
+    "candidates_total": 3,
+    "candidates_inspected": 3,
+    "candidates_deferred": 0,
+    "candidates_skipped": 0,
+    "ledger_records_count": 4,
+    "summary_message": "[SIMULATED] Sortie under B1 (Uncertainty First) completed: 3 inspected, 0 skipped, 0 deferred. Safe return: True."
+  },
+  "decisions": [
+    {
+      "step": 1,
+      "candidate_id": "cand_sq_levir_002",
+      "action": "RECAPTURE",
+      "cost_wh": 2.4761,
+      "reserve_feasible": true,
+      "reason": "Policy B1 selected RECAPTURE. Battery after action satisfies post-action return reserve"
+    },
+    {
+      "step": 2,
+      "candidate_id": "cand_sq_levir_001",
+      "action": "RECAPTURE",
+      "cost_wh": 0.9912,
+      "reserve_feasible": true,
+      "reason": "Policy B1 selected RECAPTURE. Battery after action satisfies post-action return reserve"
+    },
+    {
+      "step": 3,
+      "candidate_id": "cand_sq_levir_003",
+      "action": "RECAPTURE",
+      "cost_wh": 1.0963,
+      "reserve_feasible": true,
+      "reason": "Policy B1 selected RECAPTURE. Battery after action satisfies post-action return reserve"
+    },
+    {
+      "step": 4,
+      "candidate_id": "MISSION_RETURN",
+      "action": "RETURN_HOME",
+      "cost_wh": 1.4722,
+      "reserve_feasible": true,
+      "reason": "UAV transit from mission position back to home base"
+    }
+  ],
+  "candidates": [
+    {
+      "candidate_id": "cand_sq_levir_001",
+      "predicted_change": "vegetation_clearing",
+      "confidence": 0.9423,
+      "uncertainty": 0.3183,
+      "action_selected": "RECAPTURE"
+    },
+    {
+      "candidate_id": "cand_sq_levir_002",
+      "predicted_change": "vegetation_clearing",
+      "confidence": 0.9009,
+      "uncertainty": 0.4661,
+      "action_selected": "RECAPTURE"
+    },
+    {
+      "candidate_id": "cand_sq_levir_003",
+      "predicted_change": "vegetation_clearing",
+      "confidence": 0.9879,
+      "uncertainty": 0.0945,
+      "action_selected": "RECAPTURE"
+    }
+  ]
+}

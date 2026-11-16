@@ -72,6 +72,15 @@ class TestPipelineAndAresCompatibility(unittest.TestCase):
 
         self.assertEqual(len(ares_states), len(data))
 
+    @unittest.skipUnless(ARES_AVAILABLE, "ARES package not found in repository root")
+    def test_end_to_end_integration_example_runs(self):
+        """Tests that SatQuery/examples/end_to_end_integration.py runs successfully."""
+        from SatQuery.examples.end_to_end_integration import run_integration
+        sample_export = os.path.join(os.path.dirname(__file__), "..", "exports", "sample_candidates.json")
+        res = run_integration(candidates_json_path=sample_export, policy_name="B3", battery_wh=20.83)
+        self.assertTrue(res["report"].safe_return_completed)
+        self.assertGreater(len(res["decisions"]), 0)
+
 
 if __name__ == "__main__":
     unittest.main()
