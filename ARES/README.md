@@ -2,7 +2,7 @@
 
 **Owner:** Energy Modelling & Intelligent Decision-Making Lead  
 **System:** ORBITRA  
-**Status:** Milestone 2 Complete (Importance Scoring Model, Action Cost & Outcome Models, Reserve Reconciliation, B0/B1, Simulator)
+**Status:** Milestone 3 Complete (B2 Adaptive Computation Policy, Multi-Action Simulator, Configurable Thresholds)
 
 ARES consumes candidate change records produced by SatQuery and decides what to inspect, compute, defer, or stop while strictly respecting the mission energy budget and safe-return reserve.
 
@@ -22,7 +22,7 @@ ARES/
 │   ├── scoring/                  # Mission-importance scoring decoupled from model confidence
 │   ├── actions/                  # Action cost (J) & outcome models (RECAPTURE, STRONGER_MODEL, HUMAN_REVIEW)
 │   ├── ledger/                   # Structured decision audit trail (J, Wh, SIMULATED tags)
-│   ├── policies/                 # B0 (Fixed Pass) & B1 (Uncertainty First); B2-B4 as PLANNED
+│   ├── policies/                 # B0 (Fixed Pass), B1 (Uncertainty First), B2 (Adaptive Computation); B3–B4 PLANNED
 │   └── simulation/               # Discrete-event runner with [SYNTHETIC EXAMPLE]s
 └── tests/                        # Automated unit tests
 ```
@@ -68,7 +68,7 @@ python -m unittest discover -s tests -v
 | --- | --- | --- | --- |
 | **B0** | Fixed Pass | **Implemented (Milestone 1)** | Sequential candidate pass; baseline reference. |
 | **B1** | Uncertainty First | **Implemented (Milestone 1)** | Prioritizes targets with highest detector uncertainty. |
-| **B2** | Adaptive Computation | Planned (Milestone 3) | Dynamic edge vs. server inference depth per candidate. |
+| **B2** | Adaptive Computation | **Implemented (Milestone 3)** | 5-branch decision tree: accept / recapture / stronger-model / human-review / return-home. Configurable thresholds (`ASSUMED`). |
 | **B3** | Joint Policy | Planned (Milestone 4) | Joint candidate selection and action depth optimization. |
 | **B4** | Greedy Benefit-per-Energy | Planned (Milestone 5) | Marginal utility per Joule maximization ($\Delta B / \Delta E$). |
 | **P1** | Confidence Ranked | Supplementary Baseline | Compares against pure detector confidence ranking. |
@@ -84,7 +84,7 @@ python -m unittest discover -s tests -v
 | 1-3 | Review energy-aware UAV research; outline simulator; design doc & schema proposal | **Completed (Milestone 1)** |
 | 4-7 | Candidate-state architecture, Joules energy model, return-reserve rule, decision ledger, B0/B1 | **Completed (Milestone 1)** |
 | 8-11 | Importance scoring model and action cost/outcome models (RECAPTURE, STRONGER_MODEL, HUMAN_REVIEW) | **Completed (Milestone 2)** |
-| 12-15 | Energy model calibration and geodetic GIS coordinate integration | Planned |
+| 12-15 | B2 Adaptive Computation policy, multi-action simulator refactor | **Completed (Milestone 3)** |
 | 16-19 | Policies B2-B4 implementation and decision logging | Planned |
 | 20-23 | Matched-budget policy experiments and ablations | Planned |
 | 24-32 | Dashboard, end-to-end integration with SatQuery records, final reporting | Planned |
@@ -92,6 +92,31 @@ python -m unittest discover -s tests -v
 ---
 
 ## Running Implementation Log
+
+### Milestone 3: B2 Adaptive Computation — 2026-11-16
+- **Summary:** Implemented B2 Adaptive Computation policy with a 5-branch per-candidate decision tree (accept / recapture / stronger-model / human-review / return-home). Refactored `BasePolicy` to expose an overridable `select_action()` method, and rewrote the simulator to delegate action selection to the policy (enabling full multi-action support). Added configurable thresholds in `B2AdaptiveComputationConfig` (all tagged `ASSUMED`). Added B2 to the policy registry.
+- **Changed Files:**
+  - `ARES/ares/policies/base.py`: Added `ActionSelectionDecision` NamedTuple and `select_action()` default method.
+  - `ARES/ares/policies/b2_adaptive_computation.py`: New file — `B2AdaptiveComputationConfig`, `B2AdaptiveComputationPolicy`.
+  - `ARES/ares/policies/registry.py`: B2 status → `IMPLEMENTED`; `get_policy("B2")` returns `B2AdaptiveComputationPolicy()`.
+  - `ARES/ares/policies/__init__.py`: Exports for B2 symbols.
+  - `ARES/ares/simulation/simulator.py`: Rewrote `run_mission()` to call `policy.select_action()` and handle all `ActionType` values.
+  - `ARES/tests/test_b2_policy.py`: 6 new tests covering ranking, branch selection, downscaling, end-to-end simulation.
+  - `ARES/tests/test_policies.py`: Updated registry expectations for B2.
+  - `ARES/docs/DESIGN.md`: Added Section 6 (B2 decision logic, threshold table, reserve integration); updated policy arena table.
+  - `ARES/README.md`: Updated policy table, development sequence, and this log.
+- **Checks Actually Performed:**
+  - Ran `python -m unittest discover -s ARES/tests -t ARES -v`: **40/40 tests passed**.
+  - Confirmed B2 selects `NONE` for $u < 0.30$, `RECAPTURE` for high-$u$/high-$w$ within budget, `STRONGER_MODEL` for moderate-$u$, and downgrades correctly when recapture fails reserve.
+  - Confirmed B0/B1 simulator tests still pass with the refactored simulator.
+- **Known Limitations:**
+  - All decision thresholds (`low_uncertainty=0.30`, `high_uncertainty=0.65`, `min_battery_fraction=0.35`) are `ASSUMED` starting values — not calibrated from real flight experiments.
+  - Simulated outcome reduction rates (RECAPTURE ≈70%, STRONGER_MODEL ≈40%) are `SIMULATED` — no physical sensor measurements.
+  - No matched-budget policy comparison between B0, B1, and B2 yet — requires controlled experiments.
+  - SatQuery interface remains strictly provisional (`v1.0.0-provisional`).
+  - B3 and B4 remain `PLANNED`.
+- **Action Needed from SatQuery Owner:**
+  - Review `ARES/docs/INTERFACE_PROPOSAL.md` when SatQuery work begins.
 
 ### Milestone 2: Importance Scoring & Action Models — 2026-11-16
 - **Summary:** Added the mission-importance scoring engine (`ares/scoring/`) decoupled from detector confidence, and implemented formal action cost and simulated outcome models (`ares/actions/`) for `RECAPTURE`, `STRONGER_MODEL`, and `HUMAN_REVIEW`.

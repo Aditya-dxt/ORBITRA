@@ -10,6 +10,10 @@ from pydantic import BaseModel
 from ares.policies.base import BasePolicy
 from ares.policies.b0_fixed_pass import B0FixedPassPolicy
 from ares.policies.b1_uncertainty_first import B1UncertaintyFirstPolicy
+from ares.policies.b2_adaptive_computation import (
+    B2AdaptiveComputationConfig,
+    B2AdaptiveComputationPolicy,
+)
 
 
 class PolicyStatus(str, Enum):
@@ -44,23 +48,23 @@ POLICY_CATALOG: Dict[str, PolicyMetadata] = {
     "B2": PolicyMetadata(
         policy_id="B2",
         name="Adaptive Computation",
-        description="Dynamically selects computation depth (edge vs server/heavy) per candidate.",
-        status=PolicyStatus.PLANNED,
-        notes="Planned for Milestone 2."
+        description="Dynamically selects computation depth and verification modality per candidate.",
+        status=PolicyStatus.IMPLEMENTED,
+        notes="Adaptive compute policy checkpoint."
     ),
     "B3": PolicyMetadata(
         policy_id="B3",
         name="Joint Policy",
         description="Jointly selects target candidate and inspection/computation action level.",
         status=PolicyStatus.PLANNED,
-        notes="Planned for Milestone 3."
+        notes="Planned for Milestone 4."
     ),
     "B4": PolicyMetadata(
         policy_id="B4",
         name="Greedy Benefit per Energy",
         description="Prioritizes candidates maximizing marginal benefit per expended Joule (dB/dE).",
         status=PolicyStatus.PLANNED,
-        notes="Planned for Milestone 4."
+        notes="Planned for Milestone 5."
     ),
     "P1": PolicyMetadata(
         policy_id="P1",
@@ -93,11 +97,13 @@ def get_policy(policy_id: str) -> BasePolicy:
         return B0FixedPassPolicy()
     elif pid == "B1":
         return B1UncertaintyFirstPolicy()
+    elif pid == "B2":
+        return B2AdaptiveComputationPolicy()
     elif pid in POLICY_CATALOG:
         meta = POLICY_CATALOG[pid]
         raise NotImplementedError(
             f"Policy {pid} ('{meta.name}') is currently {meta.status.value}. "
-            f"Implemented policies in this milestone: B0, B1."
+            f"Implemented policies in this milestone: B0, B1, B2."
         )
     else:
         raise KeyError(f"Unknown policy ID: {policy_id}. Available: {list(POLICY_CATALOG.keys())}")

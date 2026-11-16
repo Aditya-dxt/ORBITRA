@@ -1,6 +1,6 @@
 # ARES Technical Design Document
 
-**Status:** Research Prototype — Architecture & Milestone 2 Foundation  
+**Status:** Research Prototype — Architecture & Milestone 3 B2 Adaptive Computation  
 **Module:** ARES (Energy Modelling & Intelligent Decision-Making Engine)  
 **Parent System:** ORBITRA  
 **Owner:** Energy Modelling & Intelligent Decision-Making Lead  
@@ -29,7 +29,7 @@ ARES implements and evaluates five primary policies across matched energy budget
 | --- | --- | --- | --- |
 | **B0** | Fixed Pass | Processes candidate targets in a predetermined sequence (e.g., discovery order / spatial index) until energy constraints or return reserves mandate return. | **Implemented (Milestone 1)** |
 | **B1** | Uncertainty First | Prioritizes candidates with highest detector uncertainty first, targeting areas where additional data/verification yields maximum entropy reduction. | **Implemented (Milestone 1)** |
-| **B2** | Adaptive Computation | Dynamically allocates computation depth (e.g., lightweight on-edge detector vs. high-capacity model) per candidate based on uncertainty and importance. | Planned |
+| **B2** | Adaptive Computation | Dynamically allocates computation depth (e.g., lightweight on-edge detector vs. high-capacity model) per candidate based on uncertainty and importance. | **Implemented (Milestone 3)** |
 | **B3** | Joint Policy | Jointly optimizes both the candidate visit sequence and the inspection/computation action level under total energy constraints. | Planned |
 | **B4** | Greedy Benefit-per-Energy | Selects the next action that maximizes the ratio of expected mission benefit to total energy expenditure: $\Delta B / \Delta E$. | Planned |
 
@@ -113,7 +113,66 @@ All costs are tagged `ASSUMED`. All simulated outcome records are tagged `SIMULA
 
 ---
 
-## 6. Decision Ledger & Traceability
+## 6. Policy B2: Adaptive Computation Decision Logic
+
+**Status:** Implemented (Milestone 3) — `ARES/ares/policies/b2_adaptive_computation.py`
+
+B2 replaces the uniform "always try RECAPTURE" rule of B0/B1 with a **5-branch decision tree** that selects the cheapest sufficient action for each candidate, trading off uncertainty reduction, mission importance, and remaining battery.
+
+### 6.1 Candidate Ranking
+
+Before the decision loop, B2 ranks candidates in **descending order of expected information gain proxy**:
+
+$$\text{rank score} = \text{importance\_weight} \times \text{uncertainty}$$
+
+Higher-importance and higher-uncertainty candidates are evaluated first, so budget is spent where it matters most.
+
+### 6.2 Per-Candidate Decision Tree (5 Branches)
+
+For each candidate with uncertainty $u$, importance weight $w$, and battery fraction $f = E_{\text{remaining}} / E_{\text{initial}}$:
+
+| Branch | Condition | Selected Action | Rationale |
+|--------|-----------|-----------------|-----------|
+| **1 — Accept** | $u < u_{\text{low}}$ | `NONE` (skip) | Detector is already confident enough; no verification value. |
+| **2 — Recapture** | $u \ge u_{\text{high}}$ **AND** $w \ge w_{\text{high}}$ **AND** $f \ge f_{\text{min\_flight}}$ **AND** reserve feasible | `RECAPTURE` | High uncertainty + high importance justifies full UAV sortie. |
+| **3 — Stronger Model** | RECAPTURE fails reserve, or $u_{\text{low}} \le u < u_{\text{high}}$ (moderate) | `STRONGER_MODEL` **if** reserve feasible | Compute-only verification; no flight cost; acceptable when recapture is blocked or uncertainty is moderate. |
+| **4 — Human Review** | Energy too tight for `STRONGER_MODEL` **AND** `allow_human_review_fallback` is `True` | `HUMAN_REVIEW` | Minimal energy ($50\ \text{J}$ comms); conclusive resolution via analyst queue. |
+| **5 — Return Home** | All actions infeasible | `RETURN_HOME` | Reserve guardrail forces mission abort. |
+
+### 6.3 Configurable Thresholds (`B2AdaptiveComputationConfig`)
+
+All thresholds are tagged **`ASSUMED`** — they are starting values, not calibrated from experiments.
+
+| Parameter | Default Value | Meaning | Tag |
+|-----------|---------------|---------|-----|
+| `low_uncertainty_threshold` | `0.30` | Below this, no action is taken (candidate accepted). | `ASSUMED` |
+| `high_uncertainty_threshold` | `0.65` | At or above this, recapture is considered if importance is high. | `ASSUMED` |
+| `high_importance_threshold` | `4.0` | Minimum importance weight for triggering recapture. | `ASSUMED` |
+| `min_battery_fraction_for_flight` | `0.35` | Minimum remaining battery fraction before flight actions are permitted. | `ASSUMED` |
+| `allow_human_review_fallback` | `True` | Whether to escalate to human review when compute budget is tight. | `ASSUMED` |
+
+### 6.4 Reserve Check Integration
+
+Every action candidate (RECAPTURE, STRONGER_MODEL, HUMAN_REVIEW) is passed through the existing `ReturnReserveCalculator.is_feasible()` guardrail before being selected:
+
+- **Flight actions** (`RECAPTURE`): post-action position is the **target candidate location** (drone will have flown there).
+- **Non-flight actions** (`STRONGER_MODEL`, `HUMAN_REVIEW`): post-action position is the **current drone position** (no movement).
+- If the check fails, the branch downgrades to the next cheaper action.
+
+> [!IMPORTANT]
+> The reserve guardrail is enforced unconditionally. No B2 path can override or bypass it. All energy margin values are `ASSUMED` and not certified safety guarantees.
+
+### 6.5 Simulated Outcome Assumptions (all `SIMULATED`)
+
+| Action | Uncertainty Reduction | Confidence Shift | Tag |
+|--------|-----------------------|-----------------|-----|
+| `RECAPTURE` | ×0.30 of original (≈70% cut) | Polarized toward ground truth | `SIMULATED` |
+| `STRONGER_MODEL` | ×0.60 of original (≈40% cut) | Refined calibration | `SIMULATED` |
+| `HUMAN_REVIEW` | Fixed $u' \le 0.05$ | Verified label assigned | `SIMULATED` |
+
+---
+
+## 7. Decision Ledger & Traceability
 
 Every decision evaluated by ARES produces an immutable `DecisionRecord` containing:
 - `timestamp`: ISO-8601 simulation timestamp.
@@ -133,7 +192,7 @@ Every decision evaluated by ARES produces an immutable `DecisionRecord` containi
 
 ---
 
-## 7. Candidate State Machine
+## 8. Candidate State Machine
 
 ```
         [ SatQuery Detection Record ]

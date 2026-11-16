@@ -4,6 +4,7 @@ import unittest
 
 from ares.policies.b0_fixed_pass import B0FixedPassPolicy
 from ares.policies.b1_uncertainty_first import B1UncertaintyFirstPolicy
+from ares.policies.b2_adaptive_computation import B2AdaptiveComputationPolicy
 from ares.policies.registry import (
     POLICY_CATALOG,
     PolicyStatus,
@@ -20,7 +21,7 @@ from ares.schemas.satquery_record import (
 
 
 class TestPolicies(unittest.TestCase):
-    """Verifies B0 (Fixed Pass), B1 (Uncertainty First), and the policy registry."""
+    """Verifies B0 (Fixed Pass), B1 (Uncertainty First), B2 (Adaptive Compute), and the policy registry."""
 
     def _create_candidate(self, cid: str, conf: float, unc: float, imp: ImportanceTier) -> AresCandidateState:
         record = SatQueryCandidateRecord(
@@ -86,7 +87,9 @@ class TestPolicies(unittest.TestCase):
 
         self.assertEqual(POLICY_CATALOG["B0"].status, PolicyStatus.IMPLEMENTED)
         self.assertEqual(POLICY_CATALOG["B1"].status, PolicyStatus.IMPLEMENTED)
-        self.assertEqual(POLICY_CATALOG["B2"].status, PolicyStatus.PLANNED)
+        self.assertEqual(POLICY_CATALOG["B2"].status, PolicyStatus.IMPLEMENTED)
+        self.assertEqual(POLICY_CATALOG["B3"].status, PolicyStatus.PLANNED)
+        self.assertEqual(POLICY_CATALOG["B4"].status, PolicyStatus.PLANNED)
         self.assertEqual(POLICY_CATALOG["P1"].status, PolicyStatus.SUPPLEMENTARY_BASELINE)
 
         # Factory returns instances of implemented policies
@@ -94,10 +97,12 @@ class TestPolicies(unittest.TestCase):
         self.assertIsInstance(p0, B0FixedPassPolicy)
         p1 = get_policy("B1")
         self.assertIsInstance(p1, B1UncertaintyFirstPolicy)
+        p2 = get_policy("B2")
+        self.assertIsInstance(p2, B2AdaptiveComputationPolicy)
 
         # Planned policy raises NotImplementedError with clear description
         with self.assertRaises(NotImplementedError):
-            get_policy("B2")
+            get_policy("B3")
 
 
 if __name__ == "__main__":

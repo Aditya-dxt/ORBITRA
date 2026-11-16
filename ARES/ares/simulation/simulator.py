@@ -7,6 +7,7 @@ All results and action outcomes are explicitly marked SIMULATED.
 from typing import List, Optional
 from pydantic import BaseModel, Field
 
+from ares.actions.models import ActionCostModel, ActionOutcomeSimulator
 from ares.energy.model import DroneEnergyModel, euclidean_distance
 from ares.energy.reserve import ReturnReserveCalculator
 from ares.energy.units import joules_to_wh
@@ -68,11 +69,15 @@ class MissionSimulator:
         self,
         config: Optional[MissionSimulationConfig] = None,
         energy_model: Optional[DroneEnergyModel] = None,
-        reserve_calc: Optional[ReturnReserveCalculator] = None
+        reserve_calc: Optional[ReturnReserveCalculator] = None,
+        cost_model: Optional[ActionCostModel] = None,
+        outcome_sim: Optional[ActionOutcomeSimulator] = None
     ):
         self.config = config or MissionSimulationConfig()
         self.energy_model = energy_model or DroneEnergyModel()
         self.reserve_calc = reserve_calc or ReturnReserveCalculator(energy_model=self.energy_model)
+        self.cost_model = cost_model or ActionCostModel(energy_model=self.energy_model)
+        self.outcome_sim = outcome_sim or ActionOutcomeSimulator()
         self.ledger = DecisionLedger()
 
     def run_mission(
@@ -93,69 +98,99 @@ class MissionSimulator:
                 break
 
             target = ranked_queue[0]
-            target_pos = target.detection.region.local_grid
-            if target_pos is None:
-                target_pos = LocalGridCoordinates(x_meters=100.0, y_meters=100.0, z_meters=50.0)
-
-            proposed_action = ActionType.RECAPTURE
-            estimated_action_cost = self.energy_model.estimate_recapture_action_energy(
+            
+            # Delegate action selection to policy under return-reserve constraint
+            decision = policy.select_action(
+                candidate=target,
                 current_pos=current_pos,
-                target_pos=target_pos,
-                hover_sec=self.config.hover_duration_sec
-            )
-            estimated_benefit = policy.evaluate_benefit(target)
-
-            # Evaluate return energy from post-action coordinates back to home base
-            reserve_check = self.reserve_calc.check_action_feasibility(
                 current_battery_joules=current_battery,
-                estimated_action_joules=estimated_action_cost,
-                post_action_pos=target_pos,
-                home_pos=home
+                cost_model=self.cost_model,
+                reserve_calc=self.reserve_calc,
+                home_pos=home,
+                initial_battery_joules=self.config.initial_battery_joules
             )
 
-            if reserve_check.is_feasible:
+            if decision.reserve_feasible:
                 battery_before = current_battery
-                current_battery -= estimated_action_cost
-                current_pos = target_pos
+                current_battery -= decision.estimated_cost_joules
+                
+                # Flight actions relocate drone; non-flight actions (STRONGER_MODEL, HUMAN_REVIEW) do not
+                if decision.is_flight_action:
+                    current_pos = decision.post_action_pos
 
-                target.status = CandidateStatus.INSPECTED
-                target.assigned_action = proposed_action
-                target.estimated_benefit = estimated_benefit
-                target.estimated_energy_joules = estimated_action_cost
-                target.reserve_feasible = True
-                target.decision_reason = "Reserve feasible: executed action"
+                required_reserve = self.reserve_calc.calculate_required_reserve_joules(
+                    decision.post_action_pos, home
+                )
 
-                target.evidence_history.append(
-                    EvidenceRecord(
-                        action=proposed_action,
-                        timestamp=target.detection.timestamp,
-                        energy_spent_joules=estimated_action_cost,
-                        simulated_outcome="[SIMULATED] High-resolution recapture completed successfully",
-                        notes=f"Post-action location: x={target_pos.x_meters}m, y={target_pos.y_meters}m"
+                if decision.action == ActionType.NONE:
+                    target.status = CandidateStatus.SKIPPED
+                    target.assigned_action = ActionType.NONE
+                    target.estimated_benefit = 0.0
+                    target.estimated_energy_joules = 0.0
+                    target.reserve_feasible = True
+                    target.decision_reason = decision.reason
+
+                    self.ledger.record_decision(
+                        candidate_id=target.detection.candidate_id,
+                        policy_id=policy.policy_id,
+                        selected_action=ActionType.NONE,
+                        action_energy_joules=0.0,
+                        battery_before_joules=battery_before,
+                        battery_after_joules=current_battery,
+                        required_reserve_joules=required_reserve,
+                        reserve_feasible=True,
+                        estimated_benefit=0.0,
+                        reason=decision.reason,
+                        simulated_outcome="[SIMULATED] Candidate accepted without additional compute",
+                        extra_metadata={"action": "NONE"}
                     )
-                )
+                else:
+                    target.status = CandidateStatus.INSPECTED
+                    target.assigned_action = decision.action
+                    target.estimated_benefit = decision.estimated_benefit
+                    target.estimated_energy_joules = decision.estimated_cost_joules
+                    target.reserve_feasible = True
+                    target.decision_reason = decision.reason
 
-                self.ledger.record_decision(
-                    candidate_id=target.detection.candidate_id,
-                    policy_id=policy.policy_id,
-                    selected_action=proposed_action,
-                    action_energy_joules=estimated_action_cost,
-                    battery_before_joules=battery_before,
-                    battery_after_joules=current_battery,
-                    required_reserve_joules=reserve_check.required_reserve_joules,
-                    reserve_feasible=True,
-                    estimated_benefit=estimated_benefit,
-                    reason=f"Policy {policy.policy_id} selected target. {reserve_check.reason}",
-                    simulated_outcome="[SIMULATED] Target inspected via recapture",
-                    extra_metadata={"target_pos": target_pos.model_dump()}
-                )
+                    # Generate simulated outcome
+                    sim_outcome = self.outcome_sim.simulate_outcome(decision.action, target)
+
+                    target.evidence_history.append(
+                        EvidenceRecord(
+                            action=decision.action,
+                            timestamp=target.detection.timestamp,
+                            energy_spent_joules=decision.estimated_cost_joules,
+                            simulated_outcome=sim_outcome.outcome_summary,
+                            notes=f"Post-action location: x={decision.post_action_pos.x_meters}m, y={decision.post_action_pos.y_meters}m"
+                        )
+                    )
+
+                    self.ledger.record_decision(
+                        candidate_id=target.detection.candidate_id,
+                        policy_id=policy.policy_id,
+                        selected_action=decision.action,
+                        action_energy_joules=decision.estimated_cost_joules,
+                        battery_before_joules=battery_before,
+                        battery_after_joules=current_battery,
+                        required_reserve_joules=required_reserve,
+                        reserve_feasible=True,
+                        estimated_benefit=decision.estimated_benefit,
+                        reason=decision.reason,
+                        simulated_outcome=sim_outcome.outcome_summary,
+                        extra_metadata={"post_action_pos": decision.post_action_pos.model_dump()}
+                    )
             else:
+                # Infeasible under return reserve constraint -> abort sortie to protect reserve
                 target.status = CandidateStatus.DEFERRED
                 target.assigned_action = ActionType.RETURN_HOME
-                target.estimated_benefit = estimated_benefit
-                target.estimated_energy_joules = estimated_action_cost
+                target.estimated_benefit = decision.estimated_benefit
+                target.estimated_energy_joules = decision.estimated_cost_joules
                 target.reserve_feasible = False
-                target.decision_reason = f"Return reserve guardrail triggered: {reserve_check.reason}"
+                target.decision_reason = decision.reason
+
+                required_reserve = self.reserve_calc.calculate_required_reserve_joules(
+                    decision.post_action_pos, home
+                )
 
                 self.ledger.record_decision(
                     candidate_id=target.detection.candidate_id,
@@ -164,10 +199,10 @@ class MissionSimulator:
                     action_energy_joules=0.0,
                     battery_before_joules=current_battery,
                     battery_after_joules=current_battery,
-                    required_reserve_joules=reserve_check.required_reserve_joules,
+                    required_reserve_joules=required_reserve,
                     reserve_feasible=False,
                     estimated_benefit=0.0,
-                    reason=reserve_check.reason,
+                    reason=decision.reason,
                     simulated_outcome="[SIMULATED] Sortie terminated to guarantee safe return reserve",
                     extra_metadata={"deferred_candidate": target.detection.candidate_id}
                 )
@@ -224,7 +259,7 @@ class MissionSimulator:
             ledger_records_count=len(self.ledger.records),
             summary_message=(
                 f"[SIMULATED] Sortie under {policy.policy_id} ({policy.policy_name}) completed: "
-                f"{inspected_count}/{len(active_candidates)} inspected, {deferred_count} deferred. "
+                f"{inspected_count} inspected, {skipped_count} skipped, {deferred_count} deferred. "
                 f"Safe return: {safe_return}."
             )
         )
