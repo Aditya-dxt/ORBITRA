@@ -7,6 +7,10 @@ from ares.policies.b2_adaptive_computation import (
     B2AdaptiveComputationConfig,
     B2AdaptiveComputationPolicy,
 )
+from ares.policies.b3_joint_policy import (
+    B3JointPolicyConfig,
+    B3JointPolicy,
+)
 from ares.policies.registry import (
     POLICY_CATALOG,
     PolicyMetadata,
@@ -22,9 +26,12 @@ __all__ = [
     "B1UncertaintyFirstPolicy",
     "B2AdaptiveComputationConfig",
     "B2AdaptiveComputationPolicy",
+    "B3JointPolicyConfig",
+    "B3JointPolicy",
     "POLICY_CATALOG",
     "PolicyMetadata",
     "PolicyStatus",
     "get_policy",
     "list_policies",
 ]
+

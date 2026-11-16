@@ -1,6 +1,6 @@
 # ARES Technical Design Document
 
-**Status:** Research Prototype — Architecture & Milestone 3 B2 Adaptive Computation  
+**Status:** Research Prototype — Architecture & Milestone 4 B3 Joint Policy  
 **Module:** ARES (Energy Modelling & Intelligent Decision-Making Engine)  
 **Parent System:** ORBITRA  
 **Owner:** Energy Modelling & Intelligent Decision-Making Lead  
@@ -30,7 +30,7 @@ ARES implements and evaluates five primary policies across matched energy budget
 | **B0** | Fixed Pass | Processes candidate targets in a predetermined sequence (e.g., discovery order / spatial index) until energy constraints or return reserves mandate return. | **Implemented (Milestone 1)** |
 | **B1** | Uncertainty First | Prioritizes candidates with highest detector uncertainty first, targeting areas where additional data/verification yields maximum entropy reduction. | **Implemented (Milestone 1)** |
 | **B2** | Adaptive Computation | Dynamically allocates computation depth (e.g., lightweight on-edge detector vs. high-capacity model) per candidate based on uncertainty and importance. | **Implemented (Milestone 3)** |
-| **B3** | Joint Policy | Jointly optimizes both the candidate visit sequence and the inspection/computation action level under total energy constraints. | Planned |
+| **B3** | Joint Policy | Jointly optimizes both the candidate visit sequence and the inspection/computation action level under total energy constraints. | **Implemented (Milestone 4)** |
 | **B4** | Greedy Benefit-per-Energy | Selects the next action that maximizes the ratio of expected mission benefit to total energy expenditure: $\Delta B / \Delta E$. | Planned |
 
 ### 2.2 Supplementary Baselines (P1, P2, P5)
@@ -172,7 +172,83 @@ Every action candidate (RECAPTURE, STRONGER_MODEL, HUMAN_REVIEW) is passed throu
 
 ---
 
-## 7. Decision Ledger & Traceability
+## 7. Policy B3: Joint Candidate-and-Action Selection Logic
+
+**Status:** Implemented (Milestone 4) — `ARES/ares/policies/b3_joint_policy.py`
+
+B3 is the first ARES policy that **jointly** decides both _which_ candidate to handle and _which_ action to apply, in a single objective evaluation per step. B0, B1, and B2 all first rank candidates by some criterion (input order / uncertainty / information-gain proxy) and then separately decide an action. B3 collapses both decisions into one.
+
+### 7.1 Decision Loop
+
+Each mission step proceeds as:
+
+1. **Enumerate all PENDING candidates** in the pool.
+2. **For each `(candidate, action)` pair**, where action ∈ {`RECAPTURE`, `STRONGER_MODEL`, `HUMAN_REVIEW`}:
+   - Estimate the action's energy cost in Joules using the existing `ActionCostModel`.
+   - Apply the **return-reserve guardrail** (`ReturnReserveCalculator.check_action_feasibility`). Infeasible pairs are **unconditionally excluded** — B3 never bypasses the guardrail.
+   - Compute the **joint score** (see §7.2).
+3. **Select the globally highest-scoring feasible pair** and execute that action on that candidate.
+4. All other candidates remain `PENDING` until the next step.
+5. Repeat until no feasible pair remains → trigger safe return.
+
+> [!IMPORTANT]
+> The reserve guardrail is enforced before scoring. No `(candidate, action)` pair that fails the reserve check can be selected, regardless of its joint score.
+
+### 7.2 Joint Objective Function
+
+$$\text{score}(c, a) = \frac{w_c \cdot u_c \cdot r_a}{\max(E_a,\ E_{\min})}$$
+
+| Symbol | Meaning | Tag |
+|--------|---------|-----|
+| $w_c$ | Candidate importance weight ($1.0$, $2.0$, or $4.0$) | `ASSUMED` |
+| $u_c$ | Prior detector uncertainty $\in [0, 1]$ | From SatQuery |
+| $r_a$ | Expected fractional uncertainty reduction for action $a$ | `ASSUMED` |
+| $E_a$ | Estimated action energy cost in Joules | `ASSUMED` |
+| $E_{\min}$ | Minimum denominator guard (default $50\ \text{J}$) preventing division-by-zero for very cheap actions | `ASSUMED` |
+
+**Interpretation:** A candidate-action pair scores high when it is important ($w_c$), uncertain ($u_c$), reduces uncertainty efficiently ($r_a$), and is energy-cheap relative to its benefit ($E_a$ small). This is an instantaneous greedy objective; B3 does not solve a global trajectory optimisation problem.
+
+**Relationship to B4:** The B4 (Greedy Benefit-per-Energy, Planned) policy is defined to maximise marginal utility per Joule across the full action space. B3 uses the same ratio structure but evaluates it jointly over the `(candidate × action)` space at each step. When B4 is implemented, the two will be compared experimentally under matched energy budgets.
+
+### 7.3 Assumed Uncertainty Reduction Rates (all `ASSUMED`)
+
+| Action | Expected Reduction Fraction $r_a$ | Tag |
+|--------|----------------------------------|-----|
+| `RECAPTURE` | $0.70$ (≈70% reduction) | `ASSUMED` |
+| `STRONGER_MODEL` | $0.40$ (≈40% reduction) | `ASSUMED` |
+| `HUMAN_REVIEW` | $0.95$ (≈95% reduction — conclusive analyst resolution) | `ASSUMED` |
+
+### 7.4 Special Cases
+
+| Situation | B3 Behaviour |
+|-----------|-------------|
+| Candidate's baseline benefit $w_c \cdot u_c < \text{min\_benefit\_to\_act}$ (default $0.05$) | Accepted as-is (`NONE`), no additional compute |
+| All `(candidate, action)` pairs infeasible under reserve | `RETURN_HOME` — sortie terminates |
+| `allow_human_review = False` in config | `HUMAN_REVIEW` excluded from the action space |
+
+### 7.5 Configurability (`B3JointPolicyConfig`)
+
+All parameters are tagged **`ASSUMED`** — starting engineering estimates, not calibrated from experiments.
+
+| Parameter | Default | Tag |
+|-----------|---------|-----|
+| `recapture_uncertainty_reduction` | `0.70` | `ASSUMED` |
+| `stronger_model_uncertainty_reduction` | `0.40` | `ASSUMED` |
+| `human_review_uncertainty_reduction` | `0.95` | `ASSUMED` |
+| `min_benefit_to_act` | `0.05` | `ASSUMED` |
+| `min_cost_denominator_joules` | `50.0` | `ASSUMED` |
+| `allow_human_review` | `True` | `ASSUMED` |
+
+### 7.6 Complexity
+
+$O(C \times A)$ evaluations per step, where $C$ = number of pending candidates and $A$ = number of action types (3 substantive). This is acceptable for a research prototype with tens of candidates. It is not a polynomial-time global optimiser.
+
+> [!WARNING]
+> All B3 scores, reduction rates, and decisions are `ASSUMED`/`SIMULATED`. No matched-budget comparison between B3 and other policies has been run. Policy performance claims require controlled experiments.
+
+---
+
+## 8. Decision Ledger & Traceability
 
 Every decision evaluated by ARES produces an immutable `DecisionRecord` containing:
 - `timestamp`: ISO-8601 simulation timestamp.
@@ -192,7 +268,7 @@ Every decision evaluated by ARES produces an immutable `DecisionRecord` containi
 
 ---
 
-## 8. Candidate State Machine
+## 9. Candidate State Machine
 
 ```
         [ SatQuery Detection Record ]

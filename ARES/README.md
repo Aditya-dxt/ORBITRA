@@ -2,7 +2,7 @@
 
 **Owner:** Energy Modelling & Intelligent Decision-Making Lead  
 **System:** ORBITRA  
-**Status:** Milestone 3 Complete (B2 Adaptive Computation Policy, Multi-Action Simulator, Configurable Thresholds)
+**Status:** Milestone 4 Complete (B3 Joint Policy — joint candidate-and-action selection with benefit/cost objective)
 
 ARES consumes candidate change records produced by SatQuery and decides what to inspect, compute, defer, or stop while strictly respecting the mission energy budget and safe-return reserve.
 
@@ -22,7 +22,7 @@ ARES/
 │   ├── scoring/                  # Mission-importance scoring decoupled from model confidence
 │   ├── actions/                  # Action cost (J) & outcome models (RECAPTURE, STRONGER_MODEL, HUMAN_REVIEW)
 │   ├── ledger/                   # Structured decision audit trail (J, Wh, SIMULATED tags)
-│   ├── policies/                 # B0 (Fixed Pass), B1 (Uncertainty First), B2 (Adaptive Computation); B3–B4 PLANNED
+│   ├── policies/                 # B0, B1, B2 (Implemented); B3 Joint (Implemented Milestone 4); B4 PLANNED
 │   └── simulation/               # Discrete-event runner with [SYNTHETIC EXAMPLE]s
 └── tests/                        # Automated unit tests
 ```
@@ -69,7 +69,7 @@ python -m unittest discover -s tests -v
 | **B0** | Fixed Pass | **Implemented (Milestone 1)** | Sequential candidate pass; baseline reference. |
 | **B1** | Uncertainty First | **Implemented (Milestone 1)** | Prioritizes targets with highest detector uncertainty. |
 | **B2** | Adaptive Computation | **Implemented (Milestone 3)** | 5-branch decision tree: accept / recapture / stronger-model / human-review / return-home. Configurable thresholds (`ASSUMED`). |
-| **B3** | Joint Policy | Planned (Milestone 4) | Joint candidate selection and action depth optimization. |
+| **B3** | Joint Policy | **Implemented (Milestone 4)** | Jointly evaluates all (candidate, action) pairs per step; selects globally best-scoring feasible pair under reserve constraint. |
 | **B4** | Greedy Benefit-per-Energy | Planned (Milestone 5) | Marginal utility per Joule maximization ($\Delta B / \Delta E$). |
 | **P1** | Confidence Ranked | Supplementary Baseline | Compares against pure detector confidence ranking. |
 | **P2** | Importance Ranked | Supplementary Baseline | Compares against pure importance ranking. |
@@ -85,13 +85,41 @@ python -m unittest discover -s tests -v
 | 4-7 | Candidate-state architecture, Joules energy model, return-reserve rule, decision ledger, B0/B1 | **Completed (Milestone 1)** |
 | 8-11 | Importance scoring model and action cost/outcome models (RECAPTURE, STRONGER_MODEL, HUMAN_REVIEW) | **Completed (Milestone 2)** |
 | 12-15 | B2 Adaptive Computation policy, multi-action simulator refactor | **Completed (Milestone 3)** |
-| 16-19 | Policies B2-B4 implementation and decision logging | Planned |
+| 16-19 | B3 Joint Policy: joint candidate-and-action selection with benefit/cost objective | **Completed (Milestone 4)** |
+| 20-23 | Policies B4 implementation and decision logging | Planned |
 | 20-23 | Matched-budget policy experiments and ablations | Planned |
 | 24-32 | Dashboard, end-to-end integration with SatQuery records, final reporting | Planned |
 
 ---
 
 ## Running Implementation Log
+
+### Milestone 4: B3 Joint Policy — 2026-11-16
+- **Summary:** Implemented B3 Joint Policy — the first ARES policy that jointly decides both _which_ candidate to handle and _which_ action to apply in a single step. At each mission step, B3 enumerates all PENDING `(candidate, action)` pairs, applies the return-reserve guardrail to exclude infeasible pairs, scores each feasible pair using the joint objective `score = w × u × r_a / max(E_a, E_min)`, and executes the globally highest-scoring pair. Configured thresholds and reduction rates are `ASSUMED`. B4 remains `PLANNED`.
+- **Changed Files:**
+  - `ARES/ares/policies/b3_joint_policy.py`: New file — `B3JointPolicyConfig`, `B3JointPolicy` with joint objective, `run_joint_step()` interface, and `select_action()` single-candidate compatibility path.
+  - `ARES/ares/policies/registry.py`: B3 status → `IMPLEMENTED`; `get_policy("B3")` returns `B3JointPolicy()`; `get_policy("B4")` raises `NotImplementedError`.
+  - `ARES/ares/policies/__init__.py`: Added `B3JointPolicyConfig`, `B3JointPolicy` exports.
+  - `ARES/tests/test_b3_policy.py`: New file — 11 tests covering ranking, benefit formula, joint score formula, best-pair selection, reserve guardrail enforcement, low-benefit NONE acceptance, single-candidate compatibility, end-to-end simulation, and config customisation.
+  - `ARES/tests/test_policies.py`: Updated to expect B3 `IMPLEMENTED`, `get_policy("B3")` → `B3JointPolicy`, `get_policy("B4")` raises `NotImplementedError`.
+  - `ARES/docs/DESIGN.md`: New Section 7 — B3 decision loop, joint objective formula and table, uncertainty reduction assumptions, special cases, configurability table, complexity note; policy arena table updated; Section 8 → 9 renumbered.
+  - `ARES/README.md`: Policy table (B3 → Implemented), development sequence, Milestone 4 log.
+- **Checks Actually Performed:**
+  - Ran `python -m unittest discover -s ARES/tests -t ARES -v`: **51/51 tests passed**.
+  - Confirmed: B3 selects from the higher-importance candidate when two candidates have equal uncertainty and distance.
+  - Confirmed: `allow_human_review=False` config excludes HUMAN_REVIEW from the action space.
+  - Confirmed: reserve guardrail prevents RECAPTURE to 2000m candidate with 5000 J budget.
+  - Confirmed: candidate with benefit < `min_benefit_to_act` (0.05) is accepted as NONE.
+  - Confirmed: B0, B1, B2 simulator tests still pass with no changes to the simulator.
+- **Known Limitations:**
+  - Joint score uses an **instantaneous greedy objective** per step — not a global trajectory optimisation. B3 does not look ahead across multiple future steps.
+  - All uncertainty reduction rates (`RECAPTURE` 70%, `STRONGER_MODEL` 40%, `HUMAN_REVIEW` 95%) are `ASSUMED` starting values — not measured from physical experiments.
+  - `HUMAN_REVIEW` (50 J, 95% reduction) tends to dominate the joint score due to the low energy denominator. This reflects the cheapness of queuing for human review in the model; tune `allow_human_review` and `min_cost_denominator_joules` to adjust.
+  - No matched-budget policy comparison between B0, B1, B2, and B3 yet — requires controlled experiments.
+  - SatQuery interface remains strictly provisional (`v1.0.0-provisional`).
+  - **B4 remains `PLANNED`.**
+- **Action Needed from SatQuery Owner:**
+  - Review `ARES/docs/INTERFACE_PROPOSAL.md` when SatQuery work begins.
 
 ### Milestone 3: B2 Adaptive Computation — 2026-11-16
 - **Summary:** Implemented B2 Adaptive Computation policy with a 5-branch per-candidate decision tree (accept / recapture / stronger-model / human-review / return-home). Refactored `BasePolicy` to expose an overridable `select_action()` method, and rewrote the simulator to delegate action selection to the policy (enabling full multi-action support). Added configurable thresholds in `B2AdaptiveComputationConfig` (all tagged `ASSUMED`). Added B2 to the policy registry.
