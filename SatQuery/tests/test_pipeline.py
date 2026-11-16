@@ -1,0 +1,77 @@
+"""Integration tests for SatQuery pipeline and cross-module ARES compatibility."""
+
+import json
+import os
+import sys
+import unittest
+
+from SatQuery.satquery.pipeline import SatQueryPipeline, run_pipeline_demo
+from SatQuery.satquery.schemas.candidate_record import SatQueryCandidateRecord
+
+# Check ARES import capability
+ARES_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "ARES"))
+if ARES_PATH not in sys.path:
+    sys.path.insert(0, ARES_PATH)
+
+try:
+    from ares.schemas.satquery_record import SatQueryCandidateRecord as AresCandidateRecord
+    from ares.schemas.candidate_state import AresCandidateState
+    ARES_AVAILABLE = True
+except ImportError:
+    ARES_AVAILABLE = False
+
+
+class TestPipelineAndAresCompatibility(unittest.TestCase):
+    """Verifies end-to-end pipeline export and direct loading into ARES."""
+
+    def test_pipeline_demo_runs_and_exports_valid_records(self):
+        export_path = os.path.join(os.path.dirname(__file__), "test_export.json")
+        try:
+            results = run_pipeline_demo(output_json=export_path)
+            self.assertGreater(len(results["candidates"]), 0)
+            self.assertTrue(os.path.exists(export_path))
+
+            # Inspect exported file
+            with open(export_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+
+            self.assertIsInstance(data, list)
+            self.assertEqual(len(data), len(results["candidates"]))
+
+            # Verify SatQuery schema validation
+            for record_dict in data:
+                record = SatQueryCandidateRecord(**record_dict)
+                self.assertTrue(record.candidate_id.startswith("cand_sq_"))
+                self.assertIsNotNone(record.region.local_grid)
+        finally:
+            if os.path.exists(export_path):
+                os.remove(export_path)
+
+    @unittest.skipUnless(ARES_AVAILABLE, "ARES package not found in repository root")
+    def test_ares_direct_loading_and_state_wrapping(self):
+        """Ensures ARES can ingest SatQuery exports directly without manual edits."""
+        export_path = os.path.join(os.path.dirname(__file__), "..", "exports", "sample_candidates.json")
+        self.assertTrue(os.path.exists(export_path), f"Expected export at {export_path}")
+
+        with open(export_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        self.assertGreater(len(data), 0)
+        ares_states = []
+
+        for record_dict in data:
+            # 1. Direct validation via ARES SatQueryCandidateRecord
+            ares_record = AresCandidateRecord(**record_dict)
+            self.assertEqual(ares_record.candidate_id, record_dict["candidate_id"])
+
+            # 2. Wrapping in AresCandidateState
+            state = AresCandidateState(detection=ares_record)
+            self.assertEqual(state.status.value, "PENDING")
+            self.assertIsNotNone(state.importance_weight)
+            ares_states.append(state)
+
+        self.assertEqual(len(ares_states), len(data))
+
+
+if __name__ == "__main__":
+    unittest.main()
