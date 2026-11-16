@@ -1,6 +1,6 @@
 # ARES Technical Design Document
 
-**Status:** Research Prototype — Initial Architecture Foundation  
+**Status:** Research Prototype — Architecture & Milestone 2 Foundation  
 **Module:** ARES (Energy Modelling & Intelligent Decision-Making Engine)  
 **Parent System:** ORBITRA  
 **Owner:** Energy Modelling & Intelligent Decision-Making Lead  
@@ -86,7 +86,34 @@ $$\text{Feasibility Gate: } E_{\text{remaining}} - E_{\text{action\_total}} \ge 
 
 ---
 
-## 4. Decision Ledger & Traceability
+## 4. Mission Importance Scoring Model
+
+Mission importance captures human and institutional priority, reflecting how costly an unverified or missed change is at a specific site. It is modeled independently of vision confidence:
+
+1. **Category Mapping:** Semantic classes map to base tiers $\{1.0, 2.0, 4.0\}$:
+   - **High ($4.0$):** `government_land_encroachment`, `industrial_spill`, `water_body_change`, `critical_infrastructure`.
+   - **Medium ($2.0$):** `flooded_cropland`, `vegetation_clearance`, `road_obstruction`.
+   - **Low ($1.0$):** `new_construction`, `seasonal_vegetation`, `ordinary_land`.
+2. **Zone Multipliers:** Geographic zoning polygons apply scalar multipliers (e.g., $1.5\times$ for protected conservation reserves, $2.0\times$ for defence buffer zones).
+3. **Tagging:** Assigned weights are stored in `AresCandidateState.importance_weight` and tagged `ASSUMED`.
+
+---
+
+## 5. Action Cost & Outcome Models
+
+ARES models three distinct evidence-acquisition and verification actions:
+
+| Action | Physical / Compute Modality | Energy Breakdown (Joules) | Duration / Latency | Capacity Cost | Simulated Outcome Behavior |
+| --- | --- | --- | --- | --- | --- |
+| **`RECAPTURE`** | UAV physical sortie | Flight transit ($P \cdot d / v$) + Hover ($2200\text{ J}$) + Sensor ($450\text{ J}$) + Compute ($350\text{ J}$) + Comms ($120\text{ J}$). | Flight time + $10\text{s}$ hover + $1\text{s}$. | $0.0$ units | Cuts uncertainty by $\sim 70\%$; polarizes confidence toward ground truth. |
+| **`STRONGER_MODEL`** | Edge accelerator or ground offload | Heavy inference compute ($1200\text{ J}$) + image tile offload comms ($250\text{ J}$). **Zero flight/hover energy.** | $2.5\text{s}$ inference latency. | $0.0$ units | Cuts uncertainty by $\sim 40\%$; refines confidence calibration. |
+| **`HUMAN_REVIEW`** | Analyst triage queue | Alert packet telemetry transmission ($50\text{ J}$). **Zero flight/hover energy.** | Queue turnaround (assumed $180\text{s}$). | $1.0$ queue slot | Resolves uncertainty conclusively ($u' \le 0.05$); assigns verified ground truth label. |
+
+All costs are tagged `ASSUMED`. All simulated outcome records are tagged `SIMULATED` and prefixed with `[SIMULATED]`.
+
+---
+
+## 6. Decision Ledger & Traceability
 
 Every decision evaluated by ARES produces an immutable `DecisionRecord` containing:
 - `timestamp`: ISO-8601 simulation timestamp.
@@ -106,7 +133,7 @@ Every decision evaluated by ARES produces an immutable `DecisionRecord` containi
 
 ---
 
-## 5. Candidate State Machine
+## 7. Candidate State Machine
 
 ```
         [ SatQuery Detection Record ]
