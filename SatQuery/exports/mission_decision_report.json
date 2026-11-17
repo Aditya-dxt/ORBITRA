@@ -1,48 +1,48 @@
 {
   "mission_summary": {
-    "policy_id": "B3",
-    "policy_name": "Joint Policy",
+    "policy_id": "B2",
+    "policy_name": "Adaptive Computation",
     "provenance": "SIMULATED",
     "initial_battery_joules": 74988.0,
     "initial_battery_wh": 20.83,
-    "final_battery_joules": 74838.0,
-    "final_battery_wh": 20.79,
-    "total_energy_spent_actions_joules": 150.0,
-    "total_energy_spent_actions_wh": 0.04,
+    "final_battery_joules": 72088.0,
+    "final_battery_wh": 20.02,
+    "total_energy_spent_actions_joules": 2900.0,
+    "total_energy_spent_actions_wh": 0.81,
     "return_flight_energy_joules": 0.0,
     "return_flight_energy_wh": 0.0,
     "safe_return_completed": true,
     "candidates_total": 3,
-    "candidates_inspected": 3,
+    "candidates_inspected": 2,
     "candidates_deferred": 0,
-    "candidates_skipped": 0,
+    "candidates_skipped": 1,
     "ledger_records_count": 4,
-    "summary_message": "[SIMULATED] Sortie under B3 (Joint Policy) completed: 3 inspected, 0 skipped, 0 deferred. Safe return: True."
+    "summary_message": "[SIMULATED] Sortie under B2 (Adaptive Computation) completed: 2 inspected, 1 skipped, 0 deferred. Safe return: True."
   },
   "decisions": [
     {
       "step": 1,
-      "candidate_id": "cand_sq_levir_001",
-      "action": "HUMAN_REVIEW",
-      "cost_wh": 0.0139,
+      "candidate_id": "cand_sq_levir_002",
+      "action": "STRONGER_MODEL",
+      "cost_wh": 0.4028,
       "reserve_feasible": true,
-      "reason": "[B3-JOINT] Best joint score 0.0121 for candidate 'cand_sq_levir_001' + HUMAN_REVIEW. w=2.0, u=0.32, reduction=95%, cost=50J"
+      "reason": "Moderate uncertainty (0.47) warrants STRONGER_MODEL inference (zero flight energy consumed)."
     },
     {
       "step": 2,
-      "candidate_id": "cand_sq_levir_002",
-      "action": "HUMAN_REVIEW",
-      "cost_wh": 0.0139,
+      "candidate_id": "cand_sq_levir_001",
+      "action": "STRONGER_MODEL",
+      "cost_wh": 0.4028,
       "reserve_feasible": true,
-      "reason": "[B3-JOINT] Best joint score 0.0177 for candidate 'cand_sq_levir_002' + HUMAN_REVIEW. w=2.0, u=0.47, reduction=95%, cost=50J"
+      "reason": "Moderate uncertainty (0.32) warrants STRONGER_MODEL inference (zero flight energy consumed)."
     },
     {
       "step": 3,
       "candidate_id": "cand_sq_levir_003",
-      "action": "HUMAN_REVIEW",
-      "cost_wh": 0.0139,
+      "action": "NONE",
+      "cost_wh": 0.0,
       "reserve_feasible": true,
-      "reason": "[B3-JOINT] Best joint score 0.0036 for candidate 'cand_sq_levir_003' + HUMAN_REVIEW. w=2.0, u=0.09, reduction=95%, cost=50J"
+      "reason": "Candidate uncertainty (0.09 < 0.30) is already low; baseline detection accepted without additional compute."
     },
     {
       "step": 4,
@@ -59,21 +59,21 @@
       "predicted_change": "vegetation_clearing",
       "confidence": 0.9423,
       "uncertainty": 0.3183,
-      "action_selected": "HUMAN_REVIEW"
+      "action_selected": "STRONGER_MODEL"
     },
     {
       "candidate_id": "cand_sq_levir_002",
       "predicted_change": "vegetation_clearing",
       "confidence": 0.9009,
       "uncertainty": 0.4661,
-      "action_selected": "HUMAN_REVIEW"
+      "action_selected": "STRONGER_MODEL"
     },
     {
       "candidate_id": "cand_sq_levir_003",
       "predicted_change": "vegetation_clearing",
       "confidence": 0.9879,
       "uncertainty": 0.0945,
-      "action_selected": "HUMAN_REVIEW"
+      "action_selected": "NONE"
     }
   ]
 }

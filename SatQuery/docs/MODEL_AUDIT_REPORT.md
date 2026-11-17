@@ -20,7 +20,7 @@ The audited model is a **State-of-the-Art Siamese ResNet-34 Change Detection Net
   - **Validation Loss:** **0.3065** across 35 completed training epochs.
 - **Role in ORBITRA:**
   1. Serves as the primary high-precision satellite change detection engine for SatQuery over real Indian satellite corridors (Kanpur, Bengaluru, Delhi, Chennai).
-  2. Serves as the concrete algorithmic engine for ARES's `STRONGER_MODEL` triage action ($E_{\text{comp}} \approx 120\text{ J}$, benefit reduction $\Delta u \approx 80\%$), allowing the mission planner to resolve ambiguous candidate changes computationally without expending drone flight battery.
+  2. Serves as the concrete algorithmic engine for ARES's `STRONGER_MODEL` triage action ($E_{\text{action}} = 1,450\text{ J}$ total, comprising $1,200\text{ J}$ edge compute + $250\text{ J}$ comms offload, with an assumed $\Delta u / u = 40\%$ uncertainty reduction under `DataProvenance.ASSUMED`), allowing the mission planner to resolve ambiguous candidate changes computationally without expending drone flight battery.
 
 ---
 
