@@ -1,0 +1,786 @@
+[
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_001",
+    "image_pair_id": "pair_sentinel2_bengaluru_tech",
+    "timestamp": "2024-01-23T05:11:19.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.6287,
+    "uncertainty": 0.9517,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1520.0,
+        "y_meters": 4355.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.889366,
+        "center_lon": 77.674003,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        149,
+        431,
+        155,
+        440
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_002",
+    "image_pair_id": "pair_sentinel2_bengaluru_tech",
+    "timestamp": "2024-01-23T05:11:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4212,
+    "uncertainty": 0.982,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2565.0,
+        "y_meters": 4110.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.887151,
+        "center_lon": 77.68363,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        253,
+        407,
+        260,
+        415
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_003",
+    "image_pair_id": "pair_sentinel2_bengaluru_tech",
+    "timestamp": "2024-01-23T05:11:19.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4256,
+    "uncertainty": 0.984,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 3795.0,
+        "y_meters": 3930.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.885524,
+        "center_lon": 77.694961,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        377,
+        390,
+        382,
+        396
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_004",
+    "image_pair_id": "pair_sentinel2_bengaluru_tech",
+    "timestamp": "2024-01-23T05:11:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5308,
+    "uncertainty": 0.9973,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 3415.0,
+        "y_meters": 3765.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.884033,
+        "center_lon": 77.69146,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        338,
+        372,
+        345,
+        381
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_005",
+    "image_pair_id": "pair_sentinel2_bengaluru_tech",
+    "timestamp": "2024-01-23T05:11:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5217,
+    "uncertainty": 0.9986,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1205.0,
+        "y_meters": 3605.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.882586,
+        "center_lon": 77.671101,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        117,
+        355,
+        124,
+        366
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_006",
+    "image_pair_id": "pair_sentinel2_bengaluru_tech",
+    "timestamp": "2024-01-23T05:11:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.6099,
+    "uncertainty": 0.9649,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1010.0,
+        "y_meters": 3530.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.881908,
+        "center_lon": 77.669305,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        95,
+        349,
+        107,
+        357
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_007",
+    "image_pair_id": "pair_sentinel2_bengaluru_tech",
+    "timestamp": "2024-01-23T05:11:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5569,
+    "uncertainty": 0.9907,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1485.0,
+        "y_meters": 3480.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.881456,
+        "center_lon": 77.67368,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        146,
+        345,
+        151,
+        351
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_008",
+    "image_pair_id": "pair_sentinel2_bengaluru_tech",
+    "timestamp": "2024-01-23T05:11:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5809,
+    "uncertainty": 0.981,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1375.0,
+        "y_meters": 3405.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.880778,
+        "center_lon": 77.672667,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        132,
+        335,
+        143,
+        346
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_009",
+    "image_pair_id": "pair_sentinel2_bengaluru_tech",
+    "timestamp": "2024-01-23T05:11:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.6059,
+    "uncertainty": 0.9674,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 580.0,
+        "y_meters": 3330.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.880101,
+        "center_lon": 77.665343,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        55,
+        330,
+        61,
+        336
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_010",
+    "image_pair_id": "pair_sentinel2_bengaluru_tech",
+    "timestamp": "2024-01-23T05:11:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5755,
+    "uncertainty": 0.9835,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1155.0,
+        "y_meters": 3230.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.879197,
+        "center_lon": 77.67064,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        112,
+        320,
+        119,
+        326
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_011",
+    "image_pair_id": "pair_sentinel2_bengaluru_tech",
+    "timestamp": "2024-01-23T05:11:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.6414,
+    "uncertainty": 0.9415,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 305.0,
+        "y_meters": 3225.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.879151,
+        "center_lon": 77.66281,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        28,
+        318,
+        33,
+        327
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_012",
+    "image_pair_id": "pair_sentinel2_bengaluru_tech",
+    "timestamp": "2024-01-23T05:11:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.58,
+    "uncertainty": 0.9814,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 40.0,
+        "y_meters": 3205.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.878971,
+        "center_lon": 77.660368,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        0,
+        314,
+        8,
+        327
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_013",
+    "image_pair_id": "pair_sentinel2_bengaluru_tech",
+    "timestamp": "2024-01-23T05:11:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.6224,
+    "uncertainty": 0.9563,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 445.0,
+        "y_meters": 3150.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.878473,
+        "center_lon": 77.6641,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        42,
+        311,
+        47,
+        319
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_014",
+    "image_pair_id": "pair_sentinel2_bengaluru_tech",
+    "timestamp": "2024-01-23T05:11:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5919,
+    "uncertainty": 0.9755,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1385.0,
+        "y_meters": 3130.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.878293,
+        "center_lon": 77.672759,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        135,
+        308,
+        142,
+        318
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_015",
+    "image_pair_id": "pair_sentinel2_bengaluru_tech",
+    "timestamp": "2024-01-23T05:11:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.6201,
+    "uncertainty": 0.9579,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1235.0,
+        "y_meters": 3070.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.87775,
+        "center_lon": 77.671377,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        120,
+        302,
+        127,
+        312
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_016",
+    "image_pair_id": "pair_sentinel2_bengaluru_tech",
+    "timestamp": "2024-01-23T05:11:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.516,
+    "uncertainty": 0.9993,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1610.0,
+        "y_meters": 2705.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.874451,
+        "center_lon": 77.674832,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        151,
+        265,
+        171,
+        276
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_017",
+    "image_pair_id": "pair_sentinel2_bengaluru_tech",
+    "timestamp": "2024-01-23T05:11:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5644,
+    "uncertainty": 0.988,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1290.0,
+        "y_meters": 2555.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.873095,
+        "center_lon": 77.671884,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        124,
+        252,
+        134,
+        259
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_018",
+    "image_pair_id": "pair_sentinel2_bengaluru_tech",
+    "timestamp": "2024-01-23T05:11:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5547,
+    "uncertainty": 0.9914,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1875.0,
+        "y_meters": 2540.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.87296,
+        "center_lon": 77.677273,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        179,
+        246,
+        196,
+        262
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_019",
+    "image_pair_id": "pair_sentinel2_bengaluru_tech",
+    "timestamp": "2024-01-23T05:11:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5585,
+    "uncertainty": 0.9901,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1745.0,
+        "y_meters": 2325.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.871016,
+        "center_lon": 77.676076,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        171,
+        229,
+        178,
+        236
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_020",
+    "image_pair_id": "pair_sentinel2_bengaluru_tech",
+    "timestamp": "2024-01-23T05:11:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.6462,
+    "uncertainty": 0.9374,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1955.0,
+        "y_meters": 2260.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.870429,
+        "center_lon": 77.67801,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        191,
+        223,
+        200,
+        229
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_021",
+    "image_pair_id": "pair_sentinel2_bengaluru_tech",
+    "timestamp": "2024-01-23T05:11:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5165,
+    "uncertainty": 0.9992,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2665.0,
+        "y_meters": 2215.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.870022,
+        "center_lon": 77.684551,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        262,
+        219,
+        271,
+        224
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_022",
+    "image_pair_id": "pair_sentinel2_bengaluru_tech",
+    "timestamp": "2024-01-23T05:11:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.6452,
+    "uncertainty": 0.9382,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2385.0,
+        "y_meters": 2205.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.869931,
+        "center_lon": 77.681972,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        235,
+        217,
+        242,
+        224
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_023",
+    "image_pair_id": "pair_sentinel2_bengaluru_tech",
+    "timestamp": "2024-01-23T05:11:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.3869,
+    "uncertainty": 0.9628,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 3515.0,
+        "y_meters": 2080.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.868802,
+        "center_lon": 77.692382,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        347,
+        205,
+        356,
+        211
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_024",
+    "image_pair_id": "pair_sentinel2_bengaluru_tech",
+    "timestamp": "2024-01-23T05:11:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.3754,
+    "uncertainty": 0.9547,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 4225.0,
+        "y_meters": 2120.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.869163,
+        "center_lon": 77.698922,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        413,
+        204,
+        432,
+        220
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_025",
+    "image_pair_id": "pair_sentinel2_bengaluru_tech",
+    "timestamp": "2024-01-23T05:11:19.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.6072,
+    "uncertainty": 0.9666,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2210.0,
+        "y_meters": 1955.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.867672,
+        "center_lon": 77.680359,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        218,
+        193,
+        224,
+        198
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_026",
+    "image_pair_id": "pair_sentinel2_bengaluru_tech",
+    "timestamp": "2024-01-23T05:11:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4909,
+    "uncertainty": 0.9998,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 5060.0,
+        "y_meters": 1030.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.85931,
+        "center_lon": 77.706615,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        503,
+        99,
+        509,
+        107
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_027",
+    "image_pair_id": "pair_sentinel2_bengaluru_tech",
+    "timestamp": "2024-01-23T05:11:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4812,
+    "uncertainty": 0.999,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 3890.0,
+        "y_meters": 395.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.85357,
+        "center_lon": 77.695836,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        384,
+        36,
+        394,
+        43
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_028",
+    "image_pair_id": "pair_sentinel2_bengaluru_tech",
+    "timestamp": "2024-01-23T05:11:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4463,
+    "uncertainty": 0.9917,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2890.0,
+        "y_meters": 240.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.852169,
+        "center_lon": 77.686624,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        287,
+        20,
+        291,
+        28
+      ]
+    }
+  }
+]
