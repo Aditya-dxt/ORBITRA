@@ -93,6 +93,24 @@ Evaluated on synthetic benchmark scenes with known ground-truth change masks:
 
 ---
 
+## 📦 Dependencies & Setup
+
+Install required Python dependencies from repository root:
+```powershell
+pip install -r SatQuery/requirements.txt
+```
+Dependencies declared in `SatQuery/requirements.txt`:
+- `numpy>=1.24.0` (Array computing)
+- `opencv-python-headless>=4.8.0` (Image processing & morphological filtering)
+- `pydantic>=2.0.0` (Strict schema contract validation)
+- `scikit-learn>=1.3.0` (Platt scaling logistic regression)
+- `scipy>=1.10.0` (Sub-pixel 2D phase correlation & optimization)
+- `pillow>=9.5.0` (Raster encoding & visual montage generation)
+
+*(Note: `SatQuery/satquery/vision/calibration.py` includes a zero-dependency pure-NumPy Platt scaling fallback, ensuring graceful execution even if `scikit-learn` is not yet installed).*
+
+---
+
 ## 🚀 How to Run
 
 ### Run SatQuery Unit & Integration Tests
@@ -147,26 +165,17 @@ python -c "import json, sys; sys.path.insert(0, 'ARES'); from ares.schemas.satqu
 
 ## 📋 Running Implementation Log
 
-### Update: 2026-11-17 — Rebase on main (ea759e0) & Python Data Module Tracking Fix
-- **Summary:** Rebased on top of `main` commit `ea759e0` (ARES B4 policy). Fixed an issue where root `.gitignore` unanchored `data/` rule inadvertently excluded Python source files in `SatQuery/satquery/data/`. Explicitly tracked `synthetic_sample_data.py`, `india_satellite_data.py`, `dataset.py`, `generate_sample_assets.py`, and `__init__.py`. Re-verified all SatQuery unit tests and end-to-end integration scripts.
+### Update: 2026-11-17 — Dependency Declaration & Scikit-Learn Graceful Fallback
+- **Summary:** Declared official dependencies in `SatQuery/requirements.txt` (including `scikit-learn>=1.3.0`, `opencv-python-headless`, `pydantic`, `numpy`, `scipy`, `pillow`). Added a clean environment setup guide in `README.md`. Implemented a pure-NumPy logistic regression fallback in `SatQuery/satquery/vision/calibration.py` so that Platt scaling and end-to-end integration execute cleanly even on environments where `scikit-learn` is not yet installed.
 - **Changed Files:**
-  - `SatQuery/satquery/data/synthetic_sample_data.py` (Benchmark test pair generator)
-  - `SatQuery/satquery/data/india_satellite_data.py` (Real Indian Sentinel-2 pipeline)
-  - `SatQuery/satquery/data/dataset.py` (Dataset loader abstractions)
-  - `SatQuery/satquery/data/generate_sample_assets.py` (Sample asset & visual montage generator)
-  - `SatQuery/satquery/data/__init__.py` (Package init)
-  - `SatQuery/README.md` (Updated run instructions, test logs, and limitations)
-- **Data Reality & Provenance Demarcation:**
-  - *Real Image-Derived Detections:* Genuine ESA Sentinel-2 Level-2A surface reflectance rasters acquired over Indian geographic corridors (Kanpur/Bhauti UP, Bengaluru Electronic City, Delhi NCR, and Chennai).
-  - *Synthetic Benchmark Data:* Used strictly in `synthetic_sample_data.py` for reproducible offline unit testing and held-out calibration experiments.
-  - *Simulated Drone Actions:* All UAV transit flight kinematics, sensor recapture outcomes, battery depletion, and human review actions are explicitly treated as software simulations (`SIMULATED` / `ASSUMED`). No physical drone flights are claimed.
-- **Limitations:**
-  - Sentinel-2 GSD is 10 m/pixel; subtle sub-pixel ground changes (<10 m) can result in false negatives.
-  - Seasonal vegetation phenology (dry grass vs lush green) may trigger false-positive candidate regions, appropriately mitigated by ARES priority weighting.
+  - `SatQuery/requirements.txt` (Declared all SatQuery dependencies)
+  - `SatQuery/satquery/vision/calibration.py` (Graceful NumPy fallback for Platt scaling when `sklearn` is missing)
+  - `SatQuery/README.md` (Documented clean setup instructions and dependency declaration)
 - **Checks Performed:**
-  - `python -m unittest discover -s SatQuery/tests -v` (23/23 passed in 0.534s)
-  - `python SatQuery/examples/end_to_end_integration.py --policy B3` (Success: All 3 records strictly validated by ARES, Safe return True)
-  - `python SatQuery/examples/run_india_pipeline.py --zone kanpur_bhauti --policy B3` (Success: 7 real candidates detected, Safe return True)
+  - `python SatQuery/examples/end_to_end_integration.py --policy B3` (Success: Safe return True)
+  - `python SatQuery/examples/run_india_pipeline.py --zone kanpur_bhauti --policy B1` (Success: Flight recapture & return reserve exercised)
+  - `python SatQuery/examples/run_india_pipeline.py --zone kanpur_bhauti --policy B4` (Success: Dynamic spatial dispatch & return reserve exercised)
+  - `python -m unittest discover -s SatQuery/tests -v` (23/23 passed)
   - `python -m unittest discover -s ARES/tests -t ARES -v` (70/70 passed)
 - **Action Needed from ARES:**
-  - Pull latest `main` commit and confirm end-to-end integration runs on your checkout before promoting interface schema from `v1.0.0-provisional` to finalized `v1.0.0`.
+  - Pull latest commit and run `pip install -r SatQuery/requirements.txt` (optional, since the pure-NumPy fallback also allows execution without `sklearn`). Confirm clean run to finalize `v1.0.0`.

@@ -14,7 +14,46 @@ Computes:
 import math
 from typing import Dict, List, Optional, Tuple, Union
 import numpy as np
-from sklearn.linear_model import LogisticRegression
+
+try:
+    from sklearn.linear_model import LogisticRegression
+    SKLEARN_AVAILABLE = True
+except (ImportError, ModuleNotFoundError):
+    SKLEARN_AVAILABLE = False
+
+    class LogisticRegression:  # type: ignore[no-redef]
+        """Pure NumPy fallback for 1D Platt scaling when scikit-learn is not installed."""
+
+        def __init__(self, solver: str = "lbfgs", max_iter: int = 200, C: float = 1.0):
+            self.max_iter = max_iter
+            self.C = C
+            self.coef_ = np.array([[1.0]])
+            self.intercept_ = np.array([0.0])
+
+        def fit(self, X: np.ndarray, y: np.ndarray) -> "LogisticRegression":
+            x = np.asarray(X, dtype=np.float64).ravel()
+            target = np.asarray(y, dtype=np.float64).ravel()
+            w, b = 1.0, 0.0
+            lr = 0.05
+            n = len(x)
+            for _ in range(self.max_iter):
+                preds = 1.0 / (1.0 + np.exp(-np.clip(w * x + b, -25.0, 25.0)))
+                err = preds - target
+                grad_w = np.sum(err * x) / n + (w / self.C) * 0.01
+                grad_b = np.sum(err) / n
+                w -= lr * grad_w
+                b -= lr * grad_b
+            self.coef_ = np.array([[w]])
+            self.intercept_ = np.array([b])
+            return self
+
+        def predict_proba(self, X: np.ndarray) -> np.ndarray:
+            x = np.asarray(X, dtype=np.float64).ravel()
+            w = self.coef_[0, 0]
+            b = self.intercept_[0]
+            prob_1 = 1.0 / (1.0 + np.exp(-np.clip(w * x + b, -25.0, 25.0)))
+            prob_0 = 1.0 - prob_1
+            return np.column_stack([prob_0, prob_1])
 
 
 def binary_entropy_uncertainty(p: float, eps: float = 1e-7) -> float:
