@@ -97,18 +97,34 @@ class MissionSimulator:
             if not ranked_queue:
                 break
 
-            target = ranked_queue[0]
-            
-            # Delegate action selection to policy under return-reserve constraint
-            decision = policy.select_action(
-                candidate=target,
-                current_pos=current_pos,
-                current_battery_joules=current_battery,
-                cost_model=self.cost_model,
-                reserve_calc=self.reserve_calc,
-                home_pos=home,
-                initial_battery_joules=self.config.initial_battery_joules
-            )
+            # Joint policies choose the candidate and action from the full
+            # pending set. Sequential baselines keep the rank-then-act path.
+            joint_selector = getattr(policy, "run_joint_step", None)
+            if callable(joint_selector):
+                target, decision = joint_selector(
+                    all_candidates=active_candidates,
+                    current_pos=current_pos,
+                    current_battery_joules=current_battery,
+                    cost_model=self.cost_model,
+                    reserve_calc=self.reserve_calc,
+                    home_pos=home,
+                    initial_battery_joules=self.config.initial_battery_joules,
+                )
+                # If every candidate-action pair is infeasible, anchor the
+                # abort ledger entry to a pending candidate.
+                if target is None:
+                    target = ranked_queue[0]
+            else:
+                target = ranked_queue[0]
+                decision = policy.select_action(
+                    candidate=target,
+                    current_pos=current_pos,
+                    current_battery_joules=current_battery,
+                    cost_model=self.cost_model,
+                    reserve_calc=self.reserve_calc,
+                    home_pos=home,
+                    initial_battery_joules=self.config.initial_battery_joules
+                )
 
             if decision.reserve_feasible:
                 battery_before = current_battery

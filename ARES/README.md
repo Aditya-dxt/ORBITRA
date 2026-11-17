@@ -87,12 +87,48 @@ python -m unittest discover -s tests -v
 | 12-15 | B2 Adaptive Computation policy, multi-action simulator refactor | **Completed (Milestone 3)** |
 | 16-19 | B3 Joint Policy: joint candidate-and-action selection with benefit/cost objective | **Completed (Milestone 4)** |
 | 20-23 | Policies B4 implementation and decision logging | **Completed (Milestone 5)** |
-| 20-23 | Matched-budget policy experiments and ablations | Planned |
+| 20-23 | Matched-budget policy experiments and ablations | **Implemented (Milestone 6, simulated baseline)** |
 | 24-32 | Dashboard, end-to-end integration with SatQuery records, final reporting | Planned |
+
+## Matched-Budget Policy Benchmark
+
+From the repository root, run:
+
+```powershell
+python ARES/run_policy_benchmark.py
+```
+
+The runner evaluates B0–B4 and the B3 `B3_no_human_review` ablation on the same deterministic synthetic candidate scenarios at matched battery budgets (8, 12, 20, 30, and 50 Wh). By default it uses 20 scenarios with 8 candidates each and writes per-run records plus mean/population-standard-deviation summaries to `ARES/outputs/policy_comparison.json` (ignored generated output).
+
+To run a smaller check or change budgets:
+
+```powershell
+python ARES/run_policy_benchmark.py --scenarios 3 --candidates 6 --budgets-wh 12 30
+```
+
+The common utility metric is **weighted uncertainty reduction**: importance weight multiplied by the change from prior uncertainty to the deterministic simulated post-action uncertainty, summed over acted candidates. Energy use includes executed action energy and return-flight energy. Human review labor/capacity and wall-clock latency are not included in the energy budget. Every generated input is marked synthetic, every result is `SIMULATED`, and model parameters remain `ASSUMED`; these results do not establish real-world policy superiority.
 
 ---
 
 ## Running Implementation Log
+
+### Milestone 6: Matched-Budget Policy Benchmark — 2026-11-17
+- **Summary:** Added a deterministic synthetic experiment runner comparing B0–B4 under identical candidate sets and battery budgets, plus a B3 ablation with human review disabled. Added common post-action weighted uncertainty-reduction, action/return energy, coverage, reserve-trigger, safe-return, and budget-utilization metrics with mean and population standard deviation over scenario seeds.
+- **Joint-selection correction:** The simulator now invokes policies exposing `run_joint_step` with the complete pending-candidate set. This makes B3's implemented joint candidate/action objective operate across candidates in full missions, rather than only across actions for the first ranked candidate. Added an end-to-end regression test proving the second, higher-scoring candidate wins over the first input candidate.
+- **Changed files:** `ARES/ares/simulation/benchmark.py`, `ARES/run_policy_benchmark.py`, `ARES/ares/simulation/simulator.py`, `ARES/ares/policies/b3_joint_policy.py`, `ARES/tests/test_benchmark.py`, `ARES/tests/test_b3_policy.py`, `ARES/README.md`, and `ARES/docs/DESIGN.md`.
+- **Checks performed:** `python -m unittest discover -s tests -p test_b3_policy.py -v` (12/12 passed); `python -m unittest discover -s tests -p test_benchmark.py -v` (3/3 passed); `python -m unittest discover -s ARES/tests -t ARES -v` (74/74 passed); `python ARES/run_policy_benchmark.py` (600 matched runs completed: 20 scenarios × 5 budgets × 6 variants; all reported safe-return rate 100%).
+- **Observed simulated mean weighted uncertainty reduction (ASSUMED outcome model):**
+
+  | Variant | 8 Wh | 12 Wh | 20 Wh | 30 Wh | 50 Wh |
+  | --- | ---: | ---: | ---: | ---: | ---: |
+  | B0 | 0.000 | 0.090 | 0.447 | 1.001 | 4.063 |
+  | B1 | 0.000 | 0.203 | 0.375 | 0.949 | 5.080 |
+  | B2 | 6.007 | 6.262 | 6.582 | 6.861 | 8.434 |
+  | B3 | 14.701 | 14.701 | 14.701 | 14.701 | 14.701 |
+  | B3 without human review | 6.038 | 6.038 | 6.038 | 6.038 | 6.038 |
+  | B4 | 0.234 | 0.577 | 1.684 | 2.919 | 6.435 |
+
+- **Interpretation and limits:** B3's constant score reflects the assumed low 50 J alert cost and 95% human-review uncertainty reduction, not measured human throughput or mission performance. The runner does not model review queue capacity/latency, ground-truth correctness, stochastic sensor outcomes, or physical flight telemetry. Treat the table as a reproducible software-simulation baseline only; no policy is declared superior. Interface remains `v1.0.0-provisional`.
 
 ### Joint Integration Verification with SatQuery Exports — 2026-11-17
 - **Summary:** Verified ARES candidate ingestion against real SatQuery export datasets following the merge of SatQuery PR #1 and subsequent commits (`ea9748e`, `79ab345`). Validated that `SatQueryCandidateRecord` directly parses and validates `SatQuery/exports/sample_candidates.json` (3 records) and all regional mission candidate exports (113 records total across Bengaluru Tech, Chennai Sriperumbudur, Delhi NCR, Kanpur Bhauti, and sample India files) with zero schema errors. Executed ARES simulations across all primary policies (B0–B4) on ingested SatQuery candidates.

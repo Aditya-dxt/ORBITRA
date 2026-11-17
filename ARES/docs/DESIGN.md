@@ -356,3 +356,30 @@ Every decision evaluated by ARES produces an immutable `DecisionRecord` containi
 2. **INSPECTED:** Action selected, validated by reserve guardrail, and executed in simulation.
 3. **DEFERRED:** Reserve guardrail prohibited execution; preserved for potential future sortie.
 4. **SKIPPED:** Evaluated as zero-utility or unviable under active policy.
+
+---
+
+## 11. Matched-Budget Policy Experiments
+
+`ARES/ares/simulation/benchmark.py` runs B0–B4 on identical deterministic synthetic candidate scenarios at matched initial battery budgets. It also runs `B3_no_human_review`, an ablation that removes `HUMAN_REVIEW` from B3's action set while keeping other assumptions fixed.
+
+Run the default experiment from the repository root:
+
+```powershell
+python ARES/run_policy_benchmark.py
+```
+
+Default design: 20 scenario seeds × 8 candidates × 5 budgets (8, 12, 20, 30, 50 Wh) × 6 policy variants = 600 runs. Per-run measurements and aggregate means/population standard deviations are written to `ARES/outputs/policy_comparison.json`; the output folder is ignored by Git.
+
+### Shared comparison metrics
+
+- **Weighted uncertainty reduction:** For every executed action, calculate importance weight × (prior uncertainty − deterministic simulated post-action uncertainty), then sum over acted candidates. This is a common outcome metric and does not reuse each policy's internal ranking score.
+- **Energy:** Report executed verification-action energy and return-flight energy separately; total mission energy is their sum.
+- **Mission outcome:** Report inspected, deferred, and skipped candidates; action counts; return-reserve triggers; safe-return status; final battery; and budget utilization.
+- **Aggregation:** Report the mean and population standard deviation across deterministic scenario seeds for each policy and matched budget.
+
+All generated candidates are labeled `[SYNTHETIC EXAMPLE]`, outputs are `SIMULATED`, and energy/action parameters are `ASSUMED`. The comparison does not model whether a simulated label is correct, human-review labor or queue throughput, stochastic outcomes, nor real UAV telemetry. A 100% simulated safe-return rate is not a flight-safety certification. Do not claim real-world policy superiority from this experiment.
+
+### Current default run (2026-11-17)
+
+The default run completed 600 simulations with a 100% modeled safe-return rate across all variants and budgets. Mean weighted uncertainty reduction by budget is recorded in the ARES README implementation log. B3's large, budget-insensitive reduction is driven by its current assumed 50 J `HUMAN_REVIEW` cost and 95% reduction; the no-human-review ablation provides a contrast, but does not validate human feasibility. These figures are software simulation outputs, not measured mission outcomes.

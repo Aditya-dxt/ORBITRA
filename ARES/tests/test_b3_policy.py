@@ -334,6 +334,25 @@ class TestB3JointPolicy(unittest.TestCase):
         non_return_records = [r for r in sim.ledger.records if r.candidate_id != "MISSION_RETURN"]
         self.assertGreater(len(non_return_records), 0)
 
+    def test_b3_simulator_selects_joint_winner_not_input_first(self):
+        """The simulator must pass all pending candidates to B3's joint selector."""
+        first = _make_candidate("first_low", 0.90, 0.47, ImportanceTier.LOW, x=100.0)
+        joint_winner = _make_candidate("second_high", 0.55, 0.99, ImportanceTier.HIGH, x=100.0)
+        sim = MissionSimulator(
+            config=MissionSimulationConfig(initial_battery_joules=60_000.0),
+            cost_model=self.cost_model,
+            outcome_sim=ActionOutcomeSimulator(),
+        )
+
+        report = sim.run_mission(self.policy, [first, joint_winner])
+        first_candidate_decision = next(
+            record for record in sim.ledger.records
+            if record.candidate_id != "MISSION_RETURN"
+        )
+
+        self.assertTrue(report.safe_return_completed)
+        self.assertEqual(first_candidate_decision.candidate_id, "second_high")
+
     # ------------------------------------------------------------------
     # 10. Config customisation — custom thresholds are honoured
     # ------------------------------------------------------------------

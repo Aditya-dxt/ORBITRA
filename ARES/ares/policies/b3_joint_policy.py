@@ -218,12 +218,9 @@ class B3JointPolicy(BasePolicy):
     ) -> ActionSelectionDecision:
         """Evaluates all feasible (candidate, action) pairs and selects the best joint score.
 
-        When `all_candidates` is provided (by the B3-aware simulator path), the
-        joint evaluation ranges over all pending candidates.  When called from
-        the standard simulator path (which passes only one candidate at a time),
-        evaluation is restricted to that single candidate — this preserves
-        compatibility with the existing simulator loop while still choosing the
-        best action for the given candidate using the joint objective.
+        When `all_candidates` is provided (by `run_joint_step`), the joint
+        evaluation ranges over all pending candidates. Without it, evaluation
+        is restricted to the single candidate supplied by the caller.
         """
         pool: List[AresCandidateState] = (
             [c for c in all_candidates if c.status == CandidateStatus.PENDING]
@@ -306,6 +303,7 @@ class B3JointPolicy(BasePolicy):
                 baseline_benefit = self.evaluate_benefit(cand)
                 if baseline_benefit < min_benefit:
                     # Accept this candidate as-is (negligible benefit)
+                    self._last_selected_candidate = cand
                     return ActionSelectionDecision(
                         action=ActionType.NONE,
                         estimated_cost_joules=0.0,
