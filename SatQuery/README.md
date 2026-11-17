@@ -147,27 +147,26 @@ python -c "import json, sys; sys.path.insert(0, 'ARES'); from ares.schemas.satqu
 
 ## 📋 Running Implementation Log
 
-### Update: 2026-11-17 — Real Indian Satellite Mission Pipeline & Comprehensive Vision Evaluation
-- **Summary:** Integrated real bi-temporal Sentinel-2 Level-2A satellite imagery over India (Kanpur / Bhauti near PSIT on NH-19 corridor, Bengaluru Electronic City, Delhi NCR, and Chennai); implemented `SatQuery/satquery/data/india_satellite_data.py` with STAC API querying, automated SAS token authentication, caching, and 2D phase-correlation spatial alignment; created `SatQuery/examples/run_india_pipeline.py` executing real Indian missions end-to-end with visual montage outputs; built `SatQuery/examples/evaluate_vision_pipeline.py` computing precision, recall, F1, IoU, ECE, and failure taxonomy; added comprehensive evaluation report `SatQuery/docs/EVALUATION_REPORT.md`; expanded unit test suite to 23 passing tests.
+### Update: 2026-11-17 — Rebase on main (ea759e0) & Python Data Module Tracking Fix
+- **Summary:** Rebased on top of `main` commit `ea759e0` (ARES B4 policy). Fixed an issue where root `.gitignore` unanchored `data/` rule inadvertently excluded Python source files in `SatQuery/satquery/data/`. Explicitly tracked `synthetic_sample_data.py`, `india_satellite_data.py`, `dataset.py`, `generate_sample_assets.py`, and `__init__.py`. Re-verified all SatQuery unit tests and end-to-end integration scripts.
 - **Changed Files:**
+  - `SatQuery/satquery/data/synthetic_sample_data.py` (Benchmark test pair generator)
   - `SatQuery/satquery/data/india_satellite_data.py` (Real Indian Sentinel-2 pipeline)
-  - `SatQuery/data/india_scenes/*` (Cached real satellite imagery & metadata for Kanpur, Bengaluru, Delhi, Chennai)
-  - `SatQuery/examples/run_india_pipeline.py` (Real Indian mission runner)
-  - `SatQuery/examples/evaluate_vision_pipeline.py` (Comprehensive vision evaluation suite)
-  - `SatQuery/docs/EVALUATION_REPORT.md` (Full quantitative & qualitative evaluation report)
-  - `SatQuery/exports/candidates_*.json` (Real candidate change records for all Indian zones)
-  - `SatQuery/exports/visualizations/*_real_montage.png` (Real satellite comparison montages)
-  - `SatQuery/exports/vision_evaluation_report.json` (Structured evaluation metrics)
-  - `SatQuery/tests/test_india_data.py` (Unit and integration tests for Indian satellite scenes)
-  - `SatQuery/tests/test_pipeline.py` (Added vision evaluation test)
-  - `SatQuery/README.md` (Updated instructions and log)
+  - `SatQuery/satquery/data/dataset.py` (Dataset loader abstractions)
+  - `SatQuery/satquery/data/generate_sample_assets.py` (Sample asset & visual montage generator)
+  - `SatQuery/satquery/data/__init__.py` (Package init)
+  - `SatQuery/README.md` (Updated run instructions, test logs, and limitations)
+- **Data Reality & Provenance Demarcation:**
+  - *Real Image-Derived Detections:* Genuine ESA Sentinel-2 Level-2A surface reflectance rasters acquired over Indian geographic corridors (Kanpur/Bhauti UP, Bengaluru Electronic City, Delhi NCR, and Chennai).
+  - *Synthetic Benchmark Data:* Used strictly in `synthetic_sample_data.py` for reproducible offline unit testing and held-out calibration experiments.
+  - *Simulated Drone Actions:* All UAV transit flight kinematics, sensor recapture outcomes, battery depletion, and human review actions are explicitly treated as software simulations (`SIMULATED` / `ASSUMED`). No physical drone flights are claimed.
+- **Limitations:**
+  - Sentinel-2 GSD is 10 m/pixel; subtle sub-pixel ground changes (<10 m) can result in false negatives.
+  - Seasonal vegetation phenology (dry grass vs lush green) may trigger false-positive candidate regions, appropriately mitigated by ARES priority weighting.
 - **Checks Performed:**
-  - `python SatQuery/examples/evaluate_vision_pipeline.py` (Success: Pixel P=94.3%, R=53.2%, F1=68.0%, IoU=51.5%, Brier=0.0608)
+  - `python -m unittest discover -s SatQuery/tests -v` (23/23 passed in 0.534s)
+  - `python SatQuery/examples/end_to_end_integration.py --policy B3` (Success: All 3 records strictly validated by ARES, Safe return True)
   - `python SatQuery/examples/run_india_pipeline.py --zone kanpur_bhauti --policy B3` (Success: 7 real candidates detected, Safe return True)
-  - `python SatQuery/examples/run_india_pipeline.py --zone bengaluru_tech --policy B1` (Success: 28 real candidates detected, return reserve triggered, Safe return True)
-  - `python SatQuery/examples/run_india_pipeline.py --zone delhi_ncr --policy B3` (Success: 9 real candidates detected, Safe return True)
-  - `python SatQuery/examples/run_india_pipeline.py --zone chennai_sriperumbudur --policy B1` (Success: 59 real candidates detected, Safe return True)
-  - `python -m unittest discover -s SatQuery/tests -v` (23/23 passed)
-  - `python -m unittest discover -s ARES/tests -t ARES -v` (51/51 passed)
+  - `python -m unittest discover -s ARES/tests -t ARES -v` (70/70 passed)
 - **Action Needed from ARES:**
-  - None at this time. SatQuery is 100% complete, fully verified on real Indian satellite datasets, and ready for joint milestone demonstration.
+  - Pull latest `main` commit and confirm end-to-end integration runs on your checkout before promoting interface schema from `v1.0.0-provisional` to finalized `v1.0.0`.
