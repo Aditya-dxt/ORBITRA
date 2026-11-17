@@ -79,9 +79,10 @@ class TestB3JointPolicy(unittest.TestCase):
 
     def test_b3_rank_candidates_returns_pending_in_input_order(self):
         """rank_candidates() must return PENDING candidates in input order (joint eval happens inside select_action)."""
-        c1 = _make_candidate("c1", 0.9, 0.80, ImportanceTier.HIGH)
-        c2 = _make_candidate("c2", 0.5, 0.30, ImportanceTier.LOW)
-        c3 = _make_candidate("c3", 0.7, 0.60, ImportanceTier.MEDIUM)
+        # Formula-consistent pairs: conf=0.70, u=0.88  h(0.70)=0.881 ✓
+        c1 = _make_candidate("c1", 0.70, 0.88, ImportanceTier.HIGH)
+        c2 = _make_candidate("c2", 0.90, 0.47, ImportanceTier.LOW)   # h(0.90)=0.469 ✓
+        c3 = _make_candidate("c3", 0.85, 0.61, ImportanceTier.MEDIUM)  # h(0.85)=0.610 ✓
 
         ranked = self.policy.rank_candidates([c1, c2, c3])
         # B3 preserves input order; joint scoring happens inside select_action
@@ -93,9 +94,10 @@ class TestB3JointPolicy(unittest.TestCase):
 
     def test_b3_evaluate_benefit_is_weight_times_uncertainty(self):
         """evaluate_benefit() = importance_weight * uncertainty (baseline proxy)."""
-        c = _make_candidate("c_eb", 0.6, 0.80, ImportanceTier.HIGH)   # w=4.0, u=0.80
+        # conf=0.60, u=0.97  h(0.60)=0.971 ✓   w=4.0 -> benefit=4.0*0.97=3.88
+        c = _make_candidate("c_eb", 0.60, 0.97, ImportanceTier.HIGH)
         benefit = self.policy.evaluate_benefit(c)
-        self.assertAlmostEqual(benefit, 4.0 * 0.80, places=4)
+        self.assertAlmostEqual(benefit, 4.0 * 0.97, places=4)
 
     # ------------------------------------------------------------------
     # 3. Joint scoring selects best (candidate, action) pair
@@ -114,8 +116,9 @@ class TestB3JointPolicy(unittest.TestCase):
         The specific action chosen (RECAPTURE / STRONGER_MODEL / HUMAN_REVIEW) depends
         on the joint objective and is not asserted here — only the winning candidate is.
         """
-        c_low = _make_candidate("c_low", 0.5, 0.90, ImportanceTier.LOW, x=100.0)
-        c_high = _make_candidate("c_high", 0.5, 0.90, ImportanceTier.HIGH, x=100.0)
+        # Formula-consistent: conf=0.55, u=0.99  h(0.55)=0.993 ✓
+        c_low = _make_candidate("c_low", 0.55, 0.99, ImportanceTier.LOW, x=100.0)
+        c_high = _make_candidate("c_high", 0.55, 0.99, ImportanceTier.HIGH, x=100.0)
 
         _, decision = self.policy.run_joint_step(
             all_candidates=[c_low, c_high],
@@ -150,7 +153,8 @@ class TestB3JointPolicy(unittest.TestCase):
         )
         policy = B3JointPolicy(config=config)
 
-        c = _make_candidate("c_no_hr", 0.5, 0.90, ImportanceTier.HIGH, x=100.0)
+        # Formula-consistent: conf=0.55, u=0.99  h(0.55)=0.993 ✓
+        c = _make_candidate("c_no_hr", 0.55, 0.99, ImportanceTier.HIGH, x=100.0)
 
         _, decision = policy.run_joint_step(
             all_candidates=[c],
@@ -176,7 +180,8 @@ class TestB3JointPolicy(unittest.TestCase):
         RECAPTURE flight would exhaust reserve.  B3 must downgrade to a cheaper action
         (STRONGER_MODEL or HUMAN_REVIEW) or return RETURN_HOME.
         """
-        c_far = _make_candidate("c_far", 0.5, 0.90, ImportanceTier.HIGH, x=2000.0)
+        # Formula-consistent: conf=0.55, u=0.99  h(0.55)=0.993 ✓  x=2000m
+        c_far = _make_candidate("c_far", 0.55, 0.99, ImportanceTier.HIGH, x=2000.0)
 
         _, decision = self.policy.run_joint_step(
             all_candidates=[c_far],
@@ -202,7 +207,8 @@ class TestB3JointPolicy(unittest.TestCase):
 
         [SYNTHETIC EXAMPLE]: w=1.0, u=0.04 → benefit = 0.04 < min_benefit_to_act default (0.05).
         """
-        c_tiny = _make_candidate("c_tiny", 0.98, 0.04, ImportanceTier.LOW)
+        # Need benefit = w*u < 0.05. Using conf=0.999, u=0.01: h(0.999)≈0.011 ✓  benefit=1.0*0.01=0.01<0.05
+        c_tiny = _make_candidate("c_tiny", 0.999, 0.01, ImportanceTier.LOW)
 
         _, decision = self.policy.run_joint_step(
             all_candidates=[c_tiny],
@@ -226,7 +232,8 @@ class TestB3JointPolicy(unittest.TestCase):
 
         ASSUMED values used in formula are tagged in B3JointPolicyConfig.
         """
-        c = _make_candidate("c_score", 0.6, 0.80, ImportanceTier.HIGH)   # w=4.0, u=0.80
+        # conf=0.60, u=0.97  h(0.60)=0.971 ✓   w=4.0
+        c = _make_candidate("c_score", 0.60, 0.97, ImportanceTier.HIGH)   # w=4.0, u=0.97
 
         # RECAPTURE reduction = 0.70 (ASSUMED)
         # cost for x=0 to x=200: flight time 200/12 * 180W + hover(2200J) + fixed(920J)
@@ -235,7 +242,7 @@ class TestB3JointPolicy(unittest.TestCase):
             HOME,
             LocalGridCoordinates(x_meters=200.0, y_meters=0.0, z_meters=50.0)
         )
-        expected_score = (4.0 * 0.80 * 0.70) / cost_est.energy_cost_joules
+        expected_score = (4.0 * 0.97 * 0.70) / cost_est.energy_cost_joules
         actual_score = self.policy._joint_score(c, ActionType.RECAPTURE, cost_est.energy_cost_joules)
         self.assertAlmostEqual(actual_score, expected_score, places=6)
 
@@ -252,7 +259,8 @@ class TestB3JointPolicy(unittest.TestCase):
         RECAPTURE cost >> STRONGER_MODEL cost (1450 J),
         so joint score for STRONGER_MODEL > RECAPTURE.
         """
-        c = _make_candidate("c_far_low", 0.5, 0.90, ImportanceTier.LOW, x=1000.0)
+        # Formula-consistent: conf=0.55, u=0.99  h(0.55)=0.993 ✓
+        c = _make_candidate("c_far_low", 0.55, 0.99, ImportanceTier.LOW, x=1000.0)
 
         _, decision = self.policy.run_joint_step(
             all_candidates=[c],
@@ -278,7 +286,8 @@ class TestB3JointPolicy(unittest.TestCase):
         This verifies compatibility with the standard simulator loop that calls
         select_action() per ranked candidate.
         """
-        c = _make_candidate("c_single", 0.5, 0.75, ImportanceTier.HIGH, x=300.0)
+        # Formula-consistent: conf=0.60, u=0.97  h(0.60)=0.971 ✓
+        c = _make_candidate("c_single", 0.60, 0.97, ImportanceTier.HIGH, x=300.0)
         decision = self.policy.select_action(
             candidate=c,
             current_pos=HOME,
@@ -345,7 +354,8 @@ class TestB3JointPolicy(unittest.TestCase):
         )
         policy = B3JointPolicy(config=config)
 
-        c = _make_candidate("c_threshold", 0.5, 0.90, ImportanceTier.HIGH)
+        # Formula-consistent: conf=0.55, u=0.99  h(0.55)=0.993 ✓
+        c = _make_candidate("c_threshold", 0.55, 0.99, ImportanceTier.HIGH)
         _, decision = policy.run_joint_step(
             all_candidates=[c],
             current_pos=HOME,

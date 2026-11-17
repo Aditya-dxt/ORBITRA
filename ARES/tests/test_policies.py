@@ -49,32 +49,40 @@ class TestPolicies(unittest.TestCase):
         return state
 
     def test_b0_fixed_pass_ordering(self):
-        c1 = self._create_candidate("c1", 0.5, 0.9, ImportanceTier.LOW)
-        c2 = self._create_candidate("c2", 0.9, 0.2, ImportanceTier.HIGH)
-        c3 = self._create_candidate("c3", 0.7, 0.5, ImportanceTier.MEDIUM)
-        
+        # Formula-consistent (conf, u) pairs — h(conf) within ±0.15 of u
+        # c1: conf=0.55, u=0.99  h(0.55)=0.993 ✓
+        # c2: conf=0.90, u=0.47  h(0.90)=0.469 ✓
+        # c3: conf=0.70, u=0.88  h(0.70)=0.881 ✓
+        c1 = self._create_candidate("c1", 0.55, 0.99, ImportanceTier.LOW)
+        c2 = self._create_candidate("c2", 0.90, 0.47, ImportanceTier.HIGH)
+        c3 = self._create_candidate("c3", 0.70, 0.88, ImportanceTier.MEDIUM)
+
         policy = B0FixedPassPolicy()
         ranked = policy.rank_candidates([c1, c2, c3])
         # Preserves sequential input order
         self.assertEqual([c.detection.candidate_id for c in ranked], ["c1", "c2", "c3"])
-        
+
         # Benefit = weight * confidence
-        # c2 benefit = 4.0 * 0.9 = 3.6
+        # c2 benefit = 4.0 * 0.90 = 3.6
         self.assertEqual(policy.evaluate_benefit(c2), 3.6)
 
     def test_b1_uncertainty_first_ordering(self):
-        c1 = self._create_candidate("c1", 0.9, 0.2, ImportanceTier.HIGH)
-        c2 = self._create_candidate("c2", 0.5, 0.9, ImportanceTier.LOW)
-        c3 = self._create_candidate("c3", 0.7, 0.6, ImportanceTier.MEDIUM)
-        
+        # Formula-consistent (conf, u) pairs — h(conf) within ±0.15 of u
+        # c1: conf=0.97, u=0.20  h(0.97)=0.194 ✓  (low uncertainty)
+        # c2: conf=0.55, u=0.99  h(0.55)=0.993 ✓  (highest uncertainty)
+        # c3: conf=0.70, u=0.88  h(0.70)=0.881 ✓  (medium uncertainty)
+        c1 = self._create_candidate("c1", 0.97, 0.20, ImportanceTier.HIGH)
+        c2 = self._create_candidate("c2", 0.55, 0.99, ImportanceTier.LOW)
+        c3 = self._create_candidate("c3", 0.70, 0.88, ImportanceTier.MEDIUM)
+
         policy = B1UncertaintyFirstPolicy()
         ranked = policy.rank_candidates([c1, c2, c3])
-        # Sorted descending by uncertainty: c2 (0.9), c3 (0.6), c1 (0.2)
+        # Sorted descending by uncertainty: c2 (0.99), c3 (0.88), c1 (0.20)
         self.assertEqual([c.detection.candidate_id for c in ranked], ["c2", "c3", "c1"])
-        
+
         # Benefit = weight * uncertainty
-        # c3 benefit = 2.0 * 0.6 = 1.2
-        self.assertEqual(policy.evaluate_benefit(c3), 1.2)
+        # c3 benefit = 2.0 * 0.88 = 1.76
+        self.assertAlmostEqual(policy.evaluate_benefit(c3), 1.76, places=4)
 
     def test_policy_registry(self):
         self.assertIn("B0", POLICY_CATALOG)

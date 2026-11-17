@@ -24,7 +24,7 @@ def generate_synthetic_candidate_records() -> List[SatQueryCandidateRecord]:
             timestamp="2026-11-16T09:00:00Z",
             predicted_change="[SYNTHETIC EXAMPLE] flooded_cropland",
             confidence=0.88,
-            uncertainty=0.72,
+            uncertainty=0.53,   # [SYNTHETIC EXAMPLE] h(0.88) ≈ 0.529, within ±0.15
             region=RegionGeometry(
                 crs="local_meter_grid",
                 local_grid=LocalGridCoordinates(x_meters=250.0, y_meters=180.0, z_meters=50.0),
@@ -38,7 +38,7 @@ def generate_synthetic_candidate_records() -> List[SatQueryCandidateRecord]:
             timestamp="2026-11-16T09:01:00Z",
             predicted_change="[SYNTHETIC EXAMPLE] new_construction",
             confidence=0.94,
-            uncertainty=0.25,
+            uncertainty=0.33,   # [SYNTHETIC EXAMPLE] h(0.94) ≈ 0.327, within ±0.15
             region=RegionGeometry(
                 crs="local_meter_grid",
                 local_grid=LocalGridCoordinates(x_meters=420.0, y_meters=310.0, z_meters=60.0),
@@ -52,7 +52,7 @@ def generate_synthetic_candidate_records() -> List[SatQueryCandidateRecord]:
             timestamp="2026-11-16T09:02:00Z",
             predicted_change="[SYNTHETIC EXAMPLE] road_obstruction",
             confidence=0.65,
-            uncertainty=0.85,
+            uncertainty=0.93,   # [SYNTHETIC EXAMPLE] h(0.65) ≈ 0.934, within ±0.15
             region=RegionGeometry(
                 crs="local_meter_grid",
                 local_grid=LocalGridCoordinates(x_meters=600.0, y_meters=500.0, z_meters=55.0),
@@ -66,7 +66,7 @@ def generate_synthetic_candidate_records() -> List[SatQueryCandidateRecord]:
             timestamp="2026-11-16T09:03:00Z",
             predicted_change="[SYNTHETIC EXAMPLE] vegetation_clearance",
             confidence=0.82,
-            uncertainty=0.48,
+            uncertainty=0.68,   # [SYNTHETIC EXAMPLE] h(0.82) ≈ 0.680, within ±0.15
             region=RegionGeometry(
                 crs="local_meter_grid",
                 local_grid=LocalGridCoordinates(x_meters=850.0, y_meters=700.0, z_meters=70.0),
@@ -80,7 +80,7 @@ def generate_synthetic_candidate_records() -> List[SatQueryCandidateRecord]:
             timestamp="2026-11-16T09:04:00Z",
             predicted_change="[SYNTHETIC EXAMPLE] industrial_spill",
             confidence=0.55,
-            uncertainty=0.91,
+            uncertainty=0.99,   # [SYNTHETIC EXAMPLE] h(0.55) ≈ 0.993, within ±0.15
             region=RegionGeometry(
                 crs="local_meter_grid",
                 local_grid=LocalGridCoordinates(x_meters=1100.0, y_meters=950.0, z_meters=80.0),
