@@ -39,14 +39,16 @@ from ares.schemas.candidate_state import (
 from ares.energy.units import joules_to_wh
 from ares.energy.model import DroneEnergyModel
 from ares.energy.reserve import ReturnReserveCalculator
+from ares.schemas.provenance import DataProvenance, ProvenanceValue
 from ares.policies.b0_fixed_pass import B0FixedPassPolicy
 from ares.policies.b1_uncertainty_first import B1UncertaintyFirstPolicy
 from ares.policies.b2_adaptive_computation import B2AdaptiveComputationPolicy
-from ares.policies.b3_joint_policy import B3JointPolicy
+from ares.policies.b3_joint_policy import B3JointPolicy, B3JointPolicyConfig
+from ares.policies.b4_greedy_benefit_per_energy import B4GreedyBenefitPerEnergyPolicy
 from ares.simulation.simulator import MissionSimulationConfig, MissionSimulator
 
 
-def get_policy_instance(policy_id: str):
+def get_policy_instance(policy_id: str, include_human_review: bool = True):
     """Factory for selecting ARES policy."""
     pid = policy_id.upper()
     if pid == "B0":
@@ -56,9 +58,20 @@ def get_policy_instance(policy_id: str):
     elif pid == "B2":
         return B2AdaptiveComputationPolicy()
     elif pid == "B3":
+        if not include_human_review:
+            config = B3JointPolicyConfig(
+                allow_human_review=ProvenanceValue(
+                    value=False,
+                    provenance=DataProvenance.ASSUMED,
+                    notes="Disabled to test physical flight recapture and return reserve",
+                )
+            )
+            return B3JointPolicy(config=config)
         return B3JointPolicy()
+    elif pid == "B4":
+        return B4GreedyBenefitPerEnergyPolicy()
     else:
-        raise ValueError(f"Unknown policy '{policy_id}'. Available: B0, B1, B2, B3")
+        raise ValueError(f"Unknown policy '{policy_id}'. Available: B0, B1, B2, B3, B4")
 
 
 def run_integration(
@@ -66,6 +79,7 @@ def run_integration(
     policy_name: str = "B3",
     battery_wh: float = 20.83,  # 75,000 J
     export_report_path: Optional[str] = None,
+    include_human_review: bool = True,
 ) -> Dict:
     """Execute end-to-end integration run."""
     print("=" * 80)
@@ -125,7 +139,7 @@ def run_integration(
     battery_joules = battery_wh * 3600.0
     config = MissionSimulationConfig(initial_battery_joules=battery_joules)
     simulator = MissionSimulator(config=config)
-    policy = get_policy_instance(policy_name)
+    policy = get_policy_instance(policy_name, include_human_review=include_human_review)
 
     print(f"\n⚡ [Stage 4] Applying ARES Policy {policy_name} ({policy.policy_name})...")
     print(f"   Initial Energy Budget: {battery_wh:.2f} Wh ({battery_joules:,.0f} Joules)")
@@ -219,9 +233,10 @@ def run_integration(
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="ORBITRA SatQuery -> ARES Integration Example")
     parser.add_argument("--candidates", type=str, default=os.path.join(REPO_ROOT, "SatQuery", "exports", "sample_candidates.json"))
-    parser.add_argument("--policy", type=str, default="B3", choices=["B0", "B1", "B2", "B3"])
+    parser.add_argument("--policy", type=str, default="B3", choices=["B0", "B1", "B2", "B3", "B4"])
     parser.add_argument("--battery_wh", type=float, default=20.83)
     parser.add_argument("--output_report", type=str, default=os.path.join(REPO_ROOT, "SatQuery", "exports", "mission_decision_report.json"))
+    parser.add_argument("--no-human-review", action="store_true", help="Exclude HUMAN_REVIEW from action space, forcing flight/model triage")
     args = parser.parse_args()
 
     run_integration(
@@ -229,4 +244,5 @@ if __name__ == "__main__":
         policy_name=args.policy,
         battery_wh=args.battery_wh,
         export_report_path=args.output_report,
+        include_human_review=not args.no_human_review,
     )

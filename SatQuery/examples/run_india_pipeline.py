@@ -42,6 +42,7 @@ def process_indian_mission(
     policy: str = "B3",
     battery_wh: float = 50.0,
     crop_size: int = 512,
+    include_human_review: bool = True,
 ):
     print("=" * 80)
     print("🇮🇳  ORBITRA REAL INDIAN SATELLITE MISSION: SatQuery -> ARES")
@@ -133,10 +134,11 @@ def process_indian_mission(
         policy_name=policy,
         battery_wh=battery_wh,
         export_report_path=report_out,
+        include_human_review=include_human_review,
     )
 
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser(description="ORBITRA Real Indian Satellite Mission Runner")
     parser.add_argument(
         "--zone",
@@ -145,12 +147,18 @@ if __name__ == "__main__":
         choices=list(INDIAN_MISSION_ZONES.keys()),
         help="Indian geographic mission zone",
     )
-    parser.add_argument("--policy", type=str, default="B3", choices=["B0", "B1", "B2", "B3"])
+    parser.add_argument("--policy", type=str, default="B3", choices=["B0", "B1", "B2", "B3", "B4"])
     parser.add_argument("--battery_wh", type=float, default=50.0)
+    parser.add_argument("--no-human-review", action="store_true", help="Exclude HUMAN_REVIEW from action space, forcing flight/model triage")
     args = parser.parse_args()
 
     process_indian_mission(
         zone_key=args.zone,
         policy=args.policy,
         battery_wh=args.battery_wh,
+        include_human_review=not args.no_human_review,
     )
+
+
+if __name__ == "__main__":
+    main()

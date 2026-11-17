@@ -5,10 +5,10 @@
     "provenance": "SIMULATED",
     "initial_battery_joules": 180000.0,
     "initial_battery_wh": 50.0,
-    "final_battery_joules": 179650.0,
-    "final_battery_wh": 49.9,
-    "total_energy_spent_actions_joules": 350.0,
-    "total_energy_spent_actions_wh": 0.1,
+    "final_battery_joules": 169850.0,
+    "final_battery_wh": 47.18,
+    "total_energy_spent_actions_joules": 10150.0,
+    "total_energy_spent_actions_wh": 2.82,
     "return_flight_energy_joules": 0.0,
     "return_flight_energy_wh": 0.0,
     "safe_return_completed": true,
@@ -23,58 +23,58 @@
     {
       "step": 1,
       "candidate_id": "cand_sq_levir_001",
-      "action": "HUMAN_REVIEW",
-      "cost_wh": 0.0139,
+      "action": "STRONGER_MODEL",
+      "cost_wh": 0.4028,
       "reserve_feasible": true,
-      "reason": "[B3-JOINT] Best joint score 0.0347 for candidate 'cand_sq_levir_001' + HUMAN_REVIEW. w=2.0, u=0.91, reduction=95%, cost=50J"
+      "reason": "[B3-JOINT] Best joint score 0.0005 for candidate 'cand_sq_levir_001' + STRONGER_MODEL. w=2.0, u=0.91, reduction=40%, cost=1450J"
     },
     {
       "step": 2,
       "candidate_id": "cand_sq_levir_002",
-      "action": "HUMAN_REVIEW",
-      "cost_wh": 0.0139,
+      "action": "STRONGER_MODEL",
+      "cost_wh": 0.4028,
       "reserve_feasible": true,
-      "reason": "[B3-JOINT] Best joint score 0.0377 for candidate 'cand_sq_levir_002' + HUMAN_REVIEW. w=2.0, u=0.99, reduction=95%, cost=50J"
+      "reason": "[B3-JOINT] Best joint score 0.0005 for candidate 'cand_sq_levir_002' + STRONGER_MODEL. w=2.0, u=0.99, reduction=40%, cost=1450J"
     },
     {
       "step": 3,
       "candidate_id": "cand_sq_levir_003",
-      "action": "HUMAN_REVIEW",
-      "cost_wh": 0.0139,
+      "action": "STRONGER_MODEL",
+      "cost_wh": 0.4028,
       "reserve_feasible": true,
-      "reason": "[B3-JOINT] Best joint score 0.0360 for candidate 'cand_sq_levir_003' + HUMAN_REVIEW. w=2.0, u=0.95, reduction=95%, cost=50J"
+      "reason": "[B3-JOINT] Best joint score 0.0005 for candidate 'cand_sq_levir_003' + STRONGER_MODEL. w=2.0, u=0.95, reduction=40%, cost=1450J"
     },
     {
       "step": 4,
       "candidate_id": "cand_sq_levir_004",
-      "action": "HUMAN_REVIEW",
-      "cost_wh": 0.0139,
+      "action": "STRONGER_MODEL",
+      "cost_wh": 0.4028,
       "reserve_feasible": true,
-      "reason": "[B3-JOINT] Best joint score 0.0376 for candidate 'cand_sq_levir_004' + HUMAN_REVIEW. w=2.0, u=0.99, reduction=95%, cost=50J"
+      "reason": "[B3-JOINT] Best joint score 0.0005 for candidate 'cand_sq_levir_004' + STRONGER_MODEL. w=2.0, u=0.99, reduction=40%, cost=1450J"
     },
     {
       "step": 5,
       "candidate_id": "cand_sq_levir_005",
-      "action": "HUMAN_REVIEW",
-      "cost_wh": 0.0139,
+      "action": "STRONGER_MODEL",
+      "cost_wh": 0.4028,
       "reserve_feasible": true,
-      "reason": "[B3-JOINT] Best joint score 0.0759 for candidate 'cand_sq_levir_005' + HUMAN_REVIEW. w=4.0, u=1.00, reduction=95%, cost=50J"
+      "reason": "[B3-JOINT] Best joint score 0.0011 for candidate 'cand_sq_levir_005' + STRONGER_MODEL. w=4.0, u=1.00, reduction=40%, cost=1450J"
     },
     {
       "step": 6,
       "candidate_id": "cand_sq_levir_006",
-      "action": "HUMAN_REVIEW",
-      "cost_wh": 0.0139,
+      "action": "STRONGER_MODEL",
+      "cost_wh": 0.4028,
       "reserve_feasible": true,
-      "reason": "[B3-JOINT] Best joint score 0.0757 for candidate 'cand_sq_levir_006' + HUMAN_REVIEW. w=4.0, u=1.00, reduction=95%, cost=50J"
+      "reason": "[B3-JOINT] Best joint score 0.0011 for candidate 'cand_sq_levir_006' + STRONGER_MODEL. w=4.0, u=1.00, reduction=40%, cost=1450J"
     },
     {
       "step": 7,
       "candidate_id": "cand_sq_levir_007",
-      "action": "HUMAN_REVIEW",
-      "cost_wh": 0.0139,
+      "action": "STRONGER_MODEL",
+      "cost_wh": 0.4028,
       "reserve_feasible": true,
-      "reason": "[B3-JOINT] Best joint score 0.0760 for candidate 'cand_sq_levir_007' + HUMAN_REVIEW. w=4.0, u=1.00, reduction=95%, cost=50J"
+      "reason": "[B3-JOINT] Best joint score 0.0011 for candidate 'cand_sq_levir_007' + STRONGER_MODEL. w=4.0, u=1.00, reduction=40%, cost=1450J"
     },
     {
       "step": 8,
@@ -91,49 +91,49 @@
       "predicted_change": "vegetation_clearing",
       "confidence": 0.3295,
       "uncertainty": 0.9144,
-      "action_selected": "HUMAN_REVIEW"
+      "action_selected": "STRONGER_MODEL"
     },
     {
       "candidate_id": "cand_sq_levir_002",
       "predicted_change": "vegetation_clearing",
       "confidence": 0.452,
       "uncertainty": 0.9933,
-      "action_selected": "HUMAN_REVIEW"
+      "action_selected": "STRONGER_MODEL"
     },
     {
       "candidate_id": "cand_sq_levir_003",
       "predicted_change": "vegetation_clearing",
       "confidence": 0.367,
       "uncertainty": 0.9483,
-      "action_selected": "HUMAN_REVIEW"
+      "action_selected": "STRONGER_MODEL"
     },
     {
       "candidate_id": "cand_sq_levir_004",
       "predicted_change": "vegetation_clearing",
       "confidence": 0.4412,
       "uncertainty": 0.99,
-      "action_selected": "HUMAN_REVIEW"
+      "action_selected": "STRONGER_MODEL"
     },
     {
       "candidate_id": "cand_sq_levir_005",
       "predicted_change": "urban_building_construction",
       "confidence": 0.4806,
       "uncertainty": 0.9989,
-      "action_selected": "HUMAN_REVIEW"
+      "action_selected": "STRONGER_MODEL"
     },
     {
       "candidate_id": "cand_sq_levir_006",
       "predicted_change": "urban_building_construction",
       "confidence": 0.4629,
       "uncertainty": 0.996,
-      "action_selected": "HUMAN_REVIEW"
+      "action_selected": "STRONGER_MODEL"
     },
     {
       "candidate_id": "cand_sq_levir_007",
       "predicted_change": "urban_building_construction",
       "confidence": 0.5092,
       "uncertainty": 0.9998,
-      "action_selected": "HUMAN_REVIEW"
+      "action_selected": "STRONGER_MODEL"
     }
   ]
 }
