@@ -50,19 +50,22 @@ class TestB2Policy(unittest.TestCase):
         )
 
     def test_b2_ranking_prioritizes_information_gain(self):
-        # c1: weight 4.0, unc 0.20 -> gain 0.8
-        # c2: weight 1.0, unc 0.90 -> gain 0.9
-        # c3: weight 4.0, unc 0.80 -> gain 3.2
-        c1 = self._create_candidate("c1", 0.8, 0.20, ImportanceTier.HIGH)
-        c2 = self._create_candidate("c2", 0.5, 0.90, ImportanceTier.LOW)
-        c3 = self._create_candidate("c3", 0.7, 0.80, ImportanceTier.HIGH)
+        # Formula-consistent (conf, u) pairs — h(conf) within ±0.15 of u:
+        # c1: conf=0.97, u=0.20  h(0.97)=0.194 ✓  weight=4.0 -> gain=4.0*0.20=0.8
+        # c2: conf=0.55, u=0.99  h(0.55)=0.993 ✓  weight=1.0 -> gain=1.0*0.99=0.99
+        # c3: conf=0.70, u=0.88  h(0.70)=0.881 ✓  weight=4.0 -> gain=4.0*0.88=3.52
+        # Expected order descending: c3 (3.52) > c2 (0.99) > c1 (0.80)
+        c1 = self._create_candidate("c1", 0.97, 0.20, ImportanceTier.HIGH)
+        c2 = self._create_candidate("c2", 0.55, 0.99, ImportanceTier.LOW)
+        c3 = self._create_candidate("c3", 0.70, 0.88, ImportanceTier.HIGH)
 
         ranked = self.policy.rank_candidates([c1, c2, c3])
         self.assertEqual([c.detection.candidate_id for c in ranked], ["c3", "c2", "c1"])
 
     def test_b2_selects_none_for_low_uncertainty(self):
-        # Candidate with uncertainty 0.20 < threshold 0.30 -> NONE
-        c = self._create_candidate("c_low_u", 0.90, 0.20, ImportanceTier.MEDIUM)
+        # Candidate with u=0.20 < threshold 0.30 -> NONE
+        # conf=0.97, u=0.20  h(0.97)=0.194 ✓
+        c = self._create_candidate("c_low_u", 0.97, 0.20, ImportanceTier.MEDIUM)
         decision = self.policy.select_action(
             candidate=c,
             current_pos=self.home,
@@ -78,8 +81,9 @@ class TestB2Policy(unittest.TestCase):
         self.assertIn("already low", decision.reason.lower())
 
     def test_b2_selects_recapture_for_high_u_and_high_w(self):
-        # Candidate with unc 0.85 (>= 0.65) and weight 4.0 (>= 4.0) -> RECAPTURE
-        c = self._create_candidate("c_high", 0.60, 0.85, ImportanceTier.HIGH, x=200.0)
+        # Candidate with u=0.97 (>= 0.65) and weight 4.0 (>= 4.0) -> RECAPTURE
+        # conf=0.60, u=0.97  h(0.60)=0.971 ✓
+        c = self._create_candidate("c_high", 0.60, 0.97, ImportanceTier.HIGH, x=200.0)
         decision = self.policy.select_action(
             candidate=c,
             current_pos=self.home,
@@ -94,8 +98,9 @@ class TestB2Policy(unittest.TestCase):
         self.assertGreater(decision.estimated_cost_joules, 3000.0)
 
     def test_b2_selects_stronger_model_for_moderate_uncertainty(self):
-        # Candidate with moderate unc 0.50 (in [0.30, 0.65]) -> STRONGER_MODEL
-        c = self._create_candidate("c_mod", 0.70, 0.50, ImportanceTier.MEDIUM, x=300.0)
+        # Candidate with moderate u=0.61 (in [0.30, 0.65]) -> STRONGER_MODEL
+        # conf=0.85, u=0.61  h(0.85)=0.610 ✓
+        c = self._create_candidate("c_mod", 0.85, 0.61, ImportanceTier.MEDIUM, x=300.0)
         decision = self.policy.select_action(
             candidate=c,
             current_pos=self.home,
@@ -111,10 +116,11 @@ class TestB2Policy(unittest.TestCase):
         self.assertEqual(decision.estimated_cost_joules, 1450.0)
 
     def test_b2_adaptive_downscaling_when_recapture_infeasible(self):
-        # High uncertainty & high importance, but candidate is far away (1500m) and battery is tight (8000 J)
+        # High uncertainty & high importance, but candidate is far away (1500m) and battery tight (8000 J)
         # Flight would cost ~25,000 J + return reserve (violating budget),
-        # so B2 adaptively downscales to STRONGER_MODEL (1450 J)!
-        c = self._create_candidate("c_far", 0.50, 0.90, ImportanceTier.HIGH, x=1500.0)
+        # so B2 adaptively downscales to STRONGER_MODEL (1450 J)
+        # conf=0.55, u=0.99  h(0.55)=0.993 ✓  (u >> 0.65 threshold -> would trigger RECAPTURE if affordable)
+        c = self._create_candidate("c_far", 0.55, 0.99, ImportanceTier.HIGH, x=1500.0)
         decision = self.policy.select_action(
             candidate=c,
             current_pos=self.home,

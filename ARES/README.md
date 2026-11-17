@@ -2,7 +2,7 @@
 
 **Owner:** Energy Modelling & Intelligent Decision-Making Lead  
 **System:** ORBITRA  
-**Status:** Milestone 4 Complete (B3 Joint Policy — joint candidate-and-action selection with benefit/cost objective)
+**Status:** Milestone 4 Complete | Provisional Interface Tightened (`v1.0.0-provisional`) per SatQuery Lead Agreement
 
 ARES consumes candidate change records produced by SatQuery and decides what to inspect, compute, defer, or stop while strictly respecting the mission energy budget and safe-return reserve.
 
@@ -93,6 +93,30 @@ python -m unittest discover -s tests -v
 ---
 
 ## Running Implementation Log
+
+### Provisional Interface Tightening (SatQuery Lead Agreement) — 2026-11-17
+- **Summary:** Updated ARES schema validation and documentation to reflect the agreed provisional interface (`v1.0.0-provisional`) with the SatQuery lead. Made `local_grid` mandatory for all ARES kinematic and reserve computations. Enforced strict ISO-8601 UTC datetime parsing (`Z` or `+00:00`), rejecting malformed strings that merely append suffixes. Enabled strict rejection of unknown extra fields (`extra='forbid'`) to prevent silent schema drift. Documented and enforced candidate uncertainty as a hard validation failure if it deviates from normalized binary Shannon entropy of calibrated confidence ($u = -[p \log_2(p) + (1-p) \log_2(1-p)]$) beyond `SHANNON_ENTROPY_TOLERANCE` (±0.15). Reconciled the documented coordinate example so sample latitude ($39.902857^\circ\text{ N}$) strictly matches the stated nominal conversion formula ($y / 111{,}320$) and inputs ($y = 318.0\text{ m}$).
+- **Changed Files:**
+  - `ARES/ares/schemas/satquery_record.py`: `local_grid` required; strict ISO-8601 UTC datetime parsing validator; `extra='forbid'`; hard Shannon entropy validation check with configurable `SHANNON_ENTROPY_TOLERANCE = 0.15`; detailed field and coordinate documentation.
+  - `ARES/ares/schemas/__init__.py`: Exported `SHANNON_ENTROPY_TOLERANCE`.
+  - `ARES/docs/INTERFACE_PROPOSAL.md`: Fully revised with agreed fields, semantics, Shannon entropy formula, hard validation rules, reconciled coordinate convention (home [0,0,0] at 39.9°N, 116.4°E, tile anchor at (160.5m E, 217.0m N), GSD 0.5m/px, centroid at local (245.5m E, 318.0m N, 50m AGL) and geodetic center at 39.902857°N, 116.402875°E), sample record, and resolved checklist.
+  - `ARES/ares/simulation/synthetic_data.py`: Synthetic candidate records aligned with the agreed Shannon entropy uncertainty formula.
+  - `ARES/tests/test_schemas.py`: Added tests for required `local_grid`, malformed ISO-8601 string rejection, non-UTC timestamp rejection, unknown field rejection, hard Shannon entropy validation, entropy boundary cases ($p=0, 0.5, 1.0$), and the reconciled coordinate example test.
+  - `ARES/tests/test_actions.py`, `test_policies.py`, `test_b2_policy.py`, `test_b3_policy.py`, `test_importance.py`: Updated synthetic test fixtures to satisfy schema validation and entropy consistency.
+  - `ARES/README.md`: Status and implementation log updated.
+- **Checks Actually Performed:**
+  - Ran `python -m unittest discover -s ARES/tests -t ARES -v`: **59/59 tests passed**.
+  - Confirmed: Missing `local_grid` raises `ValidationError`.
+  - Confirmed: Malformed ISO-8601 timestamps (`not-a-dateZ`, `invalid+00:00`, `2026-02-31T09:00:00Z`, `2026-11-17T25:00:00Z`) and non-UTC timestamps raise `ValidationError`.
+  - Confirmed: Unknown extra fields raise `ValidationError`.
+  - Confirmed: Hard validation failure triggers when uncertainty deviates by $>0.15$ from binary Shannon entropy.
+  - Confirmed: Reconciled coordinate sample center latitude $39.902857^\circ\text{ N}$ precisely matches the stated $318.0 / 111{,}320$ formula.
+  - Confirmed: All policies (B0, B1, B2, B3) and simulations run cleanly with tightened schemas.
+- **Remaining Limitations & Documented Assumptions:**
+  - Interface remains strictly `v1.0.0-provisional` until joint integration is executed with actual SatQuery code.
+  - Confidence calibration (temperature/Platt scaling) and georeferencing coordinate transforms are documented SatQuery responsibilities and assumptions, not verified by ARES.
+  - Geodetic conversion example is an illustrative local planar approximation, not a general georeferencing engine.
+  - Policy B4 remains `PLANNED`.
 
 ### Milestone 4: B3 Joint Policy — 2026-11-16
 - **Summary:** Implemented B3 Joint Policy — the first ARES policy that jointly decides both _which_ candidate to handle and _which_ action to apply in a single step. At each mission step, B3 enumerates all PENDING `(candidate, action)` pairs, applies the return-reserve guardrail to exclude infeasible pairs, scores each feasible pair using the joint objective `score = w × u × r_a / max(E_a, E_min)`, and executes the globally highest-scoring pair. Configured thresholds and reduction rates are `ASSUMED`. B4 remains `PLANNED`.

@@ -35,7 +35,7 @@ class TestActions(unittest.TestCase):
             timestamp="2026-11-16T09:00:00Z",
             predicted_change="flooded_cropland",
             confidence=0.70,
-            uncertainty=0.60,
+            uncertainty=0.88,  # h(0.70) ≈ 0.881 — formula-consistent (agreed Shannon entropy)
             region=RegionGeometry(
                 crs="local_meter_grid",
                 local_grid=self.pos_b
