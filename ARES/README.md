@@ -94,6 +94,20 @@ python -m unittest discover -s tests -v
 
 ## Running Implementation Log
 
+### Joint Integration Verification with SatQuery Exports — 2026-11-17
+- **Summary:** Verified ARES candidate ingestion against real SatQuery export datasets following the merge of SatQuery PR #1. Validated that `SatQueryCandidateRecord` directly parses and validates `SatQuery/exports/sample_candidates.json` (3 records) and all regional mission candidate exports (113 records total across Bengaluru Tech, Chennai Sriperumbudur, Delhi NCR, and Kanpur Bhauti) with zero schema errors. Executed ARES simulations across all primary policies (B0–B4) on ingested SatQuery candidates.
+- **End-to-End Script Check:** Attempted execution of `python SatQuery/examples/end_to_end_integration.py --policy B3`. The command failed at the module import stage with:
+  `ModuleNotFoundError: No module named 'SatQuery.satquery.data'`
+  caused by line 19 of `SatQuery/satquery/pipeline.py` importing `from .data.synthetic_sample_data import generate_benchmark_pair`. Inspection revealed that `data/` in root `.gitignore` (line 11) caused the SatQuery author's `SatQuery/satquery/data/` directory to be omitted from the repository. Per project boundaries, no edits were made to SatQuery files; this issue is documented for the SatQuery lead to resolve.
+- **Checks Actually Performed:**
+  - Ran `python -c "import json, sys; sys.path.insert(0, 'ARES'); from ares.schemas.satquery_record import SatQueryCandidateRecord; data = json.load(open('SatQuery/exports/sample_candidates.json')); records = [SatQueryCandidateRecord(**d) for d in data]; print(f'Loaded {len(records)} records')"`: **Successfully loaded and validated 3 records**.
+  - Validated all 6 SatQuery exported JSON files against ARES schema: **113/113 records passed strict validation**.
+  - Ran `python SatQuery/examples/end_to_end_integration.py --policy B3`: Failed with `ModuleNotFoundError: No module named 'SatQuery.satquery.data'`.
+  - Ran `python -m unittest discover -s ARES/tests -t ARES -v`: **70/70 unit tests passed**.
+- **Limitations & Outstanding Items for SatQuery Lead:**
+  - End-to-end integration cannot be claimed as passed until `SatQuery/satquery/data` is added to git (or un-gitignored) by the SatQuery owner.
+  - The interface remains `v1.0.0-provisional`.
+
 ### Milestone 5: B4 Greedy Benefit-per-Energy Policy — 2026-11-17
 - **Summary:** Formulated the clear architectural and measurable distinction between Policy B3 (joint candidate-and-action co-optimization across multi-modal actions) and Policy B4 (single-action spatial dispatch baseline). Implemented Policy B4 (`B4GreedyBenefitPerEnergyPolicy`), which dynamically ranks pending candidates by marginal expected benefit per Joule of physical transit and sortie energy ($\Delta B / E_{\text{recapture}}$) from the current UAV location $\mathbf{x}_{\text{current}}$, and selects physical `RECAPTURE` under the return-reserve guardrail ($E_{\text{remaining}} - E_{\text{action}} \ge E_{\text{reserve}}(\mathbf{x}_c \to \mathbf{x}_{\text{home}})$). Added B4 to the policy registry, simulator, and test suite. Documented the comparison and formal formulas in `DESIGN.md`.
 - **Architectural Distinction Defined (B3 vs. B4):**
@@ -125,6 +139,8 @@ python -m unittest discover -s tests -v
   - B4 performs myopic (single-step greedy) spatial selection without lookahead or multi-stop Traveling Salesperson / orienteering route optimization.
   - Policy performance comparisons require empirical flight or bench experiments under matched energy budgets.
   - SatQuery interface remains strictly `v1.0.0-provisional`.
+
+### Provisional Interface Tightening (SatQuery Lead Agreement) — 2026-11-17
 - **Summary:** Updated ARES schema validation and documentation to reflect the agreed provisional interface (`v1.0.0-provisional`) with the SatQuery lead. Made `local_grid` mandatory for all ARES kinematic and reserve computations. Enforced strict ISO-8601 UTC datetime parsing (`Z` or `+00:00`), rejecting malformed strings that merely append suffixes. Enabled strict rejection of unknown extra fields (`extra='forbid'`) to prevent silent schema drift. Documented and enforced candidate uncertainty as a hard validation failure if it deviates from normalized binary Shannon entropy of calibrated confidence ($u = -[p \log_2(p) + (1-p) \log_2(1-p)]$) beyond `SHANNON_ENTROPY_TOLERANCE` (±0.15). Reconciled the documented coordinate example so sample latitude ($39.902857^\circ\text{ N}$) strictly matches the stated nominal conversion formula ($y / 111{,}320$) and inputs ($y = 318.0\text{ m}$).
 - **Changed Files:**
   - `ARES/ares/schemas/satquery_record.py`: `local_grid` required; strict ISO-8601 UTC datetime parsing validator; `extra='forbid'`; hard Shannon entropy validation check with configurable `SHANNON_ENTROPY_TOLERANCE = 0.15`; detailed field and coordinate documentation.
