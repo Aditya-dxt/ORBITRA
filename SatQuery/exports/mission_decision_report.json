@@ -3,21 +3,21 @@
     "policy_id": "B3",
     "policy_name": "Joint Policy",
     "provenance": "SIMULATED",
-    "initial_battery_joules": 180000.0,
-    "initial_battery_wh": 50.0,
-    "final_battery_joules": 179650.0,
-    "final_battery_wh": 49.9,
-    "total_energy_spent_actions_joules": 350.0,
-    "total_energy_spent_actions_wh": 0.1,
+    "initial_battery_joules": 74988.0,
+    "initial_battery_wh": 20.83,
+    "final_battery_joules": 74838.0,
+    "final_battery_wh": 20.79,
+    "total_energy_spent_actions_joules": 150.0,
+    "total_energy_spent_actions_wh": 0.04,
     "return_flight_energy_joules": 0.0,
     "return_flight_energy_wh": 0.0,
     "safe_return_completed": true,
-    "candidates_total": 7,
-    "candidates_inspected": 7,
+    "candidates_total": 3,
+    "candidates_inspected": 3,
     "candidates_deferred": 0,
     "candidates_skipped": 0,
-    "ledger_records_count": 8,
-    "summary_message": "[SIMULATED] Sortie under B3 (Joint Policy) completed: 7 inspected, 0 skipped, 0 deferred. Safe return: True."
+    "ledger_records_count": 4,
+    "summary_message": "[SIMULATED] Sortie under B3 (Joint Policy) completed: 3 inspected, 0 skipped, 0 deferred. Safe return: True."
   },
   "decisions": [
     {
@@ -26,7 +26,7 @@
       "action": "HUMAN_REVIEW",
       "cost_wh": 0.0139,
       "reserve_feasible": true,
-      "reason": "[B3-JOINT] Best joint score 0.0347 for candidate 'cand_sq_levir_001' + HUMAN_REVIEW. w=2.0, u=0.91, reduction=95%, cost=50J"
+      "reason": "[B3-JOINT] Best joint score 0.0121 for candidate 'cand_sq_levir_001' + HUMAN_REVIEW. w=2.0, u=0.32, reduction=95%, cost=50J"
     },
     {
       "step": 2,
@@ -34,7 +34,7 @@
       "action": "HUMAN_REVIEW",
       "cost_wh": 0.0139,
       "reserve_feasible": true,
-      "reason": "[B3-JOINT] Best joint score 0.0377 for candidate 'cand_sq_levir_002' + HUMAN_REVIEW. w=2.0, u=0.99, reduction=95%, cost=50J"
+      "reason": "[B3-JOINT] Best joint score 0.0177 for candidate 'cand_sq_levir_002' + HUMAN_REVIEW. w=2.0, u=0.47, reduction=95%, cost=50J"
     },
     {
       "step": 3,
@@ -42,42 +42,10 @@
       "action": "HUMAN_REVIEW",
       "cost_wh": 0.0139,
       "reserve_feasible": true,
-      "reason": "[B3-JOINT] Best joint score 0.0360 for candidate 'cand_sq_levir_003' + HUMAN_REVIEW. w=2.0, u=0.95, reduction=95%, cost=50J"
+      "reason": "[B3-JOINT] Best joint score 0.0036 for candidate 'cand_sq_levir_003' + HUMAN_REVIEW. w=2.0, u=0.09, reduction=95%, cost=50J"
     },
     {
       "step": 4,
-      "candidate_id": "cand_sq_levir_004",
-      "action": "HUMAN_REVIEW",
-      "cost_wh": 0.0139,
-      "reserve_feasible": true,
-      "reason": "[B3-JOINT] Best joint score 0.0376 for candidate 'cand_sq_levir_004' + HUMAN_REVIEW. w=2.0, u=0.99, reduction=95%, cost=50J"
-    },
-    {
-      "step": 5,
-      "candidate_id": "cand_sq_levir_005",
-      "action": "HUMAN_REVIEW",
-      "cost_wh": 0.0139,
-      "reserve_feasible": true,
-      "reason": "[B3-JOINT] Best joint score 0.0759 for candidate 'cand_sq_levir_005' + HUMAN_REVIEW. w=4.0, u=1.00, reduction=95%, cost=50J"
-    },
-    {
-      "step": 6,
-      "candidate_id": "cand_sq_levir_006",
-      "action": "HUMAN_REVIEW",
-      "cost_wh": 0.0139,
-      "reserve_feasible": true,
-      "reason": "[B3-JOINT] Best joint score 0.0757 for candidate 'cand_sq_levir_006' + HUMAN_REVIEW. w=4.0, u=1.00, reduction=95%, cost=50J"
-    },
-    {
-      "step": 7,
-      "candidate_id": "cand_sq_levir_007",
-      "action": "HUMAN_REVIEW",
-      "cost_wh": 0.0139,
-      "reserve_feasible": true,
-      "reason": "[B3-JOINT] Best joint score 0.0760 for candidate 'cand_sq_levir_007' + HUMAN_REVIEW. w=4.0, u=1.00, reduction=95%, cost=50J"
-    },
-    {
-      "step": 8,
       "candidate_id": "MISSION_RETURN",
       "action": "RETURN_HOME",
       "cost_wh": 0.0,
@@ -89,50 +57,22 @@
     {
       "candidate_id": "cand_sq_levir_001",
       "predicted_change": "vegetation_clearing",
-      "confidence": 0.3295,
-      "uncertainty": 0.9144,
+      "confidence": 0.9423,
+      "uncertainty": 0.3183,
       "action_selected": "HUMAN_REVIEW"
     },
     {
       "candidate_id": "cand_sq_levir_002",
       "predicted_change": "vegetation_clearing",
-      "confidence": 0.452,
-      "uncertainty": 0.9933,
+      "confidence": 0.9009,
+      "uncertainty": 0.4661,
       "action_selected": "HUMAN_REVIEW"
     },
     {
       "candidate_id": "cand_sq_levir_003",
       "predicted_change": "vegetation_clearing",
-      "confidence": 0.367,
-      "uncertainty": 0.9483,
-      "action_selected": "HUMAN_REVIEW"
-    },
-    {
-      "candidate_id": "cand_sq_levir_004",
-      "predicted_change": "vegetation_clearing",
-      "confidence": 0.4412,
-      "uncertainty": 0.99,
-      "action_selected": "HUMAN_REVIEW"
-    },
-    {
-      "candidate_id": "cand_sq_levir_005",
-      "predicted_change": "urban_building_construction",
-      "confidence": 0.4806,
-      "uncertainty": 0.9989,
-      "action_selected": "HUMAN_REVIEW"
-    },
-    {
-      "candidate_id": "cand_sq_levir_006",
-      "predicted_change": "urban_building_construction",
-      "confidence": 0.4629,
-      "uncertainty": 0.996,
-      "action_selected": "HUMAN_REVIEW"
-    },
-    {
-      "candidate_id": "cand_sq_levir_007",
-      "predicted_change": "urban_building_construction",
-      "confidence": 0.5092,
-      "uncertainty": 0.9998,
+      "confidence": 0.9879,
+      "uncertainty": 0.0945,
       "action_selected": "HUMAN_REVIEW"
     }
   ]
