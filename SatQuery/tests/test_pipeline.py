@@ -81,6 +81,16 @@ class TestPipelineAndAresCompatibility(unittest.TestCase):
         self.assertTrue(res["report"].safe_return_completed)
         self.assertGreater(len(res["decisions"]), 0)
 
+    def test_vision_evaluation_suite_runs(self):
+        """Verifies that the comprehensive evaluation runner completes and produces valid metrics."""
+        from SatQuery.examples.evaluate_vision_pipeline import run_comprehensive_evaluation
+        report = run_comprehensive_evaluation()
+        self.assertIn("aggregate_pixel_metrics", report)
+        self.assertGreater(report["aggregate_pixel_metrics"]["precision"], 0.70)
+        self.assertGreater(report["aggregate_pixel_metrics"]["f1_score"], 0.50)
+        self.assertIn("failure_taxonomy", report)
+        self.assertGreater(len(report["failure_taxonomy"]), 0)
+
 
 if __name__ == "__main__":
     unittest.main()

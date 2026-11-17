@@ -1,0 +1,276 @@
+{
+  "report_title": "ORBITRA SatQuery Vision Pipeline Evaluation Report",
+  "evaluation_protocol": {
+    "iou_threshold_region_matching": 0.5,
+    "min_contour_area_pixels": 25,
+    "baseline_threshold": 0.35,
+    "calibration_method": "Platt Scaling (logistic regression fitted on val split)",
+    "uncertainty_formulation": "Normalized Binary Shannon Entropy u in [0, 1]"
+  },
+  "aggregate_pixel_metrics": {
+    "precision": 0.9432,
+    "recall": 0.5316,
+    "f1_score": 0.6799,
+    "iou": 0.5151,
+    "total_pixels_evaluated": 524288
+  },
+  "aggregate_region_metrics": {
+    "region_precision": 0.5556,
+    "region_recall": 0.4545,
+    "region_f1": 0.5,
+    "matched_regions_tp": 10,
+    "spurious_regions_fp": 8,
+    "missed_regions_fn": 12
+  },
+  "calibration_held_out": {
+    "ece": 0.1235,
+    "brier_score": 0.0608,
+    "test_sample_size": 500
+  },
+  "test_scenes": [
+    {
+      "scene_name": "Dense Urban Construction A",
+      "pixel_metrics": {
+        "precision": 0.954,
+        "recall": 0.5827,
+        "f1_score": 0.7235,
+        "iou": 0.5667,
+        "accuracy": 0.9415,
+        "tp": 5019,
+        "fp": 242,
+        "fn": 3595,
+        "tn": 56680
+      },
+      "region_metrics": {
+        "region_precision": 0.5,
+        "region_recall": 0.5,
+        "region_f1": 0.5,
+        "region_tp": 2,
+        "region_fp": 2,
+        "region_fn": 2
+      },
+      "num_candidates": 4,
+      "num_gt_regions": 4
+    },
+    {
+      "scene_name": "Dense Urban Construction B",
+      "pixel_metrics": {
+        "precision": 0.9509,
+        "recall": 0.7471,
+        "f1_score": 0.8368,
+        "iou": 0.7193,
+        "accuracy": 0.9731,
+        "tp": 4511,
+        "fp": 233,
+        "fn": 1527,
+        "tn": 59265
+      },
+      "region_metrics": {
+        "region_precision": 1.0,
+        "region_recall": 0.6667,
+        "region_f1": 0.8,
+        "region_tp": 2,
+        "region_fp": 0,
+        "region_fn": 1
+      },
+      "num_candidates": 2,
+      "num_gt_regions": 3
+    },
+    {
+      "scene_name": "Road & Infrastructure Expansion",
+      "pixel_metrics": {
+        "precision": 0.891,
+        "recall": 0.2133,
+        "f1_score": 0.3442,
+        "iou": 0.2079,
+        "accuracy": 0.952,
+        "tp": 826,
+        "fp": 101,
+        "fn": 3046,
+        "tn": 61563
+      },
+      "region_metrics": {
+        "region_precision": 0.0,
+        "region_recall": 0.0,
+        "region_f1": 0.0,
+        "region_tp": 0,
+        "region_fp": 1,
+        "region_fn": 2
+      },
+      "num_candidates": 1,
+      "num_gt_regions": 2
+    },
+    {
+      "scene_name": "Vegetation Clearing & Land Prep",
+      "pixel_metrics": {
+        "precision": 0.9191,
+        "recall": 0.8623,
+        "f1_score": 0.8898,
+        "iou": 0.8015,
+        "accuracy": 0.9924,
+        "tp": 2023,
+        "fp": 178,
+        "fn": 323,
+        "tn": 63012
+      },
+      "region_metrics": {
+        "region_precision": 1.0,
+        "region_recall": 1.0,
+        "region_f1": 1.0,
+        "region_tp": 1,
+        "region_fp": 0,
+        "region_fn": 0
+      },
+      "num_candidates": 1,
+      "num_gt_regions": 1
+    },
+    {
+      "scene_name": "Mixed Urban & Infrastructure",
+      "pixel_metrics": {
+        "precision": 0.9532,
+        "recall": 0.4479,
+        "f1_score": 0.6094,
+        "iou": 0.4383,
+        "accuracy": 0.904,
+        "tp": 4909,
+        "fp": 241,
+        "fn": 6051,
+        "tn": 54335
+      },
+      "region_metrics": {
+        "region_precision": 0.5,
+        "region_recall": 0.4,
+        "region_f1": 0.4444,
+        "region_tp": 2,
+        "region_fp": 2,
+        "region_fn": 3
+      },
+      "num_candidates": 4,
+      "num_gt_regions": 5
+    },
+    {
+      "scene_name": "Sparse Industrial Layout",
+      "pixel_metrics": {
+        "precision": 0.9144,
+        "recall": 0.4583,
+        "f1_score": 0.6106,
+        "iou": 0.4395,
+        "accuracy": 0.9486,
+        "tp": 2639,
+        "fp": 247,
+        "fn": 3119,
+        "tn": 59531
+      },
+      "region_metrics": {
+        "region_precision": 0.25,
+        "region_recall": 0.3333,
+        "region_f1": 0.2857,
+        "region_tp": 1,
+        "region_fp": 3,
+        "region_fn": 2
+      },
+      "num_candidates": 4,
+      "num_gt_regions": 3
+    },
+    {
+      "scene_name": "Suburban Development",
+      "pixel_metrics": {
+        "precision": 0.9515,
+        "recall": 0.5379,
+        "f1_score": 0.6873,
+        "iou": 0.5236,
+        "accuracy": 0.9374,
+        "tp": 4510,
+        "fp": 230,
+        "fn": 3874,
+        "tn": 56922
+      },
+      "region_metrics": {
+        "region_precision": 1.0,
+        "region_recall": 0.5,
+        "region_f1": 0.6667,
+        "region_tp": 2,
+        "region_fp": 0,
+        "region_fn": 2
+      },
+      "num_candidates": 2,
+      "num_gt_regions": 4
+    },
+    {
+      "scene_name": "Negative Control (No Change)",
+      "pixel_metrics": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0,
+        "iou": 0.0,
+        "accuracy": 1.0,
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "tn": 65536
+      },
+      "region_metrics": {
+        "region_precision": 0.0,
+        "region_recall": 0.0,
+        "region_f1": 0.0,
+        "region_tp": 0,
+        "region_fp": 0,
+        "region_fn": 0
+      },
+      "num_candidates": 0,
+      "num_gt_regions": 0
+    }
+  ],
+  "failure_taxonomy": [
+    {
+      "id": "FC-01",
+      "name": "Solar Elevation & Cast Shadow Shift",
+      "mechanism": "Diurnal or seasonal sun angle differences cause high-rise buildings and tree lines to cast differing shadow geometry, resulting in false boundary detections.",
+      "mitigation_satquery": "Bilateral spatial smoothing and morphological opening filter out narrow shadow borders.",
+      "mitigation_ares": "ARES schedules drone RECAPTURE or oblique angle inspection to confirm ground-level presence."
+    },
+    {
+      "id": "FC-02",
+      "name": "Seasonal Phenology & Vegetation Drying",
+      "mechanism": "Post-monsoon dry season in North India (e.g. Kanpur, Delhi) shifts green agricultural plots to pale yellow/brown bare soil without genuine structural change.",
+      "mitigation_satquery": "Classified as 'vegetation_clearing' or 'natural_variation' with lower baseline importance tier (LOW/MEDIUM).",
+      "mitigation_ares": "ARES downweights priority (w=1.0) or routes to HUMAN_REVIEW rather than expensive drone flights."
+    },
+    {
+      "id": "FC-03",
+      "name": "Low-Contrast Sub-Pixel Earthworks",
+      "mechanism": "Subtle dirt-track widening or gradual leveling at Sentinel-2 10m/px resolution can fall below gradient threshold tau=0.35 (False Negatives).",
+      "mitigation_satquery": "Multi-scale spectral difference preserves weak diffuse changes.",
+      "mitigation_ares": "High-uncertainty borderline candidates are flagged for targeted drone sweep."
+    },
+    {
+      "id": "FC-04",
+      "name": "Sensor Co-Registration Residual",
+      "mechanism": "1-2 pixel spatial jitter creates artificial double-edge contours along linear highways or coastlines.",
+      "mitigation_satquery": "Phase-correlation sub-pixel registration aligns pre/post rasters prior to differencing.",
+      "mitigation_ares": "Candidate spatial clustering prevents redundant flight sorties on adjacent linear edge pixels."
+    }
+  ],
+  "indian_scenes_summary": {
+    "kanpur_bhauti": {
+      "candidates_detected": 7,
+      "gsd_meters": 10.0,
+      "status": "VERIFIED"
+    },
+    "bengaluru_tech": {
+      "candidates_detected": 28,
+      "gsd_meters": 10.0,
+      "status": "VERIFIED"
+    },
+    "delhi_ncr": {
+      "candidates_detected": 9,
+      "gsd_meters": 10.0,
+      "status": "VERIFIED"
+    },
+    "chennai_sriperumbudur": {
+      "candidates_detected": 59,
+      "gsd_meters": 10.0,
+      "status": "VERIFIED"
+    }
+  }
+}

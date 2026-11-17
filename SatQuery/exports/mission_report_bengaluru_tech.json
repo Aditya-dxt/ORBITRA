@@ -1,0 +1,246 @@
+{
+  "mission_summary": {
+    "policy_id": "B1",
+    "policy_name": "Uncertainty First",
+    "provenance": "SIMULATED",
+    "initial_battery_joules": 180000.0,
+    "initial_battery_wh": 50.0,
+    "final_battery_joules": 21956.6,
+    "final_battery_wh": 6.1,
+    "total_energy_spent_actions_joules": 80581.7,
+    "total_energy_spent_actions_wh": 22.38,
+    "return_flight_energy_joules": 77461.7,
+    "return_flight_energy_wh": 21.52,
+    "safe_return_completed": true,
+    "candidates_total": 28,
+    "candidates_inspected": 1,
+    "candidates_deferred": 27,
+    "candidates_skipped": 0,
+    "ledger_records_count": 3,
+    "summary_message": "[SIMULATED] Sortie under B1 (Uncertainty First) completed: 1 inspected, 0 skipped, 27 deferred. Safe return: True."
+  },
+  "decisions": [
+    {
+      "step": 1,
+      "candidate_id": "cand_sq_levir_026",
+      "action": "RECAPTURE",
+      "cost_wh": 22.3838,
+      "reserve_feasible": true,
+      "reason": "Policy B1 selected RECAPTURE. Battery after action satisfies post-action return reserve"
+    },
+    {
+      "step": 2,
+      "candidate_id": "cand_sq_levir_016",
+      "action": "RETURN_HOME",
+      "cost_wh": 0.0,
+      "reserve_feasible": false,
+      "reason": "Return reserve guardrail triggered: Remaining battery (38771.5 J) violates required return reserve (57872.1 J) from post-action location"
+    },
+    {
+      "step": 3,
+      "candidate_id": "MISSION_RETURN",
+      "action": "RETURN_HOME",
+      "cost_wh": 21.5172,
+      "reserve_feasible": true,
+      "reason": "UAV transit from mission position back to home base"
+    }
+  ],
+  "candidates": [
+    {
+      "candidate_id": "cand_sq_levir_001",
+      "predicted_change": "vegetation_clearing",
+      "confidence": 0.6287,
+      "uncertainty": 0.9517,
+      "action_selected": "UNPROCESSED"
+    },
+    {
+      "candidate_id": "cand_sq_levir_002",
+      "predicted_change": "urban_building_construction",
+      "confidence": 0.4212,
+      "uncertainty": 0.982,
+      "action_selected": "UNPROCESSED"
+    },
+    {
+      "candidate_id": "cand_sq_levir_003",
+      "predicted_change": "natural_variation",
+      "confidence": 0.4256,
+      "uncertainty": 0.984,
+      "action_selected": "UNPROCESSED"
+    },
+    {
+      "candidate_id": "cand_sq_levir_004",
+      "predicted_change": "urban_building_construction",
+      "confidence": 0.5308,
+      "uncertainty": 0.9973,
+      "action_selected": "UNPROCESSED"
+    },
+    {
+      "candidate_id": "cand_sq_levir_005",
+      "predicted_change": "urban_building_construction",
+      "confidence": 0.5217,
+      "uncertainty": 0.9986,
+      "action_selected": "UNPROCESSED"
+    },
+    {
+      "candidate_id": "cand_sq_levir_006",
+      "predicted_change": "urban_building_construction",
+      "confidence": 0.6099,
+      "uncertainty": 0.9649,
+      "action_selected": "UNPROCESSED"
+    },
+    {
+      "candidate_id": "cand_sq_levir_007",
+      "predicted_change": "urban_building_construction",
+      "confidence": 0.5569,
+      "uncertainty": 0.9907,
+      "action_selected": "UNPROCESSED"
+    },
+    {
+      "candidate_id": "cand_sq_levir_008",
+      "predicted_change": "urban_building_construction",
+      "confidence": 0.5809,
+      "uncertainty": 0.981,
+      "action_selected": "UNPROCESSED"
+    },
+    {
+      "candidate_id": "cand_sq_levir_009",
+      "predicted_change": "urban_building_construction",
+      "confidence": 0.6059,
+      "uncertainty": 0.9674,
+      "action_selected": "UNPROCESSED"
+    },
+    {
+      "candidate_id": "cand_sq_levir_010",
+      "predicted_change": "urban_building_construction",
+      "confidence": 0.5755,
+      "uncertainty": 0.9835,
+      "action_selected": "UNPROCESSED"
+    },
+    {
+      "candidate_id": "cand_sq_levir_011",
+      "predicted_change": "urban_building_construction",
+      "confidence": 0.6414,
+      "uncertainty": 0.9415,
+      "action_selected": "UNPROCESSED"
+    },
+    {
+      "candidate_id": "cand_sq_levir_012",
+      "predicted_change": "urban_building_construction",
+      "confidence": 0.58,
+      "uncertainty": 0.9814,
+      "action_selected": "UNPROCESSED"
+    },
+    {
+      "candidate_id": "cand_sq_levir_013",
+      "predicted_change": "urban_building_construction",
+      "confidence": 0.6224,
+      "uncertainty": 0.9563,
+      "action_selected": "UNPROCESSED"
+    },
+    {
+      "candidate_id": "cand_sq_levir_014",
+      "predicted_change": "urban_building_construction",
+      "confidence": 0.5919,
+      "uncertainty": 0.9755,
+      "action_selected": "UNPROCESSED"
+    },
+    {
+      "candidate_id": "cand_sq_levir_015",
+      "predicted_change": "urban_building_construction",
+      "confidence": 0.6201,
+      "uncertainty": 0.9579,
+      "action_selected": "UNPROCESSED"
+    },
+    {
+      "candidate_id": "cand_sq_levir_016",
+      "predicted_change": "urban_building_construction",
+      "confidence": 0.516,
+      "uncertainty": 0.9993,
+      "action_selected": "RETURN_HOME"
+    },
+    {
+      "candidate_id": "cand_sq_levir_017",
+      "predicted_change": "urban_building_construction",
+      "confidence": 0.5644,
+      "uncertainty": 0.988,
+      "action_selected": "UNPROCESSED"
+    },
+    {
+      "candidate_id": "cand_sq_levir_018",
+      "predicted_change": "urban_building_construction",
+      "confidence": 0.5547,
+      "uncertainty": 0.9914,
+      "action_selected": "UNPROCESSED"
+    },
+    {
+      "candidate_id": "cand_sq_levir_019",
+      "predicted_change": "urban_building_construction",
+      "confidence": 0.5585,
+      "uncertainty": 0.9901,
+      "action_selected": "UNPROCESSED"
+    },
+    {
+      "candidate_id": "cand_sq_levir_020",
+      "predicted_change": "urban_building_construction",
+      "confidence": 0.6462,
+      "uncertainty": 0.9374,
+      "action_selected": "UNPROCESSED"
+    },
+    {
+      "candidate_id": "cand_sq_levir_021",
+      "predicted_change": "urban_building_construction",
+      "confidence": 0.5165,
+      "uncertainty": 0.9992,
+      "action_selected": "UNPROCESSED"
+    },
+    {
+      "candidate_id": "cand_sq_levir_022",
+      "predicted_change": "urban_building_construction",
+      "confidence": 0.6452,
+      "uncertainty": 0.9382,
+      "action_selected": "UNPROCESSED"
+    },
+    {
+      "candidate_id": "cand_sq_levir_023",
+      "predicted_change": "urban_building_construction",
+      "confidence": 0.3869,
+      "uncertainty": 0.9628,
+      "action_selected": "UNPROCESSED"
+    },
+    {
+      "candidate_id": "cand_sq_levir_024",
+      "predicted_change": "urban_building_construction",
+      "confidence": 0.3754,
+      "uncertainty": 0.9547,
+      "action_selected": "UNPROCESSED"
+    },
+    {
+      "candidate_id": "cand_sq_levir_025",
+      "predicted_change": "vegetation_clearing",
+      "confidence": 0.6072,
+      "uncertainty": 0.9666,
+      "action_selected": "UNPROCESSED"
+    },
+    {
+      "candidate_id": "cand_sq_levir_026",
+      "predicted_change": "urban_building_construction",
+      "confidence": 0.4909,
+      "uncertainty": 0.9998,
+      "action_selected": "RECAPTURE"
+    },
+    {
+      "candidate_id": "cand_sq_levir_027",
+      "predicted_change": "urban_building_construction",
+      "confidence": 0.4812,
+      "uncertainty": 0.999,
+      "action_selected": "UNPROCESSED"
+    },
+    {
+      "candidate_id": "cand_sq_levir_028",
+      "predicted_change": "urban_building_construction",
+      "confidence": 0.4463,
+      "uncertainty": 0.9917,
+      "action_selected": "UNPROCESSED"
+    }
+  ]
+}

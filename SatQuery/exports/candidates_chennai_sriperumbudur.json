@@ -1,0 +1,1654 @@
+[
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_001",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.563,
+    "uncertainty": 0.9885,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 4815.0,
+        "y_meters": 4870.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 13.02402,
+        "center_lon": 80.004381,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        475,
+        471,
+        488,
+        503
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_002",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "road_infrastructure",
+    "confidence": 0.5428,
+    "uncertainty": 0.9947,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 5080.0,
+        "y_meters": 4730.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 13.022755,
+        "center_lon": 80.006823,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        504,
+        463,
+        512,
+        483
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_003",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5732,
+    "uncertainty": 0.9845,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 4885.0,
+        "y_meters": 4640.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 13.021941,
+        "center_lon": 80.005026,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        485,
+        460,
+        492,
+        468
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_004",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "road_infrastructure",
+    "confidence": 0.4472,
+    "uncertainty": 0.9919,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 565.0,
+        "y_meters": 4610.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 13.02167,
+        "center_lon": 79.965208,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        51,
+        459,
+        62,
+        463
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_005",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.6117,
+    "uncertainty": 0.9637,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2825.0,
+        "y_meters": 4530.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 13.020947,
+        "center_lon": 79.986038,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        279,
+        450,
+        286,
+        456
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_006",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.6034,
+    "uncertainty": 0.9689,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 4805.0,
+        "y_meters": 4500.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 13.020676,
+        "center_lon": 80.004288,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        476,
+        446,
+        485,
+        454
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_007",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.6057,
+    "uncertainty": 0.9675,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 3440.0,
+        "y_meters": 4495.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 13.020631,
+        "center_lon": 79.991707,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        341,
+        446,
+        347,
+        453
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_008",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.6487,
+    "uncertainty": 0.9353,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2720.0,
+        "y_meters": 4315.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 13.019004,
+        "center_lon": 79.985071,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        267,
+        426,
+        277,
+        437
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_009",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.6037,
+    "uncertainty": 0.9687,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 5040.0,
+        "y_meters": 4195.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 13.017919,
+        "center_lon": 80.006454,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        499,
+        414,
+        509,
+        425
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_010",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4534,
+    "uncertainty": 0.9937,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 3360.0,
+        "y_meters": 4095.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 13.017015,
+        "center_lon": 79.99097,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        332,
+        406,
+        340,
+        413
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_011",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.609,
+    "uncertainty": 0.9655,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 3135.0,
+        "y_meters": 4020.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 13.016337,
+        "center_lon": 79.988896,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        311,
+        399,
+        316,
+        405
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_012",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5399,
+    "uncertainty": 0.9954,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2960.0,
+        "y_meters": 4010.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 13.016247,
+        "center_lon": 79.987283,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        292,
+        396,
+        300,
+        406
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_013",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.6069,
+    "uncertainty": 0.9668,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 3125.0,
+        "y_meters": 3875.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 13.015027,
+        "center_lon": 79.988804,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        310,
+        385,
+        315,
+        390
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_014",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5585,
+    "uncertainty": 0.9901,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 5045.0,
+        "y_meters": 3680.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 13.013264,
+        "center_lon": 80.006501,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        501,
+        365,
+        508,
+        371
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_015",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5863,
+    "uncertainty": 0.9784,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 3105.0,
+        "y_meters": 3570.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 13.01227,
+        "center_lon": 79.988619,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        307,
+        353,
+        314,
+        361
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_016",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5617,
+    "uncertainty": 0.989,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 3495.0,
+        "y_meters": 3565.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 13.012224,
+        "center_lon": 79.992214,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        345,
+        350,
+        354,
+        363
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_017",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5704,
+    "uncertainty": 0.9857,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 3295.0,
+        "y_meters": 3480.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 13.011456,
+        "center_lon": 79.990371,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        326,
+        343,
+        333,
+        353
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_018",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.6002,
+    "uncertainty": 0.9708,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 3055.0,
+        "y_meters": 3360.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 13.010371,
+        "center_lon": 79.988158,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        300,
+        332,
+        311,
+        340
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_019",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5968,
+    "uncertainty": 0.9728,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 4880.0,
+        "y_meters": 3335.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 13.010145,
+        "center_lon": 80.00498,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        484,
+        331,
+        492,
+        336
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_020",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4447,
+    "uncertainty": 0.9912,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 3720.0,
+        "y_meters": 3300.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 13.009829,
+        "center_lon": 79.994288,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        365,
+        327,
+        379,
+        333
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_021",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5826,
+    "uncertainty": 0.9802,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 3485.0,
+        "y_meters": 3275.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 13.009603,
+        "center_lon": 79.992122,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        346,
+        325,
+        351,
+        330
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_022",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5882,
+    "uncertainty": 0.9774,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 3255.0,
+        "y_meters": 3275.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 13.009603,
+        "center_lon": 79.990002,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        322,
+        324,
+        329,
+        331
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_023",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5872,
+    "uncertainty": 0.9779,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 3465.0,
+        "y_meters": 3035.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 13.007434,
+        "center_lon": 79.991937,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        343,
+        300,
+        350,
+        307
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_024",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4886,
+    "uncertainty": 0.9996,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 375.0,
+        "y_meters": 3015.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 13.007253,
+        "center_lon": 79.963456,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        33,
+        299,
+        42,
+        304
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_025",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "road_infrastructure",
+    "confidence": 0.4628,
+    "uncertainty": 0.996,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 215.0,
+        "y_meters": 2985.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 13.006982,
+        "center_lon": 79.961982,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        15,
+        296,
+        28,
+        301
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_026",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4624,
+    "uncertainty": 0.9959,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 535.0,
+        "y_meters": 2940.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 13.006575,
+        "center_lon": 79.964931,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        50,
+        291,
+        57,
+        297
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_027",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.6133,
+    "uncertainty": 0.9627,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 3290.0,
+        "y_meters": 2930.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 13.006485,
+        "center_lon": 79.990324,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        326,
+        290,
+        332,
+        296
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_028",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.6364,
+    "uncertainty": 0.9457,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 5060.0,
+        "y_meters": 2895.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 13.006168,
+        "center_lon": 80.006639,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        500,
+        285,
+        512,
+        294
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_029",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5842,
+    "uncertainty": 0.9794,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 3195.0,
+        "y_meters": 2785.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 13.005174,
+        "center_lon": 79.989449,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        314,
+        272,
+        325,
+        285
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_030",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5972,
+    "uncertainty": 0.9726,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 3720.0,
+        "y_meters": 2800.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 13.00531,
+        "center_lon": 79.994288,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        362,
+        262,
+        382,
+        298
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_031",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5754,
+    "uncertainty": 0.9836,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 3100.0,
+        "y_meters": 2650.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 13.003954,
+        "center_lon": 79.988573,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        307,
+        262,
+        313,
+        268
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_032",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5759,
+    "uncertainty": 0.9833,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 3735.0,
+        "y_meters": 2625.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 13.003728,
+        "center_lon": 79.994426,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        370,
+        259,
+        377,
+        266
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_033",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.6345,
+    "uncertainty": 0.9471,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 3045.0,
+        "y_meters": 2485.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 13.002462,
+        "center_lon": 79.988066,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        299,
+        243,
+        310,
+        254
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_034",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.6402,
+    "uncertainty": 0.9425,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 3885.0,
+        "y_meters": 2405.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 13.001739,
+        "center_lon": 79.995809,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        380,
+        233,
+        397,
+        248
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_035",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5695,
+    "uncertainty": 0.986,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 3315.0,
+        "y_meters": 2330.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 13.001061,
+        "center_lon": 79.990555,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        328,
+        228,
+        335,
+        238
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_036",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.6268,
+    "uncertainty": 0.9531,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 3195.0,
+        "y_meters": 2105.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.999027,
+        "center_lon": 79.989449,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        300,
+        190,
+        339,
+        231
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_037",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.6683,
+    "uncertainty": 0.9167,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 3425.0,
+        "y_meters": 1860.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.996813,
+        "center_lon": 79.991569,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        340,
+        183,
+        345,
+        189
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_038",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.6088,
+    "uncertainty": 0.9656,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 3715.0,
+        "y_meters": 1840.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.996632,
+        "center_lon": 79.994242,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        363,
+        179,
+        380,
+        189
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_039",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.6153,
+    "uncertainty": 0.9613,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 3210.0,
+        "y_meters": 1715.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.995502,
+        "center_lon": 79.989587,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        318,
+        168,
+        324,
+        175
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_040",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.6664,
+    "uncertainty": 0.9186,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 3720.0,
+        "y_meters": 1540.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.99392,
+        "center_lon": 79.994288,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        367,
+        148,
+        377,
+        160
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_041",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.615,
+    "uncertainty": 0.9615,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 3445.0,
+        "y_meters": 1515.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.993694,
+        "center_lon": 79.991753,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        338,
+        146,
+        351,
+        157
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_042",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.6842,
+    "uncertainty": 0.8998,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 4200.0,
+        "y_meters": 1470.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.993287,
+        "center_lon": 79.998712,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        414,
+        142,
+        426,
+        152
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_043",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5198,
+    "uncertainty": 0.9989,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 4760.0,
+        "y_meters": 1435.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.992971,
+        "center_lon": 80.003874,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        472,
+        141,
+        480,
+        146
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_044",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5895,
+    "uncertainty": 0.9768,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 4250.0,
+        "y_meters": 1355.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.992248,
+        "center_lon": 79.999173,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        422,
+        132,
+        428,
+        139
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_045",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.6357,
+    "uncertainty": 0.9462,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 3805.0,
+        "y_meters": 1255.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.991344,
+        "center_lon": 79.995071,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        373,
+        121,
+        388,
+        130
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_046",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5967,
+    "uncertainty": 0.9729,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 4020.0,
+        "y_meters": 1280.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.99157,
+        "center_lon": 79.997053,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        394,
+        117,
+        410,
+        139
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_047",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.6627,
+    "uncertainty": 0.9222,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 3660.0,
+        "y_meters": 1055.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.989536,
+        "center_lon": 79.993735,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        360,
+        101,
+        372,
+        110
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_048",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.6698,
+    "uncertainty": 0.9152,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 3730.0,
+        "y_meters": 955.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.988632,
+        "center_lon": 79.99438,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        368,
+        92,
+        378,
+        99
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_049",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5986,
+    "uncertainty": 0.9718,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 4035.0,
+        "y_meters": 755.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.986825,
+        "center_lon": 79.997191,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        400,
+        70,
+        407,
+        81
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_050",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.6393,
+    "uncertainty": 0.9433,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 3735.0,
+        "y_meters": 680.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.986147,
+        "center_lon": 79.994426,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        366,
+        64,
+        381,
+        72
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_051",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5355,
+    "uncertainty": 0.9964,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 4155.0,
+        "y_meters": 645.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.98583,
+        "center_lon": 79.998297,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        412,
+        62,
+        419,
+        67
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_052",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.6658,
+    "uncertainty": 0.9192,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 4125.0,
+        "y_meters": 565.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.985107,
+        "center_lon": 79.998021,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        409,
+        53,
+        416,
+        60
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_053",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.6998,
+    "uncertainty": 0.8816,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 4165.0,
+        "y_meters": 370.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.983344,
+        "center_lon": 79.998389,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        412,
+        34,
+        421,
+        40
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_054",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.6399,
+    "uncertainty": 0.9428,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 3710.0,
+        "y_meters": 390.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.983525,
+        "center_lon": 79.994196,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        367,
+        33,
+        375,
+        45
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_055",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.6299,
+    "uncertainty": 0.9507,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2125.0,
+        "y_meters": 385.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.98348,
+        "center_lon": 79.979586,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        205,
+        29,
+        220,
+        48
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_056",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.4874,
+    "uncertainty": 0.9995,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1885.0,
+        "y_meters": 205.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.981853,
+        "center_lon": 79.977374,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        186,
+        16,
+        191,
+        25
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_057",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.6565,
+    "uncertainty": 0.9281,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 4645.0,
+        "y_meters": 115.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.981039,
+        "center_lon": 80.002814,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        461,
+        9,
+        468,
+        14
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_058",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5576,
+    "uncertainty": 0.9904,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2125.0,
+        "y_meters": 170.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.981537,
+        "center_lon": 79.979586,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        208,
+        9,
+        217,
+        25
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_059",
+    "image_pair_id": "pair_sentinel2_chennai_sriperumbudur",
+    "timestamp": "2023-11-16T05:00:51.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.625,
+    "uncertainty": 0.9544,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 4730.0,
+        "y_meters": 15.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 12.980136,
+        "center_lon": 80.003597,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        467,
+        0,
+        479,
+        3
+      ]
+    }
+  }
+]
