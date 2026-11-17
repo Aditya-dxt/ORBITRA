@@ -2,7 +2,7 @@
 
 **Owner:** Energy Modelling & Intelligent Decision-Making Lead  
 **System:** ORBITRA  
-**Status:** Milestone 4 Complete | Provisional Interface Tightened (`v1.0.0-provisional`) per SatQuery Lead Agreement
+**Status:** Milestone 5 Complete (B0–B4 Implemented) | Provisional Interface Tightened (`v1.0.0-provisional`) per SatQuery Lead Agreement
 
 ARES consumes candidate change records produced by SatQuery and decides what to inspect, compute, defer, or stop while strictly respecting the mission energy budget and safe-return reserve.
 
@@ -14,7 +14,7 @@ ARES consumes candidate change records produced by SatQuery and decides what to 
 ARES/
 ├── README.md                     # Module documentation & running implementation log
 ├── docs/
-│   ├── DESIGN.md                 # Architecture, energy kinematics, reserve math, policy arena
+│   ├── DESIGN.md                 # Architecture, energy kinematics, reserve math, policy arena (B0-B4)
 │   └── INTERFACE_PROPOSAL.md     # Provisional schema proposal & 7-point review checklist
 ├── ares/
 │   ├── schemas/                  # Pydantic validation (SatQueryRecord vs AresCandidateState)
@@ -22,7 +22,7 @@ ARES/
 │   ├── scoring/                  # Mission-importance scoring decoupled from model confidence
 │   ├── actions/                  # Action cost (J) & outcome models (RECAPTURE, STRONGER_MODEL, HUMAN_REVIEW)
 │   ├── ledger/                   # Structured decision audit trail (J, Wh, SIMULATED tags)
-│   ├── policies/                 # B0, B1, B2 (Implemented); B3 Joint (Implemented Milestone 4); B4 PLANNED
+│   ├── policies/                 # B0, B1, B2, B3, B4 (All canonical policies implemented)
 │   └── simulation/               # Discrete-event runner with [SYNTHETIC EXAMPLE]s
 └── tests/                        # Automated unit tests
 ```
@@ -70,7 +70,7 @@ python -m unittest discover -s tests -v
 | **B1** | Uncertainty First | **Implemented (Milestone 1)** | Prioritizes targets with highest detector uncertainty. |
 | **B2** | Adaptive Computation | **Implemented (Milestone 3)** | 5-branch decision tree: accept / recapture / stronger-model / human-review / return-home. Configurable thresholds (`ASSUMED`). |
 | **B3** | Joint Policy | **Implemented (Milestone 4)** | Jointly evaluates all (candidate, action) pairs per step; selects globally best-scoring feasible pair under reserve constraint. |
-| **B4** | Greedy Benefit-per-Energy | Planned (Milestone 5) | Marginal utility per Joule maximization ($\Delta B / \Delta E$). |
+| **B4** | Greedy Benefit-per-Energy | **Implemented (Milestone 5)** | Greedily prioritizes candidates maximizing marginal benefit per expended Joule ($\Delta B / \Delta E$) using physical RECAPTURE (spatial dispatch baseline). |
 | **P1** | Confidence Ranked | Supplementary Baseline | Compares against pure detector confidence ranking. |
 | **P2** | Importance Ranked | Supplementary Baseline | Compares against pure importance ranking. |
 | **P5** | Zone-Weighted Spatial | Supplementary Baseline | Compares against spatial sector risk ranking. |
@@ -86,7 +86,7 @@ python -m unittest discover -s tests -v
 | 8-11 | Importance scoring model and action cost/outcome models (RECAPTURE, STRONGER_MODEL, HUMAN_REVIEW) | **Completed (Milestone 2)** |
 | 12-15 | B2 Adaptive Computation policy, multi-action simulator refactor | **Completed (Milestone 3)** |
 | 16-19 | B3 Joint Policy: joint candidate-and-action selection with benefit/cost objective | **Completed (Milestone 4)** |
-| 20-23 | Policies B4 implementation and decision logging | Planned |
+| 20-23 | Policies B4 implementation and decision logging | **Completed (Milestone 5)** |
 | 20-23 | Matched-budget policy experiments and ablations | Planned |
 | 24-32 | Dashboard, end-to-end integration with SatQuery records, final reporting | Planned |
 
@@ -94,7 +94,37 @@ python -m unittest discover -s tests -v
 
 ## Running Implementation Log
 
-### Provisional Interface Tightening (SatQuery Lead Agreement) — 2026-11-17
+### Milestone 5: B4 Greedy Benefit-per-Energy Policy — 2026-11-17
+- **Summary:** Formulated the clear architectural and measurable distinction between Policy B3 (joint candidate-and-action co-optimization across multi-modal actions) and Policy B4 (single-action spatial dispatch baseline). Implemented Policy B4 (`B4GreedyBenefitPerEnergyPolicy`), which dynamically ranks pending candidates by marginal expected benefit per Joule of physical transit and sortie energy ($\Delta B / E_{\text{recapture}}$) from the current UAV location $\mathbf{x}_{\text{current}}$, and selects physical `RECAPTURE` under the return-reserve guardrail ($E_{\text{remaining}} - E_{\text{action}} \ge E_{\text{reserve}}(\mathbf{x}_c \to \mathbf{x}_{\text{home}})$). Added B4 to the policy registry, simulator, and test suite. Documented the comparison and formal formulas in `DESIGN.md`.
+- **Architectural Distinction Defined (B3 vs. B4):**
+  - **Action Modality Space:** B4 is strictly single-modality (`RECAPTURE` only, 0% compute offload, 0% human review), representing the classic robotic field survey / spatial orienteering baseline. B3 optimizes over multi-modal actions (`RECAPTURE`, `STRONGER_MODEL`, `HUMAN_REVIEW`, `NONE`).
+  - **Optimization Dimension:** B4 performs 1D spatial greedy ranking over candidates $\mathcal{C}$ based on dynamic distance from $\mathbf{x}_{\text{current}}$. B3 performs 2D joint co-optimization over the Cartesian product $\mathcal{C} \times \mathcal{A}$.
+  - **Behavior under Reserve Constraints:** When battery cannot support flight to candidate + return to home, B4 unconditionally triggers `RETURN_HOME` and terminates the sortie. Under the same constraint, B3 dynamically downgrades to non-flight compute or analyst review, continuing candidate processing at zero flight cost.
+- **Changed Files:**
+  - `ARES/docs/DESIGN.md`: Added Section 8 detailing the architectural distinction, comparison table, mathematical formulation, decision rules, and configurable thresholds (`B4GreedyBenefitPerEnergyConfig`); updated Section 2.1 policy arena table; renumbered subsequent sections.
+  - `ARES/ares/policies/base.py`: Updated `rank_candidates()` signature to optionally accept `current_pos: Optional[LocalGridCoordinates] = None`.
+  - `ARES/ares/policies/b0_fixed_pass.py`, `b1_uncertainty_first.py`, `b2_adaptive_computation.py`, `b3_joint_policy.py`: Aligned `rank_candidates()` signatures with optional `current_pos`.
+  - `ARES/ares/policies/b4_greedy_benefit_per_energy.py`: New file — `B4GreedyBenefitPerEnergyConfig` and `B4GreedyBenefitPerEnergyPolicy` implementing dynamic spatial benefit-per-Joule ranking and reserve-constrained RECAPTURE selection.
+  - `ARES/ares/policies/registry.py`: B4 status → `IMPLEMENTED`; `get_policy("B4")` returns `B4GreedyBenefitPerEnergyPolicy()`.
+  - `ARES/ares/policies/__init__.py`: Exported `B4GreedyBenefitPerEnergyConfig` and `B4GreedyBenefitPerEnergyPolicy`.
+  - `ARES/ares/simulation/simulator.py`: Pass `current_pos=current_pos` into `policy.rank_candidates()`.
+  - `ARES/tests/test_b4_policy.py`: New file — 11 comprehensive tests verifying benefit formula, spatial distance ordering, benefit ordering, dynamic re-ranking as UAV relocates, reserve guardrail enforcement, low-benefit NONE acceptance, single-modality invariant, end-to-end simulation, and behavioral contrast against B3.
+  - `ARES/tests/test_policies.py`: Updated registry assertions for B4 `IMPLEMENTED` and factory instantiation.
+  - `ARES/README.md`: Status badge, policy catalog, development sequence, and implementation log updated.
+- **Checks Actually Performed:**
+  - Ran `python -m unittest discover -s ARES/tests -t ARES -v`: **70/70 tests passed cleanly**.
+  - Confirmed: B4 ranks closer candidate higher when benefit is identical (higher benefit per Joule).
+  - Confirmed: B4 ranks higher-benefit candidate higher when distance is identical.
+  - Confirmed: Relocating UAV position $\mathbf{x}_{\text{current}}$ dynamically updates candidate priority ordering.
+  - Confirmed: Far candidate (3000m) with 5000 J battery triggers `RETURN_HOME` with `reserve_feasible=False`.
+  - Confirmed: B4 never selects `STRONGER_MODEL` or `HUMAN_REVIEW` (single-action modality verified).
+  - Confirmed: In matched-energy simulation (20,000 J), B4 visits the close target and aborts on the far target, whereas B3 continues processing with non-flight actions.
+  - Confirmed: All other baseline policies (B0, B1, B2, B3) continue to pass all tests with zero regression.
+- **Remaining Limitations & Documented Assumptions:**
+  - All B4 thresholds and uncertainty reduction rates ($r_{\text{recapture}} = 0.70$) are theoretical starting values tagged `ASSUMED` — not measured from physical flight logs.
+  - B4 performs myopic (single-step greedy) spatial selection without lookahead or multi-stop Traveling Salesperson / orienteering route optimization.
+  - Policy performance comparisons require empirical flight or bench experiments under matched energy budgets.
+  - SatQuery interface remains strictly `v1.0.0-provisional`.
 - **Summary:** Updated ARES schema validation and documentation to reflect the agreed provisional interface (`v1.0.0-provisional`) with the SatQuery lead. Made `local_grid` mandatory for all ARES kinematic and reserve computations. Enforced strict ISO-8601 UTC datetime parsing (`Z` or `+00:00`), rejecting malformed strings that merely append suffixes. Enabled strict rejection of unknown extra fields (`extra='forbid'`) to prevent silent schema drift. Documented and enforced candidate uncertainty as a hard validation failure if it deviates from normalized binary Shannon entropy of calibrated confidence ($u = -[p \log_2(p) + (1-p) \log_2(1-p)]$) beyond `SHANNON_ENTROPY_TOLERANCE` (±0.15). Reconciled the documented coordinate example so sample latitude ($39.902857^\circ\text{ N}$) strictly matches the stated nominal conversion formula ($y / 111{,}320$) and inputs ($y = 318.0\text{ m}$).
 - **Changed Files:**
   - `ARES/ares/schemas/satquery_record.py`: `local_grid` required; strict ISO-8601 UTC datetime parsing validator; `extra='forbid'`; hard Shannon entropy validation check with configurable `SHANNON_ENTROPY_TOLERANCE = 0.15`; detailed field and coordinate documentation.

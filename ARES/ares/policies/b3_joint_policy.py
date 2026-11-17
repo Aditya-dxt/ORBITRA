@@ -144,7 +144,8 @@ class B3JointPolicy(BasePolicy):
 
     def rank_candidates(
         self,
-        candidates: List[AresCandidateState]
+        candidates: List[AresCandidateState],
+        current_pos: Optional[LocalGridCoordinates] = None,
     ) -> List[AresCandidateState]:
         """B3 does not pre-sort candidates independently.
 

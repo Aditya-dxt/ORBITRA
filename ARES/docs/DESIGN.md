@@ -1,6 +1,6 @@
 # ARES Technical Design Document
 
-**Status:** Research Prototype — Architecture & Milestone 4 B3 Joint Policy  
+**Status:** Research Prototype — Architecture & Milestone 5 B4 Greedy Benefit-per-Energy Policy  
 **Module:** ARES (Energy Modelling & Intelligent Decision-Making Engine)  
 **Parent System:** ORBITRA  
 **Owner:** Energy Modelling & Intelligent Decision-Making Lead  
@@ -31,7 +31,7 @@ ARES implements and evaluates five primary policies across matched energy budget
 | **B1** | Uncertainty First | Prioritizes candidates with highest detector uncertainty first, targeting areas where additional data/verification yields maximum entropy reduction. | **Implemented (Milestone 1)** |
 | **B2** | Adaptive Computation | Dynamically allocates computation depth (e.g., lightweight on-edge detector vs. high-capacity model) per candidate based on uncertainty and importance. | **Implemented (Milestone 3)** |
 | **B3** | Joint Policy | Jointly optimizes both the candidate visit sequence and the inspection/computation action level under total energy constraints. | **Implemented (Milestone 4)** |
-| **B4** | Greedy Benefit-per-Energy | Selects the next action that maximizes the ratio of expected mission benefit to total energy expenditure: $\Delta B / \Delta E$. | Planned |
+| **B4** | Greedy Benefit-per-Energy | Greedily prioritizes candidates maximizing marginal benefit per expended Joule ($\Delta B / \Delta E$) using physical RECAPTURE (spatial dispatch baseline). | **Implemented (Milestone 5)** |
 
 ### 2.2 Supplementary Baselines (P1, P2, P5)
 To support comparative research without duplicating B0–B4, ARES recognizes three supplementary reference baselines:
@@ -208,7 +208,11 @@ $$\text{score}(c, a) = \frac{w_c \cdot u_c \cdot r_a}{\max(E_a,\ E_{\min})}$$
 
 **Interpretation:** A candidate-action pair scores high when it is important ($w_c$), uncertain ($u_c$), reduces uncertainty efficiently ($r_a$), and is energy-cheap relative to its benefit ($E_a$ small). This is an instantaneous greedy objective; B3 does not solve a global trajectory optimisation problem.
 
-**Relationship to B4:** The B4 (Greedy Benefit-per-Energy, Planned) policy is defined to maximise marginal utility per Joule across the full action space. B3 uses the same ratio structure but evaluates it jointly over the `(candidate × action)` space at each step. When B4 is implemented, the two will be compared experimentally under matched energy budgets.
+**Relationship to B4:** While B3 and B4 both employ a benefit-to-energy ratio structure ($\Delta B / \Delta E$), they answer fundamentally distinct research questions:
+- **B4 (Greedy Benefit-per-Energy Baseline):** A single-modality spatial dispatch baseline (P4/P5 equivalent). It fixes the verification action to physical `RECAPTURE` (no action choice) and tests whether energy-aware spatial routing alone is sufficient.
+- **B3 (Joint Policy):** A multi-modal co-optimization policy (P7 equivalent). It co-optimizes candidate selection AND verification action level simultaneously across the 2D Cartesian product $\mathcal{C}_{\text{pending}} \times \mathcal{A}$.
+
+See §8 for the detailed architectural, mathematical, and behavioral distinction.
 
 ### 7.3 Assumed Uncertainty Reduction Rates (all `ASSUMED`)
 
@@ -248,7 +252,70 @@ $O(C \times A)$ evaluations per step, where $C$ = number of pending candidates a
 
 ---
 
-## 8. Decision Ledger & Traceability
+## 8. Policy B4: Greedy Benefit-per-Energy Baseline vs. Policy B3 (Joint Policy)
+
+**Status:** Implemented (Milestone 5) — `ARES/ares/policies/b4_greedy_benefit_per_energy.py`
+
+### 8.1 Clear Architectural & Methodological Distinction
+
+To prevent confusion between B3 and B4, ARES formalizes a strict division of roles between the two policies:
+
+| Dimension | Policy B4 (Greedy Benefit-per-Energy Baseline) | Policy B3 (Joint Policy) |
+| :--- | :--- | :--- |
+| **Scientific Role** | Single-action spatial greedy baseline (corresponds to blueprint P4/P5). Tests hypothesis: *"Is energy-aware spatial routing on benefit-per-Joule sufficient on its own without multi-modal action switching?"* | Multi-modal co-optimization policy (corresponds to blueprint P7). Tests hypothesis: *"Does co-optimizing which candidate to visit AND which inspection modality to execute outperform spatial-only dispatch?"* |
+| **Action Modality Space** | Single action: fixed strictly to physical UAV sortie (`RECAPTURE`). No action choice ($0\%$ compute offload, $0\%$ human review). | Multi-modal: $\mathcal{A} = \{\text{RECAPTURE}, \text{STRONGER\_MODEL}, \text{HUMAN\_REVIEW}, \text{NONE}\}$. |
+| **Decision Dimension** | **1D Spatial Optimization:** Evaluates pending candidates $\mathcal{C}_{\text{pending}}$ by transit + sortie energy from dynamic UAV position $\mathbf{x}_{\text{current}}$. | **2D Joint Optimization:** Evaluates Cartesian product $\mathcal{C}_{\text{pending}} \times \mathcal{A}$ in a single step. |
+| **Objective Function** | $\text{score}_{B4}(c) = \frac{\Delta B(c)}{\max(E_{\text{recapture}}(\mathbf{x}_{\text{curr}}, \mathbf{x}_c), E_{\min})}$ | $\text{score}_{B3}(c, a) = \frac{w_c \cdot u_c \cdot r_a}{\max(E_a(\mathbf{x}_{\text{curr}}, \mathbf{x}_c), E_{\min})}$ |
+| **Dynamic Spatial Updating** | Re-computes flight transit energy from updated position $\mathbf{x}_{\text{current}}$ at every step as drone traverses candidates. | Evaluates transit energy for RECAPTURE; non-flight actions evaluate at $\mathbf{x}_{\text{current}}$ without movement. |
+| **Return-Reserve Behavior** | When battery cannot support flight to candidate + safe return to home base, unconditionally forces `RETURN_HOME` abort. | When battery cannot support flight, dynamically falls back to compute (`STRONGER_MODEL`) or comms (`HUMAN_REVIEW`) at zero flight cost. |
+| **Measurable Action Distribution** | **100% of non-abort actions are `RECAPTURE`.** Zero edge compute, zero human triage. | Heterogeneous action mix across flight, compute, and comms. |
+| **Energy Consumption Profile** | **Flight propulsion dominates (>85% of total battery energy).** | Energy distributed across propulsion, compute accelerators, and radio transmitters. |
+| **Confirmed Candidate Throughput** | Lower candidate throughput under constrained battery budgets due to high transit energy cost per verification ($>3000\text{ J}$ each). | Higher candidate throughput under matched battery budgets by triaging distant candidates with non-flight actions. |
+
+### 8.2 Formulation & Decision Logic
+
+#### Marginal Benefit Proxy:
+$$\Delta B(c) = w_c \cdot u_c \cdot r_{\text{recapture}}$$
+
+where:
+- $w_c$: Operational importance weight ($1.0, 2.0, 4.0$, tagged `ASSUMED`).
+- $u_c$: Prior detector uncertainty $\in [0, 1]$ from SatQuery record.
+- $r_{\text{recapture}}$: Expected fractional uncertainty reduction for physical re-imaging (default $0.70$, tagged `ASSUMED`).
+
+#### Transit & Inspection Energy:
+$$E_{\text{recapture}}(\mathbf{x}_{\text{current}}, \mathbf{x}_c) = E_{\text{transit}}(\mathbf{x}_{\text{current}} \to \mathbf{x}_c) + E_{\text{hover}} + E_{\text{sensor}} + E_{\text{compute}} + E_{\text{comms}}$$
+
+#### Greedy Benefit-per-Energy Ratio:
+$$\text{ratio}_{B4}(c) = \frac{\Delta B(c)}{\max(E_{\text{recapture}}(\mathbf{x}_{\text{current}}, \mathbf{x}_c), E_{\min})}$$
+
+where $E_{\min}$ (default $50.0\text{ J}$) protects against division-by-zero.
+
+#### Execution Step:
+1. From current drone position $\mathbf{x}_{\text{current}}$, compute $\text{ratio}_{B4}(c)$ for all pending candidates.
+2. Select top-ranked candidate $c^* = \arg\max_{c \in \mathcal{C}_{\text{pending}}} \text{ratio}_{B4}(c)$.
+3. If $\Delta B(c^*) < \text{min\_benefit\_to\_act}$ (default $0.05$), accept candidate as-is (`NONE`).
+4. Validate post-action return-reserve feasibility:
+   $$E_{\text{remaining}} - E_{\text{recapture}}(\mathbf{x}_{\text{current}}, \mathbf{x}_{c^*}) \ge E_{\text{reserve}}(\mathbf{x}_{c^*} \to \mathbf{x}_{\text{home}})$$
+5. If feasible: execute `RECAPTURE`, relocate drone to $\mathbf{x}_{c^*}$, deduct energy, mark candidate `INSPECTED`.
+6. If infeasible: trigger `RETURN_HOME`, abort sortie to guarantee safe return reserve, mark remaining candidates `DEFERRED`.
+
+### 8.3 Configurable Parameters (`B4GreedyBenefitPerEnergyConfig`)
+
+All thresholds and parameters are tagged **`ASSUMED`**:
+
+| Parameter | Default Value | Meaning | Provenance Tag |
+| :--- | :--- | :--- | :--- |
+| `recapture_uncertainty_reduction` | `0.70` | Expected fractional uncertainty reduction from physical UAV recapture. | `ASSUMED` |
+| `min_benefit_to_act` | `0.05` | Minimum expected benefit required to dispatch UAV; candidates below are accepted as `NONE`. | `ASSUMED` |
+| `min_cost_denominator_joules` | `50.0` | Minimum denominator floor preventing numerical overflow. | `ASSUMED` |
+| `verification_action` | `ActionType.RECAPTURE` | Fixed verification modality representing single-action dispatch baseline. | `ASSUMED` |
+
+> [!WARNING]
+> B4 scores, reduction rates, and energy models are theoretical engineering assumptions (`ASSUMED`). No matched-budget comparison between B3 and B4 has been validated in physical flight. Claims of policy superiority require controlled experiments.
+
+---
+
+## 9. Decision Ledger & Traceability
 
 Every decision evaluated by ARES produces an immutable `DecisionRecord` containing:
 - `timestamp`: ISO-8601 simulation timestamp.
@@ -268,7 +335,7 @@ Every decision evaluated by ARES produces an immutable `DecisionRecord` containi
 
 ---
 
-## 9. Candidate State Machine
+## 10. Candidate State Machine
 
 ```
         [ SatQuery Detection Record ]

@@ -6,6 +6,7 @@ from ares.policies.b0_fixed_pass import B0FixedPassPolicy
 from ares.policies.b1_uncertainty_first import B1UncertaintyFirstPolicy
 from ares.policies.b2_adaptive_computation import B2AdaptiveComputationPolicy
 from ares.policies.b3_joint_policy import B3JointPolicy
+from ares.policies.b4_greedy_benefit_per_energy import B4GreedyBenefitPerEnergyPolicy
 from ares.policies.registry import (
     POLICY_CATALOG,
     PolicyStatus,
@@ -98,7 +99,7 @@ class TestPolicies(unittest.TestCase):
         self.assertEqual(POLICY_CATALOG["B1"].status, PolicyStatus.IMPLEMENTED)
         self.assertEqual(POLICY_CATALOG["B2"].status, PolicyStatus.IMPLEMENTED)
         self.assertEqual(POLICY_CATALOG["B3"].status, PolicyStatus.IMPLEMENTED)
-        self.assertEqual(POLICY_CATALOG["B4"].status, PolicyStatus.PLANNED)
+        self.assertEqual(POLICY_CATALOG["B4"].status, PolicyStatus.IMPLEMENTED)
         self.assertEqual(POLICY_CATALOG["P1"].status, PolicyStatus.SUPPLEMENTARY_BASELINE)
 
         # Factory returns instances of implemented policies
@@ -110,10 +111,12 @@ class TestPolicies(unittest.TestCase):
         self.assertIsInstance(p2, B2AdaptiveComputationPolicy)
         p3 = get_policy("B3")
         self.assertIsInstance(p3, B3JointPolicy)
+        p4 = get_policy("B4")
+        self.assertIsInstance(p4, B4GreedyBenefitPerEnergyPolicy)
 
-        # Planned policy raises NotImplementedError with clear description
+        # Planned / Supplementary baseline raises NotImplementedError with clear description
         with self.assertRaises(NotImplementedError):
-            get_policy("B4")
+            get_policy("P1")
 
 
 if __name__ == "__main__":

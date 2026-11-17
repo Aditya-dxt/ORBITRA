@@ -4,10 +4,11 @@ Processes candidates in a predetermined sequential order (e.g. discovery order)
 without re-ranking based on uncertainty or importance.
 """
 
-from typing import List
+from typing import List, Optional
 
 from ares.policies.base import BasePolicy
 from ares.schemas.candidate_state import AresCandidateState
+from ares.schemas.satquery_record import LocalGridCoordinates
 
 
 class B0FixedPassPolicy(BasePolicy):
@@ -21,7 +22,8 @@ class B0FixedPassPolicy(BasePolicy):
 
     def rank_candidates(
         self,
-        candidates: List[AresCandidateState]
+        candidates: List[AresCandidateState],
+        current_pos: Optional[LocalGridCoordinates] = None,
     ) -> List[AresCandidateState]:
         """Preserves the original predetermined input ordering of pending candidates."""
         return self.get_pending_candidates(candidates)

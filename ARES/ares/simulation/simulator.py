@@ -93,7 +93,7 @@ class MissionSimulator:
         active_candidates = [c.model_copy(deep=True) for c in candidates]
 
         while True:
-            ranked_queue = policy.rank_candidates(active_candidates)
+            ranked_queue = policy.rank_candidates(active_candidates, current_pos=current_pos)
             if not ranked_queue:
                 break
 

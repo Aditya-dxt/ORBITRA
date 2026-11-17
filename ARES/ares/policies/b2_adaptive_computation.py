@@ -77,7 +77,8 @@ class B2AdaptiveComputationPolicy(BasePolicy):
 
     def rank_candidates(
         self,
-        candidates: List[AresCandidateState]
+        candidates: List[AresCandidateState],
+        current_pos: Optional[LocalGridCoordinates] = None,
     ) -> List[AresCandidateState]:
         """Ranks pending candidates prioritizing highest expected information gain (importance * uncertainty)."""
         pending = self.get_pending_candidates(candidates)

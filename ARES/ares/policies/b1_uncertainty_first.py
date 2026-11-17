@@ -4,10 +4,11 @@ Prioritizes candidates with the highest detector uncertainty first,
 aiming to reduce operational ambiguity where information gain is greatest.
 """
 
-from typing import List
+from typing import List, Optional
 
 from ares.policies.base import BasePolicy
 from ares.schemas.candidate_state import AresCandidateState
+from ares.schemas.satquery_record import LocalGridCoordinates
 
 
 class B1UncertaintyFirstPolicy(BasePolicy):
@@ -21,7 +22,8 @@ class B1UncertaintyFirstPolicy(BasePolicy):
 
     def rank_candidates(
         self,
-        candidates: List[AresCandidateState]
+        candidates: List[AresCandidateState],
+        current_pos: Optional[LocalGridCoordinates] = None,
     ) -> List[AresCandidateState]:
         """Ranks pending candidates descending by uncertainty, breaking ties with importance weight."""
         pending = self.get_pending_candidates(candidates)

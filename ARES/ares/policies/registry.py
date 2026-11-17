@@ -18,6 +18,10 @@ from ares.policies.b3_joint_policy import (
     B3JointPolicyConfig,
     B3JointPolicy,
 )
+from ares.policies.b4_greedy_benefit_per_energy import (
+    B4GreedyBenefitPerEnergyConfig,
+    B4GreedyBenefitPerEnergyPolicy,
+)
 
 
 class PolicyStatus(str, Enum):
@@ -66,9 +70,9 @@ POLICY_CATALOG: Dict[str, PolicyMetadata] = {
     "B4": PolicyMetadata(
         policy_id="B4",
         name="Greedy Benefit per Energy",
-        description="Prioritizes candidates maximizing marginal benefit per expended Joule (dB/dE).",
-        status=PolicyStatus.PLANNED,
-        notes="Planned for Milestone 5."
+        description="Prioritizes candidates maximizing marginal benefit per expended Joule (dB/dE) using RECAPTURE.",
+        status=PolicyStatus.IMPLEMENTED,
+        notes="Implemented in Milestone 5."
     ),
     "P1": PolicyMetadata(
         policy_id="P1",
@@ -105,11 +109,13 @@ def get_policy(policy_id: str) -> BasePolicy:
         return B2AdaptiveComputationPolicy()
     elif pid == "B3":
         return B3JointPolicy()
+    elif pid == "B4":
+        return B4GreedyBenefitPerEnergyPolicy()
     elif pid in POLICY_CATALOG:
         meta = POLICY_CATALOG[pid]
         raise NotImplementedError(
             f"Policy {pid} ('{meta.name}') is currently {meta.status.value}. "
-            f"Implemented policies in this milestone: B0, B1, B2, B3."
+            f"Implemented policies in this milestone: B0, B1, B2, B3, B4."
         )
     else:
         raise KeyError(f"Unknown policy ID: {policy_id}. Available: {list(POLICY_CATALOG.keys())}")

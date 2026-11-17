@@ -30,9 +30,14 @@ class BasePolicy(ABC):
     @abstractmethod
     def rank_candidates(
         self,
-        candidates: List[AresCandidateState]
+        candidates: List[AresCandidateState],
+        current_pos: Optional[LocalGridCoordinates] = None,
     ) -> List[AresCandidateState]:
-        """Ranks pending candidates according to the policy's prioritization rules."""
+        """Ranks pending candidates according to the policy's prioritization rules.
+        
+        Optional current_pos allows spatial policies (e.g. B4) to evaluate
+        transit distance dynamically from the current UAV location.
+        """
         pass
 
     @abstractmethod

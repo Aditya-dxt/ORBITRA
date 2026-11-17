@@ -11,6 +11,10 @@ from ares.policies.b3_joint_policy import (
     B3JointPolicyConfig,
     B3JointPolicy,
 )
+from ares.policies.b4_greedy_benefit_per_energy import (
+    B4GreedyBenefitPerEnergyConfig,
+    B4GreedyBenefitPerEnergyPolicy,
+)
 from ares.policies.registry import (
     POLICY_CATALOG,
     PolicyMetadata,
@@ -28,6 +32,8 @@ __all__ = [
     "B2AdaptiveComputationPolicy",
     "B3JointPolicyConfig",
     "B3JointPolicy",
+    "B4GreedyBenefitPerEnergyConfig",
+    "B4GreedyBenefitPerEnergyPolicy",
     "POLICY_CATALOG",
     "PolicyMetadata",
     "PolicyStatus",
