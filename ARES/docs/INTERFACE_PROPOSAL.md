@@ -49,7 +49,7 @@ Architectural ownership rules:
 
 ---
 
-## 3. Uncertainty Semantics (Agreed)
+## 3. Uncertainty Semantics & Hard Validation Rule (Agreed)
 
 `uncertainty` is the **normalized binary Shannon entropy** of `confidence`:
 
@@ -61,7 +61,7 @@ Boundary values:
 - $u = 1.0$ when $p = 0.5$ (maximum ambiguity — equal probability of change/no-change)
 - $u \to 0$ when $p \to 0$ or $p \to 1$ (high certainty in either direction)
 
-ARES applies a cross-check at schema ingestion with tolerance ±0.15 to catch gross mismatches (e.g., a confidence value accidentally used in place of uncertainty). It does **not** recompute or redefine the formula; that is SatQuery's responsibility.
+ARES enforces this as a **hard validation check** (`SHANNON_ENTROPY_TOLERANCE = 0.15`). If $|u - h(p)| > 0.15$, schema validation raises a hard `ValidationError`, rejecting the candidate record. This prevents uncalibrated, corrupted, or inverted values from propagating into ARES energy allocation and decision policies.
 
 ---
 
@@ -78,7 +78,7 @@ ARES applies a cross-check at schema ingestion with tolerance ±0.15 to catch gr
     "z_meters": 50.0
   },
   "coordinates": {
-    "center_lat": 39.902864,
+    "center_lat": 39.902857,
     "center_lon": 116.402875,
     "altitude_m": 50.0
   },
@@ -112,8 +112,10 @@ $$y = 217.0 + 202 \times 0.5 = 318.0\ \text{m North}$$
 $$z = 50.0\ \text{m AGL}$$
 
 **Geodetic centroid (local flat-earth approximation):**
-$$\Delta\text{lat} \approx \frac{318.0}{111{,}320} \approx 0.002858° \quad\Rightarrow\quad \text{lat} \approx 39.902858°\ \text{N}$$
-$$\Delta\text{lon} \approx \frac{245.5}{111{,}320 \times \cos(39.9°)} \approx 0.002875° \quad\Rightarrow\quad \text{lon} \approx 116.402875°\ \text{E}$$
+$$\Delta\text{lat} \approx \frac{318.0}{111{,}320} \approx 0.002857° \quad\Rightarrow\quad \text{lat} = 39.900000° + 0.002857° = 39.902857°\ \text{N}$$
+$$\Delta\text{lon} \approx \frac{245.5}{111{,}320 \times \cos(39.9°)} \approx 0.002875° \quad\Rightarrow\quad \text{lon} = 116.400000° + 0.002875° = 116.402875°\ \text{E}$$
+
+*(Note on geodetic models: using the stated spherical flat-earth formula with nominal $111{,}320\text{ m/deg}$ yields $39.902857°\text{ N}$. An ellipsoidal model using WGS-84 meridional radius of curvature $M(\phi) \approx 111{,}034\text{ m/deg}$ at $39.9°\text{ N}$ yields $318.0 / 111{,}034 \approx 0.002864° \Rightarrow 39.902864°\text{ N}$. The documented sample uses the stated nominal formula $\Delta\text{lat} = y / 111{,}320 \Rightarrow 39.902857°\text{ N}$ to remain strictly consistent with the stated equation.)*
 
 > [!NOTE]
 > This flat-earth approximation is documented for ARES reference only.
@@ -142,7 +144,7 @@ $$\Delta\text{lon} \approx \frac{245.5}{111{,}320 \times \cos(39.9°)} \approx 0
       "z_meters": 50.0
     },
     "coordinates": {
-      "center_lat": 39.902864,
+      "center_lat": 39.902857,
       "center_lon": 116.402875,
       "altitude_m": 50.0
     },
@@ -151,8 +153,8 @@ $$\Delta\text{lon} \approx \frac{245.5}{111{,}320 \times \cos(39.9°)} \approx 0
 }
 ```
 
-**Uncertainty cross-check:** `h(0.70) = -(0.70·log₂(0.70) + 0.30·log₂(0.30)) ≈ 0.881`.
-Reported `uncertainty=0.88`; difference 0.001 — well within the ±0.15 tolerance. ✓
+**Uncertainty check:** `h(0.70) = -(0.70·log₂(0.70) + 0.30·log₂(0.30)) ≈ 0.881`.
+Reported `uncertainty=0.88`; difference 0.001 — within the hard tolerance of ±0.15. ✓
 
 ---
 
@@ -161,13 +163,14 @@ Reported `uncertainty=0.88`; difference 0.001 — well within the ±0.15 toleran
 | Rule | Enforcement |
 |------|------------|
 | `schema_version` must start with `v1.` | Hard reject |
-| `timestamp` must end with `Z` or `+00:00` | Hard reject |
+| `timestamp` must be a valid ISO-8601 UTC datetime with explicit `Z` or `+00:00` | Hard reject (parses as real ISO-8601 datetime; rejects malformed strings) |
 | `local_grid` is required inside `region` | Hard reject |
 | `confidence` ∈ [0, 1] | Hard reject |
 | `uncertainty` ∈ [0, 1] | Hard reject |
 | `bbox_pixels` ordering: xmin ≤ xmax, ymin ≤ ymax | Hard reject |
 | Unknown extra fields in record or sub-objects | Hard reject (`extra='forbid'`) |
-| `\|uncertainty - h(confidence)\|` > 0.15 | Hard reject (cross-check) |
+| `\|uncertainty - h(confidence)\|` > `SHANNON_ENTROPY_TOLERANCE` (0.15) | Hard reject (`ValidationError`): enforces agreed Shannon entropy within ±0.15 tolerance |
+| ARES-owned fields (`importance_weight`, `candidate_status`, etc.) | Hard reject if present in SatQuery record |
 | ARES-owned fields (`importance_weight`, `candidate_status`, etc.) | Hard reject if present in SatQuery record |
 
 ---

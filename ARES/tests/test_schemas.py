@@ -144,7 +144,7 @@ class TestSchemas(unittest.TestCase):
             SatQueryCandidateRecord(**no_grid)
 
     # ------------------------------------------------------------------
-    # 7. NEW: Timestamps without UTC designator are rejected
+    # 7. NEW: Timestamps without UTC designator or malformed ISO strings rejected
     # ------------------------------------------------------------------
 
     def test_non_utc_timestamp_raises(self):
@@ -161,6 +161,26 @@ class TestSchemas(unittest.TestCase):
             with self.subTest(timestamp=bad_ts):
                 bad = self.valid_record_dict.copy()
                 bad["timestamp"] = bad_ts
+                with self.assertRaises(ValidationError):
+                    SatQueryCandidateRecord(**bad)
+
+    def test_malformed_timestamp_with_utc_suffix_raises(self):
+        """Malformed strings that merely end with 'Z' or '+00:00' must be rejected.
+
+        Verifies that timestamps are parsed as real ISO-8601 datetimes,
+        not just checked with a naive string suffix.
+        """
+        for malformed in [
+            "not-a-dateZ",                # non-datetime text with Z
+            "invalid+00:00",              # non-datetime text with +00:00
+            "2026-02-31T09:00:00Z",       # invalid calendar day (Feb 31)
+            "2026-11-17T25:00:00Z",       # invalid hour (25)
+            "2026-11-17T09:65:00Z",       # invalid minute (65)
+            "T09:00:00Z",                 # time only
+        ]:
+            with self.subTest(timestamp=malformed):
+                bad = self.valid_record_dict.copy()
+                bad["timestamp"] = malformed
                 with self.assertRaises(ValidationError):
                     SatQueryCandidateRecord(**bad)
 
@@ -192,34 +212,86 @@ class TestSchemas(unittest.TestCase):
             SatQueryCandidateRecord(**with_extra2)
 
     # ------------------------------------------------------------------
-    # 9. NEW: Shannon entropy cross-check catches gross mismatches
+    # 9. NEW: Shannon entropy hard validation check enforces agreed semantics
     # ------------------------------------------------------------------
 
-    def test_uncertainty_entropy_cross_check(self):
-        """The model_validator flags uncertainty values that deviate > 0.15
-        from the agreed Shannon entropy formula applied to confidence.
+    def test_uncertainty_shannon_entropy_hard_validation(self):
+        """Hard validation failure: raises ValidationError when |u - h(p)| > 0.15.
 
-        Note: this is a cross-check for schema-level sanity, not a physical
-        measurement.  Calibration is SatQuery's responsibility.
+        Agreed formula: u = -[p*log2(p) + (1-p)*log2(1-p)].
+        Tolerance: SHANNON_ENTROPY_TOLERANCE = 0.15.
         """
-        # conf=0.85 -> h(0.85) ≈ 0.610.  Setting uncertainty=0.99 (diff≈0.38) must fail.
+        # conf=0.85 -> h(0.85) ≈ 0.610.
+        # u=0.99 (diff ≈ 0.380 > 0.15) must raise ValidationError.
         bad = self.valid_record_dict.copy()
-        bad["uncertainty"] = 0.99  # far from h(0.85)≈0.610
+        bad["confidence"] = 0.85
+        bad["uncertainty"] = 0.99
         with self.assertRaises(ValidationError):
             SatQueryCandidateRecord(**bad)
+
+        # u=0.77 (diff ≈ 0.160 > 0.15) must raise ValidationError.
+        bad_border = self.valid_record_dict.copy()
+        bad_border["confidence"] = 0.85
+        bad_border["uncertainty"] = 0.77
+        with self.assertRaises(ValidationError):
+            SatQueryCandidateRecord(**bad_border)
+
+        # u=0.75 (diff ≈ 0.140 <= 0.15) must pass.
+        ok_border = self.valid_record_dict.copy()
+        ok_border["confidence"] = 0.85
+        ok_border["uncertainty"] = 0.75
+        rec = SatQueryCandidateRecord(**ok_border)
+        self.assertEqual(rec.uncertainty, 0.75)
+
+    def test_uncertainty_entropy_boundaries(self):
+        """Boundary values for Shannon entropy hard validation."""
+        # p=0.5 -> h(0.5) = 1.0; u=1.0 must pass.
+        rec_mid = SatQueryCandidateRecord(**{
+            **self.valid_record_dict,
+            "confidence": 0.5,
+            "uncertainty": 1.0,
+        })
+        self.assertEqual(rec_mid.uncertainty, 1.0)
+
+        # p=0.5 with u=0.5 (diff=0.5 > 0.15) must fail.
+        with self.assertRaises(ValidationError):
+            SatQueryCandidateRecord(**{
+                **self.valid_record_dict,
+                "confidence": 0.5,
+                "uncertainty": 0.5,
+            })
+
+        # p=0.0 -> expected 0.0; u=0.0 must pass.
+        rec_zero = SatQueryCandidateRecord(**{
+            **self.valid_record_dict,
+            "confidence": 0.0,
+            "uncertainty": 0.0,
+        })
+        self.assertEqual(rec_zero.uncertainty, 0.0)
+
+        # p=1.0 -> expected 0.0; u=0.0 must pass.
+        rec_one = SatQueryCandidateRecord(**{
+            **self.valid_record_dict,
+            "confidence": 1.0,
+            "uncertainty": 0.0,
+        })
+        self.assertEqual(rec_one.uncertainty, 0.0)
 
     def test_valid_record_with_agreed_coordinate_example(self):
         """Sample record using the agreed coordinate convention example.
 
-        Agreed reference (illustrative — not a surveyed ground truth):
+        Agreed reference inputs:
           Home WGS84: (39.900000° N, 116.400000° E, 0 m)
           Bbox [128, 160, 212, 244] → centroid pixel (170, 202)
           Tile anchor at local (160.5 m E, 217.0 m N), GSD 0.5 m/px
-          Local centroid: x=245.5 m E, y=318.0 m N, z=50 m AGL
-          Geodetic centroid ≈ (39.902864° N, 116.402875° E, 50 m)
-            [local flat-earth approximation, not a general georeferencing method]
+          Local centroid: x = 160.5 + 170*0.5 = 245.5 m E
+                          y = 217.0 + 202*0.5 = 318.0 m N
+                          z = 50.0 m AGL
+          Geodetic centroid (flat-earth formula with 111,320 m/deg):
+              Δlat = 318.0 / 111,320 ≈ 0.002857° -> lat = 39.900000 + 0.002857 = 39.902857° N
+              Δlon = 245.5 / (111,320 * cos(39.9°)) ≈ 0.002875° -> lon = 116.400000 + 0.002875 = 116.402875° E
         """
-        # conf=0.70 -> h(0.70) ≈ 0.881; u=0.88 (diff=0.001, well within ±0.15)
+        # conf=0.70 -> h(0.70) ≈ 0.881; u=0.88 (diff=0.001, within ±0.15)
         record = SatQueryCandidateRecord(
             schema_version="v1.0.0-provisional",
             candidate_id="cand_coord_example_001",
@@ -236,8 +308,8 @@ class TestSchemas(unittest.TestCase):
                     z_meters=50.0,    # 50 m AGL
                 ),
                 coordinates=GeographicCoordinates(
-                    center_lat=39.902864,   # illustrative — local flat-earth approx
-                    center_lon=116.402875,
+                    center_lat=39.902857,   # matches stated conversion formula: 39.900000 + 318.0/111320
+                    center_lon=116.402875,  # matches stated conversion formula: 116.400000 + 245.5/(111320*cos(39.9°))
                     altitude_m=50.0,
                 ),
                 bbox_pixels=[128, 160, 212, 244],
@@ -245,7 +317,7 @@ class TestSchemas(unittest.TestCase):
         )
         self.assertAlmostEqual(record.region.local_grid.x_meters, 245.5)
         self.assertAlmostEqual(record.region.local_grid.y_meters, 318.0)
-        self.assertAlmostEqual(record.region.coordinates.center_lat, 39.902864)
+        self.assertAlmostEqual(record.region.coordinates.center_lat, 39.902857)
         self.assertAlmostEqual(record.region.coordinates.center_lon, 116.402875)
 
 

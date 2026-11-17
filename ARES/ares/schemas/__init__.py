@@ -2,6 +2,7 @@
 
 from ares.schemas.provenance import DataProvenance, ProvenanceValue
 from ares.schemas.satquery_record import (
+    SHANNON_ENTROPY_TOLERANCE,
     GeographicCoordinates,
     LocalGridCoordinates,
     RegionGeometry,
@@ -22,6 +23,7 @@ __all__ = [
     "GeographicCoordinates",
     "RegionGeometry",
     "SatQueryCandidateRecord",
+    "SHANNON_ENTROPY_TOLERANCE",
     "CandidateStatus",
     "ActionType",
     "ImportanceTier",

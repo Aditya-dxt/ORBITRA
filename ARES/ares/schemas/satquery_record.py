@@ -14,14 +14,15 @@ OWNERSHIP RULE:
   reserve_feasible) are defined in ares/schemas/candidate_state.py and must
   never appear inside SatQueryCandidateRecord.
 
-UNCERTAINTY SEMANTICS (agreed with SatQuery lead):
+UNCERTAINTY SEMANTICS & HARD VALIDATION (agreed with SatQuery lead):
   `uncertainty` is the normalized binary Shannon entropy of `confidence`:
       u = -[ p·log₂(p) + (1-p)·log₂(1-p) ]
   where p = confidence.  Boundary values:
       u = 1.0  when p = 0.5  (maximum ambiguity)
       u → 0.0  when p → 0.0 or p → 1.0  (high certainty)
-  ARES assumes this formula but does NOT verify or recompute it;
-  calibration is SatQuery's responsibility.
+  ARES enforces this as a HARD VALIDATION CHECK: if |uncertainty - h(confidence)|
+  exceeds SHANNON_ENTROPY_TOLERANCE (±0.15), validation raises a hard
+  ValidationError to prevent uncalibrated or corrupt records from entering ARES.
 
 CONFIDENCE CALIBRATION (agreed with SatQuery lead):
   `confidence` is a calibrated probability P(real change) ∈ [0, 1], produced
@@ -37,13 +38,21 @@ COORDINATE CONVENTION (agreed):
   Geodetic approximation formula (not a general georeferencing method):
       Δlat ≈ y / 111_320  (degrees)
       Δlon ≈ x / (111_320 · cos(lat_home))  (degrees)
-  See INTERFACE_PROPOSAL.md §3 for the full worked coordinate example.
+  Worked example:
+      y = 318.0 m North -> Δlat = 318.0 / 111_320 ≈ 0.002857° -> lat ≈ 39.902857° N
+      x = 245.5 m East  -> Δlon = 245.5 / (111_320 · cos(39.9°)) ≈ 0.002875° -> lon ≈ 116.402875° E
+  See INTERFACE_PROPOSAL.md §4 for the full worked coordinate example.
 """
 
+from datetime import datetime, timezone
 import math
 from typing import List, Optional
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
+
+# Permissible tolerance for the hard Shannon entropy validation check.
+# SatQuery candidate records must satisfy |uncertainty - h(confidence)| <= SHANNON_ENTROPY_TOLERANCE.
+SHANNON_ENTROPY_TOLERANCE: float = 0.15
 
 
 class LocalGridCoordinates(BaseModel):
@@ -202,52 +211,65 @@ class SatQueryCandidateRecord(BaseModel):
     @field_validator("timestamp")
     @classmethod
     def validate_timestamp_utc(cls, v: str) -> str:
-        """Timestamps must carry an explicit UTC designator (Z or +00:00).
+        """Validates that timestamp is a parseable ISO-8601 UTC datetime.
 
-        ARES does not interpret the timestamp numerically but enforces that
-        SatQuery records include a timezone designator to prevent silent
-        timezone-naive record ingestion.
+        Requires an explicit UTC timezone designator ('Z' or '+00:00').
+        Rejects malformed strings even if they end with 'Z' or '+00:00'.
         """
+        if not isinstance(v, str):
+            raise ValueError("timestamp must be an ISO-8601 string")
         stripped = v.strip()
-        if not (stripped.endswith("Z") or stripped.endswith("+00:00")):
+        if not (stripped.endswith("Z") or stripped.endswith("+00:00") or stripped.endswith("-00:00")):
             raise ValueError(
                 f"timestamp must be UTC ISO-8601 with explicit timezone designator "
                 f"('Z' or '+00:00'). Got: '{v}'. "
                 f"Example: '2026-11-17T09:00:00Z'"
             )
-        return v
+        try:
+            dt = datetime.fromisoformat(stripped)
+        except Exception as e:
+            raise ValueError(
+                f"Malformed ISO-8601 timestamp: '{v}'. Failed to parse datetime: {e}"
+            ) from e
+        if dt.tzinfo is None or dt.utcoffset() != timezone.utc.utcoffset(dt):
+            raise ValueError(
+                f"timestamp must represent a UTC datetime (+00:00 offset). Got: '{v}'"
+            )
+        return stripped
 
     @model_validator(mode="after")
-    def validate_uncertainty_approx_matches_confidence(self) -> "SatQueryCandidateRecord":
-        """Advisory cross-check: flags a warning if uncertainty deviates significantly
-        from the agreed Shannon entropy formula.
+    def validate_uncertainty_matches_shannon_entropy(self) -> "SatQueryCandidateRecord":
+        """Hard validation check: enforces that candidate uncertainty matches the
+        normalized binary Shannon entropy of calibrated confidence within tolerance ±0.15.
 
-        This check is INFORMATIONAL, not a hard rejection, because SatQuery
-        may apply rounding or clamping before serialization.  ARES does not
-        recompute uncertainty; this guard catches gross mismatches (e.g. a
-        confidence field being accidentally used in place of uncertainty).
+        Agreed formula:
+            u = -[p·log₂(p) + (1-p)·log₂(1-p)],  where p = confidence.
 
-        Tolerance: ±0.15 (permissive for rounded/clamped values).
+        Boundary values:
+            u = 1.0  when p = 0.5  (maximum ambiguity)
+            u -> 0.0 when p -> 0.0 or p -> 1.0  (high certainty)
+
+        Hard failure: raises ValueError (ValidationError) if:
+            |uncertainty - expected_entropy| > SHANNON_ENTROPY_TOLERANCE (default 0.15).
+
+        This is a hard validation check to prevent corrupt or uncalibrated
+        candidate records from propagating into ARES decision and energy engines.
         """
         p = self.confidence
         u_reported = self.uncertainty
 
-        # Avoid log(0) at the boundaries
+        # Avoid log(0) at boundaries
         if p <= 0.0 or p >= 1.0:
-            # At p=0 or p=1 entropy is 0; check that uncertainty is near 0
             expected = 0.0
         else:
-            expected = -(p * math.log2(p) + (1 - p) * math.log2(1 - p))
+            expected = -(p * math.log2(p) + (1.0 - p) * math.log2(1.0 - p))
 
-        if abs(u_reported - expected) > 0.15:
-            # Raise a validation warning as a ValueError so pydantic surfaces it
-            # only when the mismatch is large enough to indicate a likely schema error.
+        diff = abs(u_reported - expected)
+        if diff > SHANNON_ENTROPY_TOLERANCE:
             raise ValueError(
-                f"uncertainty={u_reported:.4f} deviates significantly from the "
-                f"agreed Shannon entropy formula applied to confidence={p:.4f} "
-                f"(expected ≈ {expected:.4f}, tolerance ±0.15). "
-                f"Agreed formula: u = -[p·log₂(p) + (1-p)·log₂(1-p)]. "
-                f"If SatQuery applies additional rounding or clamping, adjust "
-                f"the tolerance or disable this check for integration testing."
+                f"Hard validation failure: candidate uncertainty={u_reported:.4f} deviates "
+                f"by {diff:.4f} from the agreed normalized binary Shannon entropy of "
+                f"confidence={p:.4f} (expected ≈ {expected:.4f}, tolerance ±{SHANNON_ENTROPY_TOLERANCE}). "
+                f"Agreed formula: u = -[p·log₂(p) + (1-p)·log₂(1-p)]."
             )
         return self
