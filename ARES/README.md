@@ -95,17 +95,21 @@ python -m unittest discover -s tests -v
 ## Running Implementation Log
 
 ### Joint Integration Verification with SatQuery Exports — 2026-11-17
-- **Summary:** Verified ARES candidate ingestion against real SatQuery export datasets following the merge of SatQuery PR #1. Validated that `SatQueryCandidateRecord` directly parses and validates `SatQuery/exports/sample_candidates.json` (3 records) and all regional mission candidate exports (113 records total across Bengaluru Tech, Chennai Sriperumbudur, Delhi NCR, and Kanpur Bhauti) with zero schema errors. Executed ARES simulations across all primary policies (B0–B4) on ingested SatQuery candidates.
+- **Summary:** Verified ARES candidate ingestion against real SatQuery export datasets following the merge of SatQuery PR #1 and subsequent commits (`ea9748e`, `79ab345`). Validated that `SatQueryCandidateRecord` directly parses and validates `SatQuery/exports/sample_candidates.json` (3 records) and all regional mission candidate exports (113 records total across Bengaluru Tech, Chennai Sriperumbudur, Delhi NCR, Kanpur Bhauti, and sample India files) with zero schema errors. Executed ARES simulations across all primary policies (B0–B4) on ingested SatQuery candidates.
 - **End-to-End Script Check:** Attempted execution of `python SatQuery/examples/end_to_end_integration.py --policy B3`. The command failed at the module import stage with:
-  `ModuleNotFoundError: No module named 'SatQuery.satquery.data'`
-  caused by line 19 of `SatQuery/satquery/pipeline.py` importing `from .data.synthetic_sample_data import generate_benchmark_pair`. Inspection revealed that `data/` in root `.gitignore` (line 11) caused the SatQuery author's `SatQuery/satquery/data/` directory to be omitted from the repository. Per project boundaries, no edits were made to SatQuery files; this issue is documented for the SatQuery lead to resolve.
+  ```
+  File "D:\Projects\ARES\SatQuery\satquery\vision\calibration.py", line 17, in <module>
+    from sklearn.linear_model import LogisticRegression
+  ModuleNotFoundError: No module named 'sklearn'
+  ```
+  Inspection: `SatQuery/examples/end_to_end_integration.py` imports `SatQuery.satquery.pipeline`, which imports `ScoreCalibrator` from `SatQuery/satquery/vision/calibration.py`. Line 17 of `calibration.py` requires `scikit-learn` (`sklearn.linear_model.LogisticRegression`), which is not installed in the project environment. Per project boundaries, no edits were made to SatQuery files; this missing third-party dependency is documented for the SatQuery owner to either declare in environment requirements or handle with an optional fallback.
 - **Checks Actually Performed:**
   - Ran `python -c "import json, sys; sys.path.insert(0, 'ARES'); from ares.schemas.satquery_record import SatQueryCandidateRecord; data = json.load(open('SatQuery/exports/sample_candidates.json')); records = [SatQueryCandidateRecord(**d) for d in data]; print(f'Loaded {len(records)} records')"`: **Successfully loaded and validated 3 records**.
   - Validated all 6 SatQuery exported JSON files against ARES schema: **113/113 records passed strict validation**.
-  - Ran `python SatQuery/examples/end_to_end_integration.py --policy B3`: Failed with `ModuleNotFoundError: No module named 'SatQuery.satquery.data'`.
+  - Ran `python SatQuery/examples/end_to_end_integration.py --policy B3`: Failed with `ModuleNotFoundError: No module named 'sklearn'`.
   - Ran `python -m unittest discover -s ARES/tests -t ARES -v`: **70/70 unit tests passed**.
 - **Limitations & Outstanding Items for SatQuery Lead:**
-  - End-to-end integration cannot be claimed as passed until `SatQuery/satquery/data` is added to git (or un-gitignored) by the SatQuery owner.
+  - End-to-end integration script cannot complete until `scikit-learn` is installed in the environment or made optional in `SatQuery/satquery/vision/calibration.py`.
   - The interface remains `v1.0.0-provisional`.
 
 ### Milestone 5: B4 Greedy Benefit-per-Energy Policy — 2026-11-17
