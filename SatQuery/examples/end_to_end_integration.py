@@ -237,10 +237,22 @@ if __name__ == "__main__":
     parser.add_argument("--battery_wh", type=float, default=20.83)
     parser.add_argument("--output_report", type=str, default=os.path.join(REPO_ROOT, "SatQuery", "exports", "mission_decision_report.json"))
     parser.add_argument("--no-human-review", action="store_true", help="Exclude HUMAN_REVIEW from action space, forcing flight/model triage")
+    parser.add_argument("--model", type=str, default="deep_siamese", choices=["deep_siamese", "baseline"])
+    parser.add_argument("--regenerate", action="store_true", help="Regenerate candidates using specified model before running ARES")
     args = parser.parse_args()
 
+    candidates_path = args.candidates
+    if args.regenerate or not os.path.exists(candidates_path):
+        from SatQuery.satquery.pipeline import SatQueryPipeline
+        from SatQuery.satquery.data.synthetic_sample_data import generate_benchmark_pair
+        print(f"Generating candidates using {args.model.upper()}...")
+        p = SatQueryPipeline(model_type=args.model)
+        pre, post, gt_mask, gt_boxes = generate_benchmark_pair("levir")
+        res = p.process_pair(pre, post, image_pair_id="pair_benchmark_live", ground_truth_mask=gt_mask, ground_truth_boxes=gt_boxes)
+        p.export_candidates_to_json(res["candidates"], candidates_path)
+
     run_integration(
-        candidates_json_path=args.candidates,
+        candidates_json_path=candidates_path,
         policy_name=args.policy,
         battery_wh=args.battery_wh,
         export_report_path=args.output_report,

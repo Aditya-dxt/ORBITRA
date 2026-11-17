@@ -21,11 +21,14 @@ SatQuery/
 │   │   └── candidate_record.py        # Strict Pydantic model (extra='forbid', UTC ISO-8601, local_grid required)
 │   ├── data/
 │   │   ├── dataset.py                 # LEVIR-CD & OSCD loader, pair validation, spatial alignment check
+│   │   ├── india_satellite_data.py    # Automated STAC Sentinel-2 imagery loader over Indian mission corridors
 │   │   └── synthetic_sample_data.py   # Self-contained reproducible benchmark scenes
 │   ├── models/
+│   │   ├── checkpoint_loader.py       # Safe checkpoint inspector & weight parser (*.pth)
 │   │   ├── classifier.py              # Semantic change classifier (building, road, vegetation, natural)
-│   │   └── siamese_unet.py            # Deep learning Siamese U-Net with Spatial-Temporal Attention
+│   │   └── siamese_unet.py            # Deep Siamese ResNet-34 with Spatial-Temporal Attention
 │   ├── vision/
+│   │   ├── deep_detector.py           # High-precision deep change detector (PyTorch & calibrated fallback)
 │   │   ├── detector.py                # Multi-scale differential change detector & continuous heatmap
 │   │   ├── candidate_generator.py     # Contour extraction, min-area filter, pixel bbox & georeferencing
 │   │   ├── georeferencing.py          # Pixel <-> Local Grid (ENU) <-> Geodetic (WGS-84) transforms
@@ -164,6 +167,23 @@ python -c "import json, sys; sys.path.insert(0, 'ARES'); from ares.schemas.satqu
 ---
 
 ## 📋 Running Implementation Log
+
+### Update: 2026-11-17 — Deep Siamese ResNet-34 + CBAM Model Integration & Audit
+- **Summary:** Audited and integrated the trained deep Siamese neural network (`best_siamese_model.pth`, 285 MB) into SatQuery. The model incorporates a weight-shared Siamese ResNet-34 backbone with dual-stream Channel and Spatial Attention (CBAM) difference weighting across 4 spatial scales, coupled with a progressive transposed-convolution decoder. Audited checkpoint confirms 35 completed epochs with Cosine Annealing, achieving **84.75% Validation F1** and **73.54% Validation IoU** (a +22.0% IoU and +34.7% F1 gain over the differential baseline). Provided a PyTorch inference engine with a seamless calibrated feature-attention fallback for environments without PyTorch. Integrated model selection (`--model deep_siamese` / `--model baseline`) into pipeline runners and added unit tests in `SatQuery/tests/test_deep_model.py`.
+- **Changed Files:**
+  - `SatQuery/satquery/models/checkpoint_loader.py` (Safe checkpoint inspector and metadata parser)
+  - `SatQuery/satquery/models/siamese_unet.py` (Full 315-tensor PyTorch Siamese ResNet-34 architecture matching `best_siamese_model.pth`)
+  - `SatQuery/satquery/vision/deep_detector.py` (Deep Siamese detector wrapper with PyTorch / calibrated fallback)
+  - `SatQuery/satquery/pipeline.py` (Supported `model_type` selection)
+  - `SatQuery/examples/run_india_pipeline.py` (Added `--model` flag and diagnostic telemetry)
+  - `SatQuery/examples/end_to_end_integration.py` (Added `--model` and `--regenerate` flags)
+  - `SatQuery/tests/test_deep_model.py` (Unit tests for checkpoint discovery, metadata audit, inference, and candidate generation)
+- **Checks Performed:**
+  - `python -m unittest discover -s SatQuery/tests -v` (27/27 passed)
+  - `python -m unittest discover -s ARES/tests -t ARES -v` (70/70 passed)
+  - `python SatQuery/examples/end_to_end_integration.py --policy B3 --model deep_siamese` (Success)
+  - `python SatQuery/examples/run_india_pipeline.py --zone kanpur_bhauti --policy B3 --model deep_siamese` (Success: 5 candidates detected and verified)
+  - `python SatQuery/examples/run_india_pipeline.py --zone kanpur_bhauti --policy B4 --no-human-review --model deep_siamese` (Success: Recaptured 3 targets, safety reserve guardrail triggered for 4th target, safe return completed with 16.79 Wh return flight energy)
 
 ### Update: 2026-11-17 — Dependency Declaration & Scikit-Learn Graceful Fallback
 - **Summary:** Declared official dependencies in `SatQuery/requirements.txt` (including `scikit-learn>=1.3.0`, `opencv-python-headless`, `pydantic`, `numpy`, `scipy`, `pillow`). Added a clean environment setup guide in `README.md`. Implemented a pure-NumPy logistic regression fallback in `SatQuery/satquery/vision/calibration.py` so that Platt scaling and end-to-end integration execute cleanly even on environments where `scikit-learn` is not yet installed.

@@ -5,25 +5,25 @@
     "image_pair_id": "pair_sentinel2_kanpur_bhauti",
     "timestamp": "2023-12-24T05:12:29.024000Z",
     "predicted_change": "vegetation_clearing",
-    "confidence": 0.3295,
-    "uncertainty": 0.9144,
+    "confidence": 0.4819,
+    "uncertainty": 0.9991,
     "region": {
       "crs": "local_meter_grid",
       "local_grid": {
-        "x_meters": 120.0,
-        "y_meters": 4760.0,
+        "x_meters": 520.0,
+        "y_meters": 3840.0,
         "z_meters": 60.0
       },
       "coordinates": {
-        "center_lat": 26.489962,
-        "center_lon": 80.199203,
+        "center_lat": 26.481659,
+        "center_lon": 80.203214,
         "altitude_m": 180.0
       },
       "bbox_pixels": [
-        10,
-        472,
-        14,
-        480
+        50,
+        380,
+        54,
+        388
       ]
     }
   },
@@ -33,25 +33,25 @@
     "image_pair_id": "pair_sentinel2_kanpur_bhauti",
     "timestamp": "2023-12-24T05:12:29.024000Z",
     "predicted_change": "vegetation_clearing",
-    "confidence": 0.452,
-    "uncertainty": 0.9933,
+    "confidence": 0.5137,
+    "uncertainty": 0.9995,
     "region": {
       "crs": "local_meter_grid",
       "local_grid": {
-        "x_meters": 535.0,
-        "y_meters": 3860.0,
+        "x_meters": 1745.0,
+        "y_meters": 1760.0,
         "z_meters": 60.0
       },
       "coordinates": {
-        "center_lat": 26.481839,
-        "center_lon": 80.203364,
+        "center_lat": 26.462885,
+        "center_lon": 80.215496,
         "altitude_m": 180.0
       },
       "bbox_pixels": [
-        50,
-        380,
-        57,
-        392
+        171,
+        173,
+        178,
+        179
       ]
     }
   },
@@ -60,93 +60,9 @@
     "candidate_id": "cand_sq_levir_003",
     "image_pair_id": "pair_sentinel2_kanpur_bhauti",
     "timestamp": "2023-12-24T05:12:29.024000Z",
-    "predicted_change": "vegetation_clearing",
-    "confidence": 0.367,
-    "uncertainty": 0.9483,
-    "region": {
-      "crs": "local_meter_grid",
-      "local_grid": {
-        "x_meters": 955.0,
-        "y_meters": 3590.0,
-        "z_meters": 60.0
-      },
-      "coordinates": {
-        "center_lat": 26.479402,
-        "center_lon": 80.207575,
-        "altitude_m": 180.0
-      },
-      "bbox_pixels": [
-        90,
-        355,
-        101,
-        363
-      ]
-    }
-  },
-  {
-    "schema_version": "v1.0.0-provisional",
-    "candidate_id": "cand_sq_levir_004",
-    "image_pair_id": "pair_sentinel2_kanpur_bhauti",
-    "timestamp": "2023-12-24T05:12:29.024000Z",
-    "predicted_change": "vegetation_clearing",
-    "confidence": 0.4412,
-    "uncertainty": 0.99,
-    "region": {
-      "crs": "local_meter_grid",
-      "local_grid": {
-        "x_meters": 120.0,
-        "y_meters": 2995.0,
-        "z_meters": 60.0
-      },
-      "coordinates": {
-        "center_lat": 26.474032,
-        "center_lon": 80.199203,
-        "altitude_m": 180.0
-      },
-      "bbox_pixels": [
-        9,
-        297,
-        15,
-        302
-      ]
-    }
-  },
-  {
-    "schema_version": "v1.0.0-provisional",
-    "candidate_id": "cand_sq_levir_005",
-    "image_pair_id": "pair_sentinel2_kanpur_bhauti",
-    "timestamp": "2023-12-24T05:12:29.024000Z",
     "predicted_change": "urban_building_construction",
-    "confidence": 0.4806,
-    "uncertainty": 0.9989,
-    "region": {
-      "crs": "local_meter_grid",
-      "local_grid": {
-        "x_meters": 1760.0,
-        "y_meters": 1775.0,
-        "z_meters": 60.0
-      },
-      "coordinates": {
-        "center_lat": 26.463021,
-        "center_lon": 80.215647,
-        "altitude_m": 180.0
-      },
-      "bbox_pixels": [
-        171,
-        173,
-        181,
-        182
-      ]
-    }
-  },
-  {
-    "schema_version": "v1.0.0-provisional",
-    "candidate_id": "cand_sq_levir_006",
-    "image_pair_id": "pair_sentinel2_kanpur_bhauti",
-    "timestamp": "2023-12-24T05:12:29.024000Z",
-    "predicted_change": "urban_building_construction",
-    "confidence": 0.4629,
-    "uncertainty": 0.996,
+    "confidence": 0.4716,
+    "uncertainty": 0.9977,
     "region": {
       "crs": "local_meter_grid",
       "local_grid": {
@@ -169,12 +85,40 @@
   },
   {
     "schema_version": "v1.0.0-provisional",
-    "candidate_id": "cand_sq_levir_007",
+    "candidate_id": "cand_sq_levir_004",
     "image_pair_id": "pair_sentinel2_kanpur_bhauti",
     "timestamp": "2023-12-24T05:12:29.024000Z",
     "predicted_change": "urban_building_construction",
-    "confidence": 0.5092,
+    "confidence": 0.508,
     "uncertainty": 0.9998,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 4775.0,
+        "y_meters": 100.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.447903,
+        "center_lon": 80.245876,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        468,
+        0,
+        487,
+        20
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0-provisional",
+    "candidate_id": "cand_sq_levir_005",
+    "image_pair_id": "pair_sentinel2_kanpur_bhauti",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4858,
+    "uncertainty": 0.9994,
     "region": {
       "crs": "local_meter_grid",
       "local_grid": {

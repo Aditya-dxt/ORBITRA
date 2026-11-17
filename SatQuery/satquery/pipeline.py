@@ -22,6 +22,7 @@ from .models.classifier import SemanticChangeClassifier
 from .schemas.candidate_record import SatQueryCandidateRecord
 from .vision.calibration import ScoreCalibrator
 from .vision.candidate_generator import CandidateGenerator
+from .vision.deep_detector import DeepSiameseChangeDetector
 from .vision.detector import BaselineChangeDetector
 from .vision.georeferencing import MissionGeoreferencer
 
@@ -36,8 +37,22 @@ class SatQueryPipeline:
         georeferencer: Optional[MissionGeoreferencer] = None,
         calibrator: Optional[ScoreCalibrator] = None,
         schema_version: str = "v1.0.0-provisional",
+        model_type: str = "baseline",
+        checkpoint_path: Optional[str] = None,
+        detector: Optional[Union[BaselineChangeDetector, DeepSiameseChangeDetector]] = None,
     ):
-        self.detector = BaselineChangeDetector(threshold=threshold, min_contour_area=min_pixel_area)
+        self.model_type = model_type
+        if detector is not None:
+            self.detector = detector
+        elif model_type == "deep_siamese":
+            self.detector = DeepSiameseChangeDetector(
+                checkpoint_path=checkpoint_path,
+                threshold=threshold,
+                min_contour_area=min_pixel_area,
+            )
+        else:
+            self.detector = BaselineChangeDetector(threshold=threshold, min_contour_area=min_pixel_area)
+
         self.georeferencer = georeferencer or MissionGeoreferencer()
         self.calibrator = calibrator or ScoreCalibrator()
         self.classifier = SemanticChangeClassifier()

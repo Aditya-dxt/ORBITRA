@@ -43,6 +43,7 @@ def process_indian_mission(
     battery_wh: float = 50.0,
     crop_size: int = 512,
     include_human_review: bool = True,
+    model_type: str = "deep_siamese",
 ):
     print("=" * 80)
     print("🇮🇳  ORBITRA REAL INDIAN SATELLITE MISSION: SatQuery -> ARES")
@@ -70,9 +71,22 @@ def process_indian_mission(
         default_flight_alt=60.0,
     )
 
-    # 3. Execute Detection Pipeline
-    print("\n🔎 Running SatQuery Change Detection on Real Satellite Imagery...")
-    pipeline = SatQueryPipeline(georeferencer=geo, threshold=0.30, min_pixel_area=15)
+    # 3. Configure and Execute Detection Pipeline
+    print(f"\n🔎 Running SatQuery Change Detection ({model_type.upper()}) on Real Satellite Imagery...")
+    pipeline = SatQueryPipeline(
+        georeferencer=geo,
+        threshold=0.35 if model_type == "deep_siamese" else 0.30,
+        min_pixel_area=15,
+        model_type=model_type,
+    )
+    if hasattr(pipeline.detector, "get_model_info"):
+        info = pipeline.detector.get_model_info()
+        print(f"   ✓ Model Architecture: {info.get('architecture', 'SiameseResNet34-CBAM-Attention')}")
+        if 'best_f1' in info:
+            print(f"   ✓ Trained Checkpoint: {os.path.basename(info.get('path', 'best_siamese_model.pth'))}")
+            print(f"   ✓ Peak Validation F1: {info['best_f1']*100:.2f}% | Val IoU: {info['val_iou']*100:.2f}% | Val Loss: {info['val_loss']}")
+        print(f"   ✓ Execution Mode: {info.get('mode')}")
+
     pair_id = f"pair_sentinel2_{zone_key}"
     results = pipeline.process_pair(
         img_pre=zone_data["img_pre"],
@@ -150,6 +164,13 @@ def main():
     parser.add_argument("--policy", type=str, default="B3", choices=["B0", "B1", "B2", "B3", "B4"])
     parser.add_argument("--battery_wh", type=float, default=50.0)
     parser.add_argument("--no-human-review", action="store_true", help="Exclude HUMAN_REVIEW from action space, forcing flight/model triage")
+    parser.add_argument(
+        "--model",
+        type=str,
+        default="deep_siamese",
+        choices=["deep_siamese", "baseline"],
+        help="Change detection model engine (deep_siamese: ResNet-34 CBAM Attention | baseline: differential)",
+    )
     args = parser.parse_args()
 
     process_indian_mission(
@@ -157,6 +178,7 @@ def main():
         policy=args.policy,
         battery_wh=args.battery_wh,
         include_human_review=not args.no_human_review,
+        model_type=args.model,
     )
 
 

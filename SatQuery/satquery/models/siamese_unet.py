@@ -1,14 +1,16 @@
-"""Siamese U-Net with Spatial-Temporal Attention for Bi-Temporal Change Detection.
+"""Siamese ResNet-34 with Spatial-Temporal Attention for Bi-Temporal Change Detection.
 
-Implements the deep learning baseline documented in the ORBITRA synopsis and Satquery-1.O.
-Features:
-- Dual-stream weight-shared Siamese feature encoder (ResNet backbone)
-- Multi-scale Spatial-Temporal Attention Difference Modules across feature levels
-- U-Net style decoder with transposed convolutions and skip connections
-- Output change probability logits
+Implements the trained deep Siamese neural network from ORBITRA's model checkpoint
+(best_siamese_model.pth):
+- Dual-stream weight-shared Siamese feature encoder (ResNet-34 backbone)
+- 4-scale Spatial-Temporal Attention Modules (CBAM channel + spatial difference weighting)
+- Multi-scale progressive transposed-convolution decoder (dec4, dec3, dec2, dec1)
+- High-resolution final transposed upsampling and 1x1 classification head
+- Output change probability logits for direct sigmoid scoring
 """
 
-from typing import Optional
+import os
+from typing import Optional, Tuple
 
 try:
     import torch
@@ -22,7 +24,10 @@ except ImportError:
 
 if TORCH_AVAILABLE:
     class SpatialTemporalAttentionModule(nn.Module):
-        """Suppresses seasonal/lighting noise and highlights genuine structural developments."""
+        """Dual-stream Channel and Spatial Attention Difference Module.
+        
+        Suppresses seasonal/illumination noise and highlights genuine structural developments.
+        """
         def __init__(self, in_channels: int):
             super().__init__()
             self.channel_attn = nn.Sequential(
@@ -51,6 +56,7 @@ if TORCH_AVAILABLE:
 
 
     class DecoderBlock(nn.Module):
+        """Transposed-convolution upsampler and dual-convolution refinement block."""
         def __init__(self, in_channels: int, skip_channels: int, out_channels: int):
             super().__init__()
             self.up = nn.ConvTranspose2d(in_channels, in_channels // 2, kernel_size=2, stride=2)
@@ -72,7 +78,7 @@ if TORCH_AVAILABLE:
 
 
     class SiameseUNetAttention(nn.Module):
-        """Temporal Siamese Convolutional Network with Spatial-Temporal Attention."""
+        """Temporal Siamese Convolutional Network with Spatial-Temporal Attention (ResNet-34)."""
         def __init__(self, pretrained: bool = False):
             super().__init__()
             resnet = models.resnet34(weights=models.ResNet34_Weights.DEFAULT if pretrained else None)
@@ -92,14 +98,17 @@ if TORCH_AVAILABLE:
             self.dec4 = DecoderBlock(512, 256, 256)
             self.dec3 = DecoderBlock(256, 128, 128)
             self.dec2 = DecoderBlock(128, 64, 64)
-            self.dec1 = nn.Sequential(
-                nn.ConvTranspose2d(64, 32, kernel_size=2, stride=2),
-                nn.BatchNorm2d(32),
+            self.dec1 = DecoderBlock(64, 64, 32)
+
+            self.final_up = nn.ConvTranspose2d(32, 16, kernel_size=2, stride=2)
+            self.final_conv = nn.Sequential(
+                nn.Conv2d(16, 16, kernel_size=3, padding=1),
+                nn.BatchNorm2d(16),
                 nn.ReLU(inplace=True),
-                nn.Conv2d(32, 1, kernel_size=3, padding=1),
+                nn.Conv2d(16, 1, kernel_size=1),
             )
 
-        def forward_single(self, x: torch.Tensor):
+        def forward_single(self, x: torch.Tensor) -> Tuple[torch.Tensor, ...]:
             x0 = self.initial(x)
             x1 = self.layer1(self.maxpool(x0))
             x2 = self.layer2(x1)
@@ -111,6 +120,7 @@ if TORCH_AVAILABLE:
             a0, a1, a2, a3, a4 = self.forward_single(img_a)
             b0, b1, b2, b3, b4 = self.forward_single(img_b)
 
+            d0 = torch.abs(a0 - b0)
             d4 = self.attn4(a4, b4)
             d3 = self.attn3(a3, b3)
             d2 = self.attn2(a2, b2)
@@ -119,16 +129,31 @@ if TORCH_AVAILABLE:
             x = self.dec4(d4, d3)
             x = self.dec3(x, d2)
             x = self.dec2(x, d1)
-            out = self.dec1(x)
-            # Interpolate to match original input dimension
-            if out.shape[2:] != img_a.shape[2:]:
-                out = F.interpolate(out, size=img_a.shape[2:], mode="bilinear", align_corners=True)
-            return out
+            x = self.dec1(x, d0)
+            x = self.final_up(x)
+            logits = self.final_conv(x)
+            return logits
+
+        def load_pretrained_weights(self, checkpoint_path: str, device: str = "cpu") -> None:
+            """Load trained weights from best_siamese_model.pth."""
+            if not os.path.isfile(checkpoint_path):
+                raise FileNotFoundError(f"Checkpoint file does not exist: {checkpoint_path}")
+            checkpoint = torch.load(checkpoint_path, map_location=device)
+            state_dict = checkpoint.get("model_state_dict", checkpoint)
+            self.load_state_dict(state_dict)
+            self.eval()
+
 else:
     class SiameseUNetAttention:
-        """Placeholder when PyTorch is not installed."""
+        """Fallback placeholder when PyTorch is not installed."""
         def __init__(self, *args, **kwargs):
+            self.is_torch = False
+
+        def forward(self, *args, **kwargs):
             raise ImportError(
-                "PyTorch is not installed in the current environment. "
-                "SatQuery provides its baseline differential change detector via BaselineChangeDetector."
+                "PyTorch is not installed in the active environment. "
+                "SatQuery automatically operates with its calibrated feature change detector."
             )
+
+        def load_pretrained_weights(self, *args, **kwargs):
+            pass

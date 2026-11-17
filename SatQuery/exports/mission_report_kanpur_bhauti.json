@@ -1,86 +1,62 @@
 {
   "mission_summary": {
-    "policy_id": "B3",
-    "policy_name": "Joint Policy",
+    "policy_id": "B4",
+    "policy_name": "Greedy Benefit per Energy",
     "provenance": "SIMULATED",
     "initial_battery_joules": 180000.0,
     "initial_battery_wh": 50.0,
-    "final_battery_joules": 169850.0,
-    "final_battery_wh": 47.18,
-    "total_energy_spent_actions_joules": 10150.0,
-    "total_energy_spent_actions_wh": 2.82,
-    "return_flight_energy_joules": 0.0,
-    "return_flight_energy_wh": 0.0,
+    "final_battery_joules": 49290.1,
+    "final_battery_wh": 13.69,
+    "total_energy_spent_actions_joules": 70281.5,
+    "total_energy_spent_actions_wh": 19.52,
+    "return_flight_energy_joules": 60428.4,
+    "return_flight_energy_wh": 16.79,
     "safe_return_completed": true,
-    "candidates_total": 7,
-    "candidates_inspected": 7,
-    "candidates_deferred": 0,
+    "candidates_total": 5,
+    "candidates_inspected": 3,
+    "candidates_deferred": 2,
     "candidates_skipped": 0,
-    "ledger_records_count": 8,
-    "summary_message": "[SIMULATED] Sortie under B3 (Joint Policy) completed: 7 inspected, 0 skipped, 0 deferred. Safe return: True."
+    "ledger_records_count": 5,
+    "summary_message": "[SIMULATED] Sortie under B4 (Greedy Benefit per Energy) completed: 3 inspected, 0 skipped, 2 deferred. Safe return: True."
   },
   "decisions": [
     {
       "step": 1,
-      "candidate_id": "cand_sq_levir_001",
-      "action": "STRONGER_MODEL",
-      "cost_wh": 0.4028,
+      "candidate_id": "cand_sq_levir_003",
+      "action": "RECAPTURE",
+      "cost_wh": 10.2982,
       "reserve_feasible": true,
-      "reason": "[B3-JOINT] Best joint score 0.0005 for candidate 'cand_sq_levir_001' + STRONGER_MODEL. w=2.0, u=0.91, reduction=40%, cost=1450J"
+      "reason": "[B4-GREEDY] Selected RECAPTURE for 'cand_sq_levir_003'. Benefit=2.7936, Energy=37073.7J, Ratio=0.000075. Battery after action satisfies post-action return reserve"
     },
     {
       "step": 2,
       "candidate_id": "cand_sq_levir_002",
-      "action": "STRONGER_MODEL",
-      "cost_wh": 0.4028,
+      "action": "RECAPTURE",
+      "cost_wh": 1.7654,
       "reserve_feasible": true,
-      "reason": "[B3-JOINT] Best joint score 0.0005 for candidate 'cand_sq_levir_002' + STRONGER_MODEL. w=2.0, u=0.99, reduction=40%, cost=1450J"
+      "reason": "[B4-GREEDY] Selected RECAPTURE for 'cand_sq_levir_002'. Benefit=1.3993, Energy=6355.4J, Ratio=0.000220. Battery after action satisfies post-action return reserve"
     },
     {
       "step": 3,
-      "candidate_id": "cand_sq_levir_003",
-      "action": "STRONGER_MODEL",
-      "cost_wh": 0.4028,
+      "candidate_id": "cand_sq_levir_005",
+      "action": "RECAPTURE",
+      "cost_wh": 7.459,
       "reserve_feasible": true,
-      "reason": "[B3-JOINT] Best joint score 0.0005 for candidate 'cand_sq_levir_003' + STRONGER_MODEL. w=2.0, u=0.95, reduction=40%, cost=1450J"
+      "reason": "[B4-GREEDY] Selected RECAPTURE for 'cand_sq_levir_005'. Benefit=2.7983, Energy=26852.4J, Ratio=0.000104. Battery after action satisfies post-action return reserve"
     },
     {
       "step": 4,
       "candidate_id": "cand_sq_levir_004",
-      "action": "STRONGER_MODEL",
-      "cost_wh": 0.4028,
-      "reserve_feasible": true,
-      "reason": "[B3-JOINT] Best joint score 0.0005 for candidate 'cand_sq_levir_004' + STRONGER_MODEL. w=2.0, u=0.99, reduction=40%, cost=1450J"
+      "action": "RETURN_HOME",
+      "cost_wh": 0.0,
+      "reserve_feasible": false,
+      "reason": "[B4-GREEDY] Return reserve guardrail triggered for RECAPTURE of 'cand_sq_levir_004': Remaining battery (62041.1 J) violates required return reserve (87175.6 J) from post-action location. Initiating safe return to home base."
     },
     {
       "step": 5,
-      "candidate_id": "cand_sq_levir_005",
-      "action": "STRONGER_MODEL",
-      "cost_wh": 0.4028,
-      "reserve_feasible": true,
-      "reason": "[B3-JOINT] Best joint score 0.0011 for candidate 'cand_sq_levir_005' + STRONGER_MODEL. w=4.0, u=1.00, reduction=40%, cost=1450J"
-    },
-    {
-      "step": 6,
-      "candidate_id": "cand_sq_levir_006",
-      "action": "STRONGER_MODEL",
-      "cost_wh": 0.4028,
-      "reserve_feasible": true,
-      "reason": "[B3-JOINT] Best joint score 0.0011 for candidate 'cand_sq_levir_006' + STRONGER_MODEL. w=4.0, u=1.00, reduction=40%, cost=1450J"
-    },
-    {
-      "step": 7,
-      "candidate_id": "cand_sq_levir_007",
-      "action": "STRONGER_MODEL",
-      "cost_wh": 0.4028,
-      "reserve_feasible": true,
-      "reason": "[B3-JOINT] Best joint score 0.0011 for candidate 'cand_sq_levir_007' + STRONGER_MODEL. w=4.0, u=1.00, reduction=40%, cost=1450J"
-    },
-    {
-      "step": 8,
       "candidate_id": "MISSION_RETURN",
       "action": "RETURN_HOME",
-      "cost_wh": 0.0,
+      "cost_wh": 16.7857,
       "reserve_feasible": true,
       "reason": "UAV transit from mission position back to home base"
     }
@@ -89,51 +65,37 @@
     {
       "candidate_id": "cand_sq_levir_001",
       "predicted_change": "vegetation_clearing",
-      "confidence": 0.3295,
-      "uncertainty": 0.9144,
-      "action_selected": "STRONGER_MODEL"
+      "confidence": 0.4819,
+      "uncertainty": 0.9991,
+      "action_selected": "UNPROCESSED"
     },
     {
       "candidate_id": "cand_sq_levir_002",
       "predicted_change": "vegetation_clearing",
-      "confidence": 0.452,
-      "uncertainty": 0.9933,
-      "action_selected": "STRONGER_MODEL"
+      "confidence": 0.5137,
+      "uncertainty": 0.9995,
+      "action_selected": "RECAPTURE"
     },
     {
       "candidate_id": "cand_sq_levir_003",
-      "predicted_change": "vegetation_clearing",
-      "confidence": 0.367,
-      "uncertainty": 0.9483,
-      "action_selected": "STRONGER_MODEL"
+      "predicted_change": "urban_building_construction",
+      "confidence": 0.4716,
+      "uncertainty": 0.9977,
+      "action_selected": "RECAPTURE"
     },
     {
       "candidate_id": "cand_sq_levir_004",
-      "predicted_change": "vegetation_clearing",
-      "confidence": 0.4412,
-      "uncertainty": 0.99,
-      "action_selected": "STRONGER_MODEL"
+      "predicted_change": "urban_building_construction",
+      "confidence": 0.508,
+      "uncertainty": 0.9998,
+      "action_selected": "RETURN_HOME"
     },
     {
       "candidate_id": "cand_sq_levir_005",
       "predicted_change": "urban_building_construction",
-      "confidence": 0.4806,
-      "uncertainty": 0.9989,
-      "action_selected": "STRONGER_MODEL"
-    },
-    {
-      "candidate_id": "cand_sq_levir_006",
-      "predicted_change": "urban_building_construction",
-      "confidence": 0.4629,
-      "uncertainty": 0.996,
-      "action_selected": "STRONGER_MODEL"
-    },
-    {
-      "candidate_id": "cand_sq_levir_007",
-      "predicted_change": "urban_building_construction",
-      "confidence": 0.5092,
-      "uncertainty": 0.9998,
-      "action_selected": "STRONGER_MODEL"
+      "confidence": 0.4858,
+      "uncertainty": 0.9994,
+      "action_selected": "RECAPTURE"
     }
   ]
 }
