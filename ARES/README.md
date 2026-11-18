@@ -284,3 +284,18 @@ The common utility metric is **weighted uncertainty reduction**: importance weig
   - No physical drone flights have been conducted; all outcomes are labeled `[SIMULATED]`.
 - **Action Needed from SatQuery Owner:**
   - Review `ARES/docs/INTERFACE_PROPOSAL.md` when SatQuery work begins.
+
+### Latest SatQuery–ARES Verification — 2026-11-18 (`9746107`)
+- **Scope:** Read-only verification of Aditya’s SatQuery update. The interface remains `v1.0.0-provisional`; no SatQuery source or generated export changes are included in this ARES log update.
+- **Repository:** Checked out `main` at `9746107`; the working tree was clean before verification. The checkout includes the prior ARES commits `868c4d0` and `e820411`.
+- **Checks actually performed:**
+  - `python -m unittest discover -s SatQuery/tests -v`: **28 tests run, 0 failures, 0 errors, 1 skipped** (the checkpoint-presence test, because local neural weights are absent). Aditya’s report said 27 tests; local discovery reports 28.
+  - `python -m unittest discover -s ARES/tests -t ARES -v`: **74/74 passed**.
+  - `python SatQuery/examples/end_to_end_integration.py --policy B2`: **exit 0**. Loaded and validated all 3 sample records; reported `calibrated_feature_attention` fallback with no checkpoint; selected `STRONGER_MODEL` twice at 1,450 J each and `NONE` once; simulated safe return with 0 J return-flight energy because there was no flight displacement.
+  - `python SatQuery/examples/end_to_end_integration.py --policy B3`: **exit 0**. Loaded and validated all 3 sample records; selected `HUMAN_REVIEW` for all three at 50 J each; simulated safe return with 0 J return-flight energy because there was no flight displacement.
+  - Restored the integration script’s generated `SatQuery/exports/mission_decision_report.json` after each run; no SatQuery changes are retained.
+- **Outstanding SatQuery findings; do not treat as sign-off:**
+  - The evaluation output observed during the SatQuery suite reported ECE `0.3511` while printing `PASSED (ECE < 0.10, Well-calibrated)`. Source inspection found the status text is hard-coded, so that PASS label is not supported by the metric. SatQuery should compute the status from the measured ECE and investigate the high value before calibration is claimed.
+  - The B2 console heading says “SATQUERY DEEP NEURAL MODEL INVOCATION,” but inspection of `SatQuery/examples/end_to_end_integration.py` found it only reads detector mode metadata and prints the ARES-simulated 40% uncertainty reduction. The example loads prebuilt sample candidates and does not call detector inference for those STRONGER_MODEL decisions. Treat the decision and reduction as ARES simulation, not evidence that SatQuery re-ran the image through a stronger model. The fallback mode is explicitly reported; no `.pth` weights were present in this checkout.
+- **Decision:** Keep `v1.0.0-provisional`. The schema ingestion and both policy examples work, but calibration status reporting and the meaning of STRONGER_MODEL execution need clarification/correction before claiming full model-level integration sign-off.
+- **Next action:** Ask the SatQuery owner to make the ECE status data-driven and accurately label or implement the STRONGER_MODEL inference step, then rerun the evaluation, clean-checkout tests, and B2/B3 examples. Recheck the test count discrepancy when sharing results.
