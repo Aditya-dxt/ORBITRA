@@ -340,3 +340,16 @@ The common utility metric is **weighted uncertainty reduction**: importance weig
   - `ARES` test suite: 74 / 74 passed.
   - End-to-end integration runs (B2 and B3) strictly validate all candidate records against `v1.0.0`.
 - **Interface Status:** Finalized and promoted to **`v1.0.0`**.
+
+### Independent Verification of Schema Promotion — 2026-11-18 (`6fffd26`)
+- **Checkout:** Fast-forwarded `main` to `6fffd26`; began from a clean working tree. Confirmed ARES and SatQuery schema definitions and their interface documents state `v1.0.0`.
+- **Checks actually performed:**
+  - `python -m unittest discover -s SatQuery/tests -v`: **29 run, 28 passed, 1 skipped, 0 failures**. The single skip is the checkpoint discovery test because the local `.pth` weights are absent. The suite also ran the B3 integration and vision evaluation tests; observed held-out ECE `0.0557` with a passing status.
+  - `python -m unittest discover -s ARES/tests -t ARES -v`: **74/74 passed**.
+  - `python SatQuery/examples/end_to_end_integration.py --policy B2`: **exit 0**. All 3 sample candidates validated as `v1.0.0`. The resolver used `DETERMINISTIC_SYNTHETIC` source imagery; fallback re-inference updated the two dispatched candidate states, and the separate ARES reduction remained labeled simulated.
+  - `python SatQuery/examples/run_india_pipeline.py --zone kanpur_bhauti --policy B2 --model deep_siamese`: **exit 0**. Generated 5 Kanpur records, all validated as `v1.0.0`; B2 selected two simulated RECAPTURE and three STRONGER_MODEL actions, and reported safe return with 9.432 Wh return-flight energy and 3.04 Wh remaining.
+  - `python SatQuery/examples/end_to_end_integration.py --candidates SatQuery/exports/candidates_kanpur_bhauti.json --policy B2`: **exit 0**. All 5 Kanpur candidates passed both schemas. STRONGER_MODEL actions resolved to `DISK_FILE_REAL`, ran fallback detector inference on source-image crops, mutated in-memory candidate confidence/uncertainty, and exported measured values separately from the ARES simulated baseline. The integration run selected STRONGER_MODEL for all five and did not displace the simulated drone, so return-flight energy was 0 J.
+  - Independently loaded all 3 checked-in sample records and all 5 generated Kanpur records directly with `ARES.SatQueryCandidateRecord`; each file contained only `v1.0.0` records.
+- **Generated artifacts:** The Kanpur runner and integration example update tracked reports and a visualization. Restored those generated files after recording the observed outputs; no SatQuery files are included in this documentation update.
+- **Verified scope and limitations:** The public handoff fields, strict validation, fallback vision execution, software energy model, and reserve logic passed the checks above. The trained `.pth` checkpoint was absent, so checkpoint-backed neural inference was skipped. Drone flight and recapture behavior remains simulated; only cached Sentinel-2 rasters were used in this checkout.
+- **Interface status:** The coordinated `v1.0.0` promotion is independently verified on this checkout. This confirms software contract compatibility and the documented simulation boundary; it does not constitute physical-flight or trained-checkpoint validation.
