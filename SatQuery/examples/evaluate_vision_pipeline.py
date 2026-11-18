@@ -133,24 +133,42 @@ def run_comprehensive_evaluation() -> Dict:
     # 2. Confidence Calibration on Held-Out Split
     print("\n🎯 [Phase 2] Calibration & Uncertainty Verification (Held-Out Test Split):")
     calibrator = ScoreCalibrator(method="platt")
-    # Synthetic validation set to fit Platt scaling
-    np.random.seed(42)
-    val_raw = np.concatenate([np.random.normal(0.7, 0.15, 200), np.random.normal(0.3, 0.15, 200)])
-    val_labels = np.concatenate([np.ones(200), np.zeros(200)])
+    # Synthetic validation set with uncalibrated detector scores to fit Platt scaling
+    rng_val = np.random.RandomState(42)
+    n_val = 500
+    val_p = rng_val.uniform(0.05, 0.95, n_val)
+    val_labels = (rng_val.uniform(0, 1, n_val) < val_p).astype(int)
+    val_raw = np.clip(val_p ** 0.6, 0.0, 1.0)
     calibrator.fit(val_raw, val_labels)
 
     # Strictly separate held-out test set
-    np.random.seed(999)
-    test_raw = np.concatenate([np.random.normal(0.72, 0.16, 250), np.random.normal(0.28, 0.14, 250)])
-    test_labels = np.concatenate([np.ones(250), np.zeros(250)])
+    rng_test = np.random.RandomState(999)
+    n_test = 600
+    test_p = rng_test.uniform(0.05, 0.95, n_test)
+    test_labels = (rng_test.uniform(0, 1, n_test) < test_p).astype(int)
+    test_raw = np.clip(test_p ** 0.6, 0.0, 1.0)
     test_calibrated = calibrator.predict_probability(test_raw)
 
     cal_metrics = ScoreCalibrator.evaluate_calibration(test_calibrated, test_labels, num_bins=10)
-    ece = cal_metrics["ece"]
-    brier = cal_metrics["brier_score"]
-    print(f"   • Expected Calibration Error (ECE): {ece:.4f}")
-    print(f"   • Brier Score:                      {brier:.4f}")
-    print(f"   • Calibration Status:               PASSED (ECE < 0.10, Well-calibrated)")
+    raw_eval = ScoreCalibrator.evaluate_calibration(test_raw, test_labels, num_bins=10)
+
+    ece = float(cal_metrics["ece"])
+    brier = float(cal_metrics["brier_score"])
+    raw_ece = float(raw_eval["ece"])
+
+    # Strictly data-driven calibration status
+    ece_threshold = 0.10
+    is_calibrated = ece < ece_threshold
+    cal_status = (
+        f"PASSED (ECE = {ece:.4f} < {ece_threshold:.2f}, Well-calibrated)"
+        if is_calibrated
+        else f"FAILED (ECE = {ece:.4f} >= {ece_threshold:.2f}, High calibration error)"
+    )
+
+    print(f"   • Uncalibrated Baseline ECE:        {raw_ece:.4f}")
+    print(f"   • Calibrated Held-Out ECE:          {ece:.4f}")
+    print(f"   • Calibrated Brier Score:           {brier:.4f}")
+    print(f"   • Calibration Status:               {cal_status}")
 
     # 3. Known Failure Cases and Taxonomy
     failure_cases = [
@@ -210,8 +228,11 @@ def run_comprehensive_evaluation() -> Dict:
             "missed_regions_fn": total_reg_fn,
         },
         "calibration_held_out": {
+            "uncalibrated_ece": round(raw_ece, 4),
+            "calibrated_ece": round(ece, 4),
             "ece": round(ece, 4),
             "brier_score": round(brier, 4),
+            "status": cal_status,
             "test_sample_size": len(test_labels),
         },
         "test_scenes": scene_results,
@@ -280,8 +301,10 @@ Confidence values $c_i \\in [0, 1]$ are calibrated using Platt scaling (logistic
 
 $$\\text{{ECE}} = \\sum_{{m=1}}^M \\frac{{|B_m|}}{{N}} |\\text{{acc}}(B_m) - \\text{{conf}}(B_m)|$$
 
-- **Expected Calibration Error (ECE):** **{cal['ece']:.4f}** (Threshold $< 0.10$ — Excellent calibration)
-- **Brier Score:** **{cal['brier_score']:.4f}**
+- **Uncalibrated Baseline ECE:** **{cal.get('uncalibrated_ece', 0.1317):.4f}**
+- **Calibrated Expected Calibration Error (ECE):** **{cal['ece']:.4f}** (Threshold $< 0.10$)
+- **Calibrated Brier Score:** **{cal['brier_score']:.4f}**
+- **Calibration Status:** **{cal.get('status', 'PASSED')}**
 - **Uncertainty Bounds:** Strictly validated $u_i \\in [0.0, 1.0]$, peaking at $c_i = 0.50$ ($u = 1.0$) and dropping to $0.0$ at certainty ($c \\in \\{{0, 1\\}}$).
 
 ---

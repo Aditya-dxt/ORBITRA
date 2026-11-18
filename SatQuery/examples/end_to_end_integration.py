@@ -15,6 +15,7 @@ import json
 import os
 import sys
 from typing import Dict, List, Optional
+import numpy as np
 
 # Add workspace root to sys.path to resolve ARES and SatQuery packages
 REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
@@ -220,26 +221,51 @@ def run_integration(
         })
     print("-" * 95)
 
-    # 7. Concrete STRONGER_MODEL Invocation & Resolution Summary
+    # 7. STRONGER_MODEL Verification: Detector Inference & ARES Simulated Outcome
     stronger_decisions = [r for r in decision_entries if r["action"] == "STRONGER_MODEL"]
     if stronger_decisions:
         print("\n" + "=" * 95)
-        print("🧠 SATQUERY DEEP NEURAL MODEL INVOCATION (STRONGER_MODEL Resolution)")
+        print("🧠 STRONGER_MODEL DISPATCH: SatQuery Vision Re-Inference & ARES Outcome")
         print("=" * 95)
-        print(f"   • Active Execution Mode: {model_info['execution_description']}")
-        print(f"   • Energy Cost Contract:  1,450.0 J per candidate (1,200 J edge compute + 250 J offload comms)")
-        print(f"   • Target Uncertainty:    40% reduction (u_post = u_pre * 0.60)")
+        print(f"   • Active Vision Detector: {deep_det.describe_execution_mode()}")
+        print(f"   • ARES Action Cost Rule:  1,450.0 J (1,200 J edge compute + 250 J offload comms) [ASSUMED]")
+        print(f"   • ARES Policy Assumption: 40% uncertainty reduction (u_post = u_pre * 0.60) [SIMULATED]")
+
+        # Attempt to load source image pair for real patch re-inference
+        from SatQuery.satquery.data.synthetic_sample_data import generate_benchmark_pair
+        from SatQuery.satquery.vision.calibration import binary_entropy_uncertainty
+        source_pair = generate_benchmark_pair(seed=42)
+        img_pre_ref = source_pair["img_pre"]
+        img_post_ref = source_pair["img_post"]
+
         for sd in stronger_decisions:
             cid = sd["candidate_id"]
             c_obj = next((c for c in candidate_states if c.detection.candidate_id == cid), None)
             if c_obj:
                 u_orig = c_obj.detection.uncertainty
-                u_post = round(u_orig * 0.60, 3)
-                print(f"\n   ✓ Candidate '{cid}':")
-                print(f"       Initial State:   Confidence={c_obj.detection.confidence:.3f}, Uncertainty={u_orig:.3f}")
-                print(f"       Inference Mode:  {model_info['mode']} ({model_info['execution_description']})")
-                print(f"       Resolved State:  Uncertainty reduced from {u_orig:.3f} to {u_post:.3f} (40% reduction)")
-                print(f"       Energy Billed:   1,450.0 J (0.403 Wh) [Zero flight energy consumed]")
+                conf_orig = c_obj.detection.confidence
+                bbox = c_obj.detection.region.bbox_pixels
+
+                print(f"\n   ✓ Candidate '{cid}' [Action: STRONGER_MODEL]:")
+                print(f"       [SatQuery Input State]       Confidence={conf_orig:.3f}, Uncertainty={u_orig:.3f}, BBox={bbox}")
+
+                # Real patch crop inference
+                if bbox and len(bbox) == 4:
+                    x1, y1, x2, y2 = bbox
+                    crop_pre = img_pre_ref[y1:y2, x1:x2]
+                    crop_post = img_post_ref[y1:y2, x1:x2]
+                    if crop_pre.size > 0 and crop_post.size > 0:
+                        crop_heatmap, crop_mask = deep_det.detect_changes(crop_pre, crop_post)
+                        crop_score = float(np.mean(crop_heatmap))
+                        crop_conf = float(deep_det.calibrator.predict_probability(crop_score))
+                        crop_unc = binary_entropy_uncertainty(crop_conf)
+                        print(f"       [SatQuery Patch Inference]   Executed on crop {crop_pre.shape[:2]} via '{deep_det.mode}':")
+                        print(f"                                    Re-computed Confidence={crop_conf:.3f}, Re-computed Uncertainty={crop_unc:.3f}")
+
+                # ARES simulated decision outcome
+                u_simulated = round(u_orig * 0.60, 3)
+                print(f"       [ARES Simulated Outcome]     Uncertainty reduced from {u_orig:.3f} to {u_simulated:.3f} (40% theoretical reduction)")
+                print(f"       [ARES Energy Billed]         1,450.0 J (0.403 Wh) [Zero flight energy consumed]")
         print("=" * 95)
 
     # 8. Export Report

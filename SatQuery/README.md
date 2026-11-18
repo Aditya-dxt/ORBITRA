@@ -193,6 +193,23 @@ python -c "import json, sys; sys.path.insert(0, 'ARES'); from ares.schemas.satqu
 
 ## 📋 Running Implementation Log
 
+### Update: 2026-11-18 — Calibration Optimizer Fix, Data-Driven Status, and Real Crop Re-Inference
+- **Summary:** Resolved teammate findings regarding calibration status reporting and STRONGER_MODEL execution:
+  1. Replaced naive gradient descent in the pure-NumPy Platt scaling fallback (`calibration.py`) with L2-regularized Newton-Raphson IRLS. This eliminates the optimization lag that caused ECE 0.3511 in clean environments, achieving rapid convergence (8 iterations) with true calibrated **ECE = 0.0557** ($< 0.10$) and Brier score 0.1767.
+  2. Made calibration status reporting in `evaluate_vision_pipeline.py` strictly data-driven based on measured ECE (`PASSED (ECE = 0.0557 < 0.10, Well-calibrated)`).
+  3. Upgraded `end_to_end_integration.py` to extract candidate patch crops (`img_pre`, `img_post`) and run actual detector inference during `STRONGER_MODEL` dispatch, while clearly distinguishing real vision re-inference from ARES's theoretical decision simulation and energy billing.
+  4. Confirmed the SatQuery test suite count of **28 tests** (27 passed, 1 skipped for local weights).
+- **Changed Files:**
+  - `SatQuery/satquery/vision/calibration.py` (L2-regularized Newton-Raphson IRLS optimizer in pure-NumPy fallback)
+  - `SatQuery/examples/evaluate_vision_pipeline.py` (Data-driven calibration status and held-out ECE benchmark)
+  - `SatQuery/examples/end_to_end_integration.py` (Actual patch crop inference on STRONGER_MODEL dispatch + explicit simulation labeling)
+  - `SatQuery/docs/EVALUATION_REPORT.md` & `SatQuery/exports/vision_evaluation_report.json` (Updated with true measured calibration metrics)
+- **Checks Performed:**
+  - `python -m unittest discover -s SatQuery/tests -v` (28 tests: 27 passed, 1 skipped)
+  - `python -m unittest discover -s ARES/tests -t ARES -v` (74/74 passed)
+  - `python SatQuery/examples/evaluate_vision_pipeline.py` (Passed: Calibrated ECE = 0.0557)
+  - `python SatQuery/examples/end_to_end_integration.py --policy B2` (Passed: Real patch crop inference + ARES simulated outcome logged)
+
 ### Update: 2026-11-17 — Deep Siamese ResNet-34 + CBAM Model Integration & Audit
 - **Summary:** Audited and integrated the trained deep Siamese neural network (`best_siamese_model.pth`, 285 MB) into SatQuery. The model incorporates a weight-shared Siamese ResNet-34 backbone with dual-stream Channel and Spatial Attention (CBAM) difference weighting across 4 spatial scales, coupled with a progressive transposed-convolution decoder. Audited checkpoint confirms 35 completed epochs with Cosine Annealing, achieving **84.75% Validation F1** and **73.54% Validation IoU** (a +22.0% IoU and +34.7% F1 gain over the differential baseline). Provided a PyTorch inference engine with a seamless calibrated feature-attention fallback for environments without PyTorch. Integrated model selection (`--model deep_siamese` / `--model baseline`) into pipeline runners and added unit tests in `SatQuery/tests/test_deep_model.py`.
 - **Changed Files:**

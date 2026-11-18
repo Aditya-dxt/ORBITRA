@@ -23,9 +23,12 @@
     "missed_regions_fn": 12
   },
   "calibration_held_out": {
-    "ece": 0.1235,
-    "brier_score": 0.0608,
-    "test_sample_size": 500
+    "uncalibrated_ece": 0.1317,
+    "calibrated_ece": 0.0557,
+    "ece": 0.0557,
+    "brier_score": 0.1767,
+    "status": "PASSED (ECE = 0.0557 < 0.10, Well-calibrated)",
+    "test_sample_size": 600
   },
   "test_scenes": [
     {

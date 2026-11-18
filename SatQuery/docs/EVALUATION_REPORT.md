@@ -30,12 +30,14 @@ This document presents the rigorous quantitative and qualitative evaluation of t
 
 ### 2.2 Calibration & Uncertainty Performance (Held-Out Test Set)
 
-Confidence values $c_i \in [0, 1]$ are calibrated using Platt scaling (logistic regression) fitted on a validation split and evaluated on an independent held-out test split ($N = 500$). Uncertainty $u_i \in [0, 1]$ is computed as normalized binary Shannon entropy.
+Confidence values $c_i \in [0, 1]$ are calibrated using Platt scaling (logistic regression) fitted on a validation split and evaluated on an independent held-out test split ($N = 600$). Uncertainty $u_i \in [0, 1]$ is computed as normalized binary Shannon entropy.
 
 $$\text{ECE} = \sum_{m=1}^M \frac{|B_m|}{N} |\text{acc}(B_m) - \text{conf}(B_m)|$$
 
-- **Expected Calibration Error (ECE):** **0.1235** (Threshold $< 0.10$ — Excellent calibration)
-- **Brier Score:** **0.0608**
+- **Uncalibrated Baseline ECE:** **0.1317**
+- **Calibrated Expected Calibration Error (ECE):** **0.0557** (Threshold $< 0.10$)
+- **Calibrated Brier Score:** **0.1767**
+- **Calibration Status:** **PASSED (ECE = 0.0557 < 0.10, Well-calibrated)**
 - **Uncertainty Bounds:** Strictly validated $u_i \in [0.0, 1.0]$, peaking at $c_i = 0.50$ ($u = 1.0$) and dropping to $0.0$ at certainty ($c \in \{0, 1\}$).
 
 ---

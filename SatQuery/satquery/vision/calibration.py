@@ -22,29 +22,55 @@ except (ImportError, ModuleNotFoundError):
     SKLEARN_AVAILABLE = False
 
     class LogisticRegression:  # type: ignore[no-redef]
-        """Pure NumPy fallback for 1D Platt scaling when scikit-learn is not installed."""
+        """Pure NumPy fallback for 1D Platt scaling when scikit-learn is not installed.
+        
+        Uses Iteratively Reweighted Least Squares (IRLS / Newton-Raphson) with L2 regularization
+        to achieve rapid, exact convergence in 5-15 iterations.
+        """
 
-        def __init__(self, solver: str = "lbfgs", max_iter: int = 200, C: float = 1.0):
+        def __init__(self, solver: str = "lbfgs", max_iter: int = 100, C: float = 1.0):
             self.max_iter = max_iter
-            self.C = C
+            self.C = max(float(C), 1e-4)
             self.coef_ = np.array([[1.0]])
             self.intercept_ = np.array([0.0])
 
         def fit(self, X: np.ndarray, y: np.ndarray) -> "LogisticRegression":
             x = np.asarray(X, dtype=np.float64).ravel()
             target = np.asarray(y, dtype=np.float64).ravel()
-            w, b = 1.0, 0.0
-            lr = 0.05
             n = len(x)
+            if n == 0:
+                return self
+
+            # Design matrix with bias column: [x, 1]
+            design = np.column_stack([x, np.ones_like(x)])
+            beta = np.zeros(2, dtype=np.float64)  # [w, b]
+            l2_reg = 1.0 / (self.C * n)
+
             for _ in range(self.max_iter):
-                preds = 1.0 / (1.0 + np.exp(-np.clip(w * x + b, -25.0, 25.0)))
-                err = preds - target
-                grad_w = np.sum(err * x) / n + (w / self.C) * 0.01
-                grad_b = np.sum(err) / n
-                w -= lr * grad_w
-                b -= lr * grad_b
-            self.coef_ = np.array([[w]])
-            self.intercept_ = np.array([b])
+                logits = np.clip(design @ beta, -25.0, 25.0)
+                probs = 1.0 / (1.0 + np.exp(-logits))
+                weights = np.clip(probs * (1.0 - probs), 1e-5, None)
+
+                # Gradient with L2 regularization on weight w only
+                grad = (design.T @ (probs - target)) / n
+                grad[0] += l2_reg * beta[0]
+
+                # Hessian with L2 regularization
+                hessian = (design.T * weights) @ design / n
+                hessian[0, 0] += l2_reg
+                hessian += 1e-5 * np.eye(2)
+
+                try:
+                    step = np.linalg.solve(hessian, grad)
+                except np.linalg.LinAlgError:
+                    step = grad * 0.1
+
+                beta -= step
+                if np.linalg.norm(step) < 1e-6:
+                    break
+
+            self.coef_ = np.array([[beta[0]]])
+            self.intercept_ = np.array([beta[1]])
             return self
 
         def predict_proba(self, X: np.ndarray) -> np.ndarray:
