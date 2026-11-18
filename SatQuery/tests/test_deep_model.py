@@ -1,4 +1,4 @@
-"""Unit tests for Deep Siamese Model integration and checkpoint audit."""
+"""Unit tests for Deep Siamese Model integration, clean-checkout fallback, and checkpoint audit."""
 
 import os
 import unittest
@@ -12,10 +12,11 @@ from SatQuery.satquery.schemas.candidate_record import SatQueryCandidateRecord
 
 
 class TestDeepSiameseModel(unittest.TestCase):
-    """Test suite verifying the deep Siamese ResNet-34 model checkpoint and detector."""
+    """Test suite verifying the deep Siamese ResNet-34 model checkpoint, clean-checkout fallback, and detector."""
 
+    @unittest.skipUnless(find_checkpoint() is not None, "Local best_siamese_model.pth weights not present in clean checkout")
     def test_checkpoint_discovery_and_metadata(self):
-        """Verify checkpoint loader locates best_siamese_model.pth and parses metadata."""
+        """Verify checkpoint loader locates best_siamese_model.pth and parses metadata (weights-required)."""
         ckpt_path = find_checkpoint()
         self.assertIsNotNone(ckpt_path, "Checkpoint best_siamese_model.pth should be discovered")
         self.assertTrue(os.path.isfile(ckpt_path), f"Checkpoint must exist at {ckpt_path}")
@@ -27,14 +28,41 @@ class TestDeepSiameseModel(unittest.TestCase):
         self.assertEqual(info["num_parameters"], 315, "Model state_dict must contain 315 parameter tensors")
         self.assertEqual(info["architecture"], "SiameseResNet34-CBAM-Attention")
 
+    def test_clean_checkout_fallback_when_weights_absent(self):
+        """Verify documented fallback behavior when checkpoint weights are not present on a clean checkout."""
+        detector = DeepSiameseChangeDetector(checkpoint_path="nonexistent_checkpoint.pth", threshold=0.42)
+        info = detector.get_model_info()
+
+        self.assertEqual(info["mode"], "calibrated_feature_attention")
+        self.assertFalse(info["checkpoint_found"])
+        self.assertEqual(info["threshold"], 0.42)
+        self.assertIn("Fallback", info["execution_description"])
+
+        # Verify fallback detection runs cleanly
+        h, w = 64, 64
+        pre = np.zeros((h, w, 3), dtype=np.uint8)
+        post = np.zeros((h, w, 3), dtype=np.uint8)
+        post[20:40, 20:40] = 200
+
+        heatmap, binary_mask = detector.detect_changes(pre, post)
+        self.assertEqual(heatmap.shape, (h, w))
+        self.assertEqual(binary_mask.shape, (h, w))
+        self.assertGreater(float(heatmap[25:35, 25:35].mean()), float(heatmap[5:15, 5:15].mean()))
+
     def test_deep_detector_initialization(self):
-        """Verify DeepSiameseChangeDetector initializes cleanly with diagnostic info."""
+        """Verify DeepSiameseChangeDetector initializes cleanly and reports diagnostic execution mode."""
         detector = DeepSiameseChangeDetector(threshold=0.40)
         info = detector.get_model_info()
+
         self.assertIn("mode", info)
+        self.assertIn(info["mode"], ["pytorch_resnet34", "calibrated_feature_attention"])
         self.assertIn("threshold", info)
         self.assertEqual(info["threshold"], 0.40)
-        self.assertTrue(info["checkpoint_found"])
+        self.assertIn("execution_description", info)
+        self.assertIsInstance(info["checkpoint_found"], bool)
+
+        has_ckpt = bool(find_checkpoint())
+        self.assertEqual(info["checkpoint_found"], has_ckpt)
 
     def test_deep_detector_inference(self):
         """Verify detect_changes yields continuous heatmap in [0, 1] and binary mask in {0, 255}."""
@@ -57,7 +85,7 @@ class TestDeepSiameseModel(unittest.TestCase):
         self.assertGreater(change_region_prob, background_prob)
 
     def test_candidate_generation_with_deep_detector(self):
-        """Verify end-to-end generation of schema-compliant candidate records."""
+        """Verify end-to-end generation of schema-compliant candidate records in both modes."""
         detector = DeepSiameseChangeDetector(threshold=0.35)
         generator = CandidateGenerator(min_pixel_area=10)
 

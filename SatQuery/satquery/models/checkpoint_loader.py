@@ -39,23 +39,22 @@ class _TorchZipUnpickler(pickle.Unpickler):
 def find_checkpoint(custom_path: Optional[str] = None) -> Optional[str]:
     """Locate the best Siamese model checkpoint file.
 
-    Checks:
-    1. custom_path (if provided and exists)
-    2. SatQuery/models/checkpoints/best_siamese_model.pth
-    3. C:\\Users\\adity\\Downloads\\best_siamese_model.pth
-    4. Current working directory ./best_siamese_model.pth
+    If custom_path is provided, checks strictly that specified path.
+    If custom_path is None, checks standard discovery locations:
+    1. SatQuery/models/checkpoints/best_siamese_model.pth
+    2. User's Downloads directory (Downloads/best_siamese_model.pth)
+    3. Current working directory (./best_siamese_model.pth)
     """
-    candidates = []
-    if custom_path:
-        candidates.append(custom_path)
+    if custom_path is not None:
+        return os.path.abspath(custom_path) if os.path.isfile(custom_path) else None
 
     base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-    candidates.extend([
+    candidates = [
         os.path.join(base_dir, "models", "checkpoints", "best_siamese_model.pth"),
         os.path.join(os.path.expanduser("~"), "Downloads", "best_siamese_model.pth"),
         os.path.join(r"C:\Users\adity\Downloads", "best_siamese_model.pth"),
         os.path.join(".", "best_siamese_model.pth"),
-    ])
+    ]
 
     for path in candidates:
         if path and os.path.isfile(path):

@@ -30,6 +30,7 @@ class DeepSiameseChangeDetector:
         threshold: float = 0.45,
         min_contour_area: int = 20,
         device: str = "cpu",
+        force_fallback: bool = False,
     ):
         """
         Args:
@@ -37,13 +38,14 @@ class DeepSiameseChangeDetector:
             threshold: Probability threshold for binary candidate segmentation.
             min_contour_area: Minimum connected component area in pixels.
             device: 'cpu' or 'cuda' for PyTorch inference.
+            force_fallback: If True, forces calibrated feature attention fallback even if weights exist.
         """
         self.threshold = threshold
         self.min_contour_area = min_contour_area
         self.device = device
         self.calibrator = ScoreCalibrator()
 
-        self.checkpoint_path = find_checkpoint(checkpoint_path)
+        self.checkpoint_path = None if force_fallback else find_checkpoint(checkpoint_path)
         self.model_info: Dict[str, Any] = {}
 
         if self.checkpoint_path and os.path.isfile(self.checkpoint_path):
@@ -68,14 +70,26 @@ class DeepSiameseChangeDetector:
 
         self.mode = "pytorch_resnet34" if self.use_pytorch else "calibrated_feature_attention"
 
+    def describe_execution_mode(self) -> str:
+        """Human-readable explanation of whether PyTorch neural weights or fallback is active."""
+        if self.mode == "pytorch_resnet34":
+            ckpt_name = os.path.basename(self.checkpoint_path) if self.checkpoint_path else "weights"
+            return f"PyTorch Neural Inference (Active: ResNet-34 CBAM using '{ckpt_name}' on {self.device})"
+        elif self.checkpoint_path and not TORCH_AVAILABLE:
+            ckpt_name = os.path.basename(self.checkpoint_path)
+            return f"Calibrated Feature Attention Fallback (weights '{ckpt_name}' present, PyTorch uninstalled)"
+        else:
+            return "Calibrated Feature Attention Fallback (Clean checkout: .pth weights absent)"
+
     def get_model_info(self) -> Dict[str, Any]:
         """Return diagnostic and audit metadata of the active change detection model."""
         info = {
             "mode": self.mode,
+            "execution_description": self.describe_execution_mode(),
             "threshold": self.threshold,
             "min_contour_area": self.min_contour_area,
             "torch_available": TORCH_AVAILABLE,
-            "checkpoint_found": bool(self.checkpoint_path),
+            "checkpoint_found": bool(self.checkpoint_path and os.path.isfile(self.checkpoint_path)),
         }
         if self.model_info:
             info.update(self.model_info)

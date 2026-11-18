@@ -111,12 +111,17 @@ class SatQueryPipeline:
                 ground_truth_boxes=ground_truth_boxes,
             )
 
+        exec_desc = getattr(self.detector, "describe_execution_mode", lambda: "Baseline Differential Detector")()
+        mode_str = getattr(self.detector, "mode", "baseline_differential")
+
         return {
             "candidates": candidates,
             "candidate_dicts": candidate_dicts,
             "heatmap": heatmap,
             "binary_mask": binary_mask,
             "metrics": metrics,
+            "model_mode": mode_str,
+            "execution_description": exec_desc,
         }
 
     def export_candidates_to_json(
