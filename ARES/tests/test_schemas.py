@@ -1,6 +1,6 @@
 """Unit tests for schema validation and candidate state tracking.
 
-Updated to reflect agreed provisional interface (v1.0.0-provisional):
+Updated to reflect agreed provisional interface (v1.0.0):
 - confidence is calibrated P(real change) ∈ [0,1]
 - uncertainty is normalized binary Shannon entropy of confidence:
       u = -[p·log₂(p) + (1-p)·log₂(1-p)]
@@ -42,7 +42,7 @@ class TestSchemas(unittest.TestCase):
     def setUp(self):
         # conf=0.85 -> h(0.85) ≈ 0.610; using u=0.61 (diff=0.000, within ±0.15)
         self.valid_record_dict = {
-            "schema_version": "v1.0.0-provisional",
+            "schema_version": "v1.0.0",
             "candidate_id": "cand_sq_001",
             "image_pair_id": "pair_01",
             "timestamp": "2026-11-16T09:00:00Z",
@@ -293,7 +293,7 @@ class TestSchemas(unittest.TestCase):
         """
         # conf=0.70 -> h(0.70) ≈ 0.881; u=0.88 (diff=0.001, within ±0.15)
         record = SatQueryCandidateRecord(
-            schema_version="v1.0.0-provisional",
+            schema_version="v1.0.0",
             candidate_id="cand_coord_example_001",
             image_pair_id="pair_beijing_nov2026_01",
             timestamp="2026-11-17T06:00:00Z",

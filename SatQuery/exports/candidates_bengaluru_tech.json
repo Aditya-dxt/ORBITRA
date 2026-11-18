@@ -1,6 +1,6 @@
 [
   {
-    "schema_version": "v1.0.0-provisional",
+    "schema_version": "v1.0.0",
     "candidate_id": "cand_sq_levir_001",
     "image_pair_id": "pair_sentinel2_bengaluru_tech",
     "timestamp": "2024-01-23T05:11:19.024000Z",
@@ -28,7 +28,7 @@
     }
   },
   {
-    "schema_version": "v1.0.0-provisional",
+    "schema_version": "v1.0.0",
     "candidate_id": "cand_sq_levir_002",
     "image_pair_id": "pair_sentinel2_bengaluru_tech",
     "timestamp": "2024-01-23T05:11:19.024000Z",
@@ -56,7 +56,7 @@
     }
   },
   {
-    "schema_version": "v1.0.0-provisional",
+    "schema_version": "v1.0.0",
     "candidate_id": "cand_sq_levir_003",
     "image_pair_id": "pair_sentinel2_bengaluru_tech",
     "timestamp": "2024-01-23T05:11:19.024000Z",
@@ -84,7 +84,7 @@
     }
   },
   {
-    "schema_version": "v1.0.0-provisional",
+    "schema_version": "v1.0.0",
     "candidate_id": "cand_sq_levir_004",
     "image_pair_id": "pair_sentinel2_bengaluru_tech",
     "timestamp": "2024-01-23T05:11:19.024000Z",
@@ -112,7 +112,7 @@
     }
   },
   {
-    "schema_version": "v1.0.0-provisional",
+    "schema_version": "v1.0.0",
     "candidate_id": "cand_sq_levir_005",
     "image_pair_id": "pair_sentinel2_bengaluru_tech",
     "timestamp": "2024-01-23T05:11:19.024000Z",
@@ -140,7 +140,7 @@
     }
   },
   {
-    "schema_version": "v1.0.0-provisional",
+    "schema_version": "v1.0.0",
     "candidate_id": "cand_sq_levir_006",
     "image_pair_id": "pair_sentinel2_bengaluru_tech",
     "timestamp": "2024-01-23T05:11:19.024000Z",
@@ -168,7 +168,7 @@
     }
   },
   {
-    "schema_version": "v1.0.0-provisional",
+    "schema_version": "v1.0.0",
     "candidate_id": "cand_sq_levir_007",
     "image_pair_id": "pair_sentinel2_bengaluru_tech",
     "timestamp": "2024-01-23T05:11:19.024000Z",
@@ -196,7 +196,7 @@
     }
   },
   {
-    "schema_version": "v1.0.0-provisional",
+    "schema_version": "v1.0.0",
     "candidate_id": "cand_sq_levir_008",
     "image_pair_id": "pair_sentinel2_bengaluru_tech",
     "timestamp": "2024-01-23T05:11:19.024000Z",
@@ -224,7 +224,7 @@
     }
   },
   {
-    "schema_version": "v1.0.0-provisional",
+    "schema_version": "v1.0.0",
     "candidate_id": "cand_sq_levir_009",
     "image_pair_id": "pair_sentinel2_bengaluru_tech",
     "timestamp": "2024-01-23T05:11:19.024000Z",
@@ -252,7 +252,7 @@
     }
   },
   {
-    "schema_version": "v1.0.0-provisional",
+    "schema_version": "v1.0.0",
     "candidate_id": "cand_sq_levir_010",
     "image_pair_id": "pair_sentinel2_bengaluru_tech",
     "timestamp": "2024-01-23T05:11:19.024000Z",
@@ -280,7 +280,7 @@
     }
   },
   {
-    "schema_version": "v1.0.0-provisional",
+    "schema_version": "v1.0.0",
     "candidate_id": "cand_sq_levir_011",
     "image_pair_id": "pair_sentinel2_bengaluru_tech",
     "timestamp": "2024-01-23T05:11:19.024000Z",
@@ -308,7 +308,7 @@
     }
   },
   {
-    "schema_version": "v1.0.0-provisional",
+    "schema_version": "v1.0.0",
     "candidate_id": "cand_sq_levir_012",
     "image_pair_id": "pair_sentinel2_bengaluru_tech",
     "timestamp": "2024-01-23T05:11:19.024000Z",
@@ -336,7 +336,7 @@
     }
   },
   {
-    "schema_version": "v1.0.0-provisional",
+    "schema_version": "v1.0.0",
     "candidate_id": "cand_sq_levir_013",
     "image_pair_id": "pair_sentinel2_bengaluru_tech",
     "timestamp": "2024-01-23T05:11:19.024000Z",
@@ -364,7 +364,7 @@
     }
   },
   {
-    "schema_version": "v1.0.0-provisional",
+    "schema_version": "v1.0.0",
     "candidate_id": "cand_sq_levir_014",
     "image_pair_id": "pair_sentinel2_bengaluru_tech",
     "timestamp": "2024-01-23T05:11:19.024000Z",
@@ -392,7 +392,7 @@
     }
   },
   {
-    "schema_version": "v1.0.0-provisional",
+    "schema_version": "v1.0.0",
     "candidate_id": "cand_sq_levir_015",
     "image_pair_id": "pair_sentinel2_bengaluru_tech",
     "timestamp": "2024-01-23T05:11:19.024000Z",
@@ -420,7 +420,7 @@
     }
   },
   {
-    "schema_version": "v1.0.0-provisional",
+    "schema_version": "v1.0.0",
     "candidate_id": "cand_sq_levir_016",
     "image_pair_id": "pair_sentinel2_bengaluru_tech",
     "timestamp": "2024-01-23T05:11:19.024000Z",
@@ -448,7 +448,7 @@
     }
   },
   {
-    "schema_version": "v1.0.0-provisional",
+    "schema_version": "v1.0.0",
     "candidate_id": "cand_sq_levir_017",
     "image_pair_id": "pair_sentinel2_bengaluru_tech",
     "timestamp": "2024-01-23T05:11:19.024000Z",
@@ -476,7 +476,7 @@
     }
   },
   {
-    "schema_version": "v1.0.0-provisional",
+    "schema_version": "v1.0.0",
     "candidate_id": "cand_sq_levir_018",
     "image_pair_id": "pair_sentinel2_bengaluru_tech",
     "timestamp": "2024-01-23T05:11:19.024000Z",
@@ -504,7 +504,7 @@
     }
   },
   {
-    "schema_version": "v1.0.0-provisional",
+    "schema_version": "v1.0.0",
     "candidate_id": "cand_sq_levir_019",
     "image_pair_id": "pair_sentinel2_bengaluru_tech",
     "timestamp": "2024-01-23T05:11:19.024000Z",
@@ -532,7 +532,7 @@
     }
   },
   {
-    "schema_version": "v1.0.0-provisional",
+    "schema_version": "v1.0.0",
     "candidate_id": "cand_sq_levir_020",
     "image_pair_id": "pair_sentinel2_bengaluru_tech",
     "timestamp": "2024-01-23T05:11:19.024000Z",
@@ -560,7 +560,7 @@
     }
   },
   {
-    "schema_version": "v1.0.0-provisional",
+    "schema_version": "v1.0.0",
     "candidate_id": "cand_sq_levir_021",
     "image_pair_id": "pair_sentinel2_bengaluru_tech",
     "timestamp": "2024-01-23T05:11:19.024000Z",
@@ -588,7 +588,7 @@
     }
   },
   {
-    "schema_version": "v1.0.0-provisional",
+    "schema_version": "v1.0.0",
     "candidate_id": "cand_sq_levir_022",
     "image_pair_id": "pair_sentinel2_bengaluru_tech",
     "timestamp": "2024-01-23T05:11:19.024000Z",
@@ -616,7 +616,7 @@
     }
   },
   {
-    "schema_version": "v1.0.0-provisional",
+    "schema_version": "v1.0.0",
     "candidate_id": "cand_sq_levir_023",
     "image_pair_id": "pair_sentinel2_bengaluru_tech",
     "timestamp": "2024-01-23T05:11:19.024000Z",
@@ -644,7 +644,7 @@
     }
   },
   {
-    "schema_version": "v1.0.0-provisional",
+    "schema_version": "v1.0.0",
     "candidate_id": "cand_sq_levir_024",
     "image_pair_id": "pair_sentinel2_bengaluru_tech",
     "timestamp": "2024-01-23T05:11:19.024000Z",
@@ -672,7 +672,7 @@
     }
   },
   {
-    "schema_version": "v1.0.0-provisional",
+    "schema_version": "v1.0.0",
     "candidate_id": "cand_sq_levir_025",
     "image_pair_id": "pair_sentinel2_bengaluru_tech",
     "timestamp": "2024-01-23T05:11:19.024000Z",
@@ -700,7 +700,7 @@
     }
   },
   {
-    "schema_version": "v1.0.0-provisional",
+    "schema_version": "v1.0.0",
     "candidate_id": "cand_sq_levir_026",
     "image_pair_id": "pair_sentinel2_bengaluru_tech",
     "timestamp": "2024-01-23T05:11:19.024000Z",
@@ -728,7 +728,7 @@
     }
   },
   {
-    "schema_version": "v1.0.0-provisional",
+    "schema_version": "v1.0.0",
     "candidate_id": "cand_sq_levir_027",
     "image_pair_id": "pair_sentinel2_bengaluru_tech",
     "timestamp": "2024-01-23T05:11:19.024000Z",
@@ -756,7 +756,7 @@
     }
   },
   {
-    "schema_version": "v1.0.0-provisional",
+    "schema_version": "v1.0.0",
     "candidate_id": "cand_sq_levir_028",
     "image_pair_id": "pair_sentinel2_bengaluru_tech",
     "timestamp": "2024-01-23T05:11:19.024000Z",

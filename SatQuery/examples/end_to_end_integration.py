@@ -2,7 +2,7 @@
 
 Demonstrates:
 1. Loading SatQuery exported candidate records (or generating live candidates)
-2. Validating against the agreed SatQueryCandidateRecord schema (v1.0.0-provisional)
+2. Validating against the agreed SatQueryCandidateRecord schema (v1.0.0)
 3. Ingesting into ARES candidate state manager (AresCandidateState)
 4. Decorating with decoupled mission importance scoring
 5. Applying ARES policies (B0, B1, B2, or B3) under defined energy budget and return reserve
@@ -88,7 +88,7 @@ def run_integration(
     print("🛰️  ORBITRA JOINT INTEGRATION: SatQuery (Vision) -> ARES (Decision & Energy)")
     print("=" * 80)
     print("📋 [Demonstration Architecture Scope]")
-    print("   • Schema Interface:      SatQueryCandidateRecord (v1.0.0-provisional)")
+    print("   • Schema Interface:      SatQueryCandidateRecord (v1.0.0)")
     print("   • Candidate Management:  AresCandidateState with decoupled importance & energy guards")
     print("   • Vision Re-Inference:   Live patch inference on resolved candidate source imagery")
     print("   • Energy Accounting:     ARES discrete-event ledger with 1,450 J STRONGER_MODEL billing")
@@ -118,7 +118,7 @@ def run_integration(
     print(f"   • Neural Checkpoint Found: {model_info['checkpoint_found']}")
 
     # 2. Validate Against Interface Schema
-    print("\n🔍 [Stage 2] Validating records against schema contract (v1.0.0-provisional)...")
+    print("\n🔍 [Stage 2] Validating records against schema contract (v1.0.0)...")
     validated_records = []
     for item in raw_data:
         # Validate through SatQuery schema
@@ -357,7 +357,8 @@ if __name__ == "__main__":
         from SatQuery.satquery.data.synthetic_sample_data import generate_benchmark_pair
         print(f"Generating candidates using {args.model.upper()}...")
         p = SatQueryPipeline(model_type=args.model)
-        pre, post, gt_mask, gt_boxes = generate_benchmark_pair("levir")
+        scene = generate_benchmark_pair(seed=42)
+        pre, post, gt_mask, gt_boxes = scene["img_pre"], scene["img_post"], scene["mask_gt"], scene["ground_truth_boxes"]
         res = p.process_pair(pre, post, image_pair_id="pair_benchmark_live", ground_truth_mask=gt_mask, ground_truth_boxes=gt_boxes)
         p.export_candidates_to_json(res["candidates"], candidates_path)
 

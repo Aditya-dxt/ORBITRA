@@ -112,7 +112,7 @@ class TestDeepSiameseModel(unittest.TestCase):
             self.assertLessEqual(cand.confidence, 1.0)
             self.assertGreaterEqual(cand.uncertainty, 0.0)
             self.assertLessEqual(cand.uncertainty, 1.0)
-            self.assertEqual(cand.schema_version, "v1.0.0-provisional")
+            self.assertEqual(cand.schema_version, "v1.0.0")
 
 
 if __name__ == "__main__":

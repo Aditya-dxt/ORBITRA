@@ -16,7 +16,7 @@ class TestCandidateRecordSchema(unittest.TestCase):
 
     def setUp(self):
         self.valid_record_dict = {
-            "schema_version": "v1.0.0-provisional",
+            "schema_version": "v1.0.0",
             "candidate_id": "cand_sq_levir_042_001",
             "image_pair_id": "pair_levir_test_042",
             "timestamp": "2026-11-16T10:30:00Z",

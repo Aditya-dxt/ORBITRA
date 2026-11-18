@@ -34,7 +34,7 @@ class TestB4Policy(unittest.TestCase):
         z: float = 50.0,
     ) -> AresCandidateState:
         record = SatQueryCandidateRecord(
-            schema_version="v1.0.0-provisional",
+            schema_version="v1.0.0",
             candidate_id=cid,
             image_pair_id="pair_b4_test",
             timestamp="2026-11-17T09:00:00Z",

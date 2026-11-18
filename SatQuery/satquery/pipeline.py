@@ -36,7 +36,7 @@ class SatQueryPipeline:
         min_pixel_area: int = 25,
         georeferencer: Optional[MissionGeoreferencer] = None,
         calibrator: Optional[ScoreCalibrator] = None,
-        schema_version: str = "v1.0.0-provisional",
+        schema_version: str = "v1.0.0",
         model_type: str = "baseline",
         checkpoint_path: Optional[str] = None,
         detector: Optional[Union[BaselineChangeDetector, DeepSiameseChangeDetector]] = None,

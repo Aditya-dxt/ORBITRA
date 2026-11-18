@@ -1,12 +1,10 @@
-"""Provisional schema validation for SatQuery candidate change records.
+"""Production schema validation for SatQuery candidate change records.
 
 Strictly encapsulates fields supplied by the SatQuery engine.
 
-INTERFACE STATUS: v1.0.0-provisional
+INTERFACE STATUS: v1.0.0
   Fields, semantics, and coordinate conventions below reflect the agreed
-  provisional interface as of 2026-11-17 (see ARES/docs/INTERFACE_PROPOSAL.md).
-  This schema remains PROVISIONAL until joint end-to-end integration with
-  SatQuery is completed and both module leads sign off on v1.0.0.
+  v1.0.0 interface signed off jointly by the SatQuery and ARES module leads.
 
 OWNERSHIP RULE:
   This module validates ONLY fields that SatQuery owns and supplies.
@@ -147,14 +145,14 @@ class SatQueryCandidateRecord(BaseModel):
     Unknown extra fields are REJECTED (extra='forbid') to prevent silent
     schema drift between modules.
 
-    SCHEMA VERSION: v1.0.0-provisional
-      Remains provisional until joint end-to-end integration is completed.
-      Both module leads must agree before promoting to v1.0.0.
+    SCHEMA VERSION: v1.0.0
+      Officially promoted and signed off by both module leads following
+      joint end-to-end integration and verification.
     """
     model_config = ConfigDict(extra="forbid")
 
     schema_version: str = Field(
-        default="v1.0.0-provisional",
+        default="v1.0.0",
         description="Agreed interface schema version (SemVer)"
     )
     candidate_id: str = Field(
@@ -204,7 +202,7 @@ class SatQueryCandidateRecord(BaseModel):
         if not v.startswith("v1."):
             raise ValueError(
                 f"Unsupported schema version: '{v}'. "
-                f"Expected v1.x (current agreed version: v1.0.0-provisional)."
+                f"Expected v1.x (current agreed version: v1.0.0)."
             )
         return v
 

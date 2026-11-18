@@ -32,7 +32,7 @@ class TestB2Policy(unittest.TestCase):
 
     def _create_candidate(self, cid: str, conf: float, unc: float, tier: ImportanceTier, x: float = 200.0) -> AresCandidateState:
         record = SatQueryCandidateRecord(
-            schema_version="v1.0.0-provisional",
+            schema_version="v1.0.0",
             candidate_id=cid,
             image_pair_id="pair_01",
             timestamp="2026-11-16T09:00:00Z",

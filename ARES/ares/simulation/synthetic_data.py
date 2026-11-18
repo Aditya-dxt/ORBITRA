@@ -18,7 +18,7 @@ def generate_synthetic_candidate_records() -> List[SatQueryCandidateRecord]:
     """Generates a reproducible set of synthetic candidate change records for simulation."""
     return [
         SatQueryCandidateRecord(
-            schema_version="v1.0.0-provisional",
+            schema_version="v1.0.0",
             candidate_id="cand_synth_001",
             image_pair_id="pair_synth_cartosat_risat_01",
             timestamp="2026-11-16T09:00:00Z",
@@ -32,7 +32,7 @@ def generate_synthetic_candidate_records() -> List[SatQueryCandidateRecord]:
             )
         ),
         SatQueryCandidateRecord(
-            schema_version="v1.0.0-provisional",
+            schema_version="v1.0.0",
             candidate_id="cand_synth_002",
             image_pair_id="pair_synth_cartosat_risat_01",
             timestamp="2026-11-16T09:01:00Z",
@@ -46,7 +46,7 @@ def generate_synthetic_candidate_records() -> List[SatQueryCandidateRecord]:
             )
         ),
         SatQueryCandidateRecord(
-            schema_version="v1.0.0-provisional",
+            schema_version="v1.0.0",
             candidate_id="cand_synth_003",
             image_pair_id="pair_synth_cartosat_risat_01",
             timestamp="2026-11-16T09:02:00Z",
@@ -60,7 +60,7 @@ def generate_synthetic_candidate_records() -> List[SatQueryCandidateRecord]:
             )
         ),
         SatQueryCandidateRecord(
-            schema_version="v1.0.0-provisional",
+            schema_version="v1.0.0",
             candidate_id="cand_synth_004",
             image_pair_id="pair_synth_cartosat_risat_01",
             timestamp="2026-11-16T09:03:00Z",
@@ -74,7 +74,7 @@ def generate_synthetic_candidate_records() -> List[SatQueryCandidateRecord]:
             )
         ),
         SatQueryCandidateRecord(
-            schema_version="v1.0.0-provisional",
+            schema_version="v1.0.0",
             candidate_id="cand_synth_005",
             image_pair_id="pair_synth_cartosat_risat_01",
             timestamp="2026-11-16T09:04:00Z",

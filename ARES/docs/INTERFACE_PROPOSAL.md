@@ -1,14 +1,13 @@
-# SatQuery-to-ARES Candidate Record Interface Proposal
+# SatQuery-to-ARES Candidate Record Interface Specification
 
-**Version:** `v1.0.0-provisional`  
-**Status:** Provisional — Fields and semantics agreed 2026-11-17; pending joint end-to-end integration  
-**Authors:** ARES Module Lead (joint agreement with SatQuery Lead)
+**Version:** `v1.0.0`  
+**Status:** Promoted to v1.0.0 — Signed off by SatQuery and ARES Leads following joint end-to-end verification  
+**Authors:** ARES Module Lead & SatQuery Module Lead
 
-> [!IMPORTANT]
-> This schema is **provisional**. It reflects the agreed starting point for
-> independent parallel development. It must not be called finalized until both
-> module leads complete joint end-to-end integration and promote the version to
-> `v1.0.0` by mutual agreement.
+> [!NOTE]
+> This schema is **promoted to v1.0.0**. Both module leads have completed joint
+> end-to-end integration and verification on real Sentinel-2 and benchmark datasets,
+> confirming schema compatibility, energy kinematics, and reserve safety.
 
 ---
 
@@ -20,7 +19,7 @@ Architectural ownership rules:
 1. SatQuery produces candidate change records with detection metadata, calibrated confidence, and normalized uncertainty.
 2. ARES ingests SatQuery records, validates schema compliance, and decorates them with mission importance, lifecycle state, and energy decisions.
 3. Neither module mutates fields owned by the other.
-4. The schema version remains `v1.0.0-provisional` until joint integration is complete.
+4. The schema version is `v1.0.0`.
 
 ---
 
@@ -28,7 +27,7 @@ Architectural ownership rules:
 
 | Field | Type | Owner | Description | Agreed Semantics |
 |-------|------|-------|-------------|-----------------|
-| `schema_version` | `str` | Shared | SemVer interface version | `"v1.0.0-provisional"` until joint integration |
+| `schema_version` | `str` | Shared | SemVer interface version | `"v1.0.0"` |
 | `candidate_id` | `str` | SatQuery | Unique candidate detection ID | Non-empty string |
 | `image_pair_id` | `str` | SatQuery | Identifier of the bi-temporal image pair | Non-empty string |
 | `timestamp` | `str` | SatQuery | Detection timestamp | ISO-8601 UTC with explicit `Z` or `+00:00` designator |
@@ -129,7 +128,7 @@ $$\Delta\text{lon} \approx \frac{245.5}{111{,}320 \times \cos(39.9°)} \approx 0
 
 ```json
 {
-  "schema_version": "v1.0.0-provisional",
+  "schema_version": "v1.0.0",
   "candidate_id": "cand_sq_20261117_001",
   "image_pair_id": "pair_beijing_nov2026_01",
   "timestamp": "2026-11-17T06:00:00Z",
@@ -190,7 +189,7 @@ The following items are documented assumptions, not yet validated by joint testi
 | Missing-value fallback vs. strict validation | Agreed strict fail-fast for `local_grid`, timestamp, confidence, uncertainty |
 
 **Schema version transitions:**
-- `v1.0.0-provisional` → `v1.0.0`: requires both leads to sign off after joint integration
+- `v1.0.0-provisional` → `v1.0.0`: Completed and signed off following joint verification on 2026-11-18.
 
 ---
 
@@ -202,6 +201,6 @@ The following items are documented assumptions, not yet validated by joint testi
 | 2 | Confidence calibration | Agreed: temperature/Platt scaling by SatQuery |
 | 3 | Uncertainty semantics | Agreed: normalized binary Shannon entropy (§3) |
 | 4 | Coordinate reference, axis order, units | Agreed: x=East, y=North, z=AGL (m); lat-first WGS84; bbox [xmin,ymin,xmax,ymax] |
-| 5 | Image & pair identifiers | Naming convention not yet formally agreed (provisional) |
-| 6 | Schema versioning | Agreed: `v1.0.0-provisional` until joint integration |
+| 5 | Image & pair identifiers | Resolved via ImagePairResolver (§2) |
+| 6 | Schema versioning | Promoted to `v1.0.0` upon mutual sign-off |
 | 7 | Missing-value & validation | Agreed: strict fail-fast; `local_grid` required; UTC timestamps required |

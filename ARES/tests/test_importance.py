@@ -1,6 +1,6 @@
 """Unit tests for mission importance scoring and decoupling from confidence.
 
-Updated to reflect agreed provisional interface (v1.0.0-provisional):
+Updated to reflect agreed provisional interface (v1.0.0):
 uncertainty is normalized binary Shannon entropy of confidence:
     u = -[p*log2(p) + (1-p)*log2(1-p)]
 Test records compute uncertainty from confidence to satisfy the cross-check.
@@ -36,7 +36,7 @@ class TestImportanceScoring(unittest.TestCase):
         agreed cross-check in SatQueryCandidateRecord (tolerance +/-0.15).
         """
         return SatQueryCandidateRecord(
-            schema_version="v1.0.0-provisional",
+            schema_version="v1.0.0",
             candidate_id="cand_test_scoring",
             image_pair_id="pair_01",
             timestamp="2026-11-16T09:00:00Z",

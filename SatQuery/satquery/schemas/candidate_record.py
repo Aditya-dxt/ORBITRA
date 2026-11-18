@@ -1,6 +1,6 @@
 """Strict Pydantic schema validation for SatQuery candidate change records.
 
-Agreed interface schema for handoff to ARES (v1.0.0-provisional).
+Agreed interface schema for handoff to ARES (v1.0.0).
 Enforces:
 - Required local_grid for ARES transit kinematics and energy estimation
 - Timezone-aware UTC ISO-8601 timestamps
@@ -83,7 +83,7 @@ class SatQueryCandidateRecord(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     schema_version: str = Field(
-        default="v1.0.0-provisional",
+        default="v1.0.0",
         description="Agreed interface schema version (v1.x)"
     )
     candidate_id: str = Field(

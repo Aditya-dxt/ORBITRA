@@ -29,7 +29,7 @@ class TestActions(unittest.TestCase):
         self.pos_b = LocalGridCoordinates(x_meters=240.0, y_meters=0.0, z_meters=0.0)
         
         self.record = SatQueryCandidateRecord(
-            schema_version="v1.0.0-provisional",
+            schema_version="v1.0.0",
             candidate_id="cand_test_actions",
             image_pair_id="pair_01",
             timestamp="2026-11-16T09:00:00Z",

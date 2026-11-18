@@ -29,7 +29,7 @@ class CandidateGenerator:
         calibrator: Optional[ScoreCalibrator] = None,
         classifier: Optional[SemanticChangeClassifier] = None,
         min_pixel_area: int = 25,
-        default_schema_version: str = "v1.0.0-provisional",
+        default_schema_version: str = "v1.0.0",
     ):
         """
         Args:

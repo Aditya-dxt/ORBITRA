@@ -35,7 +35,7 @@ def _make_candidate(
 ) -> AresCandidateState:
     """[SYNTHETIC EXAMPLE] candidate factory for B3 unit tests."""
     record = SatQueryCandidateRecord(
-        schema_version="v1.0.0-provisional",
+        schema_version="v1.0.0",
         candidate_id=cid,
         image_pair_id="pair_b3_test",
         timestamp="2026-11-16T10:00:00Z",
