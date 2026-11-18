@@ -59,14 +59,26 @@
       "predicted_change": "vegetation_clearing",
       "confidence": 0.9423,
       "uncertainty": 0.3183,
-      "action_selected": "STRONGER_MODEL"
+      "action_selected": "STRONGER_MODEL",
+      "recomputed_confidence": 0.3699,
+      "recomputed_uncertainty": 0.9506,
+      "measured_delta_uncertainty": -0.6323,
+      "imagery_source": "DISK_FILE_BENCHMARK",
+      "ares_assumed_reduction": "40% (u * 0.60)",
+      "ares_energy_billed_joules": 1450.0
     },
     {
       "candidate_id": "cand_sq_levir_002",
       "predicted_change": "vegetation_clearing",
       "confidence": 0.9009,
       "uncertainty": 0.4661,
-      "action_selected": "STRONGER_MODEL"
+      "action_selected": "STRONGER_MODEL",
+      "recomputed_confidence": 0.4658,
+      "recomputed_uncertainty": 0.9966,
+      "measured_delta_uncertainty": -0.5305,
+      "imagery_source": "DISK_FILE_BENCHMARK",
+      "ares_assumed_reduction": "40% (u * 0.60)",
+      "ares_energy_billed_joules": 1450.0
     },
     {
       "candidate_id": "cand_sq_levir_003",

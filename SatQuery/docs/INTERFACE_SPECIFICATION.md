@@ -85,3 +85,35 @@ To support both planar drone kinematics (in ARES) and geographic GIS mapping:
 - `region.local_grid`: Strictly required; missing coordinates fail validation.
 - `region.bbox_pixels`: Exactly 4 integers $[x_{\min}, y_{\min}, x_{\max}, y_{\max}]$ with $x_{\min} \le x_{\max}$ and $y_{\min} \le y_{\max}$.
 - `extra='forbid'`: Reject any unrecognized fields.
+
+---
+
+## 6. Image Pair Resolution & STRONGER_MODEL Re-Inference Contract
+
+When ARES selects `STRONGER_MODEL` for a candidate, the system executes high-capacity specialist vision inference on the candidate's exact spatial crop. The architectural boundary operates as follows:
+
+### 1. Source Imagery Resolution (`image_pair_id`)
+- Every candidate record supplies a non-empty `image_pair_id` (e.g., `pair_levir_test_042`, `pair_sentinel2_kanpur_bhauti`).
+- The `ImagePairResolver` (`SatQuery/satquery/data/image_resolver.py`) resolves this identifier to the concrete bi-temporal image pair $(I_{\text{pre}}, I_{\text{post}})$:
+  - **Real Indian Sentinel-2 Scenes:** Resolves to cached Level-2A multi-spectral rasters (e.g., `kanpur_bhauti_{pre,post}_real.png`, 512x512 RGB).
+  - **Benchmark LEVIR-CD Scenes:** Resolves to cached benchmark PNGs (`scene_levir_042_{pre,post}.png`, 256x256 RGB) or deterministically synthesizes the identical scene from seed (e.g., seed 42) when running on clean checkouts where local data caches are not checked into Git.
+  - **Provenance Tagging:** Each resolved pair explicitly declares its source mode (`DISK_FILE_REAL`, `DISK_FILE_BENCHMARK`, or `DETERMINISTIC_SYNTHETIC`).
+
+### 2. Patch Extraction & Vision Re-Inference
+- The bounding box `region.bbox_pixels = [xmin, ymin, xmax, ymax]` defines the candidate crop:
+  $$C_{\text{pre}} = I_{\text{pre}}[y_{\min}:y_{\max}, x_{\min}:x_{\max}], \quad C_{\text{post}} = I_{\text{post}}[y_{\min}:y_{\max}, x_{\min}:x_{\max}]$$
+- The specialist detector (PyTorch Siamese network or calibrated fallback) processes $(C_{\text{pre}}, C_{\text{post}})$, computing:
+  - Continuous patch change heatmap and mean change score $\bar{s}$.
+  - Calibrated probability $p_{\text{crop}} = \text{Calibrator}(\bar{s}) \in [0.0, 1.0]$.
+  - Measured post-inference uncertainty $u_{\text{crop}} = -\left[ p_{\text{crop}} \log_2(p_{\text{crop}}) + (1 - p_{\text{crop}}) \log_2(1 - p_{\text{crop}}) \right]$.
+
+### 3. State Mutation vs. ARES Simulation Boundary
+- **Live Closed-Loop Execution:** The candidate state object in memory is mutated to reflect the empirical measurement:
+  - $p_{\text{candidate}} \leftarrow p_{\text{crop}}$
+  - $u_{\text{candidate}} \leftarrow u_{\text{crop}}$
+  - Measured uncertainty reduction: $\Delta u_{\text{measured}} = u_{\text{prior}} - u_{\text{crop}}$.
+  - Appends an `EvidenceRecord` to `c_obj.evidence_history` tagged `[MEASURED]`.
+- **ARES Offline Benchmark Baseline:** For standalone policy evaluation and reproducible benchmarking where vision weights or rasters are not loaded, ARES's `ActionOutcomeSimulator` records its theoretical model assumption:
+  - $u_{\text{simulated}} = \max(0.10, u_{\text{prior}} \times 0.60)$ (assumed 40% reduction, tagged `[SIMULATED]`).
+- **Energy Accounting:** Regardless of the measured $\Delta u$, ARES bills exactly $1,450.0\text{ J}$ ($1,200\text{ J}$ compute + $250\text{ J}$ offload comms) with $0.0\text{ J}$ flight energy, and enforces the post-action return reserve feasibility back to home base.
+

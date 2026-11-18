@@ -35,6 +35,7 @@ from ares.schemas.candidate_state import (
     ActionType,
     AresCandidateState,
     CandidateStatus,
+    EvidenceRecord,
     ImportanceTier,
 )
 from ares.energy.units import joules_to_wh
@@ -85,6 +86,12 @@ def run_integration(
     """Execute end-to-end integration run."""
     print("=" * 80)
     print("🛰️  ORBITRA JOINT INTEGRATION: SatQuery (Vision) -> ARES (Decision & Energy)")
+    print("=" * 80)
+    print("📋 [Demonstration Architecture Scope]")
+    print("   • Schema Interface:      SatQueryCandidateRecord (v1.0.0-provisional)")
+    print("   • Candidate Management:  AresCandidateState with decoupled importance & energy guards")
+    print("   • Vision Re-Inference:   Live patch inference on resolved candidate source imagery")
+    print("   • Energy Accounting:     ARES discrete-event ledger with 1,450 J STRONGER_MODEL billing")
     print("=" * 80)
 
     # 1. Load or Generate SatQuery Records
@@ -231,12 +238,10 @@ def run_integration(
         print(f"   • ARES Action Cost Rule:  1,450.0 J (1,200 J edge compute + 250 J offload comms) [ASSUMED]")
         print(f"   • ARES Policy Assumption: 40% uncertainty reduction (u_post = u_pre * 0.60) [SIMULATED]")
 
-        # Attempt to load source image pair for real patch re-inference
-        from SatQuery.satquery.data.synthetic_sample_data import generate_benchmark_pair
+        from SatQuery.satquery.data.image_resolver import ImagePairResolver
         from SatQuery.satquery.vision.calibration import binary_entropy_uncertainty
-        source_pair = generate_benchmark_pair(seed=42)
-        img_pre_ref = source_pair["img_pre"]
-        img_post_ref = source_pair["img_post"]
+
+        resolver = ImagePairResolver()
 
         for sd in stronger_decisions:
             cid = sd["candidate_id"]
@@ -245,27 +250,75 @@ def run_integration(
                 u_orig = c_obj.detection.uncertainty
                 conf_orig = c_obj.detection.confidence
                 bbox = c_obj.detection.region.bbox_pixels
+                pair_id = c_obj.detection.image_pair_id
 
                 print(f"\n   ✓ Candidate '{cid}' [Action: STRONGER_MODEL]:")
-                print(f"       [SatQuery Input State]       Confidence={conf_orig:.3f}, Uncertainty={u_orig:.3f}, BBox={bbox}")
+                print(f"       [SatQuery Input State]       Confidence={conf_orig:.3f}, Uncertainty={u_orig:.3f}, BBox={bbox}, ImagePair='{pair_id}'")
+
+                # Resolve source imagery for candidate's image_pair_id
+                resolved = resolver.resolve(pair_id)
+                print(f"       [Source Imagery Resolution]  Source='{resolved.source_type}' | Synthetic={resolved.is_synthetic}")
+                print(f"                                    {resolved.description}")
 
                 # Real patch crop inference
+                recomputed_conf = None
+                recomputed_unc = None
+                delta_u_measured = None
+
                 if bbox and len(bbox) == 4:
+                    h, w = resolved.img_pre.shape[:2]
                     x1, y1, x2, y2 = bbox
-                    crop_pre = img_pre_ref[y1:y2, x1:x2]
-                    crop_post = img_post_ref[y1:y2, x1:x2]
+                    xmin = max(0, min(x1, x2))
+                    xmax = min(w, max(x1, x2))
+                    ymin = max(0, min(y1, y2))
+                    ymax = min(h, max(y1, y2))
+
+                    crop_pre = resolved.img_pre[ymin:ymax, xmin:xmax]
+                    crop_post = resolved.img_post[ymin:ymax, xmin:xmax]
+
                     if crop_pre.size > 0 and crop_post.size > 0:
                         crop_heatmap, crop_mask = deep_det.detect_changes(crop_pre, crop_post)
                         crop_score = float(np.mean(crop_heatmap))
-                        crop_conf = float(deep_det.calibrator.predict_probability(crop_score))
-                        crop_unc = binary_entropy_uncertainty(crop_conf)
-                        print(f"       [SatQuery Patch Inference]   Executed on crop {crop_pre.shape[:2]} via '{deep_det.mode}':")
-                        print(f"                                    Re-computed Confidence={crop_conf:.3f}, Re-computed Uncertainty={crop_unc:.3f}")
+                        recomputed_conf = float(deep_det.calibrator.predict_probability(crop_score))
+                        recomputed_unc = binary_entropy_uncertainty(recomputed_conf)
+                        delta_u_measured = round(u_orig - recomputed_unc, 4)
 
-                # ARES simulated decision outcome
+                        print(f"       [SatQuery Patch Inference]   Executed on crop {crop_pre.shape[:2]} via '{deep_det.mode}':")
+                        print(f"                                    Re-computed Confidence={recomputed_conf:.3f}, Re-computed Uncertainty={recomputed_unc:.3f}")
+
+                        # Mutate candidate state to reflect measured closed-loop detector inference
+                        c_obj.detection.confidence = round(recomputed_conf, 4)
+                        c_obj.detection.uncertainty = round(recomputed_unc, 4)
+                        c_obj.evidence_history.append(
+                            EvidenceRecord(
+                                action=ActionType.STRONGER_MODEL,
+                                timestamp=c_obj.detection.timestamp,
+                                energy_spent_joules=1450.0,
+                                simulated_outcome=(
+                                    f"[MEASURED] Patch re-inference on {resolved.source_type}: "
+                                    f"conf={recomputed_conf:.3f}, uncert={recomputed_unc:.3f} (Δu={delta_u_measured:+.3f})"
+                                ),
+                                notes=f"Resolved via {resolved.description}",
+                            )
+                        )
+                        print(f"       [Candidate State Update]     Mutated candidate state: conf={conf_orig:.3f}->{recomputed_conf:.3f}, uncert={u_orig:.3f}->{recomputed_unc:.3f} (Δu={delta_u_measured:+.3f})")
+
+                        # Update final candidate summary row
+                        for row in final_candidate_rows:
+                            if row["candidate_id"] == cid:
+                                row["recomputed_confidence"] = round(recomputed_conf, 4)
+                                row["recomputed_uncertainty"] = round(recomputed_unc, 4)
+                                row["measured_delta_uncertainty"] = delta_u_measured
+                                row["imagery_source"] = resolved.source_type
+                                row["ares_assumed_reduction"] = "40% (u * 0.60)"
+                                row["ares_energy_billed_joules"] = 1450.0
+                    else:
+                        print(f"       [SatQuery Patch Inference]   WARNING: BBox [{xmin}, {ymin}, {xmax}, {ymax}] out of bounds for image shape ({h}, {w})")
+
+                # ARES offline baseline comparison
                 u_simulated = round(u_orig * 0.60, 3)
-                print(f"       [ARES Simulated Outcome]     Uncertainty reduced from {u_orig:.3f} to {u_simulated:.3f} (40% theoretical reduction)")
-                print(f"       [ARES Energy Billed]         1,450.0 J (0.403 Wh) [Zero flight energy consumed]")
+                print(f"       [ARES Offline Baseline]      ARES benchmark simulated outcome: uncertainty reduced from {u_orig:.3f} to {u_simulated:.3f} (40% theoretical reduction) [SIMULATED]")
+                print(f"       [ARES Energy Accounting]     1,450.0 J (0.403 Wh) billed [Zero flight energy consumed]")
         print("=" * 95)
 
     # 8. Export Report

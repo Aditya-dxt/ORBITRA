@@ -66,6 +66,31 @@ class TestIndiaSatelliteData(unittest.TestCase):
         self.assertAlmostEqual(first.region.coordinates.center_lat, 26.48, delta=0.1)
         self.assertAlmostEqual(first.region.coordinates.center_lon, 80.20, delta=0.1)
 
+    def test_image_pair_resolver_benchmark_and_real_scenes(self):
+        """Verifies ImagePairResolver maps pair IDs to valid pre/post image arrays."""
+        from SatQuery.satquery.data.image_resolver import ImagePairResolver
+
+        resolver = ImagePairResolver()
+
+        # 1. Benchmark pair resolution (synthetic)
+        bench = resolver.resolve("pair_levir_test_042")
+        self.assertTrue(bench.is_synthetic)
+        self.assertEqual(bench.img_pre.shape, (256, 256, 3))
+        self.assertEqual(bench.img_post.shape, (256, 256, 3))
+        self.assertIn(bench.source_type, ["DISK_FILE_BENCHMARK", "DETERMINISTIC_SYNTHETIC"])
+
+        # 2. Real Sentinel-2 pair resolution (if cached on disk)
+        real = resolver.resolve("pair_sentinel2_kanpur_bhauti")
+        if real.source_type == "DISK_FILE_REAL":
+            self.assertFalse(real.is_synthetic)
+            self.assertEqual(real.img_pre.shape, (512, 512, 3))
+            self.assertIn("Kanpur", real.description)
+
+        # 3. Unmapped fallback pair
+        fallback = resolver.resolve("pair_unknown_id_xyz")
+        self.assertTrue(fallback.is_synthetic)
+        self.assertEqual(fallback.img_pre.shape, (256, 256, 3))
+
 
 if __name__ == "__main__":
     unittest.main()
