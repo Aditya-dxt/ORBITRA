@@ -2,7 +2,7 @@
 
 **Owner:** Computer Vision & Image Processing Lead (Aditya)  
 **System:** ORBITRA  
-**Status:** Milestone 1 & 2 Complete (Agreed Schema v1.0.0-provisional, Vision Pipeline, Calibration, and ARES Export)  
+**Status:** Milestone 6 Complete | Interface Promoted to `v1.0.0` (Joint Sign-Off by SatQuery & ARES Leads)  
 
 SatQuery is responsible for satellite image processing and computer vision within ORBITRA. It turns bi-temporal satellite image inputs into structured, georeferenced, versioned candidate change records with calibrated confidence and quantified uncertainty for consumption by the **ARES** decision engine.
 
@@ -192,6 +192,29 @@ python -c "import json, sys; sys.path.insert(0, 'ARES'); from ares.schemas.satqu
 ---
 
 ## 📋 Running Implementation Log
+
+### Update: 2026-11-18 — Milestone 6: Interface Promotion to v1.0.0, ImagePairResolver, & Closed-Loop State Mutation
+- **Summary:** Coordinated formal schema promotion from `v1.0.0-provisional` to `v1.0.0` with ARES lead (Vaibhav) following successful source imagery wiring and state mutation:
+  1. Implemented `ImagePairResolver` (`satquery/data/image_resolver.py`), resolving each candidate's `image_pair_id` to actual multi-spectral or benchmark rasters (e.g. real Sentinel-2 Level-2A pairs for Kanpur/Bengaluru, or cached/synthetic LEVIR-CD pairs).
+  2. Implemented closed-loop candidate state mutation upon `STRONGER_MODEL` dispatch, replacing initial prior uncertainty with empirical measured post-inference uncertainty ($u_{\text{crop}}$) and recording a `[MEASURED]` `EvidenceRecord`.
+  3. Promoted default schema version to `v1.0.0` across Pydantic schemas, pipeline exports, unit tests, and `SatQuery/docs/INTERFACE_SPECIFICATION.md`.
+  4. Expanded test suite to **29 tests** (added `test_image_pair_resolver_benchmark_and_real_scenes`).
+- **Changed Files:**
+  - `SatQuery/satquery/data/image_resolver.py` (New source imagery pair resolver)
+  - `SatQuery/satquery/data/__init__.py` (Exported `ImagePairResolver` and `ResolvedImagePair`)
+  - `SatQuery/satquery/schemas/candidate_record.py` (Promoted default to `v1.0.0`)
+  - `SatQuery/satquery/pipeline.py` & `candidate_generator.py` (Updated defaults to `v1.0.0`)
+  - `SatQuery/docs/INTERFACE_SPECIFICATION.md` (Updated version to `v1.0.0` and added §6 Re-Inference Contract)
+  - `SatQuery/examples/end_to_end_integration.py` (Closed-loop candidate state update and dual-mode reporting)
+  - `SatQuery/tests/test_india_data.py` (Added image pair resolver unit tests)
+  - `SatQuery/tests/test_schemas.py` & `test_deep_model.py` (Updated to `v1.0.0`)
+  - `SatQuery/exports/*.json` (Updated all candidate exports to `v1.0.0`)
+- **Checks Performed:**
+  - `python -m unittest discover -s SatQuery/tests -v` (29 tests: 28 passed, 1 skipped)
+  - `python -m unittest discover -s ARES/tests -t ARES -v` (74/74 passed)
+  - `python SatQuery/examples/end_to_end_integration.py --policy B2` (Passed: all candidates validated against `v1.0.0`)
+  - `python SatQuery/examples/end_to_end_integration.py --candidates SatQuery/exports/candidates_kanpur_bhauti.json --policy B2` (Passed: real Sentinel-2 crops re-inferred)
+
 
 ### Update: 2026-11-18 — Calibration Optimizer Fix, Data-Driven Status, and Real Crop Re-Inference
 - **Summary:** Resolved teammate findings regarding calibration status reporting and STRONGER_MODEL execution:
