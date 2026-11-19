@@ -1,0 +1,665 @@
+{
+  "schema_version": "v1.0.0",
+  "total_zones": 4,
+  "mission_zones": {
+    "kanpur_bhauti": {
+      "zone_key": "kanpur_bhauti",
+      "name": "Kanpur / Bhauti Corridor, Uttar Pradesh",
+      "description": "High-growth industrial and highway construction along NH-19 near PSIT Kanpur",
+      "home_coordinates": {
+        "lat": 26.447,
+        "lon": 80.198
+      },
+      "bounding_box_wgs84": [
+        80.14,
+        26.4,
+        80.26,
+        26.5
+      ],
+      "sensor": "ESA Sentinel-2 Level-2A (10m GSD)",
+      "pre_observation": {
+        "scene_id": "S2B_MSIL2A_20211207T052209_R062_T44RMQ_20230129T143928",
+        "datetime": "2021-12-07T05:22:09.024000Z"
+      },
+      "post_observation": {
+        "scene_id": "S2B_MSIL2A_20231224T051229_R019_T44RMQ_20231224T091848",
+        "datetime": "2023-12-24T05:12:29.024000Z"
+      },
+      "spatial_alignment_shift_px": [
+        0.12,
+        0.24
+      ],
+      "candidate_metrics": {
+        "total_candidates": 5,
+        "mean_confidence": 0.4922,
+        "min_confidence": 0.4716,
+        "max_confidence": 0.5137,
+        "mean_uncertainty": 0.9991,
+        "min_uncertainty": 0.9977,
+        "max_uncertainty": 0.9998,
+        "total_change_footprint_m2": 20637800.0,
+        "total_change_footprint_ha": 2063.78,
+        "max_transit_distance_m": 4776.0
+      },
+      "ares_simulated_dispatch": {
+        "policy_id": "B4",
+        "policy_name": "Greedy Benefit per Energy",
+        "provenance": "SIMULATED",
+        "initial_battery_joules": 180000.0,
+        "initial_battery_wh": 50.0,
+        "final_battery_joules": 49290.1,
+        "final_battery_wh": 13.69,
+        "total_energy_spent_actions_joules": 70281.5,
+        "total_energy_spent_actions_wh": 19.52,
+        "return_flight_energy_joules": 60428.4,
+        "return_flight_energy_wh": 16.79,
+        "safe_return_completed": true,
+        "candidates_total": 5,
+        "candidates_inspected": 3,
+        "candidates_deferred": 2,
+        "candidates_skipped": 0,
+        "ledger_records_count": 5,
+        "summary_message": "[SIMULATED] Sortie under B4 (Greedy Benefit per Energy) completed: 3 inspected, 0 skipped, 2 deferred. Safe return: True."
+      },
+      "inspection_chips": [],
+      "top_candidates": [
+        {
+          "candidate_id": "cand_sq_levir_005",
+          "confidence": 0.4858,
+          "uncertainty": 0.9994,
+          "shannon_entropy_reference": 0.9994,
+          "local_grid": {
+            "x_meters": 3110.0,
+            "y_meters": 2560.0,
+            "z_meters": 60.0,
+            "transit_distance_m": 4028.1
+          },
+          "coordinates": {
+            "lat": 26.470106,
+            "lon": 80.229182
+          },
+          "bbox_pixels": [
+            110,
+            0,
+            512,
+            512
+          ],
+          "pixel_area": 205824,
+          "area_m2": 20582400.0,
+          "area_hectares": 2058.24
+        },
+        {
+          "candidate_id": "cand_sq_levir_004",
+          "confidence": 0.508,
+          "uncertainty": 0.9998,
+          "shannon_entropy_reference": 0.9998,
+          "local_grid": {
+            "x_meters": 4775.0,
+            "y_meters": 100.0,
+            "z_meters": 60.0,
+            "transit_distance_m": 4776.0
+          },
+          "coordinates": {
+            "lat": 26.447903,
+            "lon": 80.245876
+          },
+          "bbox_pixels": [
+            468,
+            0,
+            487,
+            20
+          ],
+          "pixel_area": 380,
+          "area_m2": 38000.0,
+          "area_hectares": 3.8
+        },
+        {
+          "candidate_id": "cand_sq_levir_003",
+          "confidence": 0.4716,
+          "uncertainty": 0.9977,
+          "shannon_entropy_reference": 0.9977,
+          "local_grid": {
+            "x_meters": 1590.0,
+            "y_meters": 1610.0,
+            "z_meters": 60.0,
+            "transit_distance_m": 2262.8
+          },
+          "coordinates": {
+            "lat": 26.461531,
+            "lon": 80.213942
+          },
+          "bbox_pixels": [
+            154,
+            156,
+            164,
+            166
+          ],
+          "pixel_area": 100,
+          "area_m2": 10000.0,
+          "area_hectares": 1.0
+        },
+        {
+          "candidate_id": "cand_sq_levir_002",
+          "confidence": 0.5137,
+          "uncertainty": 0.9995,
+          "shannon_entropy_reference": 0.9995,
+          "local_grid": {
+            "x_meters": 1745.0,
+            "y_meters": 1760.0,
+            "z_meters": 60.0,
+            "transit_distance_m": 2478.4
+          },
+          "coordinates": {
+            "lat": 26.462885,
+            "lon": 80.215496
+          },
+          "bbox_pixels": [
+            171,
+            173,
+            178,
+            179
+          ],
+          "pixel_area": 42,
+          "area_m2": 4200.0,
+          "area_hectares": 0.42
+        }
+      ]
+    },
+    "delhi_ncr": {
+      "zone_key": "delhi_ncr",
+      "name": "Delhi NCR / Gurugram Development Corridor",
+      "description": "Rapid commercial and residential urban spread in NCR",
+      "home_coordinates": {
+        "lat": 28.48,
+        "lon": 77.05
+      },
+      "bounding_box_wgs84": [
+        77.0,
+        28.42,
+        77.1,
+        28.52
+      ],
+      "sensor": "ESA Sentinel-2 Level-2A (10m GSD)",
+      "pre_observation": {
+        "scene_id": "S2B_MSIL2A_20211220T053229_R105_T43RGM_20211221T022327",
+        "datetime": "2021-12-20T05:32:29.024000Z"
+      },
+      "post_observation": {
+        "scene_id": "S2B_MSIL2A_20231210T053219_R105_T43RGM_20241101T190133",
+        "datetime": "2023-12-10T05:32:19.024000Z"
+      },
+      "spatial_alignment_shift_px": [
+        -0.04,
+        0.1
+      ],
+      "candidate_metrics": {
+        "total_candidates": 9,
+        "mean_confidence": 0.4637,
+        "min_confidence": 0.4074,
+        "max_confidence": 0.5172,
+        "mean_uncertainty": 0.991,
+        "min_uncertainty": 0.9751,
+        "max_uncertainty": 0.9994,
+        "total_change_footprint_m2": 210100.0,
+        "total_change_footprint_ha": 21.01,
+        "max_transit_distance_m": 5659.7
+      },
+      "ares_simulated_dispatch": {
+        "policy_id": "B3",
+        "policy_name": "Joint Policy",
+        "provenance": "SIMULATED",
+        "initial_battery_joules": 180000.0,
+        "initial_battery_wh": 50.0,
+        "final_battery_joules": 179550.0,
+        "final_battery_wh": 49.88,
+        "total_energy_spent_actions_joules": 450.0,
+        "total_energy_spent_actions_wh": 0.12,
+        "return_flight_energy_joules": 0.0,
+        "return_flight_energy_wh": 0.0,
+        "safe_return_completed": true,
+        "candidates_total": 9,
+        "candidates_inspected": 9,
+        "candidates_deferred": 0,
+        "candidates_skipped": 0,
+        "ledger_records_count": 10,
+        "summary_message": "[SIMULATED] Sortie under B3 (Joint Policy) completed: 9 inspected, 0 skipped, 0 deferred. Safe return: True."
+      },
+      "inspection_chips": [],
+      "top_candidates": [
+        {
+          "candidate_id": "cand_sq_levir_002",
+          "confidence": 0.4316,
+          "uncertainty": 0.9865,
+          "shannon_entropy_reference": 0.9865,
+          "local_grid": {
+            "x_meters": 2680.0,
+            "y_meters": 4985.0,
+            "z_meters": 60.0,
+            "transit_distance_m": 5659.7
+          },
+          "coordinates": {
+            "lat": 28.52498,
+            "lon": 77.077369
+          },
+          "bbox_pixels": [
+            238,
+            485,
+            298,
+            512
+          ],
+          "pixel_area": 1620,
+          "area_m2": 162000.0,
+          "area_hectares": 16.2
+        },
+        {
+          "candidate_id": "cand_sq_levir_003",
+          "confidence": 0.4453,
+          "uncertainty": 0.9914,
+          "shannon_entropy_reference": 0.9913,
+          "local_grid": {
+            "x_meters": 1590.0,
+            "y_meters": 3800.0,
+            "z_meters": 60.0,
+            "transit_distance_m": 4119.2
+          },
+          "coordinates": {
+            "lat": 28.514288,
+            "lon": 77.066237
+          },
+          "bbox_pixels": [
+            152,
+            376,
+            166,
+            384
+          ],
+          "pixel_area": 112,
+          "area_m2": 11200.0,
+          "area_hectares": 1.12
+        },
+        {
+          "candidate_id": "cand_sq_levir_007",
+          "confidence": 0.4434,
+          "uncertainty": 0.9907,
+          "shannon_entropy_reference": 0.9907,
+          "local_grid": {
+            "x_meters": 905.0,
+            "y_meters": 2295.0,
+            "z_meters": 60.0,
+            "transit_distance_m": 2467.0
+          },
+          "coordinates": {
+            "lat": 28.500708,
+            "lon": 77.059242
+          },
+          "bbox_pixels": [
+            86,
+            225,
+            95,
+            234
+          ],
+          "pixel_area": 81,
+          "area_m2": 8100.0,
+          "area_hectares": 0.81
+        },
+        {
+          "candidate_id": "cand_sq_levir_009",
+          "confidence": 0.5163,
+          "uncertainty": 0.9992,
+          "shannon_entropy_reference": 0.9992,
+          "local_grid": {
+            "x_meters": 990.0,
+            "y_meters": 1900.0,
+            "z_meters": 60.0,
+            "transit_distance_m": 2142.5
+          },
+          "coordinates": {
+            "lat": 28.497144,
+            "lon": 77.06011
+          },
+          "bbox_pixels": [
+            95,
+            186,
+            103,
+            194
+          ],
+          "pixel_area": 64,
+          "area_m2": 6400.0,
+          "area_hectares": 0.64
+        }
+      ]
+    },
+    "bengaluru_tech": {
+      "zone_key": "bengaluru_tech",
+      "name": "Bengaluru Electronic City Infrastructure",
+      "description": "Metro rail expansion and tech park infrastructure developments",
+      "home_coordinates": {
+        "lat": 12.85,
+        "lon": 77.66
+      },
+      "bounding_box_wgs84": [
+        77.6,
+        12.8,
+        77.72,
+        12.9
+      ],
+      "sensor": "ESA Sentinel-2 Level-2A (10m GSD)",
+      "pre_observation": {
+        "scene_id": "S2B_MSIL2A_20220123T051109_R019_T43PGQ_20220123T225338",
+        "datetime": "2022-01-23T05:11:09.024000Z"
+      },
+      "post_observation": {
+        "scene_id": "S2B_MSIL2A_20240123T051119_R019_T43PGQ_20240123T092303",
+        "datetime": "2024-01-23T05:11:19.024000Z"
+      },
+      "spatial_alignment_shift_px": [
+        0.07,
+        0.13
+      ],
+      "candidate_metrics": {
+        "total_candidates": 28,
+        "mean_confidence": 0.5465,
+        "min_confidence": 0.3754,
+        "max_confidence": 0.6462,
+        "mean_uncertainty": 0.9761,
+        "min_uncertainty": 0.9374,
+        "max_uncertainty": 0.9998,
+        "total_change_footprint_m2": 223100.0,
+        "total_change_footprint_ha": 22.31,
+        "max_transit_distance_m": 5463.2
+      },
+      "ares_simulated_dispatch": {
+        "policy_id": "B1",
+        "policy_name": "Uncertainty First",
+        "provenance": "SIMULATED",
+        "initial_battery_joules": 180000.0,
+        "initial_battery_wh": 50.0,
+        "final_battery_joules": 21956.6,
+        "final_battery_wh": 6.1,
+        "total_energy_spent_actions_joules": 80581.7,
+        "total_energy_spent_actions_wh": 22.38,
+        "return_flight_energy_joules": 77461.7,
+        "return_flight_energy_wh": 21.52,
+        "safe_return_completed": true,
+        "candidates_total": 28,
+        "candidates_inspected": 1,
+        "candidates_deferred": 27,
+        "candidates_skipped": 0,
+        "ledger_records_count": 3,
+        "summary_message": "[SIMULATED] Sortie under B1 (Uncertainty First) completed: 1 inspected, 0 skipped, 27 deferred. Safe return: True."
+      },
+      "inspection_chips": [],
+      "top_candidates": [
+        {
+          "candidate_id": "cand_sq_levir_024",
+          "confidence": 0.3754,
+          "uncertainty": 0.9547,
+          "shannon_entropy_reference": 0.9547,
+          "local_grid": {
+            "x_meters": 4225.0,
+            "y_meters": 2120.0,
+            "z_meters": 60.0,
+            "transit_distance_m": 4727.1
+          },
+          "coordinates": {
+            "lat": 12.869163,
+            "lon": 77.698922
+          },
+          "bbox_pixels": [
+            413,
+            204,
+            432,
+            220
+          ],
+          "pixel_area": 304,
+          "area_m2": 30400.0,
+          "area_hectares": 3.04
+        },
+        {
+          "candidate_id": "cand_sq_levir_018",
+          "confidence": 0.5547,
+          "uncertainty": 0.9914,
+          "shannon_entropy_reference": 0.9913,
+          "local_grid": {
+            "x_meters": 1875.0,
+            "y_meters": 2540.0,
+            "z_meters": 60.0,
+            "transit_distance_m": 3157.1
+          },
+          "coordinates": {
+            "lat": 12.87296,
+            "lon": 77.677273
+          },
+          "bbox_pixels": [
+            179,
+            246,
+            196,
+            262
+          ],
+          "pixel_area": 272,
+          "area_m2": 27200.0,
+          "area_hectares": 2.72
+        },
+        {
+          "candidate_id": "cand_sq_levir_016",
+          "confidence": 0.516,
+          "uncertainty": 0.9993,
+          "shannon_entropy_reference": 0.9993,
+          "local_grid": {
+            "x_meters": 1610.0,
+            "y_meters": 2705.0,
+            "z_meters": 60.0,
+            "transit_distance_m": 3147.9
+          },
+          "coordinates": {
+            "lat": 12.874451,
+            "lon": 77.674832
+          },
+          "bbox_pixels": [
+            151,
+            265,
+            171,
+            276
+          ],
+          "pixel_area": 220,
+          "area_m2": 22000.0,
+          "area_hectares": 2.2
+        },
+        {
+          "candidate_id": "cand_sq_levir_008",
+          "confidence": 0.5809,
+          "uncertainty": 0.981,
+          "shannon_entropy_reference": 0.981,
+          "local_grid": {
+            "x_meters": 1375.0,
+            "y_meters": 3405.0,
+            "z_meters": 60.0,
+            "transit_distance_m": 3672.1
+          },
+          "coordinates": {
+            "lat": 12.880778,
+            "lon": 77.672667
+          },
+          "bbox_pixels": [
+            132,
+            335,
+            143,
+            346
+          ],
+          "pixel_area": 121,
+          "area_m2": 12100.0,
+          "area_hectares": 1.21
+        }
+      ]
+    },
+    "chennai_sriperumbudur": {
+      "zone_key": "chennai_sriperumbudur",
+      "name": "Chennai / Sriperumbudur Industrial Corridor",
+      "description": "Automotive and electronics manufacturing land development",
+      "home_coordinates": {
+        "lat": 12.98,
+        "lon": 79.96
+      },
+      "bounding_box_wgs84": [
+        79.9,
+        12.92,
+        80.02,
+        13.02
+      ],
+      "sensor": "ESA Sentinel-2 Level-2A (10m GSD)",
+      "pre_observation": {
+        "scene_id": "S2B_MSIL2A_20211221T050219_R119_T44PLV_20211222T040330",
+        "datetime": "2021-12-21T05:02:19.024000Z"
+      },
+      "post_observation": {
+        "scene_id": "S2A_MSIL2A_20231116T050051_R119_T44PLV_20231116T102318",
+        "datetime": "2023-11-16T05:00:51.024000Z"
+      },
+      "spatial_alignment_shift_px": [
+        0.03,
+        0.02
+      ],
+      "candidate_metrics": {
+        "total_candidates": 59,
+        "mean_confidence": 0.5902,
+        "min_confidence": 0.4447,
+        "max_confidence": 0.6998,
+        "mean_uncertainty": 0.9658,
+        "min_uncertainty": 0.8816,
+        "max_uncertainty": 0.9996,
+        "total_change_footprint_m2": 750000.0,
+        "total_change_footprint_ha": 75.0,
+        "max_transit_distance_m": 6941.1
+      },
+      "ares_simulated_dispatch": {
+        "policy_id": "B1",
+        "policy_name": "Uncertainty First",
+        "provenance": "SIMULATED",
+        "initial_battery_joules": 180000.0,
+        "initial_battery_wh": 50.0,
+        "final_battery_joules": 51871.4,
+        "final_battery_wh": 14.41,
+        "total_energy_spent_actions_joules": 99672.6,
+        "total_energy_spent_actions_wh": 27.69,
+        "return_flight_energy_joules": 28456.0,
+        "return_flight_energy_wh": 7.9,
+        "safe_return_completed": true,
+        "candidates_total": 59,
+        "candidates_inspected": 2,
+        "candidates_deferred": 57,
+        "candidates_skipped": 0,
+        "ledger_records_count": 4,
+        "summary_message": "[SIMULATED] Sortie under B1 (Uncertainty First) completed: 2 inspected, 0 skipped, 57 deferred. Safe return: True."
+      },
+      "inspection_chips": [],
+      "top_candidates": [
+        {
+          "candidate_id": "cand_sq_levir_036",
+          "confidence": 0.6268,
+          "uncertainty": 0.9531,
+          "shannon_entropy_reference": 0.9531,
+          "local_grid": {
+            "x_meters": 3195.0,
+            "y_meters": 2105.0,
+            "z_meters": 60.0,
+            "transit_distance_m": 3826.1
+          },
+          "coordinates": {
+            "lat": 12.999027,
+            "lon": 79.989449
+          },
+          "bbox_pixels": [
+            300,
+            190,
+            339,
+            231
+          ],
+          "pixel_area": 1599,
+          "area_m2": 159900.0,
+          "area_hectares": 15.99
+        },
+        {
+          "candidate_id": "cand_sq_levir_030",
+          "confidence": 0.5972,
+          "uncertainty": 0.9726,
+          "shannon_entropy_reference": 0.9726,
+          "local_grid": {
+            "x_meters": 3720.0,
+            "y_meters": 2800.0,
+            "z_meters": 60.0,
+            "transit_distance_m": 4656.0
+          },
+          "coordinates": {
+            "lat": 13.00531,
+            "lon": 79.994288
+          },
+          "bbox_pixels": [
+            362,
+            262,
+            382,
+            298
+          ],
+          "pixel_area": 720,
+          "area_m2": 72000.0,
+          "area_hectares": 7.2
+        },
+        {
+          "candidate_id": "cand_sq_levir_001",
+          "confidence": 0.563,
+          "uncertainty": 0.9885,
+          "shannon_entropy_reference": 0.9885,
+          "local_grid": {
+            "x_meters": 4815.0,
+            "y_meters": 4870.0,
+            "z_meters": 60.0,
+            "transit_distance_m": 6848.4
+          },
+          "coordinates": {
+            "lat": 13.02402,
+            "lon": 80.004381
+          },
+          "bbox_pixels": [
+            475,
+            471,
+            488,
+            503
+          ],
+          "pixel_area": 416,
+          "area_m2": 41600.0,
+          "area_hectares": 4.16
+        },
+        {
+          "candidate_id": "cand_sq_levir_046",
+          "confidence": 0.5967,
+          "uncertainty": 0.9729,
+          "shannon_entropy_reference": 0.9728,
+          "local_grid": {
+            "x_meters": 4020.0,
+            "y_meters": 1280.0,
+            "z_meters": 60.0,
+            "transit_distance_m": 4218.9
+          },
+          "coordinates": {
+            "lat": 12.99157,
+            "lon": 79.997053
+          },
+          "bbox_pixels": [
+            394,
+            117,
+            410,
+            139
+          ],
+          "pixel_area": 352,
+          "area_m2": 35200.0,
+          "area_hectares": 3.52
+        }
+      ]
+    }
+  },
+  "aggregate_statistics": {
+    "total_candidates": 101,
+    "total_change_area_m2": 21821000.0,
+    "total_change_area_hectares": 2182.1,
+    "mean_confidence": 0.5619,
+    "mean_uncertainty": 0.9725
+  }
+}

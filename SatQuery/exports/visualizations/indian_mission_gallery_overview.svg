@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 680" width="1100" height="680">
+  <rect width="1100" height="680" fill="#0f172a" rx="16" />
+  <!-- Header -->
+  <text x="40" y="48" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="700" fill="#f8fafc">ORBITRA Multi-Zone Indian Satellite Mission Gallery</text>
+  <text x="40" y="74" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#94a3b8">Bitemporal Sentinel-2 L2A Optical Surface Reflectance | Schema v1.0.0 | 4 Operational Geographic Corridors</text>
+
+  <!-- Aggregate Stats Banner -->
+  <rect x="40" y="96" width="1020" height="64" fill="#1e293b" stroke="#334155" stroke-width="1.5" rx="10" />
+  <text x="70" y="122" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">TOTAL CANDIDATES</text>
+  <text x="70" y="145" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#38bdf8">101</text>
+  <text x="260" y="122" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">TOTAL CHANGE AREA</text>
+  <text x="260" y="145" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#34d399">2182.1 ha (21,821,000 m²)</text>
+  <text x="560" y="122" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">MEAN CONFIDENCE (p)</text>
+  <text x="560" y="145" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#fbbf24">0.562</text>
+  <text x="780" y="122" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">MEAN UNCERTAINTY (u)</text>
+  <text x="780" y="145" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#c084fc">0.973</text>
+
+  <!-- 2x2 Grid of Zone Cards -->
+  <!-- Card 1: kanpur_bhauti -->
+  <rect x="40" y="180" width="498" height="220" fill="#1e293b" stroke="#334155" stroke-width="1.5" rx="10" />
+  <circle cx="64" cy="208" r="8" fill="#fbbf24" />
+  <text x="82" y="213" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#f8fafc">Kanpur / Bhauti Corridor, Uttar Pradesh</text>
+  <text x="64" y="236" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">High-growth industrial and highway construction along NH-19 near PSIT Kanpur</text>
+  <line x1="64" y1="248" x2="514" y2="248" stroke="#334155" stroke-width="1" />
+  <text x="64" y="272" font-family="system-ui, sans-serif" font-size="12" fill="#94a3b8">Coordinates: <tspan fill="#f8fafc">26.447°N, 80.198°E</tspan></text>
+  <text x="64" y="292" font-family="system-ui, sans-serif" font-size="12" fill="#94a3b8">Interval: <tspan fill="#f8fafc">2021-12-07 → 2023-12-24</tspan></text>
+  <text x="64" y="312" font-family="system-ui, sans-serif" font-size="12" fill="#94a3b8">Candidates: <tspan fill="#fbbf24" font-weight="700">5 detections</tspan> (2063.78 ha)</text>
+  <text x="64" y="332" font-family="system-ui, sans-serif" font-size="12" fill="#94a3b8">Confidence: <tspan fill="#f8fafc">avg 0.492</tspan> | Uncertainty: <tspan fill="#f8fafc">avg 0.999</tspan></text>
+  <text x="64" y="352" font-family="system-ui, sans-serif" font-size="12" fill="#94a3b8">Max Transit: <tspan fill="#f8fafc">4776.0 m</tspan> | Reg Shift: <tspan fill="#f8fafc">dx=0.12px</tspan></text>
+  <rect x="64" y="364" width="450" height="24" fill="#0f172a" rx="4" />
+  <text x="74" y="380" font-family="system-ui, sans-serif" font-size="11" fill="#34d399">ARES Simulation (B4): 3 inspected | Safe Return: True</text>
+  <!-- Card 2: delhi_ncr -->
+  <rect x="562" y="180" width="498" height="220" fill="#1e293b" stroke="#334155" stroke-width="1.5" rx="10" />
+  <circle cx="586" cy="208" r="8" fill="#38bdf8" />
+  <text x="604" y="213" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#f8fafc">Delhi NCR / Gurugram Development Corridor</text>
+  <text x="586" y="236" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">Rapid commercial and residential urban spread in NCR</text>
+  <line x1="586" y1="248" x2="1036" y2="248" stroke="#334155" stroke-width="1" />
+  <text x="586" y="272" font-family="system-ui, sans-serif" font-size="12" fill="#94a3b8">Coordinates: <tspan fill="#f8fafc">28.48°N, 77.05°E</tspan></text>
+  <text x="586" y="292" font-family="system-ui, sans-serif" font-size="12" fill="#94a3b8">Interval: <tspan fill="#f8fafc">2021-12-20 → 2023-12-10</tspan></text>
+  <text x="586" y="312" font-family="system-ui, sans-serif" font-size="12" fill="#94a3b8">Candidates: <tspan fill="#38bdf8" font-weight="700">9 detections</tspan> (21.01 ha)</text>
+  <text x="586" y="332" font-family="system-ui, sans-serif" font-size="12" fill="#94a3b8">Confidence: <tspan fill="#f8fafc">avg 0.464</tspan> | Uncertainty: <tspan fill="#f8fafc">avg 0.991</tspan></text>
+  <text x="586" y="352" font-family="system-ui, sans-serif" font-size="12" fill="#94a3b8">Max Transit: <tspan fill="#f8fafc">5659.7 m</tspan> | Reg Shift: <tspan fill="#f8fafc">dx=-0.04px</tspan></text>
+  <rect x="586" y="364" width="450" height="24" fill="#0f172a" rx="4" />
+  <text x="596" y="380" font-family="system-ui, sans-serif" font-size="11" fill="#34d399">ARES Simulation (B3): 9 inspected | Safe Return: True</text>
+  <!-- Card 3: bengaluru_tech -->
+  <rect x="40" y="420" width="498" height="220" fill="#1e293b" stroke="#334155" stroke-width="1.5" rx="10" />
+  <circle cx="64" cy="448" r="8" fill="#34d399" />
+  <text x="82" y="453" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#f8fafc">Bengaluru Electronic City Infrastructure</text>
+  <text x="64" y="476" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">Metro rail expansion and tech park infrastructure developments</text>
+  <line x1="64" y1="488" x2="514" y2="488" stroke="#334155" stroke-width="1" />
+  <text x="64" y="512" font-family="system-ui, sans-serif" font-size="12" fill="#94a3b8">Coordinates: <tspan fill="#f8fafc">12.85°N, 77.66°E</tspan></text>
+  <text x="64" y="532" font-family="system-ui, sans-serif" font-size="12" fill="#94a3b8">Interval: <tspan fill="#f8fafc">2022-01-23 → 2024-01-23</tspan></text>
+  <text x="64" y="552" font-family="system-ui, sans-serif" font-size="12" fill="#94a3b8">Candidates: <tspan fill="#34d399" font-weight="700">28 detections</tspan> (22.31 ha)</text>
+  <text x="64" y="572" font-family="system-ui, sans-serif" font-size="12" fill="#94a3b8">Confidence: <tspan fill="#f8fafc">avg 0.546</tspan> | Uncertainty: <tspan fill="#f8fafc">avg 0.976</tspan></text>
+  <text x="64" y="592" font-family="system-ui, sans-serif" font-size="12" fill="#94a3b8">Max Transit: <tspan fill="#f8fafc">5463.2 m</tspan> | Reg Shift: <tspan fill="#f8fafc">dx=0.07px</tspan></text>
+  <rect x="64" y="604" width="450" height="24" fill="#0f172a" rx="4" />
+  <text x="74" y="620" font-family="system-ui, sans-serif" font-size="11" fill="#34d399">ARES Simulation (B1): 1 inspected | Safe Return: True</text>
+  <!-- Card 4: chennai_sriperumbudur -->
+  <rect x="562" y="420" width="498" height="220" fill="#1e293b" stroke="#334155" stroke-width="1.5" rx="10" />
+  <circle cx="586" cy="448" r="8" fill="#c084fc" />
+  <text x="604" y="453" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#f8fafc">Chennai / Sriperumbudur Industrial Corridor</text>
+  <text x="586" y="476" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">Automotive and electronics manufacturing land development</text>
+  <line x1="586" y1="488" x2="1036" y2="488" stroke="#334155" stroke-width="1" />
+  <text x="586" y="512" font-family="system-ui, sans-serif" font-size="12" fill="#94a3b8">Coordinates: <tspan fill="#f8fafc">12.98°N, 79.96°E</tspan></text>
+  <text x="586" y="532" font-family="system-ui, sans-serif" font-size="12" fill="#94a3b8">Interval: <tspan fill="#f8fafc">2021-12-21 → 2023-11-16</tspan></text>
+  <text x="586" y="552" font-family="system-ui, sans-serif" font-size="12" fill="#94a3b8">Candidates: <tspan fill="#c084fc" font-weight="700">59 detections</tspan> (75.0 ha)</text>
+  <text x="586" y="572" font-family="system-ui, sans-serif" font-size="12" fill="#94a3b8">Confidence: <tspan fill="#f8fafc">avg 0.590</tspan> | Uncertainty: <tspan fill="#f8fafc">avg 0.966</tspan></text>
+  <text x="586" y="592" font-family="system-ui, sans-serif" font-size="12" fill="#94a3b8">Max Transit: <tspan fill="#f8fafc">6941.1 m</tspan> | Reg Shift: <tspan fill="#f8fafc">dx=0.03px</tspan></text>
+  <rect x="586" y="604" width="450" height="24" fill="#0f172a" rx="4" />
+  <text x="596" y="620" font-family="system-ui, sans-serif" font-size="11" fill="#34d399">ARES Simulation (B1): 2 inspected | Safe Return: True</text>
+</svg>
