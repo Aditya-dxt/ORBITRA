@@ -5,6 +5,7 @@ from .synthetic_sample_data import generate_benchmark_pair
 from .india_satellite_data import INDIAN_MISSION_ZONES, IndiaSatelliteDataLoader
 from .image_resolver import ImagePairResolver, ResolvedImagePair
 from .mission_gallery import MissionGalleryGenerator, compute_shannon_entropy
+from .dashboard_generator import MissionDashboardGenerator
 
 __all__ = [
     "ChangeDetectionDataset",
@@ -15,4 +16,5 @@ __all__ = [
     "ResolvedImagePair",
     "MissionGalleryGenerator",
     "compute_shannon_entropy",
+    "MissionDashboardGenerator",
 ]

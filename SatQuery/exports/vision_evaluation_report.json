@@ -42,7 +42,7 @@
         "spurious_regions_fp": 8,
         "missed_regions_fn": 12
       },
-      "avg_inference_latency_ms": 10.7
+      "avg_inference_latency_ms": 62.25
     },
     "deep_siamese_model": {
       "name": "Deep Siamese ResNet-34 (Calibrated Feature Attention Fallback (weights 'best_siamese_model.pth' present, PyTorch uninstalled))",
@@ -61,7 +61,7 @@
         "spurious_regions_fp": 1,
         "missed_regions_fn": 17
       },
-      "avg_inference_latency_ms": 8.09
+      "avg_inference_latency_ms": 36.31
     },
     "performance_delta": {
       "delta_pixel_f1": -0.4346,
@@ -210,7 +210,7 @@
       },
       "num_candidates": 4,
       "num_gt_regions": 4,
-      "inference_time_ms": 7.02
+      "inference_time_ms": 43.11
     },
     {
       "scene_name": "Dense Urban Construction B",
@@ -235,7 +235,7 @@
       },
       "num_candidates": 2,
       "num_gt_regions": 3,
-      "inference_time_ms": 6.92
+      "inference_time_ms": 103.13
     },
     {
       "scene_name": "Road & Infrastructure Expansion",
@@ -260,7 +260,7 @@
       },
       "num_candidates": 1,
       "num_gt_regions": 2,
-      "inference_time_ms": 24.02
+      "inference_time_ms": 144.0
     },
     {
       "scene_name": "Vegetation Clearing & Land Prep",
@@ -285,7 +285,7 @@
       },
       "num_candidates": 1,
       "num_gt_regions": 1,
-      "inference_time_ms": 13.75
+      "inference_time_ms": 51.91
     },
     {
       "scene_name": "Mixed Urban & Infrastructure",
@@ -310,7 +310,7 @@
       },
       "num_candidates": 4,
       "num_gt_regions": 5,
-      "inference_time_ms": 10.0
+      "inference_time_ms": 46.8
     },
     {
       "scene_name": "Sparse Industrial Layout",
@@ -335,7 +335,7 @@
       },
       "num_candidates": 4,
       "num_gt_regions": 3,
-      "inference_time_ms": 10.04
+      "inference_time_ms": 27.06
     },
     {
       "scene_name": "Suburban Development",
@@ -360,7 +360,7 @@
       },
       "num_candidates": 2,
       "num_gt_regions": 4,
-      "inference_time_ms": 7.6
+      "inference_time_ms": 26.04
     },
     {
       "scene_name": "Negative Control (No Change)",
@@ -385,7 +385,7 @@
       },
       "num_candidates": 0,
       "num_gt_regions": 0,
-      "inference_time_ms": 6.27
+      "inference_time_ms": 55.96
     }
   ],
   "deep_siamese_scene_results": [
@@ -412,7 +412,7 @@
       },
       "num_candidates": 1,
       "num_gt_regions": 4,
-      "inference_time_ms": 8.33
+      "inference_time_ms": 65.68
     },
     {
       "scene_name": "Dense Urban Construction B",
@@ -437,7 +437,7 @@
       },
       "num_candidates": 1,
       "num_gt_regions": 3,
-      "inference_time_ms": 8.5
+      "inference_time_ms": 30.49
     },
     {
       "scene_name": "Road & Infrastructure Expansion",
@@ -462,7 +462,7 @@
       },
       "num_candidates": 0,
       "num_gt_regions": 2,
-      "inference_time_ms": 7.88
+      "inference_time_ms": 36.29
     },
     {
       "scene_name": "Vegetation Clearing & Land Prep",
@@ -487,7 +487,7 @@
       },
       "num_candidates": 1,
       "num_gt_regions": 1,
-      "inference_time_ms": 8.34
+      "inference_time_ms": 29.4
     },
     {
       "scene_name": "Mixed Urban & Infrastructure",
@@ -512,7 +512,7 @@
       },
       "num_candidates": 1,
       "num_gt_regions": 5,
-      "inference_time_ms": 8.32
+      "inference_time_ms": 31.22
     },
     {
       "scene_name": "Sparse Industrial Layout",
@@ -537,7 +537,7 @@
       },
       "num_candidates": 1,
       "num_gt_regions": 3,
-      "inference_time_ms": 7.69
+      "inference_time_ms": 33.47
     },
     {
       "scene_name": "Suburban Development",
@@ -562,7 +562,7 @@
       },
       "num_candidates": 1,
       "num_gt_regions": 4,
-      "inference_time_ms": 8.26
+      "inference_time_ms": 34.68
     },
     {
       "scene_name": "Negative Control (No Change)",
@@ -587,7 +587,7 @@
       },
       "num_candidates": 0,
       "num_gt_regions": 0,
-      "inference_time_ms": 7.39
+      "inference_time_ms": 29.23
     }
   ],
   "failure_taxonomy": [

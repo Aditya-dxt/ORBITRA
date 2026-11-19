@@ -1,0 +1,3727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ORBITRA: Mission Operations & Vision Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-dark: #0a0f1d;
+      --card-bg: #11192e;
+      --card-border: #1e293b;
+      --accent-blue: #38bdf8;
+      --accent-emerald: #34d399;
+      --accent-amber: #fbbf24;
+      --accent-rose: #f43f5e;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; }
+    header { background: rgba(17, 25, 46, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--card-border); padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-icon { background: linear-gradient(135deg, #0284c7, #38bdf8); width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: white; }
+    .nav-corridors { display: flex; gap: 8px; }
+    .corridor-btn { background: #1e293b; color: var(--text-muted); border: 1px solid transparent; padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+    .corridor-btn:hover { background: #283548; color: var(--text-main); }
+    .corridor-btn.active { background: #0284c7; color: white; border-color: var(--accent-blue); box-shadow: 0 0 12px rgba(56, 189, 248, 0.35); }
+    .badge { padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; display: inline-flex; align-items: center; gap: 5px; }
+    .badge-success { background: rgba(52, 211, 153, 0.15); color: var(--accent-emerald); border: 1px solid rgba(52, 211, 153, 0.3); }
+    .badge-info { background: rgba(56, 189, 248, 0.15); color: var(--accent-blue); border: 1px solid rgba(56, 189, 248, 0.3); }
+    .badge-warning { background: rgba(251, 191, 36, 0.15); color: var(--accent-amber); border: 1px solid rgba(251, 191, 36, 0.3); }
+    .badge-danger { background: rgba(244, 63, 94, 0.15); color: var(--accent-rose); border: 1px solid rgba(244, 63, 94, 0.3); }
+    main { display: grid; grid-template-columns: 1fr 380px; gap: 16px; padding: 16px 24px; flex: 1; max-width: 1600px; margin: 0 auto; width: 100%; }
+    .viewport-card, .inspector-card, .drawer-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+    .drawer-card { grid-column: 1 / -1; margin-top: 8px; }
+    .viewport-toolbar { padding: 10px 16px; background: #0f172a; border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .view-modes { display: flex; background: #1e293b; border-radius: 6px; padding: 2px; }
+    .mode-tab { padding: 5px 12px; font-size: 11px; font-weight: 600; color: var(--text-muted); cursor: pointer; border-radius: 4px; border: none; background: transparent; }
+    .mode-tab.active { background: #0284c7; color: white; }
+    .viewport-canvas-container { position: relative; width: 100%; height: 540px; background: #050811; display: flex; align-items: center; justify-content: center; }
+    #viewer-stage { position: relative; width: 512px; height: 512px; box-shadow: 0 8px 32px rgba(0,0,0,0.6); border-radius: 4px; overflow: hidden; user-select: none; }
+    .stage-layer { position: absolute; top: 0; left: 0; width: 512px; height: 512px; pointer-events: none; }
+    #pre-layer { z-index: 1; }
+    #post-layer { z-index: 2; }
+    #heatmap-layer { z-index: 3; opacity: 0; mix-blend-mode: screen; }
+    #mask-layer { z-index: 4; opacity: 0; mix-blend-mode: lighten; }
+    #overlay-canvas { position: absolute; top: 0; left: 0; width: 512px; height: 512px; z-index: 5; cursor: crosshair; }
+    .swipe-divider { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--accent-blue); box-shadow: 0 0 8px var(--accent-blue); z-index: 6; pointer-events: none; }
+    .swipe-handle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 26px; height: 26px; border-radius: 50%; background: var(--accent-blue); border: 2px solid white; display: flex; align-items: center; justify-content: center; color: #0f172a; font-size: 11px; }
+    .viewport-footer { padding: 10px 16px; background: #0f172a; border-top: 1px solid var(--card-border); display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); }
+    .inspector-header { padding: 14px 16px; background: #0f172a; border-bottom: 1px solid var(--card-border); }
+    .selected-candidate-panel { padding: 16px; border-bottom: 1px solid var(--card-border); background: rgba(30, 41, 59, 0.4); }
+    .meter-block { margin-bottom: 10px; }
+    .meter-label { display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px; }
+    .meter-track { width: 100%; height: 6px; background: #0f172a; border-radius: 3px; overflow: hidden; }
+    .meter-fill-conf { height: 100%; background: linear-gradient(90deg, #38bdf8, #34d399); width: 0%; transition: width 0.3s; }
+    .meter-fill-unc { height: 100%; background: linear-gradient(90deg, #fbbf24, #f43f5e); width: 0%; transition: width 0.3s; }
+    .telemetry-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+    .tele-item { background: #0f172a; padding: 6px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05); }
+    .tele-k { font-size: 10px; color: var(--text-muted); text-transform: uppercase; }
+    .tele-v { font-size: 12px; font-weight: 600; color: var(--text-main); }
+    .ares-action-box { margin-top: 12px; padding: 10px; border-radius: 8px; background: #0f172a; border: 1px solid var(--card-border); }
+    .cand-table-scroll { flex: 1; max-height: 250px; overflow-y: auto; }
+    .cand-item { padding: 8px 16px; border-bottom: 1px solid rgba(255,255,255,0.04); display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-size: 12px; }
+    .cand-item:hover { background: rgba(56, 189, 248, 0.08); }
+    .cand-item.active { background: rgba(56, 189, 248, 0.2); border-left: 3px solid var(--accent-blue); }
+    .drawer-tabs { display: flex; background: #0f172a; border-bottom: 1px solid var(--card-border); }
+    .d-tab { padding: 10px 20px; font-size: 12px; font-weight: 600; color: var(--text-muted); cursor: pointer; background: transparent; border: none; }
+    .d-tab.active { color: var(--accent-blue); border-bottom: 2px solid var(--accent-blue); background: var(--card-bg); }
+    .drawer-content { padding: 16px 20px; font-size: 12px; }
+    .drawer-pane { display: none; }
+    .drawer-pane.active { display: block; }
+    table.data-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+    table.data-table th { background: #0f172a; padding: 8px 12px; color: var(--text-muted); border-bottom: 1px solid var(--card-border); text-align: left; }
+    table.data-table td { padding: 8px 12px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="brand-icon"><i class="fa-solid fa-satellite"></i></div>
+      <div class="brand-text">
+        <h1 style="font-size: 16px; font-weight: 700;">ORBITRA MISSION CONTROL</h1>
+        <p style="font-size: 11px; color: var(--text-muted);">SatQuery Vision & Spatial Verification Engine | Schema v1.0.0</p>
+      </div>
+    </div>
+    <div class="nav-corridors" id="corridor-nav"></div>
+    <div style="display: flex; gap: 8px;">
+      <span class="badge badge-success"><i class="fa-solid fa-check"></i> ECE: 0.0557 (Calibrated)</span>
+      <span class="badge badge-info"><i class="fa-solid fa-crosshairs"></i> 10m GSD (Sentinel-2)</span>
+    </div>
+  </header>
+
+  <main>
+    <div class="viewport-card">
+      <div class="viewport-toolbar">
+        <div class="view-modes">
+          <button class="mode-tab active" data-mode="swipe"><i class="fa-solid fa-arrows-left-right"></i> Wipe / Swipe</button>
+          <button class="mode-tab" data-mode="heatmap"><i class="fa-solid fa-fire"></i> Heatmap</button>
+          <button class="mode-tab" data-mode="detections"><i class="fa-solid fa-vector-square"></i> Detections</button>
+          <button class="mode-tab" data-mode="t1">T1</button>
+          <button class="mode-tab" data-mode="t2">T2</button>
+        </div>
+        <div id="swipe-control" style="display: flex; align-items: center; gap: 8px; font-size: 11px;">
+          <span>Wipe:</span>
+          <input type="range" id="swipe-range" min="0" max="100" value="50" style="accent-color: var(--accent-blue);">
+          <span id="swipe-val">50%</span>
+        </div>
+        <div id="heat-control" style="display: none; align-items: center; gap: 8px; font-size: 11px;">
+          <span>Heatmap Alpha:</span>
+          <input type="range" id="heat-range" min="0" max="100" value="70" style="accent-color: var(--accent-blue);">
+          <span id="heat-val">70%</span>
+        </div>
+      </div>
+      <div class="viewport-canvas-container">
+        <div id="viewer-stage">
+          <img id="pre-layer" class="stage-layer" alt="Pre Image">
+          <img id="post-layer" class="stage-layer" alt="Post Image">
+          <img id="heatmap-layer" class="stage-layer" alt="Heatmap Image">
+          <img id="mask-layer" class="stage-layer" alt="Mask Image">
+          <canvas id="overlay-canvas" width="512" height="512"></canvas>
+          <div class="swipe-divider" id="divider" style="left: 50%;">
+            <div class="swipe-handle"><i class="fa-solid fa-left-right"></i></div>
+          </div>
+        </div>
+      </div>
+      <div class="viewport-footer">
+        <div><i class="fa-solid fa-calendar"></i> <span id="interval-label">Epoch: 2021 -> 2023</span></div>
+        <div><i class="fa-solid fa-location-dot"></i> <span id="coords-label">Home Base: 26.447°N, 80.198°E</span></div>
+        <div><i class="fa-solid fa-satellite-dish"></i> Sensor: ESA Sentinel-2 Level-2A</div>
+      </div>
+    </div>
+
+    <div class="inspector-card">
+      <div class="inspector-header">
+        <h2 style="font-size: 14px; color: var(--accent-blue);"><i class="fa-solid fa-bullseye"></i> Candidate Verification</h2>
+        <p style="font-size: 11px; color: var(--text-muted);">Telemetry, Entropy Uncertainty & ARES Triage</p>
+      </div>
+      <div class="selected-candidate-panel">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <strong style="font-size: 15px;" id="sel-cand-id">cand_sq_levir_001</strong>
+          <span class="badge badge-info" id="sel-cand-area">0.32 ha</span>
+        </div>
+        <div class="meter-block">
+          <div class="meter-label"><span>Calibrated Confidence (p):</span><span id="sel-conf-val" style="color: var(--accent-blue); font-weight: 700;">0.520</span></div>
+          <div class="meter-track"><div class="meter-fill-conf" id="sel-conf-bar"></div></div>
+        </div>
+        <div class="meter-block">
+          <div class="meter-label"><span>Shannon Uncertainty (u):</span><span id="sel-unc-val" style="color: var(--accent-amber); font-weight: 700;">0.990</span></div>
+          <div class="meter-track"><div class="meter-fill-unc" id="sel-unc-bar"></div></div>
+        </div>
+        <div class="telemetry-grid">
+          <div class="tele-item"><div class="tele-k">Local X / Y (ENU)</div><div class="tele-v" id="sel-local-xy">520.0m, 3840.0m</div></div>
+          <div class="tele-item"><div class="tele-k">Transit Distance</div><div class="tele-v" id="sel-dist">3,875.0 m</div></div>
+          <div class="tele-item"><div class="tele-k">Geodetic (Lat, Lon)</div><div class="tele-v" id="sel-geodetic">26.481°, 80.203°</div></div>
+          <div class="tele-item"><div class="tele-k">Surface Area</div><div class="tele-v" id="sel-m2">3,200 m²</div></div>
+        </div>
+        <div class="ares-action-box">
+          <div style="font-size: 10px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">ARES Autonomous Triage Decision</div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 12px; font-weight: 700;" id="sel-ares-act">STRONGER_MODEL</span>
+            <span class="badge badge-warning" id="sel-ares-cost">1,450 J (0.40 Wh)</span>
+          </div>
+        </div>
+      </div>
+      <div style="padding: 10px 16px; background: #0f172a; border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-size: 12px; font-weight: 700;">Detections (<span id="cand-count">0</span>)</span>
+        <input type="text" id="cand-search" placeholder="Search ID..." style="background: #1e293b; border: 1px solid var(--card-border); color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; width: 130px;">
+      </div>
+      <div class="cand-table-scroll" id="cand-list"></div>
+    </div>
+
+    <div class="drawer-card">
+      <div class="drawer-tabs">
+        <button class="d-tab active" data-pane="pane-summary"><i class="fa-solid fa-chart-pie"></i> Multi-Zone Corridors</button>
+        <button class="d-tab" data-pane="pane-calibration"><i class="fa-solid fa-chart-line"></i> Calibration & Reliability</button>
+        <button class="d-tab" data-pane="pane-ares"><i class="fa-solid fa-battery-half"></i> Energy Model & Reserve</button>
+        <button class="d-tab" data-pane="pane-gis"><i class="fa-solid fa-map"></i> GIS GeoTIFF & GeoJSON Layers</button>
+      </div>
+      <div class="drawer-content">
+        <div class="drawer-pane active" id="pane-summary">
+          <table class="data-table">
+            <thead>
+              <tr><th>Corridor Key</th><th>Region Name</th><th>Baseline Window</th><th>Candidates</th><th>Total Footprint</th><th>ARES Policy</th><th>Safe Return</th></tr>
+            </thead>
+            <tbody id="corridors-tbody"></tbody>
+          </table>
+        </div>
+        <div class="drawer-pane" id="pane-calibration">
+          <div style="display: flex; gap: 20px; align-items: center;">
+            <div style="flex: 1;">
+              <h3 style="font-size: 13px; color: var(--accent-blue); margin-bottom: 6px;">Held-Out Calibration Properties (N=600)</h3>
+              <p style="color: var(--text-muted); line-height: 1.5; margin-bottom: 10px;">Trained via Newton-Raphson IRLS Platt scaling over validation logits. Evaluated strictly on held-out test scenes to prevent spatial leakage.</p>
+              <div style="display: flex; gap: 12px;">
+                <span class="badge badge-success">Calibrated ECE: 0.0557 (Passed &lt; 0.10)</span>
+                <span class="badge badge-info">Brier Score: 0.1767</span>
+                <span class="badge badge-warning">Max Calibration Error (MCE): 0.1405</span>
+              </div>
+            </div>
+            <div style="width: 240px; text-align: center;">
+              <a href="calibration_reliability_diagram.svg" target="_blank" style="color: var(--accent-blue); text-decoration: none; font-size: 11px;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open Vector Reliability Diagram SVG</a>
+            </div>
+          </div>
+        </div>
+        <div class="drawer-pane" id="pane-ares">
+          <p style="line-height: 1.6; color: var(--text-muted); margin-bottom: 8px;"><strong style="color: white;">Energy Accounting Equation:</strong> E = P * t / 3600 Wh. Action cost: Ea = Efly + Ecap + Ecomp + Ecomm.</p>
+          <p style="line-height: 1.6; color: var(--text-muted);"><strong style="color: white;">Return-Reserve Feasibility Guardrail:</strong> Erem - Ea >= Ereturn(xa) + Esafety. Every sortie strictly reserves return transit energy, ensuring zero battery strandings.</p>
+        </div>
+        <div class="drawer-pane" id="pane-gis">
+          <p style="color: var(--text-muted); margin-bottom: 10px;">Standards-compliant OGC GeoTIFF (EPSG:4326) and RFC 7946 GeoJSON layers are pre-generated in <code>SatQuery/exports/gis/</code>.</p>
+          <div style="display: flex; gap: 10px;">
+            <a href="../gis/kanpur_bhauti/kanpur_bhauti_candidates.geojson" download class="badge badge-info" style="text-decoration: none;"><i class="fa-solid fa-download"></i> Kanpur Candidates (.geojson)</a>
+            <a href="../gis/delhi_ncr/delhi_ncr_candidates.geojson" download class="badge badge-info" style="text-decoration: none;"><i class="fa-solid fa-download"></i> Delhi Candidates (.geojson)</a>
+            <a href="../gis/bengaluru_tech/bengaluru_tech_candidates.geojson" download class="badge badge-info" style="text-decoration: none;"><i class="fa-solid fa-download"></i> Bengaluru Candidates (.geojson)</a>
+            <a href="../gis/chennai_sriperumbudur/chennai_sriperumbudur_candidates.geojson" download class="badge badge-info" style="text-decoration: none;"><i class="fa-solid fa-download"></i> Chennai Candidates (.geojson)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script id="orbitra-data" type="application/json">
+{
+  "app_title": "ORBITRA Mission Operations Dashboard",
+  "version": "1.0.0",
+  "ece_metric": 0.0557,
+  "brier_metric": 0.1767,
+  "zones": {
+    "kanpur_bhauti": {
+      "key": "kanpur_bhauti",
+      "name": "Kanpur / Bhauti Corridor, Uttar Pradesh",
+      "description": "High-growth industrial and highway construction along NH-19 near PSIT Kanpur",
+      "home_coordinates": {
+        "lat": 26.447,
+        "lon": 80.198
+      },
+      "bbox": [
+        80.14,
+        26.4,
+        80.26,
+        26.5
+      ],
+      "pre_date": "2021-12-07",
+      "post_date": "2023-12-24",
+      "pre_scene_id": "S2B_MSIL2A_20211207T052209_R062_T44RMQ_20230129T143928",
+      "post_scene_id": "S2B_MSIL2A_20231224T051229_R019_T44RMQ_20231224T091848",
+      "pre_img_url": "../../data/india_scenes/kanpur_bhauti_pre_real.png",
+      "post_img_url": "../../data/india_scenes/kanpur_bhauti_post_real.png",
+      "heatmap_url": "kanpur_bhauti_heatmap.png",
+      "mask_url": "kanpur_bhauti_mask.png",
+      "total_candidates": 5,
+      "candidates": [
+        {
+          "candidate_id": "cand_sq_levir_001",
+          "confidence": 0.4819,
+          "uncertainty": 0.9991,
+          "shannon_entropy": 0.9991,
+          "bbox_pixels": [
+            50,
+            380,
+            54,
+            388
+          ],
+          "pixel_area": 32,
+          "area_m2": 3200.0,
+          "area_ha": 0.32,
+          "local_grid": {
+            "x_meters": 520.0,
+            "y_meters": 3840.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 3875.0,
+          "coordinates": {
+            "center_lat": 26.481659,
+            "center_lon": 80.203214,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-12-24T05:12:29.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_002",
+          "confidence": 0.5137,
+          "uncertainty": 0.9995,
+          "shannon_entropy": 0.9995,
+          "bbox_pixels": [
+            171,
+            173,
+            178,
+            179
+          ],
+          "pixel_area": 42,
+          "area_m2": 4200.0,
+          "area_ha": 0.42,
+          "local_grid": {
+            "x_meters": 1745.0,
+            "y_meters": 1760.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 2478.4,
+          "coordinates": {
+            "center_lat": 26.462885,
+            "center_lon": 80.215496,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-12-24T05:12:29.024000Z",
+          "ares_recommendation": "RECAPTURE (UAV FLIGHT)",
+          "ares_cost": "56,214 J (15.62 Wh)",
+          "ares_badge": "badge-danger"
+        },
+        {
+          "candidate_id": "cand_sq_levir_003",
+          "confidence": 0.4716,
+          "uncertainty": 0.9977,
+          "shannon_entropy": 0.9977,
+          "bbox_pixels": [
+            154,
+            156,
+            164,
+            166
+          ],
+          "pixel_area": 100,
+          "area_m2": 10000.0,
+          "area_ha": 1.0,
+          "local_grid": {
+            "x_meters": 1590.0,
+            "y_meters": 1610.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 2262.8,
+          "coordinates": {
+            "center_lat": 26.461531,
+            "center_lon": 80.213942,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-12-24T05:12:29.024000Z",
+          "ares_recommendation": "RECAPTURE (UAV FLIGHT)",
+          "ares_cost": "51,362 J (14.27 Wh)",
+          "ares_badge": "badge-danger"
+        },
+        {
+          "candidate_id": "cand_sq_levir_004",
+          "confidence": 0.508,
+          "uncertainty": 0.9998,
+          "shannon_entropy": 0.9998,
+          "bbox_pixels": [
+            468,
+            0,
+            487,
+            20
+          ],
+          "pixel_area": 380,
+          "area_m2": 38000.0,
+          "area_ha": 3.8,
+          "local_grid": {
+            "x_meters": 4775.0,
+            "y_meters": 100.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4776.0,
+          "coordinates": {
+            "center_lat": 26.447903,
+            "center_lon": 80.245876,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-12-24T05:12:29.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_005",
+          "confidence": 0.4858,
+          "uncertainty": 0.9994,
+          "shannon_entropy": 0.9994,
+          "bbox_pixels": [
+            110,
+            0,
+            512,
+            512
+          ],
+          "pixel_area": 205824,
+          "area_m2": 20582400.0,
+          "area_ha": 2058.24,
+          "local_grid": {
+            "x_meters": 3110.0,
+            "y_meters": 2560.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4028.1,
+          "coordinates": {
+            "center_lat": 26.470106,
+            "center_lon": 80.229182,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-12-24T05:12:29.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        }
+      ],
+      "mission_summary": {
+        "policy_id": "B4",
+        "policy_name": "Greedy Benefit per Energy",
+        "provenance": "SIMULATED",
+        "initial_battery_joules": 180000.0,
+        "initial_battery_wh": 50.0,
+        "final_battery_joules": 49290.1,
+        "final_battery_wh": 13.69,
+        "total_energy_spent_actions_joules": 70281.5,
+        "total_energy_spent_actions_wh": 19.52,
+        "return_flight_energy_joules": 60428.4,
+        "return_flight_energy_wh": 16.79,
+        "safe_return_completed": true,
+        "candidates_total": 5,
+        "candidates_inspected": 3,
+        "candidates_deferred": 2,
+        "candidates_skipped": 0,
+        "ledger_records_count": 5,
+        "summary_message": "[SIMULATED] Sortie under B4 (Greedy Benefit per Energy) completed: 3 inspected, 0 skipped, 2 deferred. Safe return: True."
+      }
+    },
+    "delhi_ncr": {
+      "key": "delhi_ncr",
+      "name": "Delhi NCR / Gurugram Development Corridor",
+      "description": "Rapid commercial and residential urban spread in NCR",
+      "home_coordinates": {
+        "lat": 28.48,
+        "lon": 77.05
+      },
+      "bbox": [
+        77.0,
+        28.42,
+        77.1,
+        28.52
+      ],
+      "pre_date": "2021-12-20",
+      "post_date": "2023-12-10",
+      "pre_scene_id": "S2B_MSIL2A_20211220T053229_R105_T43RGM_20211221T022327",
+      "post_scene_id": "S2B_MSIL2A_20231210T053219_R105_T43RGM_20241101T190133",
+      "pre_img_url": "../../data/india_scenes/delhi_ncr_pre_real.png",
+      "post_img_url": "../../data/india_scenes/delhi_ncr_post_real.png",
+      "heatmap_url": "delhi_ncr_heatmap.png",
+      "mask_url": "delhi_ncr_mask.png",
+      "total_candidates": 9,
+      "candidates": [
+        {
+          "candidate_id": "cand_sq_levir_001",
+          "confidence": 0.4139,
+          "uncertainty": 0.9785,
+          "shannon_entropy": 0.9785,
+          "bbox_pixels": [
+            223,
+            499,
+            234,
+            503
+          ],
+          "pixel_area": 44,
+          "area_m2": 4400.0,
+          "area_ha": 0.44,
+          "local_grid": {
+            "x_meters": 2285.0,
+            "y_meters": 5010.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 5506.5,
+          "coordinates": {
+            "center_lat": 28.525205,
+            "center_lon": 77.073335,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-12-10T05:32:19.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_002",
+          "confidence": 0.4316,
+          "uncertainty": 0.9865,
+          "shannon_entropy": 0.9865,
+          "bbox_pixels": [
+            238,
+            485,
+            298,
+            512
+          ],
+          "pixel_area": 1620,
+          "area_m2": 162000.0,
+          "area_ha": 16.2,
+          "local_grid": {
+            "x_meters": 2680.0,
+            "y_meters": 4985.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 5659.7,
+          "coordinates": {
+            "center_lat": 28.52498,
+            "center_lon": 77.077369,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-12-10T05:32:19.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_003",
+          "confidence": 0.4453,
+          "uncertainty": 0.9914,
+          "shannon_entropy": 0.9913,
+          "bbox_pixels": [
+            152,
+            376,
+            166,
+            384
+          ],
+          "pixel_area": 112,
+          "area_m2": 11200.0,
+          "area_ha": 1.12,
+          "local_grid": {
+            "x_meters": 1590.0,
+            "y_meters": 3800.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4119.2,
+          "coordinates": {
+            "center_lat": 28.514288,
+            "center_lon": 77.066237,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-12-10T05:32:19.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_004",
+          "confidence": 0.4074,
+          "uncertainty": 0.9751,
+          "shannon_entropy": 0.9751,
+          "bbox_pixels": [
+            67,
+            260,
+            73,
+            269
+          ],
+          "pixel_area": 54,
+          "area_m2": 5400.0,
+          "area_ha": 0.54,
+          "local_grid": {
+            "x_meters": 700.0,
+            "y_meters": 2645.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 2736.1,
+          "coordinates": {
+            "center_lat": 28.503866,
+            "center_lon": 77.057149,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-12-10T05:32:19.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_005",
+          "confidence": 0.4842,
+          "uncertainty": 0.9993,
+          "shannon_entropy": 0.9993,
+          "bbox_pixels": [
+            172,
+            257,
+            180,
+            263
+          ],
+          "pixel_area": 48,
+          "area_m2": 4800.0,
+          "area_ha": 0.48,
+          "local_grid": {
+            "x_meters": 1760.0,
+            "y_meters": 2600.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 3139.7,
+          "coordinates": {
+            "center_lat": 28.50346,
+            "center_lon": 77.067973,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-12-10T05:32:19.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_006",
+          "confidence": 0.5172,
+          "uncertainty": 0.9991,
+          "shannon_entropy": 0.9991,
+          "bbox_pixels": [
+            247,
+            230,
+            253,
+            235
+          ],
+          "pixel_area": 30,
+          "area_m2": 3000.0,
+          "area_ha": 0.3,
+          "local_grid": {
+            "x_meters": 2500.0,
+            "y_meters": 2325.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 3414.0,
+          "coordinates": {
+            "center_lat": 28.500979,
+            "center_lon": 77.07553,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-12-10T05:32:19.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_007",
+          "confidence": 0.4434,
+          "uncertainty": 0.9907,
+          "shannon_entropy": 0.9907,
+          "bbox_pixels": [
+            86,
+            225,
+            95,
+            234
+          ],
+          "pixel_area": 81,
+          "area_m2": 8100.0,
+          "area_ha": 0.81,
+          "local_grid": {
+            "x_meters": 905.0,
+            "y_meters": 2295.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 2467.0,
+          "coordinates": {
+            "center_lat": 28.500708,
+            "center_lon": 77.059242,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-12-10T05:32:19.024000Z",
+          "ares_recommendation": "RECAPTURE (UAV FLIGHT)",
+          "ares_cost": "55,957 J (15.54 Wh)",
+          "ares_badge": "badge-danger"
+        },
+        {
+          "candidate_id": "cand_sq_levir_008",
+          "confidence": 0.5143,
+          "uncertainty": 0.9994,
+          "shannon_entropy": 0.9994,
+          "bbox_pixels": [
+            85,
+            217,
+            91,
+            225
+          ],
+          "pixel_area": 48,
+          "area_m2": 4800.0,
+          "area_ha": 0.48,
+          "local_grid": {
+            "x_meters": 880.0,
+            "y_meters": 2210.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 2378.8,
+          "coordinates": {
+            "center_lat": 28.499941,
+            "center_lon": 77.058987,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-12-10T05:32:19.024000Z",
+          "ares_recommendation": "RECAPTURE (UAV FLIGHT)",
+          "ares_cost": "53,972 J (14.99 Wh)",
+          "ares_badge": "badge-danger"
+        },
+        {
+          "candidate_id": "cand_sq_levir_009",
+          "confidence": 0.5163,
+          "uncertainty": 0.9992,
+          "shannon_entropy": 0.9992,
+          "bbox_pixels": [
+            95,
+            186,
+            103,
+            194
+          ],
+          "pixel_area": 64,
+          "area_m2": 6400.0,
+          "area_ha": 0.64,
+          "local_grid": {
+            "x_meters": 990.0,
+            "y_meters": 1900.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 2142.5,
+          "coordinates": {
+            "center_lat": 28.497144,
+            "center_lon": 77.06011,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-12-10T05:32:19.024000Z",
+          "ares_recommendation": "RECAPTURE (UAV FLIGHT)",
+          "ares_cost": "48,655 J (13.52 Wh)",
+          "ares_badge": "badge-danger"
+        }
+      ],
+      "mission_summary": {
+        "policy_id": "B3",
+        "policy_name": "Joint Policy",
+        "provenance": "SIMULATED",
+        "initial_battery_joules": 180000.0,
+        "initial_battery_wh": 50.0,
+        "final_battery_joules": 179550.0,
+        "final_battery_wh": 49.88,
+        "total_energy_spent_actions_joules": 450.0,
+        "total_energy_spent_actions_wh": 0.12,
+        "return_flight_energy_joules": 0.0,
+        "return_flight_energy_wh": 0.0,
+        "safe_return_completed": true,
+        "candidates_total": 9,
+        "candidates_inspected": 9,
+        "candidates_deferred": 0,
+        "candidates_skipped": 0,
+        "ledger_records_count": 10,
+        "summary_message": "[SIMULATED] Sortie under B3 (Joint Policy) completed: 9 inspected, 0 skipped, 0 deferred. Safe return: True."
+      }
+    },
+    "bengaluru_tech": {
+      "key": "bengaluru_tech",
+      "name": "Bengaluru Electronic City Infrastructure",
+      "description": "Metro rail expansion and tech park infrastructure developments",
+      "home_coordinates": {
+        "lat": 12.85,
+        "lon": 77.66
+      },
+      "bbox": [
+        77.6,
+        12.8,
+        77.72,
+        12.9
+      ],
+      "pre_date": "2022-01-23",
+      "post_date": "2024-01-23",
+      "pre_scene_id": "S2B_MSIL2A_20220123T051109_R019_T43PGQ_20220123T225338",
+      "post_scene_id": "S2B_MSIL2A_20240123T051119_R019_T43PGQ_20240123T092303",
+      "pre_img_url": "../../data/india_scenes/bengaluru_tech_pre_real.png",
+      "post_img_url": "../../data/india_scenes/bengaluru_tech_post_real.png",
+      "heatmap_url": "bengaluru_tech_heatmap.png",
+      "mask_url": "bengaluru_tech_mask.png",
+      "total_candidates": 28,
+      "candidates": [
+        {
+          "candidate_id": "cand_sq_levir_001",
+          "confidence": 0.6287,
+          "uncertainty": 0.9517,
+          "shannon_entropy": 0.9517,
+          "bbox_pixels": [
+            149,
+            431,
+            155,
+            440
+          ],
+          "pixel_area": 54,
+          "area_m2": 5400.0,
+          "area_ha": 0.54,
+          "local_grid": {
+            "x_meters": 1520.0,
+            "y_meters": 4355.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4612.6,
+          "coordinates": {
+            "center_lat": 12.889366,
+            "center_lon": 77.674003,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2024-01-23T05:11:19.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_002",
+          "confidence": 0.4212,
+          "uncertainty": 0.982,
+          "shannon_entropy": 0.982,
+          "bbox_pixels": [
+            253,
+            407,
+            260,
+            415
+          ],
+          "pixel_area": 56,
+          "area_m2": 5600.0,
+          "area_ha": 0.56,
+          "local_grid": {
+            "x_meters": 2565.0,
+            "y_meters": 4110.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4844.7,
+          "coordinates": {
+            "center_lat": 12.887151,
+            "center_lon": 77.68363,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2024-01-23T05:11:19.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_003",
+          "confidence": 0.4256,
+          "uncertainty": 0.984,
+          "shannon_entropy": 0.984,
+          "bbox_pixels": [
+            377,
+            390,
+            382,
+            396
+          ],
+          "pixel_area": 30,
+          "area_m2": 3000.0,
+          "area_ha": 0.3,
+          "local_grid": {
+            "x_meters": 3795.0,
+            "y_meters": 3930.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 5463.2,
+          "coordinates": {
+            "center_lat": 12.885524,
+            "center_lon": 77.694961,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2024-01-23T05:11:19.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_004",
+          "confidence": 0.5308,
+          "uncertainty": 0.9973,
+          "shannon_entropy": 0.9973,
+          "bbox_pixels": [
+            338,
+            372,
+            345,
+            381
+          ],
+          "pixel_area": 63,
+          "area_m2": 6300.0,
+          "area_ha": 0.63,
+          "local_grid": {
+            "x_meters": 3415.0,
+            "y_meters": 3765.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 5083.1,
+          "coordinates": {
+            "center_lat": 12.884033,
+            "center_lon": 77.69146,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2024-01-23T05:11:19.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_005",
+          "confidence": 0.5217,
+          "uncertainty": 0.9986,
+          "shannon_entropy": 0.9986,
+          "bbox_pixels": [
+            117,
+            355,
+            124,
+            366
+          ],
+          "pixel_area": 77,
+          "area_m2": 7700.0,
+          "area_ha": 0.77,
+          "local_grid": {
+            "x_meters": 1205.0,
+            "y_meters": 3605.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 3801.1,
+          "coordinates": {
+            "center_lat": 12.882586,
+            "center_lon": 77.671101,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2024-01-23T05:11:19.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_006",
+          "confidence": 0.6099,
+          "uncertainty": 0.9649,
+          "shannon_entropy": 0.9649,
+          "bbox_pixels": [
+            95,
+            349,
+            107,
+            357
+          ],
+          "pixel_area": 96,
+          "area_m2": 9600.0,
+          "area_ha": 0.96,
+          "local_grid": {
+            "x_meters": 1010.0,
+            "y_meters": 3530.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 3671.6,
+          "coordinates": {
+            "center_lat": 12.881908,
+            "center_lon": 77.669305,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2024-01-23T05:11:19.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_007",
+          "confidence": 0.5569,
+          "uncertainty": 0.9907,
+          "shannon_entropy": 0.9906,
+          "bbox_pixels": [
+            146,
+            345,
+            151,
+            351
+          ],
+          "pixel_area": 30,
+          "area_m2": 3000.0,
+          "area_ha": 0.3,
+          "local_grid": {
+            "x_meters": 1485.0,
+            "y_meters": 3480.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 3783.6,
+          "coordinates": {
+            "center_lat": 12.881456,
+            "center_lon": 77.67368,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2024-01-23T05:11:19.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_008",
+          "confidence": 0.5809,
+          "uncertainty": 0.981,
+          "shannon_entropy": 0.981,
+          "bbox_pixels": [
+            132,
+            335,
+            143,
+            346
+          ],
+          "pixel_area": 121,
+          "area_m2": 12100.0,
+          "area_ha": 1.21,
+          "local_grid": {
+            "x_meters": 1375.0,
+            "y_meters": 3405.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 3672.1,
+          "coordinates": {
+            "center_lat": 12.880778,
+            "center_lon": 77.672667,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2024-01-23T05:11:19.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_009",
+          "confidence": 0.6059,
+          "uncertainty": 0.9674,
+          "shannon_entropy": 0.9674,
+          "bbox_pixels": [
+            55,
+            330,
+            61,
+            336
+          ],
+          "pixel_area": 36,
+          "area_m2": 3600.0,
+          "area_ha": 0.36,
+          "local_grid": {
+            "x_meters": 580.0,
+            "y_meters": 3330.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 3380.1,
+          "coordinates": {
+            "center_lat": 12.880101,
+            "center_lon": 77.665343,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2024-01-23T05:11:19.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_010",
+          "confidence": 0.5755,
+          "uncertainty": 0.9835,
+          "shannon_entropy": 0.9835,
+          "bbox_pixels": [
+            112,
+            320,
+            119,
+            326
+          ],
+          "pixel_area": 42,
+          "area_m2": 4200.0,
+          "area_ha": 0.42,
+          "local_grid": {
+            "x_meters": 1155.0,
+            "y_meters": 3230.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 3430.3,
+          "coordinates": {
+            "center_lat": 12.879197,
+            "center_lon": 77.67064,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2024-01-23T05:11:19.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_011",
+          "confidence": 0.6414,
+          "uncertainty": 0.9415,
+          "shannon_entropy": 0.9415,
+          "bbox_pixels": [
+            28,
+            318,
+            33,
+            327
+          ],
+          "pixel_area": 45,
+          "area_m2": 4500.0,
+          "area_ha": 0.45,
+          "local_grid": {
+            "x_meters": 305.0,
+            "y_meters": 3225.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 3239.4,
+          "coordinates": {
+            "center_lat": 12.879151,
+            "center_lon": 77.66281,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2024-01-23T05:11:19.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_012",
+          "confidence": 0.58,
+          "uncertainty": 0.9814,
+          "shannon_entropy": 0.9815,
+          "bbox_pixels": [
+            0,
+            314,
+            8,
+            327
+          ],
+          "pixel_area": 104,
+          "area_m2": 10400.0,
+          "area_ha": 1.04,
+          "local_grid": {
+            "x_meters": 40.0,
+            "y_meters": 3205.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 3205.2,
+          "coordinates": {
+            "center_lat": 12.878971,
+            "center_lon": 77.660368,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2024-01-23T05:11:19.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_013",
+          "confidence": 0.6224,
+          "uncertainty": 0.9563,
+          "shannon_entropy": 0.9563,
+          "bbox_pixels": [
+            42,
+            311,
+            47,
+            319
+          ],
+          "pixel_area": 40,
+          "area_m2": 4000.0,
+          "area_ha": 0.4,
+          "local_grid": {
+            "x_meters": 445.0,
+            "y_meters": 3150.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 3181.3,
+          "coordinates": {
+            "center_lat": 12.878473,
+            "center_lon": 77.6641,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2024-01-23T05:11:19.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_014",
+          "confidence": 0.5919,
+          "uncertainty": 0.9755,
+          "shannon_entropy": 0.9755,
+          "bbox_pixels": [
+            135,
+            308,
+            142,
+            318
+          ],
+          "pixel_area": 70,
+          "area_m2": 7000.0,
+          "area_ha": 0.7,
+          "local_grid": {
+            "x_meters": 1385.0,
+            "y_meters": 3130.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 3422.7,
+          "coordinates": {
+            "center_lat": 12.878293,
+            "center_lon": 77.672759,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2024-01-23T05:11:19.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_015",
+          "confidence": 0.6201,
+          "uncertainty": 0.9579,
+          "shannon_entropy": 0.958,
+          "bbox_pixels": [
+            120,
+            302,
+            127,
+            312
+          ],
+          "pixel_area": 70,
+          "area_m2": 7000.0,
+          "area_ha": 0.7,
+          "local_grid": {
+            "x_meters": 1235.0,
+            "y_meters": 3070.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 3309.1,
+          "coordinates": {
+            "center_lat": 12.87775,
+            "center_lon": 77.671377,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2024-01-23T05:11:19.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_016",
+          "confidence": 0.516,
+          "uncertainty": 0.9993,
+          "shannon_entropy": 0.9993,
+          "bbox_pixels": [
+            151,
+            265,
+            171,
+            276
+          ],
+          "pixel_area": 220,
+          "area_m2": 22000.0,
+          "area_ha": 2.2,
+          "local_grid": {
+            "x_meters": 1610.0,
+            "y_meters": 2705.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 3147.9,
+          "coordinates": {
+            "center_lat": 12.874451,
+            "center_lon": 77.674832,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2024-01-23T05:11:19.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_017",
+          "confidence": 0.5644,
+          "uncertainty": 0.988,
+          "shannon_entropy": 0.988,
+          "bbox_pixels": [
+            124,
+            252,
+            134,
+            259
+          ],
+          "pixel_area": 70,
+          "area_m2": 7000.0,
+          "area_ha": 0.7,
+          "local_grid": {
+            "x_meters": 1290.0,
+            "y_meters": 2555.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 2862.2,
+          "coordinates": {
+            "center_lat": 12.873095,
+            "center_lon": 77.671884,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2024-01-23T05:11:19.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_018",
+          "confidence": 0.5547,
+          "uncertainty": 0.9914,
+          "shannon_entropy": 0.9913,
+          "bbox_pixels": [
+            179,
+            246,
+            196,
+            262
+          ],
+          "pixel_area": 272,
+          "area_m2": 27200.0,
+          "area_ha": 2.72,
+          "local_grid": {
+            "x_meters": 1875.0,
+            "y_meters": 2540.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 3157.1,
+          "coordinates": {
+            "center_lat": 12.87296,
+            "center_lon": 77.677273,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2024-01-23T05:11:19.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_019",
+          "confidence": 0.5585,
+          "uncertainty": 0.9901,
+          "shannon_entropy": 0.9901,
+          "bbox_pixels": [
+            171,
+            229,
+            178,
+            236
+          ],
+          "pixel_area": 49,
+          "area_m2": 4900.0,
+          "area_ha": 0.49,
+          "local_grid": {
+            "x_meters": 1745.0,
+            "y_meters": 2325.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 2907.0,
+          "coordinates": {
+            "center_lat": 12.871016,
+            "center_lon": 77.676076,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2024-01-23T05:11:19.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_020",
+          "confidence": 0.6462,
+          "uncertainty": 0.9374,
+          "shannon_entropy": 0.9374,
+          "bbox_pixels": [
+            191,
+            223,
+            200,
+            229
+          ],
+          "pixel_area": 54,
+          "area_m2": 5400.0,
+          "area_ha": 0.54,
+          "local_grid": {
+            "x_meters": 1955.0,
+            "y_meters": 2260.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 2988.2,
+          "coordinates": {
+            "center_lat": 12.870429,
+            "center_lon": 77.67801,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2024-01-23T05:11:19.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_021",
+          "confidence": 0.5165,
+          "uncertainty": 0.9992,
+          "shannon_entropy": 0.9992,
+          "bbox_pixels": [
+            262,
+            219,
+            271,
+            224
+          ],
+          "pixel_area": 45,
+          "area_m2": 4500.0,
+          "area_ha": 0.45,
+          "local_grid": {
+            "x_meters": 2665.0,
+            "y_meters": 2215.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 3465.3,
+          "coordinates": {
+            "center_lat": 12.870022,
+            "center_lon": 77.684551,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2024-01-23T05:11:19.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_022",
+          "confidence": 0.6452,
+          "uncertainty": 0.9382,
+          "shannon_entropy": 0.9383,
+          "bbox_pixels": [
+            235,
+            217,
+            242,
+            224
+          ],
+          "pixel_area": 49,
+          "area_m2": 4900.0,
+          "area_ha": 0.49,
+          "local_grid": {
+            "x_meters": 2385.0,
+            "y_meters": 2205.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 3248.1,
+          "coordinates": {
+            "center_lat": 12.869931,
+            "center_lon": 77.681972,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2024-01-23T05:11:19.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_023",
+          "confidence": 0.3869,
+          "uncertainty": 0.9628,
+          "shannon_entropy": 0.9628,
+          "bbox_pixels": [
+            347,
+            205,
+            356,
+            211
+          ],
+          "pixel_area": 54,
+          "area_m2": 5400.0,
+          "area_ha": 0.54,
+          "local_grid": {
+            "x_meters": 3515.0,
+            "y_meters": 2080.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4084.3,
+          "coordinates": {
+            "center_lat": 12.868802,
+            "center_lon": 77.692382,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2024-01-23T05:11:19.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_024",
+          "confidence": 0.3754,
+          "uncertainty": 0.9547,
+          "shannon_entropy": 0.9547,
+          "bbox_pixels": [
+            413,
+            204,
+            432,
+            220
+          ],
+          "pixel_area": 304,
+          "area_m2": 30400.0,
+          "area_ha": 3.04,
+          "local_grid": {
+            "x_meters": 4225.0,
+            "y_meters": 2120.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4727.1,
+          "coordinates": {
+            "center_lat": 12.869163,
+            "center_lon": 77.698922,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2024-01-23T05:11:19.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_025",
+          "confidence": 0.6072,
+          "uncertainty": 0.9666,
+          "shannon_entropy": 0.9666,
+          "bbox_pixels": [
+            218,
+            193,
+            224,
+            198
+          ],
+          "pixel_area": 30,
+          "area_m2": 3000.0,
+          "area_ha": 0.3,
+          "local_grid": {
+            "x_meters": 2210.0,
+            "y_meters": 1955.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 2950.6,
+          "coordinates": {
+            "center_lat": 12.867672,
+            "center_lon": 77.680359,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2024-01-23T05:11:19.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_026",
+          "confidence": 0.4909,
+          "uncertainty": 0.9998,
+          "shannon_entropy": 0.9998,
+          "bbox_pixels": [
+            503,
+            99,
+            509,
+            107
+          ],
+          "pixel_area": 48,
+          "area_m2": 4800.0,
+          "area_ha": 0.48,
+          "local_grid": {
+            "x_meters": 5060.0,
+            "y_meters": 1030.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 5163.8,
+          "coordinates": {
+            "center_lat": 12.85931,
+            "center_lon": 77.706615,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2024-01-23T05:11:19.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_027",
+          "confidence": 0.4812,
+          "uncertainty": 0.999,
+          "shannon_entropy": 0.999,
+          "bbox_pixels": [
+            384,
+            36,
+            394,
+            43
+          ],
+          "pixel_area": 70,
+          "area_m2": 7000.0,
+          "area_ha": 0.7,
+          "local_grid": {
+            "x_meters": 3890.0,
+            "y_meters": 395.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 3910.0,
+          "coordinates": {
+            "center_lat": 12.85357,
+            "center_lon": 77.695836,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2024-01-23T05:11:19.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_028",
+          "confidence": 0.4463,
+          "uncertainty": 0.9917,
+          "shannon_entropy": 0.9917,
+          "bbox_pixels": [
+            287,
+            20,
+            291,
+            28
+          ],
+          "pixel_area": 32,
+          "area_m2": 3200.0,
+          "area_ha": 0.32,
+          "local_grid": {
+            "x_meters": 2890.0,
+            "y_meters": 240.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 2899.9,
+          "coordinates": {
+            "center_lat": 12.852169,
+            "center_lon": 77.686624,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2024-01-23T05:11:19.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        }
+      ],
+      "mission_summary": {
+        "policy_id": "B1",
+        "policy_name": "Uncertainty First",
+        "provenance": "SIMULATED",
+        "initial_battery_joules": 180000.0,
+        "initial_battery_wh": 50.0,
+        "final_battery_joules": 21956.6,
+        "final_battery_wh": 6.1,
+        "total_energy_spent_actions_joules": 80581.7,
+        "total_energy_spent_actions_wh": 22.38,
+        "return_flight_energy_joules": 77461.7,
+        "return_flight_energy_wh": 21.52,
+        "safe_return_completed": true,
+        "candidates_total": 28,
+        "candidates_inspected": 1,
+        "candidates_deferred": 27,
+        "candidates_skipped": 0,
+        "ledger_records_count": 3,
+        "summary_message": "[SIMULATED] Sortie under B1 (Uncertainty First) completed: 1 inspected, 0 skipped, 27 deferred. Safe return: True."
+      }
+    },
+    "chennai_sriperumbudur": {
+      "key": "chennai_sriperumbudur",
+      "name": "Chennai / Sriperumbudur Industrial Corridor",
+      "description": "Automotive and electronics manufacturing land development",
+      "home_coordinates": {
+        "lat": 12.98,
+        "lon": 79.96
+      },
+      "bbox": [
+        79.9,
+        12.92,
+        80.02,
+        13.02
+      ],
+      "pre_date": "2021-12-21",
+      "post_date": "2023-11-16",
+      "pre_scene_id": "S2B_MSIL2A_20211221T050219_R119_T44PLV_20211222T040330",
+      "post_scene_id": "S2A_MSIL2A_20231116T050051_R119_T44PLV_20231116T102318",
+      "pre_img_url": "../../data/india_scenes/chennai_sriperumbudur_pre_real.png",
+      "post_img_url": "../../data/india_scenes/chennai_sriperumbudur_post_real.png",
+      "heatmap_url": "chennai_sriperumbudur_heatmap.png",
+      "mask_url": "chennai_sriperumbudur_mask.png",
+      "total_candidates": 59,
+      "candidates": [
+        {
+          "candidate_id": "cand_sq_levir_001",
+          "confidence": 0.563,
+          "uncertainty": 0.9885,
+          "shannon_entropy": 0.9885,
+          "bbox_pixels": [
+            475,
+            471,
+            488,
+            503
+          ],
+          "pixel_area": 416,
+          "area_m2": 41600.0,
+          "area_ha": 4.16,
+          "local_grid": {
+            "x_meters": 4815.0,
+            "y_meters": 4870.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 6848.4,
+          "coordinates": {
+            "center_lat": 13.02402,
+            "center_lon": 80.004381,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_002",
+          "confidence": 0.5428,
+          "uncertainty": 0.9947,
+          "shannon_entropy": 0.9947,
+          "bbox_pixels": [
+            504,
+            463,
+            512,
+            483
+          ],
+          "pixel_area": 160,
+          "area_m2": 16000.0,
+          "area_ha": 1.6,
+          "local_grid": {
+            "x_meters": 5080.0,
+            "y_meters": 4730.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 6941.1,
+          "coordinates": {
+            "center_lat": 13.022755,
+            "center_lon": 80.006823,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_003",
+          "confidence": 0.5732,
+          "uncertainty": 0.9845,
+          "shannon_entropy": 0.9845,
+          "bbox_pixels": [
+            485,
+            460,
+            492,
+            468
+          ],
+          "pixel_area": 56,
+          "area_m2": 5600.0,
+          "area_ha": 0.56,
+          "local_grid": {
+            "x_meters": 4885.0,
+            "y_meters": 4640.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 6737.4,
+          "coordinates": {
+            "center_lat": 13.021941,
+            "center_lon": 80.005026,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_004",
+          "confidence": 0.4472,
+          "uncertainty": 0.9919,
+          "shannon_entropy": 0.9919,
+          "bbox_pixels": [
+            51,
+            459,
+            62,
+            463
+          ],
+          "pixel_area": 44,
+          "area_m2": 4400.0,
+          "area_ha": 0.44,
+          "local_grid": {
+            "x_meters": 565.0,
+            "y_meters": 4610.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4644.5,
+          "coordinates": {
+            "center_lat": 13.02167,
+            "center_lon": 79.965208,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_005",
+          "confidence": 0.6117,
+          "uncertainty": 0.9637,
+          "shannon_entropy": 0.9637,
+          "bbox_pixels": [
+            279,
+            450,
+            286,
+            456
+          ],
+          "pixel_area": 42,
+          "area_m2": 4200.0,
+          "area_ha": 0.42,
+          "local_grid": {
+            "x_meters": 2825.0,
+            "y_meters": 4530.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 5338.7,
+          "coordinates": {
+            "center_lat": 13.020947,
+            "center_lon": 79.986038,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_006",
+          "confidence": 0.6034,
+          "uncertainty": 0.9689,
+          "shannon_entropy": 0.9689,
+          "bbox_pixels": [
+            476,
+            446,
+            485,
+            454
+          ],
+          "pixel_area": 72,
+          "area_m2": 7200.0,
+          "area_ha": 0.72,
+          "local_grid": {
+            "x_meters": 4805.0,
+            "y_meters": 4500.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 6583.2,
+          "coordinates": {
+            "center_lat": 13.020676,
+            "center_lon": 80.004288,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_007",
+          "confidence": 0.6057,
+          "uncertainty": 0.9675,
+          "shannon_entropy": 0.9675,
+          "bbox_pixels": [
+            341,
+            446,
+            347,
+            453
+          ],
+          "pixel_area": 42,
+          "area_m2": 4200.0,
+          "area_ha": 0.42,
+          "local_grid": {
+            "x_meters": 3440.0,
+            "y_meters": 4495.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 5660.3,
+          "coordinates": {
+            "center_lat": 13.020631,
+            "center_lon": 79.991707,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_008",
+          "confidence": 0.6487,
+          "uncertainty": 0.9353,
+          "shannon_entropy": 0.9352,
+          "bbox_pixels": [
+            267,
+            426,
+            277,
+            437
+          ],
+          "pixel_area": 110,
+          "area_m2": 11000.0,
+          "area_ha": 1.1,
+          "local_grid": {
+            "x_meters": 2720.0,
+            "y_meters": 4315.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 5100.7,
+          "coordinates": {
+            "center_lat": 13.019004,
+            "center_lon": 79.985071,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_009",
+          "confidence": 0.6037,
+          "uncertainty": 0.9687,
+          "shannon_entropy": 0.9687,
+          "bbox_pixels": [
+            499,
+            414,
+            509,
+            425
+          ],
+          "pixel_area": 110,
+          "area_m2": 11000.0,
+          "area_ha": 1.1,
+          "local_grid": {
+            "x_meters": 5040.0,
+            "y_meters": 4195.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 6557.4,
+          "coordinates": {
+            "center_lat": 13.017919,
+            "center_lon": 80.006454,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_010",
+          "confidence": 0.4534,
+          "uncertainty": 0.9937,
+          "shannon_entropy": 0.9937,
+          "bbox_pixels": [
+            332,
+            406,
+            340,
+            413
+          ],
+          "pixel_area": 56,
+          "area_m2": 5600.0,
+          "area_ha": 0.56,
+          "local_grid": {
+            "x_meters": 3360.0,
+            "y_meters": 4095.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 5297.0,
+          "coordinates": {
+            "center_lat": 13.017015,
+            "center_lon": 79.99097,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_011",
+          "confidence": 0.609,
+          "uncertainty": 0.9655,
+          "shannon_entropy": 0.9654,
+          "bbox_pixels": [
+            311,
+            399,
+            316,
+            405
+          ],
+          "pixel_area": 30,
+          "area_m2": 3000.0,
+          "area_ha": 0.3,
+          "local_grid": {
+            "x_meters": 3135.0,
+            "y_meters": 4020.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 5097.9,
+          "coordinates": {
+            "center_lat": 13.016337,
+            "center_lon": 79.988896,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_012",
+          "confidence": 0.5399,
+          "uncertainty": 0.9954,
+          "shannon_entropy": 0.9954,
+          "bbox_pixels": [
+            292,
+            396,
+            300,
+            406
+          ],
+          "pixel_area": 80,
+          "area_m2": 8000.0,
+          "area_ha": 0.8,
+          "local_grid": {
+            "x_meters": 2960.0,
+            "y_meters": 4010.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4984.1,
+          "coordinates": {
+            "center_lat": 13.016247,
+            "center_lon": 79.987283,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_013",
+          "confidence": 0.6069,
+          "uncertainty": 0.9668,
+          "shannon_entropy": 0.9668,
+          "bbox_pixels": [
+            310,
+            385,
+            315,
+            390
+          ],
+          "pixel_area": 25,
+          "area_m2": 2500.0,
+          "area_ha": 0.25,
+          "local_grid": {
+            "x_meters": 3125.0,
+            "y_meters": 3875.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4978.1,
+          "coordinates": {
+            "center_lat": 13.015027,
+            "center_lon": 79.988804,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_014",
+          "confidence": 0.5585,
+          "uncertainty": 0.9901,
+          "shannon_entropy": 0.9901,
+          "bbox_pixels": [
+            501,
+            365,
+            508,
+            371
+          ],
+          "pixel_area": 42,
+          "area_m2": 4200.0,
+          "area_ha": 0.42,
+          "local_grid": {
+            "x_meters": 5045.0,
+            "y_meters": 3680.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 6244.6,
+          "coordinates": {
+            "center_lat": 13.013264,
+            "center_lon": 80.006501,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_015",
+          "confidence": 0.5863,
+          "uncertainty": 0.9784,
+          "shannon_entropy": 0.9784,
+          "bbox_pixels": [
+            307,
+            353,
+            314,
+            361
+          ],
+          "pixel_area": 56,
+          "area_m2": 5600.0,
+          "area_ha": 0.56,
+          "local_grid": {
+            "x_meters": 3105.0,
+            "y_meters": 3570.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4731.4,
+          "coordinates": {
+            "center_lat": 13.01227,
+            "center_lon": 79.988619,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_016",
+          "confidence": 0.5617,
+          "uncertainty": 0.989,
+          "shannon_entropy": 0.989,
+          "bbox_pixels": [
+            345,
+            350,
+            354,
+            363
+          ],
+          "pixel_area": 117,
+          "area_m2": 11700.0,
+          "area_ha": 1.17,
+          "local_grid": {
+            "x_meters": 3495.0,
+            "y_meters": 3565.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4992.4,
+          "coordinates": {
+            "center_lat": 13.012224,
+            "center_lon": 79.992214,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_017",
+          "confidence": 0.5704,
+          "uncertainty": 0.9857,
+          "shannon_entropy": 0.9857,
+          "bbox_pixels": [
+            326,
+            343,
+            333,
+            353
+          ],
+          "pixel_area": 70,
+          "area_m2": 7000.0,
+          "area_ha": 0.7,
+          "local_grid": {
+            "x_meters": 3295.0,
+            "y_meters": 3480.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4792.4,
+          "coordinates": {
+            "center_lat": 13.011456,
+            "center_lon": 79.990371,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_018",
+          "confidence": 0.6002,
+          "uncertainty": 0.9708,
+          "shannon_entropy": 0.9708,
+          "bbox_pixels": [
+            300,
+            332,
+            311,
+            340
+          ],
+          "pixel_area": 88,
+          "area_m2": 8800.0,
+          "area_ha": 0.88,
+          "local_grid": {
+            "x_meters": 3055.0,
+            "y_meters": 3360.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4541.2,
+          "coordinates": {
+            "center_lat": 13.010371,
+            "center_lon": 79.988158,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_019",
+          "confidence": 0.5968,
+          "uncertainty": 0.9728,
+          "shannon_entropy": 0.9728,
+          "bbox_pixels": [
+            484,
+            331,
+            492,
+            336
+          ],
+          "pixel_area": 40,
+          "area_m2": 4000.0,
+          "area_ha": 0.4,
+          "local_grid": {
+            "x_meters": 4880.0,
+            "y_meters": 3335.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 5910.7,
+          "coordinates": {
+            "center_lat": 13.010145,
+            "center_lon": 80.00498,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_020",
+          "confidence": 0.4447,
+          "uncertainty": 0.9912,
+          "shannon_entropy": 0.9912,
+          "bbox_pixels": [
+            365,
+            327,
+            379,
+            333
+          ],
+          "pixel_area": 84,
+          "area_m2": 8400.0,
+          "area_ha": 0.84,
+          "local_grid": {
+            "x_meters": 3720.0,
+            "y_meters": 3300.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4972.8,
+          "coordinates": {
+            "center_lat": 13.009829,
+            "center_lon": 79.994288,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_021",
+          "confidence": 0.5826,
+          "uncertainty": 0.9802,
+          "shannon_entropy": 0.9802,
+          "bbox_pixels": [
+            346,
+            325,
+            351,
+            330
+          ],
+          "pixel_area": 25,
+          "area_m2": 2500.0,
+          "area_ha": 0.25,
+          "local_grid": {
+            "x_meters": 3485.0,
+            "y_meters": 3275.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4782.3,
+          "coordinates": {
+            "center_lat": 13.009603,
+            "center_lon": 79.992122,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_022",
+          "confidence": 0.5882,
+          "uncertainty": 0.9774,
+          "shannon_entropy": 0.9774,
+          "bbox_pixels": [
+            322,
+            324,
+            329,
+            331
+          ],
+          "pixel_area": 49,
+          "area_m2": 4900.0,
+          "area_ha": 0.49,
+          "local_grid": {
+            "x_meters": 3255.0,
+            "y_meters": 3275.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4617.4,
+          "coordinates": {
+            "center_lat": 13.009603,
+            "center_lon": 79.990002,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_023",
+          "confidence": 0.5872,
+          "uncertainty": 0.9779,
+          "shannon_entropy": 0.9779,
+          "bbox_pixels": [
+            343,
+            300,
+            350,
+            307
+          ],
+          "pixel_area": 49,
+          "area_m2": 4900.0,
+          "area_ha": 0.49,
+          "local_grid": {
+            "x_meters": 3465.0,
+            "y_meters": 3035.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4606.2,
+          "coordinates": {
+            "center_lat": 13.007434,
+            "center_lon": 79.991937,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_024",
+          "confidence": 0.4886,
+          "uncertainty": 0.9996,
+          "shannon_entropy": 0.9996,
+          "bbox_pixels": [
+            33,
+            299,
+            42,
+            304
+          ],
+          "pixel_area": 45,
+          "area_m2": 4500.0,
+          "area_ha": 0.45,
+          "local_grid": {
+            "x_meters": 375.0,
+            "y_meters": 3015.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 3038.2,
+          "coordinates": {
+            "center_lat": 13.007253,
+            "center_lon": 79.963456,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_025",
+          "confidence": 0.4628,
+          "uncertainty": 0.996,
+          "shannon_entropy": 0.996,
+          "bbox_pixels": [
+            15,
+            296,
+            28,
+            301
+          ],
+          "pixel_area": 65,
+          "area_m2": 6500.0,
+          "area_ha": 0.65,
+          "local_grid": {
+            "x_meters": 215.0,
+            "y_meters": 2985.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 2992.7,
+          "coordinates": {
+            "center_lat": 13.006982,
+            "center_lon": 79.961982,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_026",
+          "confidence": 0.4624,
+          "uncertainty": 0.9959,
+          "shannon_entropy": 0.9959,
+          "bbox_pixels": [
+            50,
+            291,
+            57,
+            297
+          ],
+          "pixel_area": 42,
+          "area_m2": 4200.0,
+          "area_ha": 0.42,
+          "local_grid": {
+            "x_meters": 535.0,
+            "y_meters": 2940.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 2988.3,
+          "coordinates": {
+            "center_lat": 13.006575,
+            "center_lon": 79.964931,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_027",
+          "confidence": 0.6133,
+          "uncertainty": 0.9627,
+          "shannon_entropy": 0.9626,
+          "bbox_pixels": [
+            326,
+            290,
+            332,
+            296
+          ],
+          "pixel_area": 36,
+          "area_m2": 3600.0,
+          "area_ha": 0.36,
+          "local_grid": {
+            "x_meters": 3290.0,
+            "y_meters": 2930.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4405.6,
+          "coordinates": {
+            "center_lat": 13.006485,
+            "center_lon": 79.990324,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_028",
+          "confidence": 0.6364,
+          "uncertainty": 0.9457,
+          "shannon_entropy": 0.9456,
+          "bbox_pixels": [
+            500,
+            285,
+            512,
+            294
+          ],
+          "pixel_area": 108,
+          "area_m2": 10800.0,
+          "area_ha": 1.08,
+          "local_grid": {
+            "x_meters": 5060.0,
+            "y_meters": 2895.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 5829.6,
+          "coordinates": {
+            "center_lat": 13.006168,
+            "center_lon": 80.006639,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_029",
+          "confidence": 0.5842,
+          "uncertainty": 0.9794,
+          "shannon_entropy": 0.9794,
+          "bbox_pixels": [
+            314,
+            272,
+            325,
+            285
+          ],
+          "pixel_area": 143,
+          "area_m2": 14300.0,
+          "area_ha": 1.43,
+          "local_grid": {
+            "x_meters": 3195.0,
+            "y_meters": 2785.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4238.4,
+          "coordinates": {
+            "center_lat": 13.005174,
+            "center_lon": 79.989449,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_030",
+          "confidence": 0.5972,
+          "uncertainty": 0.9726,
+          "shannon_entropy": 0.9726,
+          "bbox_pixels": [
+            362,
+            262,
+            382,
+            298
+          ],
+          "pixel_area": 720,
+          "area_m2": 72000.0,
+          "area_ha": 7.2,
+          "local_grid": {
+            "x_meters": 3720.0,
+            "y_meters": 2800.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4656.0,
+          "coordinates": {
+            "center_lat": 13.00531,
+            "center_lon": 79.994288,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_031",
+          "confidence": 0.5754,
+          "uncertainty": 0.9836,
+          "shannon_entropy": 0.9835,
+          "bbox_pixels": [
+            307,
+            262,
+            313,
+            268
+          ],
+          "pixel_area": 36,
+          "area_m2": 3600.0,
+          "area_ha": 0.36,
+          "local_grid": {
+            "x_meters": 3100.0,
+            "y_meters": 2650.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4078.3,
+          "coordinates": {
+            "center_lat": 13.003954,
+            "center_lon": 79.988573,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_032",
+          "confidence": 0.5759,
+          "uncertainty": 0.9833,
+          "shannon_entropy": 0.9833,
+          "bbox_pixels": [
+            370,
+            259,
+            377,
+            266
+          ],
+          "pixel_area": 49,
+          "area_m2": 4900.0,
+          "area_ha": 0.49,
+          "local_grid": {
+            "x_meters": 3735.0,
+            "y_meters": 2625.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4565.2,
+          "coordinates": {
+            "center_lat": 13.003728,
+            "center_lon": 79.994426,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_033",
+          "confidence": 0.6345,
+          "uncertainty": 0.9471,
+          "shannon_entropy": 0.9472,
+          "bbox_pixels": [
+            299,
+            243,
+            310,
+            254
+          ],
+          "pixel_area": 121,
+          "area_m2": 12100.0,
+          "area_ha": 1.21,
+          "local_grid": {
+            "x_meters": 3045.0,
+            "y_meters": 2485.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 3930.3,
+          "coordinates": {
+            "center_lat": 13.002462,
+            "center_lon": 79.988066,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_034",
+          "confidence": 0.6402,
+          "uncertainty": 0.9425,
+          "shannon_entropy": 0.9425,
+          "bbox_pixels": [
+            380,
+            233,
+            397,
+            248
+          ],
+          "pixel_area": 255,
+          "area_m2": 25500.0,
+          "area_ha": 2.55,
+          "local_grid": {
+            "x_meters": 3885.0,
+            "y_meters": 2405.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4569.2,
+          "coordinates": {
+            "center_lat": 13.001739,
+            "center_lon": 79.995809,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_035",
+          "confidence": 0.5695,
+          "uncertainty": 0.986,
+          "shannon_entropy": 0.986,
+          "bbox_pixels": [
+            328,
+            228,
+            335,
+            238
+          ],
+          "pixel_area": 70,
+          "area_m2": 7000.0,
+          "area_ha": 0.7,
+          "local_grid": {
+            "x_meters": 3315.0,
+            "y_meters": 2330.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4051.9,
+          "coordinates": {
+            "center_lat": 13.001061,
+            "center_lon": 79.990555,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_036",
+          "confidence": 0.6268,
+          "uncertainty": 0.9531,
+          "shannon_entropy": 0.9531,
+          "bbox_pixels": [
+            300,
+            190,
+            339,
+            231
+          ],
+          "pixel_area": 1599,
+          "area_m2": 159900.0,
+          "area_ha": 15.99,
+          "local_grid": {
+            "x_meters": 3195.0,
+            "y_meters": 2105.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 3826.1,
+          "coordinates": {
+            "center_lat": 12.999027,
+            "center_lon": 79.989449,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_037",
+          "confidence": 0.6683,
+          "uncertainty": 0.9167,
+          "shannon_entropy": 0.9167,
+          "bbox_pixels": [
+            340,
+            183,
+            345,
+            189
+          ],
+          "pixel_area": 30,
+          "area_m2": 3000.0,
+          "area_ha": 0.3,
+          "local_grid": {
+            "x_meters": 3425.0,
+            "y_meters": 1860.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 3897.5,
+          "coordinates": {
+            "center_lat": 12.996813,
+            "center_lon": 79.991569,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_038",
+          "confidence": 0.6088,
+          "uncertainty": 0.9656,
+          "shannon_entropy": 0.9656,
+          "bbox_pixels": [
+            363,
+            179,
+            380,
+            189
+          ],
+          "pixel_area": 170,
+          "area_m2": 17000.0,
+          "area_ha": 1.7,
+          "local_grid": {
+            "x_meters": 3715.0,
+            "y_meters": 1840.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4145.7,
+          "coordinates": {
+            "center_lat": 12.996632,
+            "center_lon": 79.994242,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_039",
+          "confidence": 0.6153,
+          "uncertainty": 0.9613,
+          "shannon_entropy": 0.9613,
+          "bbox_pixels": [
+            318,
+            168,
+            324,
+            175
+          ],
+          "pixel_area": 42,
+          "area_m2": 4200.0,
+          "area_ha": 0.42,
+          "local_grid": {
+            "x_meters": 3210.0,
+            "y_meters": 1715.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 3639.4,
+          "coordinates": {
+            "center_lat": 12.995502,
+            "center_lon": 79.989587,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_040",
+          "confidence": 0.6664,
+          "uncertainty": 0.9186,
+          "shannon_entropy": 0.9186,
+          "bbox_pixels": [
+            367,
+            148,
+            377,
+            160
+          ],
+          "pixel_area": 120,
+          "area_m2": 12000.0,
+          "area_ha": 1.2,
+          "local_grid": {
+            "x_meters": 3720.0,
+            "y_meters": 1540.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4026.2,
+          "coordinates": {
+            "center_lat": 12.99392,
+            "center_lon": 79.994288,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_041",
+          "confidence": 0.615,
+          "uncertainty": 0.9615,
+          "shannon_entropy": 0.9615,
+          "bbox_pixels": [
+            338,
+            146,
+            351,
+            157
+          ],
+          "pixel_area": 143,
+          "area_m2": 14300.0,
+          "area_ha": 1.43,
+          "local_grid": {
+            "x_meters": 3445.0,
+            "y_meters": 1515.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 3763.4,
+          "coordinates": {
+            "center_lat": 12.993694,
+            "center_lon": 79.991753,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_042",
+          "confidence": 0.6842,
+          "uncertainty": 0.8998,
+          "shannon_entropy": 0.8998,
+          "bbox_pixels": [
+            414,
+            142,
+            426,
+            152
+          ],
+          "pixel_area": 120,
+          "area_m2": 12000.0,
+          "area_ha": 1.2,
+          "local_grid": {
+            "x_meters": 4200.0,
+            "y_meters": 1470.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4449.8,
+          "coordinates": {
+            "center_lat": 12.993287,
+            "center_lon": 79.998712,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_043",
+          "confidence": 0.5198,
+          "uncertainty": 0.9989,
+          "shannon_entropy": 0.9989,
+          "bbox_pixels": [
+            472,
+            141,
+            480,
+            146
+          ],
+          "pixel_area": 40,
+          "area_m2": 4000.0,
+          "area_ha": 0.4,
+          "local_grid": {
+            "x_meters": 4760.0,
+            "y_meters": 1435.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4971.6,
+          "coordinates": {
+            "center_lat": 12.992971,
+            "center_lon": 80.003874,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_044",
+          "confidence": 0.5895,
+          "uncertainty": 0.9768,
+          "shannon_entropy": 0.9768,
+          "bbox_pixels": [
+            422,
+            132,
+            428,
+            139
+          ],
+          "pixel_area": 42,
+          "area_m2": 4200.0,
+          "area_ha": 0.42,
+          "local_grid": {
+            "x_meters": 4250.0,
+            "y_meters": 1355.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4460.8,
+          "coordinates": {
+            "center_lat": 12.992248,
+            "center_lon": 79.999173,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_045",
+          "confidence": 0.6357,
+          "uncertainty": 0.9462,
+          "shannon_entropy": 0.9462,
+          "bbox_pixels": [
+            373,
+            121,
+            388,
+            130
+          ],
+          "pixel_area": 135,
+          "area_m2": 13500.0,
+          "area_ha": 1.35,
+          "local_grid": {
+            "x_meters": 3805.0,
+            "y_meters": 1255.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4006.6,
+          "coordinates": {
+            "center_lat": 12.991344,
+            "center_lon": 79.995071,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_046",
+          "confidence": 0.5967,
+          "uncertainty": 0.9729,
+          "shannon_entropy": 0.9728,
+          "bbox_pixels": [
+            394,
+            117,
+            410,
+            139
+          ],
+          "pixel_area": 352,
+          "area_m2": 35200.0,
+          "area_ha": 3.52,
+          "local_grid": {
+            "x_meters": 4020.0,
+            "y_meters": 1280.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4218.9,
+          "coordinates": {
+            "center_lat": 12.99157,
+            "center_lon": 79.997053,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_047",
+          "confidence": 0.6627,
+          "uncertainty": 0.9222,
+          "shannon_entropy": 0.9222,
+          "bbox_pixels": [
+            360,
+            101,
+            372,
+            110
+          ],
+          "pixel_area": 108,
+          "area_m2": 10800.0,
+          "area_ha": 1.08,
+          "local_grid": {
+            "x_meters": 3660.0,
+            "y_meters": 1055.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 3809.0,
+          "coordinates": {
+            "center_lat": 12.989536,
+            "center_lon": 79.993735,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_048",
+          "confidence": 0.6698,
+          "uncertainty": 0.9152,
+          "shannon_entropy": 0.9151,
+          "bbox_pixels": [
+            368,
+            92,
+            378,
+            99
+          ],
+          "pixel_area": 70,
+          "area_m2": 7000.0,
+          "area_ha": 0.7,
+          "local_grid": {
+            "x_meters": 3730.0,
+            "y_meters": 955.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 3850.3,
+          "coordinates": {
+            "center_lat": 12.988632,
+            "center_lon": 79.99438,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_049",
+          "confidence": 0.5986,
+          "uncertainty": 0.9718,
+          "shannon_entropy": 0.9718,
+          "bbox_pixels": [
+            400,
+            70,
+            407,
+            81
+          ],
+          "pixel_area": 77,
+          "area_m2": 7700.0,
+          "area_ha": 0.77,
+          "local_grid": {
+            "x_meters": 4035.0,
+            "y_meters": 755.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4105.0,
+          "coordinates": {
+            "center_lat": 12.986825,
+            "center_lon": 79.997191,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_050",
+          "confidence": 0.6393,
+          "uncertainty": 0.9433,
+          "shannon_entropy": 0.9433,
+          "bbox_pixels": [
+            366,
+            64,
+            381,
+            72
+          ],
+          "pixel_area": 120,
+          "area_m2": 12000.0,
+          "area_ha": 1.2,
+          "local_grid": {
+            "x_meters": 3735.0,
+            "y_meters": 680.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 3796.4,
+          "coordinates": {
+            "center_lat": 12.986147,
+            "center_lon": 79.994426,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_051",
+          "confidence": 0.5355,
+          "uncertainty": 0.9964,
+          "shannon_entropy": 0.9964,
+          "bbox_pixels": [
+            412,
+            62,
+            419,
+            67
+          ],
+          "pixel_area": 35,
+          "area_m2": 3500.0,
+          "area_ha": 0.35,
+          "local_grid": {
+            "x_meters": 4155.0,
+            "y_meters": 645.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4204.8,
+          "coordinates": {
+            "center_lat": 12.98583,
+            "center_lon": 79.998297,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_052",
+          "confidence": 0.6658,
+          "uncertainty": 0.9192,
+          "shannon_entropy": 0.9192,
+          "bbox_pixels": [
+            409,
+            53,
+            416,
+            60
+          ],
+          "pixel_area": 49,
+          "area_m2": 4900.0,
+          "area_ha": 0.49,
+          "local_grid": {
+            "x_meters": 4125.0,
+            "y_meters": 565.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4163.5,
+          "coordinates": {
+            "center_lat": 12.985107,
+            "center_lon": 79.998021,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_053",
+          "confidence": 0.6998,
+          "uncertainty": 0.8816,
+          "shannon_entropy": 0.8815,
+          "bbox_pixels": [
+            412,
+            34,
+            421,
+            40
+          ],
+          "pixel_area": 54,
+          "area_m2": 5400.0,
+          "area_ha": 0.54,
+          "local_grid": {
+            "x_meters": 4165.0,
+            "y_meters": 370.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4181.4,
+          "coordinates": {
+            "center_lat": 12.983344,
+            "center_lon": 79.998389,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_054",
+          "confidence": 0.6399,
+          "uncertainty": 0.9428,
+          "shannon_entropy": 0.9428,
+          "bbox_pixels": [
+            367,
+            33,
+            375,
+            45
+          ],
+          "pixel_area": 96,
+          "area_m2": 9600.0,
+          "area_ha": 0.96,
+          "local_grid": {
+            "x_meters": 3710.0,
+            "y_meters": 390.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 3730.4,
+          "coordinates": {
+            "center_lat": 12.983525,
+            "center_lon": 79.994196,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_055",
+          "confidence": 0.6299,
+          "uncertainty": 0.9507,
+          "shannon_entropy": 0.9507,
+          "bbox_pixels": [
+            205,
+            29,
+            220,
+            48
+          ],
+          "pixel_area": 285,
+          "area_m2": 28500.0,
+          "area_ha": 2.85,
+          "local_grid": {
+            "x_meters": 2125.0,
+            "y_meters": 385.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 2159.6,
+          "coordinates": {
+            "center_lat": 12.98348,
+            "center_lon": 79.979586,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "RECAPTURE (UAV FLIGHT)",
+          "ares_cost": "49,040 J (13.62 Wh)",
+          "ares_badge": "badge-danger"
+        },
+        {
+          "candidate_id": "cand_sq_levir_056",
+          "confidence": 0.4874,
+          "uncertainty": 0.9995,
+          "shannon_entropy": 0.9995,
+          "bbox_pixels": [
+            186,
+            16,
+            191,
+            25
+          ],
+          "pixel_area": 45,
+          "area_m2": 4500.0,
+          "area_ha": 0.45,
+          "local_grid": {
+            "x_meters": 1885.0,
+            "y_meters": 205.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 1896.1,
+          "coordinates": {
+            "center_lat": 12.981853,
+            "center_lon": 79.977374,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "RECAPTURE (UAV FLIGHT)",
+          "ares_cost": "43,112 J (11.98 Wh)",
+          "ares_badge": "badge-danger"
+        },
+        {
+          "candidate_id": "cand_sq_levir_057",
+          "confidence": 0.6565,
+          "uncertainty": 0.9281,
+          "shannon_entropy": 0.9281,
+          "bbox_pixels": [
+            461,
+            9,
+            468,
+            14
+          ],
+          "pixel_area": 35,
+          "area_m2": 3500.0,
+          "area_ha": 0.35,
+          "local_grid": {
+            "x_meters": 4645.0,
+            "y_meters": 115.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4646.4,
+          "coordinates": {
+            "center_lat": 12.981039,
+            "center_lon": 80.002814,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        },
+        {
+          "candidate_id": "cand_sq_levir_058",
+          "confidence": 0.5576,
+          "uncertainty": 0.9904,
+          "shannon_entropy": 0.9904,
+          "bbox_pixels": [
+            208,
+            9,
+            217,
+            25
+          ],
+          "pixel_area": 144,
+          "area_m2": 14400.0,
+          "area_ha": 1.44,
+          "local_grid": {
+            "x_meters": 2125.0,
+            "y_meters": 170.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 2131.8,
+          "coordinates": {
+            "center_lat": 12.981537,
+            "center_lon": 79.979586,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "RECAPTURE (UAV FLIGHT)",
+          "ares_cost": "48,415 J (13.45 Wh)",
+          "ares_badge": "badge-danger"
+        },
+        {
+          "candidate_id": "cand_sq_levir_059",
+          "confidence": 0.625,
+          "uncertainty": 0.9544,
+          "shannon_entropy": 0.9544,
+          "bbox_pixels": [
+            467,
+            0,
+            479,
+            3
+          ],
+          "pixel_area": 36,
+          "area_m2": 3600.0,
+          "area_ha": 0.36,
+          "local_grid": {
+            "x_meters": 4730.0,
+            "y_meters": 15.0,
+            "z_meters": 60.0
+          },
+          "transit_distance_m": 4730.0,
+          "coordinates": {
+            "center_lat": 12.980136,
+            "center_lon": 80.003597,
+            "altitude_m": 180.0
+          },
+          "timestamp": "2023-11-16T05:00:51.024000Z",
+          "ares_recommendation": "STRONGER_MODEL (DEEP SIAMESE)",
+          "ares_cost": "1,450 J (0.40 Wh)",
+          "ares_badge": "badge-warning"
+        }
+      ],
+      "mission_summary": {
+        "policy_id": "B1",
+        "policy_name": "Uncertainty First",
+        "provenance": "SIMULATED",
+        "initial_battery_joules": 180000.0,
+        "initial_battery_wh": 50.0,
+        "final_battery_joules": 51871.4,
+        "final_battery_wh": 14.41,
+        "total_energy_spent_actions_joules": 99672.6,
+        "total_energy_spent_actions_wh": 27.69,
+        "return_flight_energy_joules": 28456.0,
+        "return_flight_energy_wh": 7.9,
+        "safe_return_completed": true,
+        "candidates_total": 59,
+        "candidates_inspected": 2,
+        "candidates_deferred": 57,
+        "candidates_skipped": 0,
+        "ledger_records_count": 4,
+        "summary_message": "[SIMULATED] Sortie under B1 (Uncertainty First) completed: 2 inspected, 0 skipped, 57 deferred. Safe return: True."
+      }
+    }
+  }
+}
+  </script>
+
+  <script>
+    const db = JSON.parse(document.getElementById('orbitra-data').textContent);
+    let activeZoneKey = 'kanpur_bhauti';
+    let activeCandidateId = null;
+    let viewMode = 'swipe';
+    let swipePercent = 50;
+    let heatOpacity = 0.7;
+
+    const preLayer = document.getElementById('pre-layer');
+    const postLayer = document.getElementById('post-layer');
+    const heatLayer = document.getElementById('heatmap-layer');
+    const maskLayer = document.getElementById('mask-layer');
+    const overlayCanvas = document.getElementById('overlay-canvas');
+    const ctx = overlayCanvas.getContext('2d');
+    const divider = document.getElementById('divider');
+
+    function init() {
+      renderCorridorNav();
+      renderCorridorsTable();
+      switchCorridor('kanpur_bhauti');
+      setupEventListeners();
+    }
+
+    function renderCorridorNav() {
+      const nav = document.getElementById('corridor-nav');
+      nav.innerHTML = '';
+      for (const [key, z] of Object.entries(db.zones)) {
+        const btn = document.createElement('button');
+        btn.className = `corridor-btn ${key === activeZoneKey ? 'active' : ''}`;
+        btn.innerHTML = `<i class="fa-solid fa-location-dot"></i> ${z.name.split('/')[0].trim()}`;
+        btn.onclick = () => switchCorridor(key);
+        nav.appendChild(btn);
+      }
+    }
+
+    function switchCorridor(key) {
+      activeZoneKey = key;
+      const z = db.zones[key];
+
+      document.querySelectorAll('.corridor-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent.includes(z.name.split('/')[0].trim()));
+      });
+
+      preLayer.src = z.pre_img_url;
+      postLayer.src = z.post_img_url;
+      heatLayer.src = z.heatmap_url;
+      maskLayer.src = z.mask_url;
+
+      document.getElementById('interval-label').textContent = `Epoch: ${z.pre_date} -> ${z.post_date}`;
+      document.getElementById('coords-label').textContent = `Home Base: ${z.home_coordinates.lat}°N, ${z.home_coordinates.lon}°E`;
+      document.getElementById('cand-count').textContent = z.candidates.length;
+
+      renderCandidatesList(z.candidates);
+
+      if (z.candidates.length > 0) {
+        selectCandidate(z.candidates[0].candidate_id);
+      }
+
+      updateView();
+    }
+
+    function renderCandidatesList(candidates) {
+      const list = document.getElementById('cand-list');
+      list.innerHTML = '';
+      candidates.forEach(c => {
+        const row = document.createElement('div');
+        row.className = `cand-item ${c.candidate_id === activeCandidateId ? 'active' : ''}`;
+        row.dataset.id = c.candidate_id;
+        row.innerHTML = `
+          <div>
+            <strong>${c.candidate_id}</strong>
+            <div style="font-size: 10px; color: var(--text-muted);">${c.area_ha} ha | ${c.transit_distance_m}m</div>
+          </div>
+          <span class="badge ${c.ares_badge}">${c.ares_recommendation.split(' ')[0]}</span>
+        `;
+        row.onclick = () => selectCandidate(c.candidate_id);
+        list.appendChild(row);
+      });
+    }
+
+    function selectCandidate(candId) {
+      activeCandidateId = candId;
+      const z = db.zones[activeZoneKey];
+      const cand = z.candidates.find(c => c.candidate_id === candId);
+      if (!cand) return;
+
+      document.querySelectorAll('.cand-item').forEach(el => {
+        el.classList.toggle('active', el.dataset.id === candId);
+      });
+
+      document.getElementById('sel-cand-id').textContent = cand.candidate_id;
+      document.getElementById('sel-cand-area').textContent = `${cand.area_ha} ha (${cand.area_m2.toLocaleString()} m²)`;
+      document.getElementById('sel-conf-val').textContent = cand.confidence.toFixed(3);
+      document.getElementById('sel-conf-bar').style.width = `${cand.confidence * 100}%`;
+      document.getElementById('sel-unc-val').textContent = cand.uncertainty.toFixed(3);
+      document.getElementById('sel-unc-bar').style.width = `${cand.uncertainty * 100}%`;
+
+      document.getElementById('sel-local-xy').textContent = `${cand.local_grid.x_meters}m, ${cand.local_grid.y_meters}m`;
+      document.getElementById('sel-dist').textContent = `${cand.transit_distance_m.toLocaleString()} m`;
+      if (cand.coordinates && cand.coordinates.center_lat) {
+        document.getElementById('sel-geodetic').textContent = `${cand.coordinates.center_lat.toFixed(4)}°, ${cand.coordinates.center_lon.toFixed(4)}°`;
+      } else {
+        document.getElementById('sel-geodetic').textContent = 'N/A';
+      }
+      document.getElementById('sel-m2').textContent = `${cand.area_m2.toLocaleString()} m²`;
+
+      document.getElementById('sel-ares-act').textContent = cand.ares_recommendation;
+      document.getElementById('sel-ares-cost').textContent = cand.ares_cost;
+      document.getElementById('sel-ares-cost').className = `badge ${cand.ares_badge}`;
+
+      drawOverlay();
+    }
+
+    function drawOverlay() {
+      ctx.clearRect(0, 0, 512, 512);
+      const z = db.zones[activeZoneKey];
+
+      z.candidates.forEach(c => {
+        const [xmin, ymin, xmax, ymax] = c.bbox_pixels;
+        const w = xmax - xmin;
+        const h = ymax - ymin;
+        const isSelected = c.candidate_id === activeCandidateId;
+
+        ctx.strokeStyle = isSelected ? '#f43f5e' : '#38bdf8';
+        ctx.lineWidth = isSelected ? 3 : 1.5;
+        ctx.strokeRect(xmin, ymin, w, h);
+
+        if (isSelected) {
+          ctx.fillStyle = 'rgba(244, 63, 94, 0.2)';
+          ctx.fillRect(xmin, ymin, w, h);
+        }
+
+        ctx.fillStyle = isSelected ? '#f43f5e' : '#38bdf8';
+        ctx.font = '10px sans-serif';
+        ctx.fillText(c.candidate_id, xmin, Math.max(ymin - 3, 10));
+      });
+    }
+
+    function updateView() {
+      const swipeCtrl = document.getElementById('swipe-control');
+      const heatCtrl = document.getElementById('heat-control');
+
+      if (viewMode === 'swipe') {
+        swipeCtrl.style.display = 'flex';
+        heatCtrl.style.display = 'none';
+        divider.style.display = 'block';
+
+        preLayer.style.display = 'block';
+        postLayer.style.display = 'block';
+        heatLayer.style.display = 'none';
+        maskLayer.style.display = 'none';
+
+        const cut = swipePercent * 5.12;
+        postLayer.style.clipPath = `polygon(${cut}px 0, 512px 0, 512px 512px, ${cut}px 512px)`;
+        divider.style.left = `${swipePercent}%`;
+      } else if (viewMode === 'heatmap') {
+        swipeCtrl.style.display = 'none';
+        heatCtrl.style.display = 'flex';
+        divider.style.display = 'none';
+
+        preLayer.style.display = 'none';
+        postLayer.style.display = 'block';
+        postLayer.style.clipPath = 'none';
+        heatLayer.style.display = 'block';
+        heatLayer.style.opacity = heatOpacity;
+        maskLayer.style.display = 'none';
+      } else if (viewMode === 'detections') {
+        swipeCtrl.style.display = 'none';
+        heatCtrl.style.display = 'none';
+        divider.style.display = 'none';
+
+        preLayer.style.display = 'none';
+        postLayer.style.display = 'block';
+        postLayer.style.clipPath = 'none';
+        heatLayer.style.display = 'none';
+        maskLayer.style.display = 'none';
+      } else if (viewMode === 't1') {
+        swipeCtrl.style.display = 'none';
+        heatCtrl.style.display = 'none';
+        divider.style.display = 'none';
+
+        preLayer.style.display = 'block';
+        postLayer.style.display = 'none';
+        heatLayer.style.display = 'none';
+        maskLayer.style.display = 'none';
+      } else if (viewMode === 't2') {
+        swipeCtrl.style.display = 'none';
+        heatCtrl.style.display = 'none';
+        divider.style.display = 'none';
+
+        preLayer.style.display = 'none';
+        postLayer.style.display = 'block';
+        postLayer.style.clipPath = 'none';
+        heatLayer.style.display = 'none';
+        maskLayer.style.display = 'none';
+      }
+
+      drawOverlay();
+    }
+
+    function setupEventListeners() {
+      document.querySelectorAll('.mode-tab').forEach(btn => {
+        btn.onclick = () => {
+          document.querySelectorAll('.mode-tab').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          viewMode = btn.dataset.mode;
+          updateView();
+        };
+      });
+
+      const swipeRange = document.getElementById('swipe-range');
+      swipeRange.oninput = (e) => {
+        swipePercent = e.target.value;
+        document.getElementById('swipe-val').textContent = `${swipePercent}%`;
+        updateView();
+      };
+
+      const heatRange = document.getElementById('heat-range');
+      heatRange.oninput = (e) => {
+        heatOpacity = e.target.value / 100.0;
+        document.getElementById('heat-val').textContent = `${e.target.value}%`;
+        heatLayer.style.opacity = heatOpacity;
+      };
+
+      overlayCanvas.onclick = (e) => {
+        const rect = overlayCanvas.getBoundingClientRect();
+        const x = (e.clientX - rect.left) * (512 / rect.width);
+        const y = (e.clientY - rect.top) * (512 / rect.height);
+
+        const z = db.zones[activeZoneKey];
+        for (const c of z.candidates) {
+          const [xmin, ymin, xmax, ymax] = c.bbox_pixels;
+          if (x >= xmin && x <= xmax && y >= ymin && y <= ymax) {
+            selectCandidate(c.candidate_id);
+            break;
+          }
+        }
+      };
+
+      document.querySelectorAll('.d-tab').forEach(btn => {
+        btn.onclick = () => {
+          document.querySelectorAll('.d-tab').forEach(b => b.classList.remove('active'));
+          document.querySelectorAll('.drawer-pane').forEach(p => p.classList.remove('active'));
+          btn.classList.add('active');
+          document.getElementById(btn.dataset.pane).classList.add('active');
+        };
+      });
+
+      document.getElementById('cand-search').oninput = (e) => {
+        const term = e.target.value.toLowerCase();
+        const z = db.zones[activeZoneKey];
+        const filtered = z.candidates.filter(c => c.candidate_id.toLowerCase().includes(term));
+        renderCandidatesList(filtered);
+      };
+    }
+
+    function renderCorridorsTable() {
+      const tbody = document.getElementById('corridors-tbody');
+      tbody.innerHTML = '';
+      for (const [key, z] of Object.entries(db.zones)) {
+        const totalHa = z.candidates.reduce((sum, c) => sum + c.area_ha, 0).toFixed(1);
+        const ares = z.mission_summary || {};
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>${key}</strong></td>
+          <td>${z.name}</td>
+          <td>${z.pre_date} -> ${z.post_date}</td>
+          <td><span class="badge badge-info">${z.candidates.length} targets</span></td>
+          <td>${totalHa} ha</td>
+          <td>${ares.policy_id || 'B3'}</td>
+          <td><span class="badge badge-success"><i class="fa-solid fa-shield"></i> Yes</span></td>
+        `;
+        tbody.appendChild(tr);
+      }
+    }
+
+    window.onload = init;
+  </script>
+</body>
+</html>
