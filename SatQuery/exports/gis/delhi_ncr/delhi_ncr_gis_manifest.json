@@ -1,0 +1,40 @@
+{
+  "zone_key": "delhi_ncr",
+  "zone_name": "Delhi NCR / Gurugram Development Corridor",
+  "crs": "EPSG:4326 (WGS 84)",
+  "sensor": "ESA Sentinel-2 Level-2A",
+  "gsd_meters_per_pixel": [
+    10.0,
+    10.0
+  ],
+  "raster_dimensions": {
+    "width_px": 512,
+    "height_px": 512
+  },
+  "spatial_bounding_box": {
+    "west_longitude": 77.05,
+    "east_longitude": 77.102286,
+    "south_latitude": 28.48,
+    "north_latitude": 28.526198
+  },
+  "affine_transform": {
+    "origin_longitude": 77.05,
+    "origin_latitude": 28.48,
+    "pixel_width_degrees": 0.00010212150573574893,
+    "pixel_height_degrees": -9.023052886909554e-05
+  },
+  "exported_files": {
+    "pre_imagery_geotiff": "delhi_ncr_pre_t1.tif",
+    "post_imagery_geotiff": "delhi_ncr_post_t2.tif",
+    "change_heatmap_geotiff": "delhi_ncr_change_heatmap.tif",
+    "binary_mask_geotiff": "delhi_ncr_binary_mask.tif",
+    "candidates_vector_geojson": "delhi_ncr_candidates.geojson"
+  },
+  "candidate_count": 9,
+  "qgis_import_guide": {
+    "step_1": "Open QGIS and choose Layer -> Add Layer -> Add Raster Layer, select .tif files.",
+    "step_2": "For change_heatmap.tif, set Symbology to Singleband Pseudocolor (Color Ramp: Magma or Turbo).",
+    "step_3": "Choose Layer -> Add Layer -> Add Vector Layer, select candidates.geojson.",
+    "step_4": "Label vector layer by candidate_id and style stroke by uncertainty."
+  }
+}

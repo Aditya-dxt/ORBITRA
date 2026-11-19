@@ -5,6 +5,7 @@ from .candidate_generator import CandidateGenerator
 from .deep_detector import DeepSiameseChangeDetector
 from .detector import BaselineChangeDetector
 from .georeferencing import MissionGeoreferencer
+from .gis_export import GISExporter
 
 __all__ = [
     "BaselineChangeDetector",
@@ -13,4 +14,5 @@ __all__ = [
     "MissionGeoreferencer",
     "ScoreCalibrator",
     "binary_entropy_uncertainty",
+    "GISExporter",
 ]

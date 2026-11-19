@@ -1,0 +1,489 @@
+{
+  "type": "FeatureCollection",
+  "name": "ORBITRA_Delhi NCR / Gurugram Development Corridor_Candidates",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_001",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.072773,
+              28.525025
+            ],
+            [
+              77.073896,
+              28.525025
+            ],
+            [
+              77.073896,
+              28.525386
+            ],
+            [
+              77.072773,
+              28.525386
+            ],
+            [
+              77.072773,
+              28.525025
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_001",
+        "zone_name": "Delhi NCR / Gurugram Development Corridor",
+        "confidence": 0.4139,
+        "uncertainty": 0.9785,
+        "shannon_entropy_h_p": 0.9785,
+        "pixel_area": 44,
+        "area_m2": 4400.0,
+        "area_hectares": 0.44,
+        "bbox_pixels": [
+          223,
+          499,
+          234,
+          503
+        ],
+        "local_grid_x_m": 2285.0,
+        "local_grid_y_m": 5010.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 5506.5,
+        "timestamp": "2023-12-10T05:32:19.024000Z",
+        "image_pair_id": "pair_sentinel2_delhi_ncr"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_002",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.074305,
+              28.523762
+            ],
+            [
+              77.080432,
+              28.523762
+            ],
+            [
+              77.080432,
+              28.526198
+            ],
+            [
+              77.074305,
+              28.526198
+            ],
+            [
+              77.074305,
+              28.523762
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_002",
+        "zone_name": "Delhi NCR / Gurugram Development Corridor",
+        "confidence": 0.4316,
+        "uncertainty": 0.9865,
+        "shannon_entropy_h_p": 0.9865,
+        "pixel_area": 1620,
+        "area_m2": 162000.0,
+        "area_hectares": 16.2,
+        "bbox_pixels": [
+          238,
+          485,
+          298,
+          512
+        ],
+        "local_grid_x_m": 2680.0,
+        "local_grid_y_m": 4985.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 5659.7,
+        "timestamp": "2023-12-10T05:32:19.024000Z",
+        "image_pair_id": "pair_sentinel2_delhi_ncr"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_003",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.065522,
+              28.513927
+            ],
+            [
+              77.066952,
+              28.513927
+            ],
+            [
+              77.066952,
+              28.514649
+            ],
+            [
+              77.065522,
+              28.514649
+            ],
+            [
+              77.065522,
+              28.513927
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_003",
+        "zone_name": "Delhi NCR / Gurugram Development Corridor",
+        "confidence": 0.4453,
+        "uncertainty": 0.9914,
+        "shannon_entropy_h_p": 0.9913,
+        "pixel_area": 112,
+        "area_m2": 11200.0,
+        "area_hectares": 1.12,
+        "bbox_pixels": [
+          152,
+          376,
+          166,
+          384
+        ],
+        "local_grid_x_m": 1590.0,
+        "local_grid_y_m": 3800.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 4119.2,
+        "timestamp": "2023-12-10T05:32:19.024000Z",
+        "image_pair_id": "pair_sentinel2_delhi_ncr"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_004",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.056842,
+              28.50346
+            ],
+            [
+              77.057455,
+              28.50346
+            ],
+            [
+              77.057455,
+              28.504272
+            ],
+            [
+              77.056842,
+              28.504272
+            ],
+            [
+              77.056842,
+              28.50346
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_004",
+        "zone_name": "Delhi NCR / Gurugram Development Corridor",
+        "confidence": 0.4074,
+        "uncertainty": 0.9751,
+        "shannon_entropy_h_p": 0.9751,
+        "pixel_area": 54,
+        "area_m2": 5400.0,
+        "area_hectares": 0.54,
+        "bbox_pixels": [
+          67,
+          260,
+          73,
+          269
+        ],
+        "local_grid_x_m": 700.0,
+        "local_grid_y_m": 2645.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 2736.1,
+        "timestamp": "2023-12-10T05:32:19.024000Z",
+        "image_pair_id": "pair_sentinel2_delhi_ncr"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_005",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.067565,
+              28.503189
+            ],
+            [
+              77.068382,
+              28.503189
+            ],
+            [
+              77.068382,
+              28.503731
+            ],
+            [
+              77.067565,
+              28.503731
+            ],
+            [
+              77.067565,
+              28.503189
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_005",
+        "zone_name": "Delhi NCR / Gurugram Development Corridor",
+        "confidence": 0.4842,
+        "uncertainty": 0.9993,
+        "shannon_entropy_h_p": 0.9993,
+        "pixel_area": 48,
+        "area_m2": 4800.0,
+        "area_hectares": 0.48,
+        "bbox_pixels": [
+          172,
+          257,
+          180,
+          263
+        ],
+        "local_grid_x_m": 1760.0,
+        "local_grid_y_m": 2600.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 3139.7,
+        "timestamp": "2023-12-10T05:32:19.024000Z",
+        "image_pair_id": "pair_sentinel2_delhi_ncr"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_006",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.075224,
+              28.500753
+            ],
+            [
+              77.075837,
+              28.500753
+            ],
+            [
+              77.075837,
+              28.501204
+            ],
+            [
+              77.075224,
+              28.501204
+            ],
+            [
+              77.075224,
+              28.500753
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_006",
+        "zone_name": "Delhi NCR / Gurugram Development Corridor",
+        "confidence": 0.5172,
+        "uncertainty": 0.9991,
+        "shannon_entropy_h_p": 0.9991,
+        "pixel_area": 30,
+        "area_m2": 3000.0,
+        "area_hectares": 0.3,
+        "bbox_pixels": [
+          247,
+          230,
+          253,
+          235
+        ],
+        "local_grid_x_m": 2500.0,
+        "local_grid_y_m": 2325.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 3414.0,
+        "timestamp": "2023-12-10T05:32:19.024000Z",
+        "image_pair_id": "pair_sentinel2_delhi_ncr"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_007",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.058782,
+              28.500302
+            ],
+            [
+              77.059702,
+              28.500302
+            ],
+            [
+              77.059702,
+              28.501114
+            ],
+            [
+              77.058782,
+              28.501114
+            ],
+            [
+              77.058782,
+              28.500302
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_007",
+        "zone_name": "Delhi NCR / Gurugram Development Corridor",
+        "confidence": 0.4434,
+        "uncertainty": 0.9907,
+        "shannon_entropy_h_p": 0.9907,
+        "pixel_area": 81,
+        "area_m2": 8100.0,
+        "area_hectares": 0.81,
+        "bbox_pixels": [
+          86,
+          225,
+          95,
+          234
+        ],
+        "local_grid_x_m": 905.0,
+        "local_grid_y_m": 2295.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 2467.0,
+        "timestamp": "2023-12-10T05:32:19.024000Z",
+        "image_pair_id": "pair_sentinel2_delhi_ncr"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_008",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.05868,
+              28.49958
+            ],
+            [
+              77.059293,
+              28.49958
+            ],
+            [
+              77.059293,
+              28.500302
+            ],
+            [
+              77.05868,
+              28.500302
+            ],
+            [
+              77.05868,
+              28.49958
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_008",
+        "zone_name": "Delhi NCR / Gurugram Development Corridor",
+        "confidence": 0.5143,
+        "uncertainty": 0.9994,
+        "shannon_entropy_h_p": 0.9994,
+        "pixel_area": 48,
+        "area_m2": 4800.0,
+        "area_hectares": 0.48,
+        "bbox_pixels": [
+          85,
+          217,
+          91,
+          225
+        ],
+        "local_grid_x_m": 880.0,
+        "local_grid_y_m": 2210.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 2378.8,
+        "timestamp": "2023-12-10T05:32:19.024000Z",
+        "image_pair_id": "pair_sentinel2_delhi_ncr"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_009",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.059702,
+              28.496783
+            ],
+            [
+              77.060519,
+              28.496783
+            ],
+            [
+              77.060519,
+              28.497505
+            ],
+            [
+              77.059702,
+              28.497505
+            ],
+            [
+              77.059702,
+              28.496783
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_009",
+        "zone_name": "Delhi NCR / Gurugram Development Corridor",
+        "confidence": 0.5163,
+        "uncertainty": 0.9992,
+        "shannon_entropy_h_p": 0.9992,
+        "pixel_area": 64,
+        "area_m2": 6400.0,
+        "area_hectares": 0.64,
+        "bbox_pixels": [
+          95,
+          186,
+          103,
+          194
+        ],
+        "local_grid_x_m": 990.0,
+        "local_grid_y_m": 1900.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 2142.5,
+        "timestamp": "2023-12-10T05:32:19.024000Z",
+        "image_pair_id": "pair_sentinel2_delhi_ncr"
+      }
+    }
+  ]
+}

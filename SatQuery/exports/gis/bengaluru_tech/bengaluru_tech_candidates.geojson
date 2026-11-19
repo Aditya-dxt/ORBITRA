@@ -1,0 +1,1496 @@
+{
+  "type": "FeatureCollection",
+  "name": "ORBITRA_Bengaluru Electronic City Infrastructure_Candidates",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_001",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.673726,
+              12.888959
+            ],
+            [
+              77.674279,
+              12.888959
+            ],
+            [
+              77.674279,
+              12.889772
+            ],
+            [
+              77.673726,
+              12.889772
+            ],
+            [
+              77.673726,
+              12.888959
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_001",
+        "zone_name": "Bengaluru Electronic City Infrastructure",
+        "confidence": 0.6287,
+        "uncertainty": 0.9517,
+        "shannon_entropy_h_p": 0.9517,
+        "pixel_area": 54,
+        "area_m2": 5400.0,
+        "area_hectares": 0.54,
+        "bbox_pixels": [
+          149,
+          431,
+          155,
+          440
+        ],
+        "local_grid_x_m": 1520.0,
+        "local_grid_y_m": 4355.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 4612.6,
+        "timestamp": "2024-01-23T05:11:19.024000Z",
+        "image_pair_id": "pair_sentinel2_bengaluru_tech"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_002",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.683307,
+              12.88679
+            ],
+            [
+              77.683952,
+              12.88679
+            ],
+            [
+              77.683952,
+              12.887513
+            ],
+            [
+              77.683307,
+              12.887513
+            ],
+            [
+              77.683307,
+              12.88679
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_002",
+        "zone_name": "Bengaluru Electronic City Infrastructure",
+        "confidence": 0.4212,
+        "uncertainty": 0.982,
+        "shannon_entropy_h_p": 0.982,
+        "pixel_area": 56,
+        "area_m2": 5600.0,
+        "area_hectares": 0.56,
+        "bbox_pixels": [
+          253,
+          407,
+          260,
+          415
+        ],
+        "local_grid_x_m": 2565.0,
+        "local_grid_y_m": 4110.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 4844.7,
+        "timestamp": "2024-01-23T05:11:19.024000Z",
+        "image_pair_id": "pair_sentinel2_bengaluru_tech"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_003",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.694731,
+              12.885253
+            ],
+            [
+              77.695191,
+              12.885253
+            ],
+            [
+              77.695191,
+              12.885795
+            ],
+            [
+              77.694731,
+              12.885795
+            ],
+            [
+              77.694731,
+              12.885253
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_003",
+        "zone_name": "Bengaluru Electronic City Infrastructure",
+        "confidence": 0.4256,
+        "uncertainty": 0.984,
+        "shannon_entropy_h_p": 0.984,
+        "pixel_area": 30,
+        "area_m2": 3000.0,
+        "area_hectares": 0.3,
+        "bbox_pixels": [
+          377,
+          390,
+          382,
+          396
+        ],
+        "local_grid_x_m": 3795.0,
+        "local_grid_y_m": 3930.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 5463.2,
+        "timestamp": "2024-01-23T05:11:19.024000Z",
+        "image_pair_id": "pair_sentinel2_bengaluru_tech"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_004",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.691138,
+              12.883626
+            ],
+            [
+              77.691783,
+              12.883626
+            ],
+            [
+              77.691783,
+              12.884439
+            ],
+            [
+              77.691138,
+              12.884439
+            ],
+            [
+              77.691138,
+              12.883626
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_004",
+        "zone_name": "Bengaluru Electronic City Infrastructure",
+        "confidence": 0.5308,
+        "uncertainty": 0.9973,
+        "shannon_entropy_h_p": 0.9973,
+        "pixel_area": 63,
+        "area_m2": 6300.0,
+        "area_hectares": 0.63,
+        "bbox_pixels": [
+          338,
+          372,
+          345,
+          381
+        ],
+        "local_grid_x_m": 3415.0,
+        "local_grid_y_m": 3765.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 5083.1,
+        "timestamp": "2024-01-23T05:11:19.024000Z",
+        "image_pair_id": "pair_sentinel2_bengaluru_tech"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_005",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.670778,
+              12.882089
+            ],
+            [
+              77.671423,
+              12.882089
+            ],
+            [
+              77.671423,
+              12.883083
+            ],
+            [
+              77.670778,
+              12.883083
+            ],
+            [
+              77.670778,
+              12.882089
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_005",
+        "zone_name": "Bengaluru Electronic City Infrastructure",
+        "confidence": 0.5217,
+        "uncertainty": 0.9986,
+        "shannon_entropy_h_p": 0.9986,
+        "pixel_area": 77,
+        "area_m2": 7700.0,
+        "area_hectares": 0.77,
+        "bbox_pixels": [
+          117,
+          355,
+          124,
+          366
+        ],
+        "local_grid_x_m": 1205.0,
+        "local_grid_y_m": 3605.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 3801.1,
+        "timestamp": "2024-01-23T05:11:19.024000Z",
+        "image_pair_id": "pair_sentinel2_bengaluru_tech"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_006",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.668752,
+              12.881547
+            ],
+            [
+              77.669857,
+              12.881547
+            ],
+            [
+              77.669857,
+              12.88227
+            ],
+            [
+              77.668752,
+              12.88227
+            ],
+            [
+              77.668752,
+              12.881547
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_006",
+        "zone_name": "Bengaluru Electronic City Infrastructure",
+        "confidence": 0.6099,
+        "uncertainty": 0.9649,
+        "shannon_entropy_h_p": 0.9649,
+        "pixel_area": 96,
+        "area_m2": 9600.0,
+        "area_hectares": 0.96,
+        "bbox_pixels": [
+          95,
+          349,
+          107,
+          357
+        ],
+        "local_grid_x_m": 1010.0,
+        "local_grid_y_m": 3530.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 3671.6,
+        "timestamp": "2024-01-23T05:11:19.024000Z",
+        "image_pair_id": "pair_sentinel2_bengaluru_tech"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_007",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.67345,
+              12.881185
+            ],
+            [
+              77.673911,
+              12.881185
+            ],
+            [
+              77.673911,
+              12.881728
+            ],
+            [
+              77.67345,
+              12.881728
+            ],
+            [
+              77.67345,
+              12.881185
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_007",
+        "zone_name": "Bengaluru Electronic City Infrastructure",
+        "confidence": 0.5569,
+        "uncertainty": 0.9907,
+        "shannon_entropy_h_p": 0.9906,
+        "pixel_area": 30,
+        "area_m2": 3000.0,
+        "area_hectares": 0.3,
+        "bbox_pixels": [
+          146,
+          345,
+          151,
+          351
+        ],
+        "local_grid_x_m": 1485.0,
+        "local_grid_y_m": 3480.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 3783.6,
+        "timestamp": "2024-01-23T05:11:19.024000Z",
+        "image_pair_id": "pair_sentinel2_bengaluru_tech"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_008",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.67216,
+              12.880281
+            ],
+            [
+              77.673174,
+              12.880281
+            ],
+            [
+              77.673174,
+              12.881276
+            ],
+            [
+              77.67216,
+              12.881276
+            ],
+            [
+              77.67216,
+              12.880281
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_008",
+        "zone_name": "Bengaluru Electronic City Infrastructure",
+        "confidence": 0.5809,
+        "uncertainty": 0.981,
+        "shannon_entropy_h_p": 0.981,
+        "pixel_area": 121,
+        "area_m2": 12100.0,
+        "area_hectares": 1.21,
+        "bbox_pixels": [
+          132,
+          335,
+          143,
+          346
+        ],
+        "local_grid_x_m": 1375.0,
+        "local_grid_y_m": 3405.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 3672.1,
+        "timestamp": "2024-01-23T05:11:19.024000Z",
+        "image_pair_id": "pair_sentinel2_bengaluru_tech"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_009",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.665067,
+              12.879829
+            ],
+            [
+              77.66562,
+              12.879829
+            ],
+            [
+              77.66562,
+              12.880372
+            ],
+            [
+              77.665067,
+              12.880372
+            ],
+            [
+              77.665067,
+              12.879829
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_009",
+        "zone_name": "Bengaluru Electronic City Infrastructure",
+        "confidence": 0.6059,
+        "uncertainty": 0.9674,
+        "shannon_entropy_h_p": 0.9674,
+        "pixel_area": 36,
+        "area_m2": 3600.0,
+        "area_hectares": 0.36,
+        "bbox_pixels": [
+          55,
+          330,
+          61,
+          336
+        ],
+        "local_grid_x_m": 580.0,
+        "local_grid_y_m": 3330.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 3380.1,
+        "timestamp": "2024-01-23T05:11:19.024000Z",
+        "image_pair_id": "pair_sentinel2_bengaluru_tech"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_010",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.670318,
+              12.878925
+            ],
+            [
+              77.670963,
+              12.878925
+            ],
+            [
+              77.670963,
+              12.879468
+            ],
+            [
+              77.670318,
+              12.879468
+            ],
+            [
+              77.670318,
+              12.878925
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_010",
+        "zone_name": "Bengaluru Electronic City Infrastructure",
+        "confidence": 0.5755,
+        "uncertainty": 0.9835,
+        "shannon_entropy_h_p": 0.9835,
+        "pixel_area": 42,
+        "area_m2": 4200.0,
+        "area_hectares": 0.42,
+        "bbox_pixels": [
+          112,
+          320,
+          119,
+          326
+        ],
+        "local_grid_x_m": 1155.0,
+        "local_grid_y_m": 3230.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 3430.3,
+        "timestamp": "2024-01-23T05:11:19.024000Z",
+        "image_pair_id": "pair_sentinel2_bengaluru_tech"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_011",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.662579,
+              12.878745
+            ],
+            [
+              77.66304,
+              12.878745
+            ],
+            [
+              77.66304,
+              12.879558
+            ],
+            [
+              77.662579,
+              12.879558
+            ],
+            [
+              77.662579,
+              12.878745
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_011",
+        "zone_name": "Bengaluru Electronic City Infrastructure",
+        "confidence": 0.6414,
+        "uncertainty": 0.9415,
+        "shannon_entropy_h_p": 0.9415,
+        "pixel_area": 45,
+        "area_m2": 4500.0,
+        "area_hectares": 0.45,
+        "bbox_pixels": [
+          28,
+          318,
+          33,
+          327
+        ],
+        "local_grid_x_m": 305.0,
+        "local_grid_y_m": 3225.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 3239.4,
+        "timestamp": "2024-01-23T05:11:19.024000Z",
+        "image_pair_id": "pair_sentinel2_bengaluru_tech"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_012",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.66,
+              12.878383
+            ],
+            [
+              77.660737,
+              12.878383
+            ],
+            [
+              77.660737,
+              12.879558
+            ],
+            [
+              77.66,
+              12.879558
+            ],
+            [
+              77.66,
+              12.878383
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_012",
+        "zone_name": "Bengaluru Electronic City Infrastructure",
+        "confidence": 0.58,
+        "uncertainty": 0.9814,
+        "shannon_entropy_h_p": 0.9815,
+        "pixel_area": 104,
+        "area_m2": 10400.0,
+        "area_hectares": 1.04,
+        "bbox_pixels": [
+          0,
+          314,
+          8,
+          327
+        ],
+        "local_grid_x_m": 40.0,
+        "local_grid_y_m": 3205.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 3205.2,
+        "timestamp": "2024-01-23T05:11:19.024000Z",
+        "image_pair_id": "pair_sentinel2_bengaluru_tech"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_013",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.663869,
+              12.878112
+            ],
+            [
+              77.66433,
+              12.878112
+            ],
+            [
+              77.66433,
+              12.878835
+            ],
+            [
+              77.663869,
+              12.878835
+            ],
+            [
+              77.663869,
+              12.878112
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_013",
+        "zone_name": "Bengaluru Electronic City Infrastructure",
+        "confidence": 0.6224,
+        "uncertainty": 0.9563,
+        "shannon_entropy_h_p": 0.9563,
+        "pixel_area": 40,
+        "area_m2": 4000.0,
+        "area_hectares": 0.4,
+        "bbox_pixels": [
+          42,
+          311,
+          47,
+          319
+        ],
+        "local_grid_x_m": 445.0,
+        "local_grid_y_m": 3150.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 3181.3,
+        "timestamp": "2024-01-23T05:11:19.024000Z",
+        "image_pair_id": "pair_sentinel2_bengaluru_tech"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_014",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.672437,
+              12.877841
+            ],
+            [
+              77.673082,
+              12.877841
+            ],
+            [
+              77.673082,
+              12.878745
+            ],
+            [
+              77.672437,
+              12.878745
+            ],
+            [
+              77.672437,
+              12.877841
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_014",
+        "zone_name": "Bengaluru Electronic City Infrastructure",
+        "confidence": 0.5919,
+        "uncertainty": 0.9755,
+        "shannon_entropy_h_p": 0.9755,
+        "pixel_area": 70,
+        "area_m2": 7000.0,
+        "area_hectares": 0.7,
+        "bbox_pixels": [
+          135,
+          308,
+          142,
+          318
+        ],
+        "local_grid_x_m": 1385.0,
+        "local_grid_y_m": 3130.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 3422.7,
+        "timestamp": "2024-01-23T05:11:19.024000Z",
+        "image_pair_id": "pair_sentinel2_bengaluru_tech"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_015",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.671055,
+              12.877298
+            ],
+            [
+              77.6717,
+              12.877298
+            ],
+            [
+              77.6717,
+              12.878202
+            ],
+            [
+              77.671055,
+              12.878202
+            ],
+            [
+              77.671055,
+              12.877298
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_015",
+        "zone_name": "Bengaluru Electronic City Infrastructure",
+        "confidence": 0.6201,
+        "uncertainty": 0.9579,
+        "shannon_entropy_h_p": 0.958,
+        "pixel_area": 70,
+        "area_m2": 7000.0,
+        "area_hectares": 0.7,
+        "bbox_pixels": [
+          120,
+          302,
+          127,
+          312
+        ],
+        "local_grid_x_m": 1235.0,
+        "local_grid_y_m": 3070.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 3309.1,
+        "timestamp": "2024-01-23T05:11:19.024000Z",
+        "image_pair_id": "pair_sentinel2_bengaluru_tech"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_016",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.673911,
+              12.873954
+            ],
+            [
+              77.675753,
+              12.873954
+            ],
+            [
+              77.675753,
+              12.874948
+            ],
+            [
+              77.673911,
+              12.874948
+            ],
+            [
+              77.673911,
+              12.873954
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_016",
+        "zone_name": "Bengaluru Electronic City Infrastructure",
+        "confidence": 0.516,
+        "uncertainty": 0.9993,
+        "shannon_entropy_h_p": 0.9993,
+        "pixel_area": 220,
+        "area_m2": 22000.0,
+        "area_hectares": 2.2,
+        "bbox_pixels": [
+          151,
+          265,
+          171,
+          276
+        ],
+        "local_grid_x_m": 1610.0,
+        "local_grid_y_m": 2705.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 3147.9,
+        "timestamp": "2024-01-23T05:11:19.024000Z",
+        "image_pair_id": "pair_sentinel2_bengaluru_tech"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_017",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.671423,
+              12.872779
+            ],
+            [
+              77.672345,
+              12.872779
+            ],
+            [
+              77.672345,
+              12.873412
+            ],
+            [
+              77.671423,
+              12.873412
+            ],
+            [
+              77.671423,
+              12.872779
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_017",
+        "zone_name": "Bengaluru Electronic City Infrastructure",
+        "confidence": 0.5644,
+        "uncertainty": 0.988,
+        "shannon_entropy_h_p": 0.988,
+        "pixel_area": 70,
+        "area_m2": 7000.0,
+        "area_hectares": 0.7,
+        "bbox_pixels": [
+          124,
+          252,
+          134,
+          259
+        ],
+        "local_grid_x_m": 1290.0,
+        "local_grid_y_m": 2555.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 2862.2,
+        "timestamp": "2024-01-23T05:11:19.024000Z",
+        "image_pair_id": "pair_sentinel2_bengaluru_tech"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_018",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.67649,
+              12.872236
+            ],
+            [
+              77.678056,
+              12.872236
+            ],
+            [
+              77.678056,
+              12.873683
+            ],
+            [
+              77.67649,
+              12.873683
+            ],
+            [
+              77.67649,
+              12.872236
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_018",
+        "zone_name": "Bengaluru Electronic City Infrastructure",
+        "confidence": 0.5547,
+        "uncertainty": 0.9914,
+        "shannon_entropy_h_p": 0.9913,
+        "pixel_area": 272,
+        "area_m2": 27200.0,
+        "area_hectares": 2.72,
+        "bbox_pixels": [
+          179,
+          246,
+          196,
+          262
+        ],
+        "local_grid_x_m": 1875.0,
+        "local_grid_y_m": 2540.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 3157.1,
+        "timestamp": "2024-01-23T05:11:19.024000Z",
+        "image_pair_id": "pair_sentinel2_bengaluru_tech"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_019",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.675753,
+              12.8707
+            ],
+            [
+              77.676398,
+              12.8707
+            ],
+            [
+              77.676398,
+              12.871333
+            ],
+            [
+              77.675753,
+              12.871333
+            ],
+            [
+              77.675753,
+              12.8707
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_019",
+        "zone_name": "Bengaluru Electronic City Infrastructure",
+        "confidence": 0.5585,
+        "uncertainty": 0.9901,
+        "shannon_entropy_h_p": 0.9901,
+        "pixel_area": 49,
+        "area_m2": 4900.0,
+        "area_hectares": 0.49,
+        "bbox_pixels": [
+          171,
+          229,
+          178,
+          236
+        ],
+        "local_grid_x_m": 1745.0,
+        "local_grid_y_m": 2325.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 2907.0,
+        "timestamp": "2024-01-23T05:11:19.024000Z",
+        "image_pair_id": "pair_sentinel2_bengaluru_tech"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_020",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.677596,
+              12.870157
+            ],
+            [
+              77.678425,
+              12.870157
+            ],
+            [
+              77.678425,
+              12.8707
+            ],
+            [
+              77.677596,
+              12.8707
+            ],
+            [
+              77.677596,
+              12.870157
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_020",
+        "zone_name": "Bengaluru Electronic City Infrastructure",
+        "confidence": 0.6462,
+        "uncertainty": 0.9374,
+        "shannon_entropy_h_p": 0.9374,
+        "pixel_area": 54,
+        "area_m2": 5400.0,
+        "area_hectares": 0.54,
+        "bbox_pixels": [
+          191,
+          223,
+          200,
+          229
+        ],
+        "local_grid_x_m": 1955.0,
+        "local_grid_y_m": 2260.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 2988.2,
+        "timestamp": "2024-01-23T05:11:19.024000Z",
+        "image_pair_id": "pair_sentinel2_bengaluru_tech"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_021",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.684136,
+              12.869796
+            ],
+            [
+              77.684966,
+              12.869796
+            ],
+            [
+              77.684966,
+              12.870248
+            ],
+            [
+              77.684136,
+              12.870248
+            ],
+            [
+              77.684136,
+              12.869796
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_021",
+        "zone_name": "Bengaluru Electronic City Infrastructure",
+        "confidence": 0.5165,
+        "uncertainty": 0.9992,
+        "shannon_entropy_h_p": 0.9992,
+        "pixel_area": 45,
+        "area_m2": 4500.0,
+        "area_hectares": 0.45,
+        "bbox_pixels": [
+          262,
+          219,
+          271,
+          224
+        ],
+        "local_grid_x_m": 2665.0,
+        "local_grid_y_m": 2215.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 3465.3,
+        "timestamp": "2024-01-23T05:11:19.024000Z",
+        "image_pair_id": "pair_sentinel2_bengaluru_tech"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_022",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.681649,
+              12.869615
+            ],
+            [
+              77.682294,
+              12.869615
+            ],
+            [
+              77.682294,
+              12.870248
+            ],
+            [
+              77.681649,
+              12.870248
+            ],
+            [
+              77.681649,
+              12.869615
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_022",
+        "zone_name": "Bengaluru Electronic City Infrastructure",
+        "confidence": 0.6452,
+        "uncertainty": 0.9382,
+        "shannon_entropy_h_p": 0.9383,
+        "pixel_area": 49,
+        "area_m2": 4900.0,
+        "area_hectares": 0.49,
+        "bbox_pixels": [
+          235,
+          217,
+          242,
+          224
+        ],
+        "local_grid_x_m": 2385.0,
+        "local_grid_y_m": 2205.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 3248.1,
+        "timestamp": "2024-01-23T05:11:19.024000Z",
+        "image_pair_id": "pair_sentinel2_bengaluru_tech"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_023",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.691967,
+              12.86853
+            ],
+            [
+              77.692796,
+              12.86853
+            ],
+            [
+              77.692796,
+              12.869073
+            ],
+            [
+              77.691967,
+              12.869073
+            ],
+            [
+              77.691967,
+              12.86853
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_023",
+        "zone_name": "Bengaluru Electronic City Infrastructure",
+        "confidence": 0.3869,
+        "uncertainty": 0.9628,
+        "shannon_entropy_h_p": 0.9628,
+        "pixel_area": 54,
+        "area_m2": 5400.0,
+        "area_hectares": 0.54,
+        "bbox_pixels": [
+          347,
+          205,
+          356,
+          211
+        ],
+        "local_grid_x_m": 3515.0,
+        "local_grid_y_m": 2080.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 4084.3,
+        "timestamp": "2024-01-23T05:11:19.024000Z",
+        "image_pair_id": "pair_sentinel2_bengaluru_tech"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_024",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.698047,
+              12.86844
+            ],
+            [
+              77.699797,
+              12.86844
+            ],
+            [
+              77.699797,
+              12.869886
+            ],
+            [
+              77.698047,
+              12.869886
+            ],
+            [
+              77.698047,
+              12.86844
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_024",
+        "zone_name": "Bengaluru Electronic City Infrastructure",
+        "confidence": 0.3754,
+        "uncertainty": 0.9547,
+        "shannon_entropy_h_p": 0.9547,
+        "pixel_area": 304,
+        "area_m2": 30400.0,
+        "area_hectares": 3.04,
+        "bbox_pixels": [
+          413,
+          204,
+          432,
+          220
+        ],
+        "local_grid_x_m": 4225.0,
+        "local_grid_y_m": 2120.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 4727.1,
+        "timestamp": "2024-01-23T05:11:19.024000Z",
+        "image_pair_id": "pair_sentinel2_bengaluru_tech"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_025",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.680083,
+              12.867446
+            ],
+            [
+              77.680636,
+              12.867446
+            ],
+            [
+              77.680636,
+              12.867898
+            ],
+            [
+              77.680083,
+              12.867898
+            ],
+            [
+              77.680083,
+              12.867446
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_025",
+        "zone_name": "Bengaluru Electronic City Infrastructure",
+        "confidence": 0.6072,
+        "uncertainty": 0.9666,
+        "shannon_entropy_h_p": 0.9666,
+        "pixel_area": 30,
+        "area_m2": 3000.0,
+        "area_hectares": 0.3,
+        "bbox_pixels": [
+          218,
+          193,
+          224,
+          198
+        ],
+        "local_grid_x_m": 2210.0,
+        "local_grid_y_m": 1955.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 2950.6,
+        "timestamp": "2024-01-23T05:11:19.024000Z",
+        "image_pair_id": "pair_sentinel2_bengaluru_tech"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_026",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.706338,
+              12.858949
+            ],
+            [
+              77.706891,
+              12.858949
+            ],
+            [
+              77.706891,
+              12.859672
+            ],
+            [
+              77.706338,
+              12.859672
+            ],
+            [
+              77.706338,
+              12.858949
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_026",
+        "zone_name": "Bengaluru Electronic City Infrastructure",
+        "confidence": 0.4909,
+        "uncertainty": 0.9998,
+        "shannon_entropy_h_p": 0.9998,
+        "pixel_area": 48,
+        "area_m2": 4800.0,
+        "area_hectares": 0.48,
+        "bbox_pixels": [
+          503,
+          99,
+          509,
+          107
+        ],
+        "local_grid_x_m": 5060.0,
+        "local_grid_y_m": 1030.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 5163.8,
+        "timestamp": "2024-01-23T05:11:19.024000Z",
+        "image_pair_id": "pair_sentinel2_bengaluru_tech"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_027",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.695376,
+              12.853254
+            ],
+            [
+              77.696297,
+              12.853254
+            ],
+            [
+              77.696297,
+              12.853887
+            ],
+            [
+              77.695376,
+              12.853887
+            ],
+            [
+              77.695376,
+              12.853254
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_027",
+        "zone_name": "Bengaluru Electronic City Infrastructure",
+        "confidence": 0.4812,
+        "uncertainty": 0.999,
+        "shannon_entropy_h_p": 0.999,
+        "pixel_area": 70,
+        "area_m2": 7000.0,
+        "area_hectares": 0.7,
+        "bbox_pixels": [
+          384,
+          36,
+          394,
+          43
+        ],
+        "local_grid_x_m": 3890.0,
+        "local_grid_y_m": 395.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 3910.0,
+        "timestamp": "2024-01-23T05:11:19.024000Z",
+        "image_pair_id": "pair_sentinel2_bengaluru_tech"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cand_sq_levir_028",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.68644,
+              12.851808
+            ],
+            [
+              77.686808,
+              12.851808
+            ],
+            [
+              77.686808,
+              12.852531
+            ],
+            [
+              77.68644,
+              12.852531
+            ],
+            [
+              77.68644,
+              12.851808
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "candidate_id": "cand_sq_levir_028",
+        "zone_name": "Bengaluru Electronic City Infrastructure",
+        "confidence": 0.4463,
+        "uncertainty": 0.9917,
+        "shannon_entropy_h_p": 0.9917,
+        "pixel_area": 32,
+        "area_m2": 3200.0,
+        "area_hectares": 0.32,
+        "bbox_pixels": [
+          287,
+          20,
+          291,
+          28
+        ],
+        "local_grid_x_m": 2890.0,
+        "local_grid_y_m": 240.0,
+        "local_grid_z_m": 60.0,
+        "transit_distance_m": 2899.9,
+        "timestamp": "2024-01-23T05:11:19.024000Z",
+        "image_pair_id": "pair_sentinel2_bengaluru_tech"
+      }
+    }
+  ]
+}

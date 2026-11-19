@@ -1,0 +1,40 @@
+{
+  "zone_key": "kanpur_bhauti",
+  "zone_name": "Kanpur / Bhauti Corridor, Uttar Pradesh",
+  "crs": "EPSG:4326 (WGS 84)",
+  "sensor": "ESA Sentinel-2 Level-2A",
+  "gsd_meters_per_pixel": [
+    10.0,
+    10.0
+  ],
+  "raster_dimensions": {
+    "width_px": 512,
+    "height_px": 512
+  },
+  "spatial_bounding_box": {
+    "west_longitude": 80.198,
+    "east_longitude": 80.249336,
+    "south_latitude": 26.447,
+    "north_latitude": 26.493212
+  },
+  "affine_transform": {
+    "origin_longitude": 80.198,
+    "origin_latitude": 26.447,
+    "pixel_width_degrees": 0.00010026491921926798,
+    "pixel_height_degrees": -9.025687628404423e-05
+  },
+  "exported_files": {
+    "pre_imagery_geotiff": "kanpur_bhauti_pre_t1.tif",
+    "post_imagery_geotiff": "kanpur_bhauti_post_t2.tif",
+    "change_heatmap_geotiff": "kanpur_bhauti_change_heatmap.tif",
+    "binary_mask_geotiff": "kanpur_bhauti_binary_mask.tif",
+    "candidates_vector_geojson": "kanpur_bhauti_candidates.geojson"
+  },
+  "candidate_count": 5,
+  "qgis_import_guide": {
+    "step_1": "Open QGIS and choose Layer -> Add Layer -> Add Raster Layer, select .tif files.",
+    "step_2": "For change_heatmap.tif, set Symbology to Singleband Pseudocolor (Color Ramp: Magma or Turbo).",
+    "step_3": "Choose Layer -> Add Layer -> Add Vector Layer, select candidates.geojson.",
+    "step_4": "Label vector layer by candidate_id and style stroke by uncertainty."
+  }
+}

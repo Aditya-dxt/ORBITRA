@@ -1,0 +1,40 @@
+{
+  "zone_key": "bengaluru_tech",
+  "zone_name": "Bengaluru Electronic City Infrastructure",
+  "crs": "EPSG:4326 (WGS 84)",
+  "sensor": "ESA Sentinel-2 Level-2A",
+  "gsd_meters_per_pixel": [
+    10.0,
+    10.0
+  ],
+  "raster_dimensions": {
+    "width_px": 512,
+    "height_px": 512
+  },
+  "spatial_bounding_box": {
+    "west_longitude": 77.66,
+    "east_longitude": 77.707167,
+    "south_latitude": 12.85,
+    "north_latitude": 12.896281
+  },
+  "affine_transform": {
+    "origin_longitude": 77.66,
+    "origin_latitude": 12.85,
+    "pixel_width_degrees": 9.212383697466605e-05,
+    "pixel_height_degrees": -9.039203401357344e-05
+  },
+  "exported_files": {
+    "pre_imagery_geotiff": "bengaluru_tech_pre_t1.tif",
+    "post_imagery_geotiff": "bengaluru_tech_post_t2.tif",
+    "change_heatmap_geotiff": "bengaluru_tech_change_heatmap.tif",
+    "binary_mask_geotiff": "bengaluru_tech_binary_mask.tif",
+    "candidates_vector_geojson": "bengaluru_tech_candidates.geojson"
+  },
+  "candidate_count": 28,
+  "qgis_import_guide": {
+    "step_1": "Open QGIS and choose Layer -> Add Layer -> Add Raster Layer, select .tif files.",
+    "step_2": "For change_heatmap.tif, set Symbology to Singleband Pseudocolor (Color Ramp: Magma or Turbo).",
+    "step_3": "Choose Layer -> Add Layer -> Add Vector Layer, select candidates.geojson.",
+    "step_4": "Label vector layer by candidate_id and style stroke by uncertainty."
+  }
+}
