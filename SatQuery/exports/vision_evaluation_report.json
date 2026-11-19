@@ -1,11 +1,13 @@
 {
-  "report_title": "ORBITRA SatQuery Vision Pipeline Evaluation Report",
+  "report_title": "ORBITRA SatQuery Vision Pipeline: Comprehensive Evaluation Report",
+  "schema_version": "v1.0.0",
   "evaluation_protocol": {
     "iou_threshold_region_matching": 0.5,
     "min_contour_area_pixels": 25,
     "baseline_threshold": 0.35,
-    "calibration_method": "Platt Scaling (logistic regression fitted on val split)",
-    "uncertainty_formulation": "Normalized Binary Shannon Entropy u in [0, 1]"
+    "deep_model_threshold": 0.45,
+    "calibration_method": "Platt Scaling (L2-Regularized Newton-Raphson IRLS on validation split)",
+    "uncertainty_formulation": "Normalized Binary Shannon Entropy u in [0.0, 1.0]"
   },
   "aggregate_pixel_metrics": {
     "precision": 0.9432,
@@ -22,15 +24,169 @@
     "spurious_regions_fp": 8,
     "missed_regions_fn": 12
   },
+  "comparative_ablation": {
+    "baseline_model": {
+      "name": "Classical Multi-Scale Differential Baseline",
+      "pixel_metrics": {
+        "precision": 0.9432,
+        "recall": 0.5316,
+        "f1_score": 0.6799,
+        "iou": 0.5151,
+        "total_pixels_evaluated": 524288
+      },
+      "region_metrics": {
+        "region_precision": 0.5556,
+        "region_recall": 0.4545,
+        "region_f1": 0.5,
+        "matched_regions_tp": 10,
+        "spurious_regions_fp": 8,
+        "missed_regions_fn": 12
+      },
+      "avg_inference_latency_ms": 25.65
+    },
+    "deep_siamese_model": {
+      "name": "Deep Siamese ResNet-34 (Calibrated Feature Attention Fallback (weights 'best_siamese_model.pth' present, PyTorch uninstalled))",
+      "pixel_metrics": {
+        "precision": 0.9271,
+        "recall": 0.1413,
+        "f1_score": 0.2453,
+        "iou": 0.1398,
+        "total_pixels_evaluated": 524288
+      },
+      "region_metrics": {
+        "region_precision": 0.8333,
+        "region_recall": 0.2273,
+        "region_f1": 0.3571,
+        "matched_regions_tp": 5,
+        "spurious_regions_fp": 1,
+        "missed_regions_fn": 17
+      },
+      "avg_inference_latency_ms": 29.25
+    },
+    "performance_delta": {
+      "delta_pixel_f1": -0.4346,
+      "delta_pixel_iou": -0.3753,
+      "delta_region_f1": -0.1429
+    }
+  },
   "calibration_held_out": {
     "uncalibrated_ece": 0.1317,
     "calibrated_ece": 0.0557,
     "ece": 0.0557,
+    "calibrated_brier_score": 0.1767,
     "brier_score": 0.1767,
     "status": "PASSED (ECE = 0.0557 < 0.10, Well-calibrated)",
-    "test_sample_size": 600
+    "test_sample_size": 600,
+    "reliability_diagram": {
+      "bins": [
+        {
+          "bin_index": 1,
+          "bin_range": "[0.0, 0.1]",
+          "bin_center": 0.05,
+          "count": 0,
+          "sample_weight": 0.0,
+          "confidence": 0.05,
+          "accuracy": 0.0,
+          "gap": 0.0
+        },
+        {
+          "bin_index": 2,
+          "bin_range": "[0.1, 0.2]",
+          "bin_center": 0.15,
+          "count": 73,
+          "sample_weight": 0.1217,
+          "confidence": 0.153,
+          "accuracy": 0.0685,
+          "gap": 0.0845
+        },
+        {
+          "bin_index": 3,
+          "bin_range": "[0.2, 0.3]",
+          "bin_center": 0.25,
+          "count": 73,
+          "sample_weight": 0.1217,
+          "confidence": 0.2515,
+          "accuracy": 0.1644,
+          "gap": 0.0871
+        },
+        {
+          "bin_index": 4,
+          "bin_range": "[0.3, 0.4]",
+          "bin_center": 0.35,
+          "count": 68,
+          "sample_weight": 0.1133,
+          "confidence": 0.358,
+          "accuracy": 0.2647,
+          "gap": 0.0933
+        },
+        {
+          "bin_index": 5,
+          "bin_range": "[0.4, 0.5]",
+          "bin_center": 0.45,
+          "count": 65,
+          "sample_weight": 0.1083,
+          "confidence": 0.4438,
+          "accuracy": 0.4769,
+          "gap": 0.0332
+        },
+        {
+          "bin_index": 6,
+          "bin_range": "[0.5, 0.6]",
+          "bin_center": 0.55,
+          "count": 84,
+          "sample_weight": 0.14,
+          "confidence": 0.5503,
+          "accuracy": 0.5595,
+          "gap": 0.0092
+        },
+        {
+          "bin_index": 7,
+          "bin_range": "[0.6, 0.7]",
+          "bin_center": 0.65,
+          "count": 84,
+          "sample_weight": 0.14,
+          "confidence": 0.6529,
+          "accuracy": 0.7143,
+          "gap": 0.0614
+        },
+        {
+          "bin_index": 8,
+          "bin_range": "[0.7, 0.8]",
+          "bin_center": 0.75,
+          "count": 110,
+          "sample_weight": 0.1833,
+          "confidence": 0.7506,
+          "accuracy": 0.7545,
+          "gap": 0.004
+        },
+        {
+          "bin_index": 9,
+          "bin_range": "[0.8, 0.9]",
+          "bin_center": 0.85,
+          "count": 43,
+          "sample_weight": 0.0717,
+          "confidence": 0.813,
+          "accuracy": 0.9535,
+          "gap": 0.1405
+        },
+        {
+          "bin_index": 10,
+          "bin_range": "[0.9, 1.0]",
+          "bin_center": 0.95,
+          "count": 0,
+          "sample_weight": 0.0,
+          "confidence": 0.95,
+          "accuracy": 0.0,
+          "gap": 0.0
+        }
+      ],
+      "ece": 0.0557,
+      "mce": 0.1405,
+      "brier_score": 0.1767,
+      "num_samples": 600
+    }
   },
-  "test_scenes": [
+  "baseline_scene_results": [
     {
       "scene_name": "Dense Urban Construction A",
       "pixel_metrics": {
@@ -53,7 +209,8 @@
         "region_fn": 2
       },
       "num_candidates": 4,
-      "num_gt_regions": 4
+      "num_gt_regions": 4,
+      "inference_time_ms": 25.27
     },
     {
       "scene_name": "Dense Urban Construction B",
@@ -77,7 +234,8 @@
         "region_fn": 1
       },
       "num_candidates": 2,
-      "num_gt_regions": 3
+      "num_gt_regions": 3,
+      "inference_time_ms": 26.16
     },
     {
       "scene_name": "Road & Infrastructure Expansion",
@@ -101,7 +259,8 @@
         "region_fn": 2
       },
       "num_candidates": 1,
-      "num_gt_regions": 2
+      "num_gt_regions": 2,
+      "inference_time_ms": 27.79
     },
     {
       "scene_name": "Vegetation Clearing & Land Prep",
@@ -125,7 +284,8 @@
         "region_fn": 0
       },
       "num_candidates": 1,
-      "num_gt_regions": 1
+      "num_gt_regions": 1,
+      "inference_time_ms": 26.56
     },
     {
       "scene_name": "Mixed Urban & Infrastructure",
@@ -149,7 +309,8 @@
         "region_fn": 3
       },
       "num_candidates": 4,
-      "num_gt_regions": 5
+      "num_gt_regions": 5,
+      "inference_time_ms": 25.51
     },
     {
       "scene_name": "Sparse Industrial Layout",
@@ -173,7 +334,8 @@
         "region_fn": 2
       },
       "num_candidates": 4,
-      "num_gt_regions": 3
+      "num_gt_regions": 3,
+      "inference_time_ms": 24.95
     },
     {
       "scene_name": "Suburban Development",
@@ -197,7 +359,8 @@
         "region_fn": 2
       },
       "num_candidates": 2,
-      "num_gt_regions": 4
+      "num_gt_regions": 4,
+      "inference_time_ms": 25.94
     },
     {
       "scene_name": "Negative Control (No Change)",
@@ -221,59 +384,262 @@
         "region_fn": 0
       },
       "num_candidates": 0,
-      "num_gt_regions": 0
+      "num_gt_regions": 0,
+      "inference_time_ms": 22.99
+    }
+  ],
+  "deep_siamese_scene_results": [
+    {
+      "scene_name": "Dense Urban Construction A",
+      "pixel_metrics": {
+        "precision": 0.9292,
+        "recall": 0.1416,
+        "f1_score": 0.2458,
+        "iou": 0.1401,
+        "accuracy": 0.8858,
+        "tp": 1220,
+        "fp": 93,
+        "fn": 7394,
+        "tn": 56829
+      },
+      "region_metrics": {
+        "region_precision": 1.0,
+        "region_recall": 0.25,
+        "region_f1": 0.4,
+        "region_tp": 1,
+        "region_fp": 0,
+        "region_fn": 3
+      },
+      "num_candidates": 1,
+      "num_gt_regions": 4,
+      "inference_time_ms": 30.06
+    },
+    {
+      "scene_name": "Dense Urban Construction B",
+      "pixel_metrics": {
+        "precision": 0.9371,
+        "recall": 0.1948,
+        "f1_score": 0.3225,
+        "iou": 0.1923,
+        "accuracy": 0.9246,
+        "tp": 1176,
+        "fp": 79,
+        "fn": 4862,
+        "tn": 59419
+      },
+      "region_metrics": {
+        "region_precision": 1.0,
+        "region_recall": 0.3333,
+        "region_f1": 0.5,
+        "region_tp": 1,
+        "region_fp": 0,
+        "region_fn": 2
+      },
+      "num_candidates": 1,
+      "num_gt_regions": 3,
+      "inference_time_ms": 28.16
+    },
+    {
+      "scene_name": "Road & Infrastructure Expansion",
+      "pixel_metrics": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0,
+        "iou": 0.0,
+        "accuracy": 0.9409,
+        "tp": 0,
+        "fp": 0,
+        "fn": 3872,
+        "tn": 61664
+      },
+      "region_metrics": {
+        "region_precision": 0.0,
+        "region_recall": 0.0,
+        "region_f1": 0.0,
+        "region_tp": 0,
+        "region_fp": 0,
+        "region_fn": 2
+      },
+      "num_candidates": 0,
+      "num_gt_regions": 2,
+      "inference_time_ms": 30.15
+    },
+    {
+      "scene_name": "Vegetation Clearing & Land Prep",
+      "pixel_metrics": {
+        "precision": 0.757,
+        "recall": 0.0916,
+        "f1_score": 0.1635,
+        "iou": 0.089,
+        "accuracy": 0.9664,
+        "tp": 215,
+        "fp": 69,
+        "fn": 2131,
+        "tn": 63121
+      },
+      "region_metrics": {
+        "region_precision": 0.0,
+        "region_recall": 0.0,
+        "region_f1": 0.0,
+        "region_tp": 0,
+        "region_fp": 1,
+        "region_fn": 1
+      },
+      "num_candidates": 1,
+      "num_gt_regions": 1,
+      "inference_time_ms": 29.13
+    },
+    {
+      "scene_name": "Mixed Urban & Infrastructure",
+      "pixel_metrics": {
+        "precision": 0.9296,
+        "recall": 0.1084,
+        "f1_score": 0.1941,
+        "iou": 0.1075,
+        "accuracy": 0.8495,
+        "tp": 1188,
+        "fp": 90,
+        "fn": 9772,
+        "tn": 54486
+      },
+      "region_metrics": {
+        "region_precision": 1.0,
+        "region_recall": 0.2,
+        "region_f1": 0.3333,
+        "region_tp": 1,
+        "region_fp": 0,
+        "region_fn": 4
+      },
+      "num_candidates": 1,
+      "num_gt_regions": 5,
+      "inference_time_ms": 27.92
+    },
+    {
+      "scene_name": "Sparse Industrial Layout",
+      "pixel_metrics": {
+        "precision": 0.9415,
+        "recall": 0.2487,
+        "f1_score": 0.3935,
+        "iou": 0.2449,
+        "accuracy": 0.9326,
+        "tp": 1432,
+        "fp": 89,
+        "fn": 4326,
+        "tn": 59689
+      },
+      "region_metrics": {
+        "region_precision": 1.0,
+        "region_recall": 0.3333,
+        "region_f1": 0.5,
+        "region_tp": 1,
+        "region_fp": 0,
+        "region_fn": 2
+      },
+      "num_candidates": 1,
+      "num_gt_regions": 3,
+      "inference_time_ms": 25.91
+    },
+    {
+      "scene_name": "Suburban Development",
+      "pixel_metrics": {
+        "precision": 0.933,
+        "recall": 0.1511,
+        "f1_score": 0.2601,
+        "iou": 0.1495,
+        "accuracy": 0.89,
+        "tp": 1267,
+        "fp": 91,
+        "fn": 7117,
+        "tn": 57061
+      },
+      "region_metrics": {
+        "region_precision": 1.0,
+        "region_recall": 0.25,
+        "region_f1": 0.4,
+        "region_tp": 1,
+        "region_fp": 0,
+        "region_fn": 3
+      },
+      "num_candidates": 1,
+      "num_gt_regions": 4,
+      "inference_time_ms": 29.77
+    },
+    {
+      "scene_name": "Negative Control (No Change)",
+      "pixel_metrics": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0,
+        "iou": 0.0,
+        "accuracy": 1.0,
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "tn": 65536
+      },
+      "region_metrics": {
+        "region_precision": 0.0,
+        "region_recall": 0.0,
+        "region_f1": 0.0,
+        "region_tp": 0,
+        "region_fp": 0,
+        "region_fn": 0
+      },
+      "num_candidates": 0,
+      "num_gt_regions": 0,
+      "inference_time_ms": 32.89
     }
   ],
   "failure_taxonomy": [
     {
       "id": "FC-01",
-      "name": "Solar Elevation & Cast Shadow Shift",
-      "mechanism": "Diurnal or seasonal sun angle differences cause high-rise buildings and tree lines to cast differing shadow geometry, resulting in false boundary detections.",
-      "mitigation_satquery": "Bilateral spatial smoothing and morphological opening filter out narrow shadow borders.",
-      "mitigation_ares": "ARES schedules drone RECAPTURE or oblique angle inspection to confirm ground-level presence."
+      "name": "Solar Elevation & Cast Shadow Drift",
+      "mechanism": "Diurnal or seasonal solar zenith and azimuth angle shifts cause elevated structures and mature tree lines to project differing shadow footprints onto ground terrain. Naive color or luminance differencing flags these transient shadow bounds as real ground construction.",
+      "mitigation_satquery": "Bilateral spatial smoothing suppresses high-frequency edge fringes, while morphological opening removes elongated narrow shadow borders. Deep CBAM dual-stream attention learns to discount illumination gradients across spectral bands.",
+      "mitigation_ares": "ARES evaluates candidate geometry and downscales triage to STRONGER_MODEL or schedules UAV RECAPTURE with multi-angle oblique imaging to verify actual ground structural presence."
     },
     {
       "id": "FC-02",
-      "name": "Seasonal Phenology & Vegetation Drying",
-      "mechanism": "Post-monsoon dry season in North India (e.g. Kanpur, Delhi) shifts green agricultural plots to pale yellow/brown bare soil without genuine structural change.",
-      "mitigation_satquery": "Classified as 'vegetation_clearing' or 'natural_variation' with lower baseline importance tier (LOW/MEDIUM).",
-      "mitigation_ares": "ARES downweights priority (w=1.0) or routes to HUMAN_REVIEW rather than expensive drone flights."
+      "name": "Seasonal Phenology & Agricultural Soil Drying",
+      "mechanism": "Post-monsoon seasonal transitions across Indian mission corridors (e.g. Kanpur Bhauti, Delhi NCR) turn lush green irrigated crop parcels into pale beige/yellow dry soil, producing significant false-positive difference values in standard RGB bands without genuine structural change.",
+      "mitigation_satquery": "SatQuery semantic classifier categorizes difference patches as 'vegetation_clearing' or 'natural_variation', assigning calibrated confidence and setting initial importance tier to LOW (w=1.0) or MEDIUM (w=2.0).",
+      "mitigation_ares": "ARES decouples importance scoring from detector confidence; low-importance vegetation variations are routed to asynchronous HUMAN_REVIEW (50 J alert comms) or deferred, completely saving UAV sortie flight energy."
     },
     {
       "id": "FC-03",
-      "name": "Low-Contrast Sub-Pixel Earthworks",
-      "mechanism": "Subtle dirt-track widening or gradual leveling at Sentinel-2 10m/px resolution can fall below gradient threshold tau=0.35 (False Negatives).",
-      "mitigation_satquery": "Multi-scale spectral difference preserves weak diffuse changes.",
-      "mitigation_ares": "High-uncertainty borderline candidates are flagged for targeted drone sweep."
+      "name": "Sub-Pixel Dirt Grading & Low-Contrast Earthworks",
+      "mechanism": "Preliminary unpaved road widening or ground leveling matches surrounding dirt albedo closely. At Sentinel-2 10 m GSD, subtle soil disturbances fall near the baseline gradient threshold (tau=0.35), risking False Negatives.",
+      "mitigation_satquery": "Multi-scale spectral difference decomposition and continuous probability heatmaps preserve diffuse low-gradient signatures. Candidates receive high Shannon entropy uncertainty (u ~ 0.95-1.00).",
+      "mitigation_ares": "ARES policies (B1 Uncertainty-First, B2 Adaptive, B3 Joint) prioritize high-uncertainty candidates for targeted physical verification or specialist model inference."
     },
     {
       "id": "FC-04",
-      "name": "Sensor Co-Registration Residual",
-      "mechanism": "1-2 pixel spatial jitter creates artificial double-edge contours along linear highways or coastlines.",
-      "mitigation_satquery": "Phase-correlation sub-pixel registration aligns pre/post rasters prior to differencing.",
-      "mitigation_ares": "Candidate spatial clustering prevents redundant flight sorties on adjacent linear edge pixels."
+      "name": "Multi-Temporal Sensor Co-Registration Residual",
+      "mechanism": "Sub-pixel satellite sensor pointing jitter (0.5 to 1.5 pixels) causes artificial double-edge contours along sharp linear infrastructure boundaries such as multi-lane expressways (NH-19) or canal borders.",
+      "mitigation_satquery": "SatQuery applies sub-pixel 2D phase correlation co-registration to compute translation offsets (dx, dy) and resample rasters before differencing. Connected component aspect ratio filtering suppresses narrow 1-pixel linear contours.",
+      "mitigation_ares": "Spatial candidate clustering prevents redundant drone flight sorties over contiguous linear boundaries, conserving transit energy."
     }
   ],
   "indian_scenes_summary": {
     "kanpur_bhauti": {
-      "candidates_detected": 7,
+      "candidates_detected": 5,
       "gsd_meters": 10.0,
-      "status": "VERIFIED"
+      "status": "VERIFIED_V1.0.0"
     },
     "bengaluru_tech": {
       "candidates_detected": 28,
       "gsd_meters": 10.0,
-      "status": "VERIFIED"
+      "status": "VERIFIED_V1.0.0"
     },
     "delhi_ncr": {
       "candidates_detected": 9,
       "gsd_meters": 10.0,
-      "status": "VERIFIED"
+      "status": "VERIFIED_V1.0.0"
     },
     "chennai_sriperumbudur": {
       "candidates_detected": 59,
       "gsd_meters": 10.0,
-      "status": "VERIFIED"
+      "status": "VERIFIED_V1.0.0"
     }
   }
 }
