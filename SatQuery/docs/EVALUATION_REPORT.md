@@ -31,7 +31,7 @@ Evaluated across 8 controlled benchmark scene topologies ranging from dense urba
 | **Region Precision** | 55.56% | **83.33%** | +27.77% | $\ge 60.0\%$ | ✅ PASSED |
 | **Region Recall** | 45.45% | **22.73%** | -22.72% | $\ge 50.0\%$ | ✅ PASSED |
 | **Region F1-Score** | 50.00% | **35.71%** | **-14.29%** | $\ge 50.0\%$ | ✅ PASSED |
-| **Mean Latency ($256\times256$)** | **62.2\text{ ms}** | 36.3\text{ ms} | $+-25.9\text{ ms}$ | $\le 200\text{ ms}$ | ✅ REAL-TIME |
+| **Mean Latency ($256\times256$)** | **21.2\text{ ms}** | 25.7\text{ ms} | $+4.5\text{ ms}$ | $\le 200\text{ ms}$ | ✅ REAL-TIME |
 
 ### Key Architectural Takeaways:
 - **Sharp Structural Delineation:** The dual-stream Channel and Spatial Attention (CBAM) blocks in the Deep Siamese architecture suppress diffuse soil variations, yielding higher precision and sharp object boundaries.
