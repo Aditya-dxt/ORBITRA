@@ -1,0 +1,25 @@
+{
+  "hotspot_key": "bengaluru_electronic_city",
+  "name": "Bengaluru Electronic City \u2014 Namma Metro Yellow Line Viaduct",
+  "description": "Zoomed transit infrastructure corridor along Hosur Road showing viaduct construction and tech park infrastructure developments.",
+  "home_coordinates": {
+    "lat": 12.8475,
+    "lon": 77.6675
+  },
+  "bounding_box_wgs84": [
+    77.65,
+    12.835,
+    77.685,
+    12.86
+  ],
+  "pre_scene_id": "S2B_MSIL2A_20220123T051109_R019_T43PGQ_20220123T225338",
+  "pre_datetime": "2022-01-23T05:11:09.024000Z",
+  "post_scene_id": "S2B_MSIL2A_20240123T051119_R019_T43PGQ_20240123T092303",
+  "post_datetime": "2024-01-23T05:11:19.024000Z",
+  "image_dimensions": [
+    512,
+    512
+  ],
+  "source": "ESA Sentinel-2 Level-2A (Optical Surface Reflectance)",
+  "gsd_m_per_px": 5.0
+}

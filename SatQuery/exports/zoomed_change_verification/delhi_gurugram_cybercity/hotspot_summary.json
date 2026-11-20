@@ -1,0 +1,143 @@
+{
+  "hotspot_key": "delhi_gurugram_cybercity",
+  "name": "Delhi NCR / Gurugram Development Corridor (Cyber City & Sector 29)",
+  "description": "Zoomed high-density commercial construction along the Gurugram expressway and mixed-use commercial developments.",
+  "dates": {
+    "t1": "2021-12-20",
+    "t2": "2023-12-10"
+  },
+  "subpixel_shift": {
+    "dx_px": -0.58,
+    "dy_px": 1.05
+  },
+  "gsd_meters_per_pixel": 5.0,
+  "total_candidates_detected": 86,
+  "total_change_footprint_m2": 196475.0,
+  "total_change_footprint_ha": 19.648,
+  "top_inspections": [
+    {
+      "rank": 1,
+      "candidate_id": "cand_sq_levir_007",
+      "chip_file": "chip_1_cand_sq_levir_007.png",
+      "area_m2": 10000.0,
+      "confidence": 0.4449,
+      "uncertainty": 0.9912,
+      "local_grid": {
+        "x_meters": 730.0,
+        "y_meters": 2357.5,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        138,
+        459,
+        154,
+        484
+      ]
+    },
+    {
+      "rank": 2,
+      "candidate_id": "cand_sq_levir_086",
+      "chip_file": "chip_2_cand_sq_levir_086.png",
+      "area_m2": 9900.0,
+      "confidence": 0.4139,
+      "uncertainty": 0.9785,
+      "local_grid": {
+        "x_meters": 597.5,
+        "y_meters": 30.0,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        103,
+        0,
+        136,
+        12
+      ]
+    },
+    {
+      "rank": 3,
+      "candidate_id": "cand_sq_levir_031",
+      "chip_file": "chip_3_cand_sq_levir_031.png",
+      "area_m2": 9500.0,
+      "confidence": 0.5183,
+      "uncertainty": 0.999,
+      "local_grid": {
+        "x_meters": 1957.5,
+        "y_meters": 1580.0,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        382,
+        306,
+        401,
+        326
+      ]
+    },
+    {
+      "rank": 4,
+      "candidate_id": "cand_sq_levir_011",
+      "chip_file": "chip_4_cand_sq_levir_011.png",
+      "area_m2": 9375.0,
+      "confidence": 0.4435,
+      "uncertainty": 0.9908,
+      "local_grid": {
+        "x_meters": 1097.5,
+        "y_meters": 2257.5,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        212,
+        439,
+        227,
+        464
+      ]
+    },
+    {
+      "rank": 5,
+      "candidate_id": "cand_sq_levir_014",
+      "chip_file": "chip_5_cand_sq_levir_014.png",
+      "area_m2": 8400.0,
+      "confidence": 0.44,
+      "uncertainty": 0.9896,
+      "local_grid": {
+        "x_meters": 725.0,
+        "y_meters": 2082.5,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        137,
+        406,
+        153,
+        427
+      ]
+    },
+    {
+      "rank": 6,
+      "candidate_id": "cand_sq_levir_080",
+      "chip_file": "chip_6_cand_sq_levir_080.png",
+      "area_m2": 7125.0,
+      "confidence": 0.4221,
+      "uncertainty": 0.9824,
+      "local_grid": {
+        "x_meters": 232.5,
+        "y_meters": 157.5,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        39,
+        22,
+        54,
+        41
+      ]
+    }
+  ],
+  "output_directory": "E:\\ORBITRA\\SatQuery\\exports\\zoomed_change_verification\\delhi_gurugram_cybercity",
+  "files": {
+    "pre_image": "delhi_gurugram_cybercity_pre_t1.png",
+    "post_image": "delhi_gurugram_cybercity_post_t2.png",
+    "change_heatmap": "delhi_gurugram_cybercity_change_heatmap.png",
+    "binary_mask": "delhi_gurugram_cybercity_binary_mask.png",
+    "annotated_changes": "delhi_gurugram_cybercity_change_annotations.png",
+    "widescreen_montage": "delhi_gurugram_cybercity_visual_comparison_montage.png",
+    "candidates_json": "delhi_gurugram_cybercity_candidates.json"
+  }
+}

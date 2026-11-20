@@ -6,6 +6,7 @@ from .india_satellite_data import INDIAN_MISSION_ZONES, IndiaSatelliteDataLoader
 from .image_resolver import ImagePairResolver, ResolvedImagePair
 from .mission_gallery import MissionGalleryGenerator, compute_shannon_entropy
 from .dashboard_generator import MissionDashboardGenerator
+from .zoomed_scene_loader import ZOOMED_MISSION_HOTSPOTS, ZoomedSceneLoader
 
 __all__ = [
     "ChangeDetectionDataset",
@@ -17,4 +18,6 @@ __all__ = [
     "MissionGalleryGenerator",
     "compute_shannon_entropy",
     "MissionDashboardGenerator",
+    "ZOOMED_MISSION_HOTSPOTS",
+    "ZoomedSceneLoader",
 ]

@@ -1,0 +1,143 @@
+{
+  "hotspot_key": "kanpur_panki_industrial",
+  "name": "Kanpur / Panki Industrial Estate & Logistics Hub",
+  "description": "Zoomed industrial zone showing factory shed construction, rail spur logistics, and commercial ground modifications.",
+  "dates": {
+    "t1": "2021-12-07",
+    "t2": "2023-12-24"
+  },
+  "subpixel_shift": {
+    "dx_px": -0.3,
+    "dy_px": 0.32
+  },
+  "gsd_meters_per_pixel": 5.0,
+  "total_candidates_detected": 92,
+  "total_change_footprint_m2": 469050.0,
+  "total_change_footprint_ha": 46.905,
+  "top_inspections": [
+    {
+      "rank": 1,
+      "candidate_id": "cand_sq_levir_084",
+      "chip_file": "chip_1_cand_sq_levir_084.png",
+      "area_m2": 67200.0,
+      "confidence": 0.3981,
+      "uncertainty": 0.9698,
+      "local_grid": {
+        "x_meters": 1540.0,
+        "y_meters": 535.0,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        284,
+        79,
+        332,
+        135
+      ]
+    },
+    {
+      "rank": 2,
+      "candidate_id": "cand_sq_levir_078",
+      "chip_file": "chip_2_cand_sq_levir_078.png",
+      "area_m2": 39375.0,
+      "confidence": 0.4387,
+      "uncertainty": 0.9891,
+      "local_grid": {
+        "x_meters": 1492.5,
+        "y_meters": 777.5,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        281,
+        133,
+        316,
+        178
+      ]
+    },
+    {
+      "rank": 3,
+      "candidate_id": "cand_sq_levir_075",
+      "chip_file": "chip_3_cand_sq_levir_075.png",
+      "area_m2": 28700.0,
+      "confidence": 0.4031,
+      "uncertainty": 0.9727,
+      "local_grid": {
+        "x_meters": 1730.0,
+        "y_meters": 792.5,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        332,
+        138,
+        360,
+        179
+      ]
+    },
+    {
+      "rank": 4,
+      "candidate_id": "cand_sq_levir_091",
+      "chip_file": "chip_4_cand_sq_levir_091.png",
+      "area_m2": 22100.0,
+      "confidence": 0.4351,
+      "uncertainty": 0.9878,
+      "local_grid": {
+        "x_meters": 1005.0,
+        "y_meters": 155.0,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        188,
+        14,
+        214,
+        48
+      ]
+    },
+    {
+      "rank": 5,
+      "candidate_id": "cand_sq_levir_010",
+      "chip_file": "chip_5_cand_sq_levir_010.png",
+      "area_m2": 18225.0,
+      "confidence": 0.4471,
+      "uncertainty": 0.9919,
+      "local_grid": {
+        "x_meters": 687.5,
+        "y_meters": 2422.5,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        124,
+        471,
+        151,
+        498
+      ]
+    },
+    {
+      "rank": 6,
+      "candidate_id": "cand_sq_levir_054",
+      "chip_file": "chip_6_cand_sq_levir_054.png",
+      "area_m2": 17000.0,
+      "confidence": 0.4327,
+      "uncertainty": 0.9869,
+      "local_grid": {
+        "x_meters": 1465.0,
+        "y_meters": 1055.0,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        283,
+        194,
+        303,
+        228
+      ]
+    }
+  ],
+  "output_directory": "E:\\ORBITRA\\SatQuery\\exports\\zoomed_change_verification\\kanpur_panki_industrial",
+  "files": {
+    "pre_image": "kanpur_panki_industrial_pre_t1.png",
+    "post_image": "kanpur_panki_industrial_post_t2.png",
+    "change_heatmap": "kanpur_panki_industrial_change_heatmap.png",
+    "binary_mask": "kanpur_panki_industrial_binary_mask.png",
+    "annotated_changes": "kanpur_panki_industrial_change_annotations.png",
+    "widescreen_montage": "kanpur_panki_industrial_visual_comparison_montage.png",
+    "candidates_json": "kanpur_panki_industrial_candidates.json"
+  }
+}

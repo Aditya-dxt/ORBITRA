@@ -1,0 +1,2410 @@
+[
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_001",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.3663,
+    "uncertainty": 0.9478,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 760.0,
+        "y_meters": 2500.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.505058,
+        "center_lon": 77.085261,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        149,
+        496,
+        155,
+        504
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_002",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4784,
+    "uncertainty": 0.9987,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2480.0,
+        "y_meters": 2450.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.504606,
+        "center_lon": 77.102827,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        494,
+        486,
+        498,
+        494
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_003",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.4899,
+    "uncertainty": 0.9997,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1500.0,
+        "y_meters": 2440.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.504516,
+        "center_lon": 77.092819,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        297,
+        484,
+        303,
+        492
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_004",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.3997,
+    "uncertainty": 0.9708,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2157.5,
+        "y_meters": 2417.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.504313,
+        "center_lon": 77.099533,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        427,
+        480,
+        436,
+        487
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_005",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4124,
+    "uncertainty": 0.9777,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 455.0,
+        "y_meters": 2382.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.503997,
+        "center_lon": 77.082147,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        86,
+        471,
+        96,
+        482
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_006",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4134,
+    "uncertainty": 0.9782,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1222.5,
+        "y_meters": 2350.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.503704,
+        "center_lon": 77.089985,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        241,
+        466,
+        248,
+        474
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_007",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4449,
+    "uncertainty": 0.9912,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 730.0,
+        "y_meters": 2357.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.503772,
+        "center_lon": 77.084955,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        138,
+        459,
+        154,
+        484
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_008",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.4344,
+    "uncertainty": 0.9875,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 547.5,
+        "y_meters": 2307.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.503321,
+        "center_lon": 77.083091,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        107,
+        457,
+        112,
+        466
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_009",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.4068,
+    "uncertainty": 0.9748,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 845.0,
+        "y_meters": 2292.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.503185,
+        "center_lon": 77.086129,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        164,
+        456,
+        174,
+        461
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_010",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.3962,
+    "uncertainty": 0.9687,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 530.0,
+        "y_meters": 2242.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.502734,
+        "center_lon": 77.082913,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        101,
+        444,
+        111,
+        453
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_011",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4435,
+    "uncertainty": 0.9908,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1097.5,
+        "y_meters": 2257.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.50287,
+        "center_lon": 77.088708,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        212,
+        439,
+        227,
+        464
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_012",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.4068,
+    "uncertainty": 0.9748,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 662.5,
+        "y_meters": 2235.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.502667,
+        "center_lon": 77.084266,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        128,
+        439,
+        137,
+        455
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_013",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4798,
+    "uncertainty": 0.9988,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1192.5,
+        "y_meters": 2195.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.502306,
+        "center_lon": 77.089678,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        230,
+        435,
+        247,
+        443
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_014",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.44,
+    "uncertainty": 0.9896,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 725.0,
+        "y_meters": 2082.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.501291,
+        "center_lon": 77.084904,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        137,
+        406,
+        153,
+        427
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_015",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4958,
+    "uncertainty": 0.9999,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2422.5,
+        "y_meters": 1992.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.500478,
+        "center_lon": 77.10224,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        480,
+        394,
+        489,
+        403
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_016",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4312,
+    "uncertainty": 0.9863,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 950.0,
+        "y_meters": 1955.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.50014,
+        "center_lon": 77.087202,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        184,
+        385,
+        196,
+        397
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_017",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.6606,
+    "uncertainty": 0.9242,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 677.5,
+        "y_meters": 1887.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.499531,
+        "center_lon": 77.084419,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        133,
+        374,
+        138,
+        381
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_018",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4741,
+    "uncertainty": 0.9981,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2012.5,
+        "y_meters": 1882.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.499486,
+        "center_lon": 77.098052,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        399,
+        373,
+        406,
+        380
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_019",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.492,
+    "uncertainty": 0.9998,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1112.5,
+        "y_meters": 1860.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.499283,
+        "center_lon": 77.088861,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        220,
+        369,
+        225,
+        375
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_020",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.418,
+    "uncertainty": 0.9805,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1095.0,
+        "y_meters": 1785.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.498606,
+        "center_lon": 77.088683,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        216,
+        353,
+        222,
+        361
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_021",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.429,
+    "uncertainty": 0.9854,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2010.0,
+        "y_meters": 1777.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.498538,
+        "center_lon": 77.098027,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        397,
+        352,
+        407,
+        359
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_022",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4438,
+    "uncertainty": 0.9909,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2425.0,
+        "y_meters": 1757.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.498358,
+        "center_lon": 77.102265,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        480,
+        349,
+        490,
+        354
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_023",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.6363,
+    "uncertainty": 0.9457,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1365.0,
+        "y_meters": 1727.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.498087,
+        "center_lon": 77.09144,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        271,
+        342,
+        275,
+        349
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_024",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4402,
+    "uncertainty": 0.9896,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1682.5,
+        "y_meters": 1640.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.497298,
+        "center_lon": 77.094682,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        332,
+        325,
+        341,
+        331
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_025",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.403,
+    "uncertainty": 0.9727,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 942.5,
+        "y_meters": 1637.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.497275,
+        "center_lon": 77.087125,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        185,
+        322,
+        192,
+        333
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_026",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4488,
+    "uncertainty": 0.9924,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1075.0,
+        "y_meters": 1605.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.496982,
+        "center_lon": 77.088478,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        210,
+        317,
+        220,
+        325
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_027",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4484,
+    "uncertainty": 0.9923,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1170.0,
+        "y_meters": 1597.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.496914,
+        "center_lon": 77.089448,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        227,
+        315,
+        241,
+        324
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_028",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.5036,
+    "uncertainty": 1.0,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1505.0,
+        "y_meters": 1577.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.496734,
+        "center_lon": 77.09287,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        298,
+        312,
+        304,
+        319
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_029",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.4211,
+    "uncertainty": 0.982,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1227.5,
+        "y_meters": 1572.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.496689,
+        "center_lon": 77.090036,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        240,
+        310,
+        251,
+        319
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_030",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5636,
+    "uncertainty": 0.9883,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 887.5,
+        "y_meters": 1592.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.496869,
+        "center_lon": 77.086563,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        172,
+        310,
+        183,
+        327
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_031",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5183,
+    "uncertainty": 0.999,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1957.5,
+        "y_meters": 1580.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.496756,
+        "center_lon": 77.097491,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        382,
+        306,
+        401,
+        326
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_032",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.473,
+    "uncertainty": 0.9979,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 942.5,
+        "y_meters": 1525.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.49626,
+        "center_lon": 77.087125,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        185,
+        301,
+        192,
+        309
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_033",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4875,
+    "uncertainty": 0.9996,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1087.5,
+        "y_meters": 1510.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.496125,
+        "center_lon": 77.088606,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        215,
+        299,
+        220,
+        305
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_034",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4528,
+    "uncertainty": 0.9936,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2375.0,
+        "y_meters": 1427.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.49538,
+        "center_lon": 77.101754,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        470,
+        282,
+        480,
+        289
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_035",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4186,
+    "uncertainty": 0.9808,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1845.0,
+        "y_meters": 1432.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.495426,
+        "center_lon": 77.096342,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        363,
+        282,
+        375,
+        291
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_036",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4456,
+    "uncertainty": 0.9914,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 367.5,
+        "y_meters": 1422.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.495335,
+        "center_lon": 77.081253,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        71,
+        280,
+        76,
+        289
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_037",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4869,
+    "uncertainty": 0.9995,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2487.5,
+        "y_meters": 1420.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.495313,
+        "center_lon": 77.102903,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        487,
+        278,
+        508,
+        290
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_038",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4351,
+    "uncertainty": 0.9878,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1575.0,
+        "y_meters": 1380.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.494952,
+        "center_lon": 77.093585,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        306,
+        274,
+        324,
+        278
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_039",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4856,
+    "uncertainty": 0.9994,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2450.0,
+        "y_meters": 1375.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.494907,
+        "center_lon": 77.10252,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        484,
+        269,
+        496,
+        281
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_040",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.507,
+    "uncertainty": 0.9999,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1845.0,
+        "y_meters": 1372.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.494884,
+        "center_lon": 77.096342,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        365,
+        267,
+        373,
+        282
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_041",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5322,
+    "uncertainty": 0.997,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2492.5,
+        "y_meters": 1327.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.494478,
+        "center_lon": 77.102954,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        495,
+        262,
+        502,
+        269
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_042",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.3867,
+    "uncertainty": 0.9627,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1317.5,
+        "y_meters": 1310.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.49432,
+        "center_lon": 77.090955,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        259,
+        258,
+        268,
+        266
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_043",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4629,
+    "uncertainty": 0.996,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 567.5,
+        "y_meters": 1322.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.494433,
+        "center_lon": 77.083296,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        109,
+        257,
+        118,
+        272
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_044",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4933,
+    "uncertainty": 0.9999,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 742.5,
+        "y_meters": 1267.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.493937,
+        "center_lon": 77.085083,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        144,
+        249,
+        153,
+        258
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_045",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.4427,
+    "uncertainty": 0.9905,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2350.0,
+        "y_meters": 1177.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.493125,
+        "center_lon": 77.101499,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        467,
+        233,
+        473,
+        238
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_046",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.4033,
+    "uncertainty": 0.9728,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 687.5,
+        "y_meters": 1157.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.492944,
+        "center_lon": 77.084521,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        135,
+        228,
+        140,
+        235
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_047",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.4709,
+    "uncertainty": 0.9976,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 937.5,
+        "y_meters": 1160.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.492967,
+        "center_lon": 77.087074,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        181,
+        227,
+        194,
+        237
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_048",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4553,
+    "uncertainty": 0.9942,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 777.5,
+        "y_meters": 1070.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.492155,
+        "center_lon": 77.08544,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        151,
+        211,
+        160,
+        217
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_049",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.5381,
+    "uncertainty": 0.9958,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1077.5,
+        "y_meters": 990.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.491433,
+        "center_lon": 77.088504,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        212,
+        195,
+        219,
+        201
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_050",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4514,
+    "uncertainty": 0.9932,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2100.0,
+        "y_meters": 947.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.491049,
+        "center_lon": 77.098946,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        418,
+        186,
+        422,
+        193
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_051",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5206,
+    "uncertainty": 0.9988,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1090.0,
+        "y_meters": 907.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.490688,
+        "center_lon": 77.088632,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        213,
+        177,
+        223,
+        186
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_052",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4659,
+    "uncertainty": 0.9966,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 70.0,
+        "y_meters": 860.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.49026,
+        "center_lon": 77.078215,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        11,
+        169,
+        17,
+        175
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_053",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5275,
+    "uncertainty": 0.9978,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1022.5,
+        "y_meters": 862.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.490282,
+        "center_lon": 77.087942,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        200,
+        168,
+        209,
+        177
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_054",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4286,
+    "uncertainty": 0.9852,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 245.0,
+        "y_meters": 770.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.489448,
+        "center_lon": 77.080002,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        46,
+        151,
+        52,
+        157
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_055",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.4359,
+    "uncertainty": 0.9881,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 145.0,
+        "y_meters": 770.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.489448,
+        "center_lon": 77.078981,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        26,
+        151,
+        32,
+        157
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_056",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4056,
+    "uncertainty": 0.9741,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 235.0,
+        "y_meters": 710.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.488906,
+        "center_lon": 77.0799,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        43,
+        139,
+        51,
+        145
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_057",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.5411,
+    "uncertainty": 0.9951,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1217.5,
+        "y_meters": 690.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.488726,
+        "center_lon": 77.089934,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        241,
+        135,
+        246,
+        141
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_058",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4111,
+    "uncertainty": 0.9771,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 180.0,
+        "y_meters": 682.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.488658,
+        "center_lon": 77.079338,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        33,
+        134,
+        39,
+        139
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_059",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5196,
+    "uncertainty": 0.9989,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1967.5,
+        "y_meters": 680.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.488636,
+        "center_lon": 77.097593,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        388,
+        133,
+        399,
+        139
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_060",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4231,
+    "uncertainty": 0.9828,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1542.5,
+        "y_meters": 645.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.48832,
+        "center_lon": 77.093253,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        306,
+        126,
+        311,
+        132
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_061",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4845,
+    "uncertainty": 0.9993,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1087.5,
+        "y_meters": 605.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.487959,
+        "center_lon": 77.088606,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        209,
+        117,
+        226,
+        125
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_062",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.5157,
+    "uncertainty": 0.9993,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 320.0,
+        "y_meters": 570.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.487643,
+        "center_lon": 77.080768,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        61,
+        110,
+        67,
+        118
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_063",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.4712,
+    "uncertainty": 0.9976,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 635.0,
+        "y_meters": 467.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.486718,
+        "center_lon": 77.083985,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        123,
+        91,
+        131,
+        96
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_064",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.5145,
+    "uncertainty": 0.9994,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1380.0,
+        "y_meters": 465.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.486696,
+        "center_lon": 77.091593,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        270,
+        87,
+        282,
+        99
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_065",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4285,
+    "uncertainty": 0.9852,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1240.0,
+        "y_meters": 372.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.485861,
+        "center_lon": 77.090163,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        245,
+        71,
+        251,
+        78
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_066",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4463,
+    "uncertainty": 0.9917,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2065.0,
+        "y_meters": 365.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.485793,
+        "center_lon": 77.098589,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        410,
+        68,
+        416,
+        78
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_067",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4624,
+    "uncertainty": 0.9959,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1092.5,
+        "y_meters": 337.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.485545,
+        "center_lon": 77.088657,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        215,
+        64,
+        222,
+        71
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_068",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4092,
+    "uncertainty": 0.9761,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 837.5,
+        "y_meters": 340.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.485568,
+        "center_lon": 77.086053,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        165,
+        64,
+        170,
+        72
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_069",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4604,
+    "uncertainty": 0.9955,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 620.0,
+        "y_meters": 257.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.484823,
+        "center_lon": 77.083832,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        117,
+        49,
+        131,
+        54
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_070",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.6281,
+    "uncertainty": 0.9521,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1592.5,
+        "y_meters": 252.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.484778,
+        "center_lon": 77.093763,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        316,
+        47,
+        321,
+        54
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_071",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4097,
+    "uncertainty": 0.9763,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 215.0,
+        "y_meters": 255.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.484801,
+        "center_lon": 77.079696,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        39,
+        47,
+        47,
+        55
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_072",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4617,
+    "uncertainty": 0.9958,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 540.0,
+        "y_meters": 240.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.484666,
+        "center_lon": 77.083015,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        102,
+        43,
+        114,
+        53
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_073",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4612,
+    "uncertainty": 0.9956,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 742.5,
+        "y_meters": 205.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.48435,
+        "center_lon": 77.085083,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        144,
+        39,
+        153,
+        43
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_074",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4593,
+    "uncertainty": 0.9952,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 637.5,
+        "y_meters": 207.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.484372,
+        "center_lon": 77.08401,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        123,
+        38,
+        132,
+        45
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_075",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4901,
+    "uncertainty": 0.9997,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 845.0,
+        "y_meters": 192.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.484237,
+        "center_lon": 77.086129,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        166,
+        36,
+        172,
+        41
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_076",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.485,
+    "uncertainty": 0.9993,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1495.0,
+        "y_meters": 195.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.484259,
+        "center_lon": 77.092768,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        296,
+        34,
+        302,
+        44
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_077",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.5141,
+    "uncertainty": 0.9994,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1307.5,
+        "y_meters": 180.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.484124,
+        "center_lon": 77.090853,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        257,
+        34,
+        266,
+        38
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_078",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.531,
+    "uncertainty": 0.9972,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2250.0,
+        "y_meters": 172.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.484056,
+        "center_lon": 77.100478,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        447,
+        31,
+        453,
+        38
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_079",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4679,
+    "uncertainty": 0.997,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 367.5,
+        "y_meters": 142.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.483786,
+        "center_lon": 77.081253,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        69,
+        22,
+        78,
+        35
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_080",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4221,
+    "uncertainty": 0.9824,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 232.5,
+        "y_meters": 157.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.483921,
+        "center_lon": 77.079874,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        39,
+        22,
+        54,
+        41
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_081",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4501,
+    "uncertainty": 0.9928,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1315.0,
+        "y_meters": 105.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.483447,
+        "center_lon": 77.090929,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        257,
+        15,
+        269,
+        27
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_082",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.4377,
+    "uncertainty": 0.9888,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 495.0,
+        "y_meters": 65.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.483086,
+        "center_lon": 77.082555,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        95,
+        10,
+        103,
+        16
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_083",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.519,
+    "uncertainty": 0.999,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 285.0,
+        "y_meters": 35.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.482816,
+        "center_lon": 77.080411,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        49,
+        5,
+        65,
+        9
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_084",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.3812,
+    "uncertainty": 0.9589,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 452.5,
+        "y_meters": 42.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.482883,
+        "center_lon": 77.082121,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        88,
+        4,
+        93,
+        13
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_085",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "road_infrastructure",
+    "confidence": 0.6619,
+    "uncertainty": 0.923,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1090.0,
+        "y_meters": 40.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.482861,
+        "center_lon": 77.088632,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        215,
+        0,
+        221,
+        16
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_086",
+    "image_pair_id": "pair_zoomed_delhi_gurugram_cybercity",
+    "timestamp": "2023-12-10T05:32:19.024000Z",
+    "predicted_change": "road_infrastructure",
+    "confidence": 0.4139,
+    "uncertainty": 0.9785,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 597.5,
+        "y_meters": 30.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 28.482771,
+        "center_lon": 77.083602,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        103,
+        0,
+        136,
+        12
+      ]
+    }
+  }
+]

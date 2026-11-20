@@ -1,0 +1,143 @@
+{
+  "hotspot_key": "chennai_sriperumbudur",
+  "name": "Chennai / Sriperumbudur Automotive Manufacturing Zone",
+  "description": "Zoomed manufacturing corridor showing industrial building footprints and automotive manufacturing expansions.",
+  "dates": {
+    "t1": "2021-12-21",
+    "t2": "2023-11-16"
+  },
+  "subpixel_shift": {
+    "dx_px": -0.32,
+    "dy_px": -0.89
+  },
+  "gsd_meters_per_pixel": 5.0,
+  "total_candidates_detected": 54,
+  "total_change_footprint_m2": 167500.0,
+  "total_change_footprint_ha": 16.75,
+  "top_inspections": [
+    {
+      "rank": 1,
+      "candidate_id": "cand_sq_levir_036",
+      "chip_file": "chip_1_cand_sq_levir_036.png",
+      "area_m2": 52675.0,
+      "confidence": 0.5987,
+      "uncertainty": 0.9717,
+      "local_grid": {
+        "x_meters": 1422.5,
+        "y_meters": 1487.5,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        263,
+        273,
+        306,
+        322
+      ]
+    },
+    {
+      "rank": 2,
+      "candidate_id": "cand_sq_levir_037",
+      "chip_file": "chip_2_cand_sq_levir_037.png",
+      "area_m2": 18000.0,
+      "confidence": 0.6582,
+      "uncertainty": 0.9266,
+      "local_grid": {
+        "x_meters": 1340.0,
+        "y_meters": 1285.0,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        253,
+        245,
+        283,
+        269
+      ]
+    },
+    {
+      "rank": 3,
+      "candidate_id": "cand_sq_levir_002",
+      "chip_file": "chip_3_cand_sq_levir_002.png",
+      "area_m2": 7500.0,
+      "confidence": 0.4891,
+      "uncertainty": 0.9997,
+      "local_grid": {
+        "x_meters": 455.0,
+        "y_meters": 2477.5,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        81,
+        488,
+        101,
+        503
+      ]
+    },
+    {
+      "rank": 4,
+      "candidate_id": "cand_sq_levir_023",
+      "chip_file": "chip_4_cand_sq_levir_023.png",
+      "area_m2": 7125.0,
+      "confidence": 0.4685,
+      "uncertainty": 0.9971,
+      "local_grid": {
+        "x_meters": 2457.5,
+        "y_meters": 1972.5,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        482,
+        387,
+        501,
+        402
+      ]
+    },
+    {
+      "rank": 5,
+      "candidate_id": "cand_sq_levir_053",
+      "chip_file": "chip_5_cand_sq_levir_053.png",
+      "area_m2": 4750.0,
+      "confidence": 0.5305,
+      "uncertainty": 0.9973,
+      "local_grid": {
+        "x_meters": 1595.0,
+        "y_meters": 182.5,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        314,
+        27,
+        324,
+        46
+      ]
+    },
+    {
+      "rank": 6,
+      "candidate_id": "cand_sq_levir_043",
+      "chip_file": "chip_6_cand_sq_levir_043.png",
+      "area_m2": 4500.0,
+      "confidence": 0.5496,
+      "uncertainty": 0.9929,
+      "local_grid": {
+        "x_meters": 1682.5,
+        "y_meters": 625.0,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        329,
+        119,
+        344,
+        131
+      ]
+    }
+  ],
+  "output_directory": "E:\\ORBITRA\\SatQuery\\exports\\zoomed_change_verification\\chennai_sriperumbudur",
+  "files": {
+    "pre_image": "chennai_sriperumbudur_pre_t1.png",
+    "post_image": "chennai_sriperumbudur_post_t2.png",
+    "change_heatmap": "chennai_sriperumbudur_change_heatmap.png",
+    "binary_mask": "chennai_sriperumbudur_binary_mask.png",
+    "annotated_changes": "chennai_sriperumbudur_change_annotations.png",
+    "widescreen_montage": "chennai_sriperumbudur_visual_comparison_montage.png",
+    "candidates_json": "chennai_sriperumbudur_candidates.json"
+  }
+}

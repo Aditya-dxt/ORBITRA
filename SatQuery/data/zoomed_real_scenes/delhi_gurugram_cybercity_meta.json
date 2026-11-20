@@ -1,0 +1,25 @@
+{
+  "hotspot_key": "delhi_gurugram_cybercity",
+  "name": "Delhi NCR / Gurugram Development Corridor (Cyber City & Sector 29)",
+  "description": "Zoomed high-density commercial construction along the Gurugram expressway and mixed-use commercial developments.",
+  "home_coordinates": {
+    "lat": 28.4825,
+    "lon": 77.0775
+  },
+  "bounding_box_wgs84": [
+    77.06,
+    28.47,
+    77.095,
+    28.495
+  ],
+  "pre_scene_id": "S2B_MSIL2A_20211220T053229_R105_T43RGM_20211221T022327",
+  "pre_datetime": "2021-12-20T05:32:29.024000Z",
+  "post_scene_id": "S2B_MSIL2A_20231210T053219_R105_T43RGM_20241101T190133",
+  "post_datetime": "2023-12-10T05:32:19.024000Z",
+  "image_dimensions": [
+    512,
+    512
+  ],
+  "source": "ESA Sentinel-2 Level-2A (Optical Surface Reflectance)",
+  "gsd_m_per_px": 5.0
+}

@@ -1,0 +1,25 @@
+{
+  "hotspot_key": "kanpur_panki_industrial",
+  "name": "Kanpur / Panki Industrial Estate & Logistics Hub",
+  "description": "Zoomed industrial zone showing factory shed construction, rail spur logistics, and commercial ground modifications.",
+  "home_coordinates": {
+    "lat": 26.4725,
+    "lon": 80.2375
+  },
+  "bounding_box_wgs84": [
+    80.22,
+    26.46,
+    80.255,
+    26.485
+  ],
+  "pre_scene_id": "S2B_MSIL2A_20211207T052209_R062_T44RMQ_20230129T143928",
+  "pre_datetime": "2021-12-07T05:22:09.024000Z",
+  "post_scene_id": "S2B_MSIL2A_20231224T051229_R019_T44RMQ_20231224T091848",
+  "post_datetime": "2023-12-24T05:12:29.024000Z",
+  "image_dimensions": [
+    512,
+    512
+  ],
+  "source": "ESA Sentinel-2 Level-2A (Optical Surface Reflectance)",
+  "gsd_m_per_px": 5.0
+}

@@ -1,0 +1,25 @@
+{
+  "hotspot_key": "chennai_sriperumbudur",
+  "name": "Chennai / Sriperumbudur Automotive Manufacturing Zone",
+  "description": "Zoomed manufacturing corridor showing industrial building footprints and automotive manufacturing expansions.",
+  "home_coordinates": {
+    "lat": 12.9825,
+    "lon": 79.9575
+  },
+  "bounding_box_wgs84": [
+    79.94,
+    12.97,
+    79.975,
+    12.995
+  ],
+  "pre_scene_id": "S2B_MSIL2A_20211221T050219_R119_T44PLV_20211222T040330",
+  "pre_datetime": "2021-12-21T05:02:19.024000Z",
+  "post_scene_id": "S2A_MSIL2A_20231116T050051_R119_T44PLV_20231116T102318",
+  "post_datetime": "2023-11-16T05:00:51.024000Z",
+  "image_dimensions": [
+    512,
+    512
+  ],
+  "source": "ESA Sentinel-2 Level-2A (Optical Surface Reflectance)",
+  "gsd_m_per_px": 5.0
+}

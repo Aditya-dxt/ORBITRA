@@ -1,0 +1,25 @@
+{
+  "hotspot_key": "kanpur_bhauti_nh19",
+  "name": "Kanpur / Bhauti PSIT Corridor (NH-19 Highway Widening)",
+  "description": "High-resolution 3.5 km corridor along National Highway 19 directly in front of PSIT Kanpur, highlighting new industrial warehousing, highway lane expansion, and institutional construction.",
+  "home_coordinates": {
+    "lat": 26.4475,
+    "lon": 80.1975
+  },
+  "bounding_box_wgs84": [
+    80.18,
+    26.435,
+    80.215,
+    26.46
+  ],
+  "pre_scene_id": "S2B_MSIL2A_20211207T052209_R062_T44RMQ_20230129T143928",
+  "pre_datetime": "2021-12-07T05:22:09.024000Z",
+  "post_scene_id": "S2B_MSIL2A_20231224T051229_R019_T44RMQ_20231224T091848",
+  "post_datetime": "2023-12-24T05:12:29.024000Z",
+  "image_dimensions": [
+    512,
+    512
+  ],
+  "source": "ESA Sentinel-2 Level-2A (Optical Surface Reflectance)",
+  "gsd_m_per_px": 5.0
+}

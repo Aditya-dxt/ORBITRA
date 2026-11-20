@@ -1,0 +1,143 @@
+{
+  "hotspot_key": "bengaluru_electronic_city",
+  "name": "Bengaluru Electronic City \u2014 Namma Metro Yellow Line Viaduct",
+  "description": "Zoomed transit infrastructure corridor along Hosur Road showing viaduct construction and tech park infrastructure developments.",
+  "dates": {
+    "t1": "2022-01-23",
+    "t2": "2024-01-23"
+  },
+  "subpixel_shift": {
+    "dx_px": -0.29,
+    "dy_px": 0.15
+  },
+  "gsd_meters_per_pixel": 5.0,
+  "total_candidates_detected": 105,
+  "total_change_footprint_m2": 672150.0,
+  "total_change_footprint_ha": 67.215,
+  "top_inspections": [
+    {
+      "rank": 1,
+      "candidate_id": "cand_sq_levir_100",
+      "chip_file": "chip_1_cand_sq_levir_100.png",
+      "area_m2": 220725.0,
+      "confidence": 0.4453,
+      "uncertainty": 0.9914,
+      "local_grid": {
+        "x_meters": 587.5,
+        "y_meters": 237.5,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        63,
+        7,
+        172,
+        88
+      ]
+    },
+    {
+      "rank": 2,
+      "candidate_id": "cand_sq_levir_012",
+      "chip_file": "chip_2_cand_sq_levir_012.png",
+      "area_m2": 65325.0,
+      "confidence": 0.4803,
+      "uncertainty": 0.9989,
+      "local_grid": {
+        "x_meters": 1392.5,
+        "y_meters": 2242.5,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        259,
+        415,
+        298,
+        482
+      ]
+    },
+    {
+      "rank": 3,
+      "candidate_id": "cand_sq_levir_105",
+      "chip_file": "chip_3_cand_sq_levir_105.png",
+      "area_m2": 39600.0,
+      "confidence": 0.5097,
+      "uncertainty": 0.9997,
+      "local_grid": {
+        "x_meters": 2095.0,
+        "y_meters": 110.0,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        401,
+        0,
+        437,
+        44
+      ]
+    },
+    {
+      "rank": 4,
+      "candidate_id": "cand_sq_levir_049",
+      "chip_file": "chip_4_cand_sq_levir_049.png",
+      "area_m2": 25575.0,
+      "confidence": 0.4891,
+      "uncertainty": 0.9997,
+      "local_grid": {
+        "x_meters": 407.5,
+        "y_meters": 1527.5,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        65,
+        290,
+        98,
+        321
+      ]
+    },
+    {
+      "rank": 5,
+      "candidate_id": "cand_sq_levir_056",
+      "chip_file": "chip_5_cand_sq_levir_056.png",
+      "area_m2": 19500.0,
+      "confidence": 0.4707,
+      "uncertainty": 0.9975,
+      "local_grid": {
+        "x_meters": 1740.0,
+        "y_meters": 1390.0,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        335,
+        263,
+        361,
+        293
+      ]
+    },
+    {
+      "rank": 6,
+      "candidate_id": "cand_sq_levir_087",
+      "chip_file": "chip_6_cand_sq_levir_087.png",
+      "area_m2": 16650.0,
+      "confidence": 0.4631,
+      "uncertainty": 0.9961,
+      "local_grid": {
+        "x_meters": 2020.0,
+        "y_meters": 592.5,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        395,
+        100,
+        413,
+        137
+      ]
+    }
+  ],
+  "output_directory": "E:\\ORBITRA\\SatQuery\\exports\\zoomed_change_verification\\bengaluru_electronic_city",
+  "files": {
+    "pre_image": "bengaluru_electronic_city_pre_t1.png",
+    "post_image": "bengaluru_electronic_city_post_t2.png",
+    "change_heatmap": "bengaluru_electronic_city_change_heatmap.png",
+    "binary_mask": "bengaluru_electronic_city_binary_mask.png",
+    "annotated_changes": "bengaluru_electronic_city_change_annotations.png",
+    "widescreen_montage": "bengaluru_electronic_city_visual_comparison_montage.png",
+    "candidates_json": "bengaluru_electronic_city_candidates.json"
+  }
+}

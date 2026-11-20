@@ -1,0 +1,2578 @@
+[
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_001",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.3349,
+    "uncertainty": 0.9198,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1130.0,
+        "y_meters": 2545.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.49547,
+        "center_lon": 80.248832,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        222,
+        506,
+        230,
+        512
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_002",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.3456,
+    "uncertainty": 0.9301,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 130.0,
+        "y_meters": 2505.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.495109,
+        "center_lon": 80.238804,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        23,
+        497,
+        29,
+        505
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_003",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4235,
+    "uncertainty": 0.983,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 32.5,
+        "y_meters": 2502.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.495087,
+        "center_lon": 80.237826,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        0,
+        497,
+        13,
+        504
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_004",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "road_infrastructure",
+    "confidence": 0.3907,
+    "uncertainty": 0.9652,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1317.5,
+        "y_meters": 2500.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.495064,
+        "center_lon": 80.250713,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        246,
+        493,
+        281,
+        507
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_005",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.3508,
+    "uncertainty": 0.9348,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 220.0,
+        "y_meters": 2445.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.494568,
+        "center_lon": 80.239706,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        39,
+        487,
+        49,
+        491
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_006",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.3557,
+    "uncertainty": 0.939,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 360.0,
+        "y_meters": 2452.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.494635,
+        "center_lon": 80.24111,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        58,
+        486,
+        86,
+        495
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_007",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.3449,
+    "uncertainty": 0.9295,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1202.5,
+        "y_meters": 2407.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.494229,
+        "center_lon": 80.24956,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        236,
+        478,
+        245,
+        485
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_008",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.3951,
+    "uncertainty": 0.968,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 15.0,
+        "y_meters": 2402.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.494184,
+        "center_lon": 80.23765,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        0,
+        477,
+        6,
+        484
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_009",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4022,
+    "uncertainty": 0.9722,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2532.5,
+        "y_meters": 2400.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.494162,
+        "center_lon": 80.262898,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        501,
+        473,
+        512,
+        487
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_010",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4471,
+    "uncertainty": 0.9919,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 687.5,
+        "y_meters": 2422.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.494365,
+        "center_lon": 80.244395,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        124,
+        471,
+        151,
+        498
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_011",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4326,
+    "uncertainty": 0.9869,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2487.5,
+        "y_meters": 2332.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.493552,
+        "center_lon": 80.262446,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        494,
+        461,
+        501,
+        472
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_012",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.4086,
+    "uncertainty": 0.9758,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1775.0,
+        "y_meters": 2317.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.493417,
+        "center_lon": 80.255301,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        350,
+        461,
+        360,
+        466
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_013",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.3685,
+    "uncertainty": 0.9495,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 102.5,
+        "y_meters": 2322.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.493462,
+        "center_lon": 80.238528,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        8,
+        453,
+        33,
+        476
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_014",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4276,
+    "uncertainty": 0.9848,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 25.0,
+        "y_meters": 2285.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.493124,
+        "center_lon": 80.237751,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        0,
+        451,
+        10,
+        463
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_015",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.3997,
+    "uncertainty": 0.9708,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2335.0,
+        "y_meters": 2210.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.492447,
+        "center_lon": 80.260917,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        463,
+        436,
+        471,
+        448
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_016",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4447,
+    "uncertainty": 0.9912,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2427.5,
+        "y_meters": 2170.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.492086,
+        "center_lon": 80.261845,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        482,
+        430,
+        489,
+        438
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_017",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.3627,
+    "uncertainty": 0.9449,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 242.5,
+        "y_meters": 2187.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.492244,
+        "center_lon": 80.239932,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        42,
+        430,
+        55,
+        445
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_018",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.3923,
+    "uncertainty": 0.9662,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 800.0,
+        "y_meters": 2175.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.492131,
+        "center_lon": 80.245523,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        154,
+        428,
+        166,
+        442
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_019",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.3898,
+    "uncertainty": 0.9646,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 90.0,
+        "y_meters": 2150.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.491905,
+        "center_lon": 80.238403,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        7,
+        422,
+        29,
+        438
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_020",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4208,
+    "uncertainty": 0.9818,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2377.5,
+        "y_meters": 2117.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.491612,
+        "center_lon": 80.261343,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        470,
+        418,
+        481,
+        429
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_021",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.3448,
+    "uncertainty": 0.9293,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2520.0,
+        "y_meters": 2080.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.491273,
+        "center_lon": 80.262772,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        501,
+        412,
+        507,
+        420
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_022",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.4427,
+    "uncertainty": 0.9905,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2477.5,
+        "y_meters": 2065.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.491138,
+        "center_lon": 80.262346,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        493,
+        410,
+        498,
+        416
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_023",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.3402,
+    "uncertainty": 0.925,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 162.5,
+        "y_meters": 2027.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.4908,
+        "center_lon": 80.23913,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        24,
+        398,
+        41,
+        413
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_024",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4085,
+    "uncertainty": 0.9757,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2522.5,
+        "y_meters": 2007.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.490619,
+        "center_lon": 80.262797,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        500,
+        395,
+        509,
+        408
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_025",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.3417,
+    "uncertainty": 0.9264,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 160.0,
+        "y_meters": 1972.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.490303,
+        "center_lon": 80.239105,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        30,
+        391,
+        34,
+        398
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_026",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.3957,
+    "uncertainty": 0.9684,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2397.5,
+        "y_meters": 1967.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.490258,
+        "center_lon": 80.261544,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        472,
+        389,
+        487,
+        398
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_027",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4164,
+    "uncertainty": 0.9797,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 40.0,
+        "y_meters": 1930.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.48992,
+        "center_lon": 80.237901,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        0,
+        377,
+        16,
+        395
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_028",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.3976,
+    "uncertainty": 0.9695,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1860.0,
+        "y_meters": 1887.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.489536,
+        "center_lon": 80.256153,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        369,
+        374,
+        375,
+        381
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_029",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.3878,
+    "uncertainty": 0.9634,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1825.0,
+        "y_meters": 1852.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.48922,
+        "center_lon": 80.255802,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        363,
+        367,
+        367,
+        374
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_030",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4139,
+    "uncertainty": 0.9785,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 105.0,
+        "y_meters": 1850.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.489197,
+        "center_lon": 80.238553,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        17,
+        366,
+        25,
+        374
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_031",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.3822,
+    "uncertainty": 0.9596,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 35.0,
+        "y_meters": 1850.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.489197,
+        "center_lon": 80.237851,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        0,
+        366,
+        14,
+        374
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_032",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4115,
+    "uncertainty": 0.9773,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2402.5,
+        "y_meters": 1782.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.488588,
+        "center_lon": 80.261594,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        477,
+        353,
+        484,
+        360
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_033",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.4236,
+    "uncertainty": 0.9831,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1115.0,
+        "y_meters": 1792.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.488678,
+        "center_lon": 80.248682,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        220,
+        352,
+        226,
+        365
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_034",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.3962,
+    "uncertainty": 0.9687,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1987.5,
+        "y_meters": 1762.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.488408,
+        "center_lon": 80.257432,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        395,
+        349,
+        400,
+        356
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_035",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.3986,
+    "uncertainty": 0.9701,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 12.5,
+        "y_meters": 1765.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.48843,
+        "center_lon": 80.237625,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        0,
+        349,
+        5,
+        357
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_036",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4098,
+    "uncertainty": 0.9764,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 957.5,
+        "y_meters": 1757.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.488363,
+        "center_lon": 80.247102,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        184,
+        346,
+        199,
+        357
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_037",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.3809,
+    "uncertainty": 0.9587,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 797.5,
+        "y_meters": 1707.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.487911,
+        "center_lon": 80.245498,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        155,
+        338,
+        164,
+        345
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_038",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4104,
+    "uncertainty": 0.9767,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 117.5,
+        "y_meters": 1687.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.487731,
+        "center_lon": 80.238678,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        20,
+        334,
+        27,
+        341
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_039",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.3924,
+    "uncertainty": 0.9663,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 72.5,
+        "y_meters": 1620.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.487122,
+        "center_lon": 80.238227,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        9,
+        317,
+        20,
+        331
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_040",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.3606,
+    "uncertainty": 0.9431,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1780.0,
+        "y_meters": 1615.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.487076,
+        "center_lon": 80.255351,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        348,
+        312,
+        364,
+        334
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_041",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4516,
+    "uncertainty": 0.9932,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1152.5,
+        "y_meters": 1602.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.486964,
+        "center_lon": 80.249058,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        225,
+        311,
+        236,
+        330
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_042",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.462,
+    "uncertainty": 0.9958,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 495.0,
+        "y_meters": 1552.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.486512,
+        "center_lon": 80.242464,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        96,
+        306,
+        102,
+        315
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_043",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.43,
+    "uncertainty": 0.9858,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 887.5,
+        "y_meters": 1480.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.485858,
+        "center_lon": 80.2464,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        172,
+        287,
+        183,
+        305
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_044",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.392,
+    "uncertainty": 0.966,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 565.0,
+        "y_meters": 1357.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.484752,
+        "center_lon": 80.243166,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        110,
+        268,
+        116,
+        275
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_045",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4325,
+    "uncertainty": 0.9868,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1702.5,
+        "y_meters": 1312.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.484346,
+        "center_lon": 80.254574,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        337,
+        260,
+        344,
+        265
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_046",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.3821,
+    "uncertainty": 0.9595,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1327.5,
+        "y_meters": 1282.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.484075,
+        "center_lon": 80.250813,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        260,
+        252,
+        271,
+        261
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_047",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.475,
+    "uncertainty": 0.9982,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1575.0,
+        "y_meters": 1277.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.48403,
+        "center_lon": 80.253295,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        311,
+        250,
+        319,
+        261
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_048",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.3908,
+    "uncertainty": 0.9653,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1540.0,
+        "y_meters": 1172.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.483083,
+        "center_lon": 80.252944,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        297,
+        224,
+        319,
+        245
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_049",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.625,
+    "uncertainty": 0.9545,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1322.5,
+        "y_meters": 1147.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.482857,
+        "center_lon": 80.250763,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        255,
+        218,
+        274,
+        241
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_050",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4392,
+    "uncertainty": 0.9893,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1277.5,
+        "y_meters": 1107.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.482496,
+        "center_lon": 80.250312,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        252,
+        217,
+        259,
+        226
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_051",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.4174,
+    "uncertainty": 0.9802,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1820.0,
+        "y_meters": 1032.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.481819,
+        "center_lon": 80.255752,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        362,
+        203,
+        366,
+        210
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_052",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4078,
+    "uncertainty": 0.9753,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1310.0,
+        "y_meters": 1020.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.481706,
+        "center_lon": 80.250638,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        255,
+        198,
+        269,
+        210
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_053",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.3726,
+    "uncertainty": 0.9527,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 307.5,
+        "y_meters": 997.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.481503,
+        "center_lon": 80.240584,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        58,
+        196,
+        65,
+        203
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_054",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4327,
+    "uncertainty": 0.9869,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1465.0,
+        "y_meters": 1055.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.482022,
+        "center_lon": 80.252192,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        283,
+        194,
+        303,
+        228
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_055",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.42,
+    "uncertainty": 0.9814,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 525.0,
+        "y_meters": 1012.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.481638,
+        "center_lon": 80.242765,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        103,
+        192,
+        107,
+        213
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_056",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.3667,
+    "uncertainty": 0.9481,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1750.0,
+        "y_meters": 1012.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.481638,
+        "center_lon": 80.25505,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        343,
+        185,
+        357,
+        220
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_057",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.3909,
+    "uncertainty": 0.9654,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1445.0,
+        "y_meters": 937.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.480962,
+        "center_lon": 80.251991,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        284,
+        183,
+        294,
+        192
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_058",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.3832,
+    "uncertainty": 0.9603,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1267.5,
+        "y_meters": 932.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.480916,
+        "center_lon": 80.250211,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        249,
+        183,
+        258,
+        190
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_059",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.3895,
+    "uncertainty": 0.9645,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 172.5,
+        "y_meters": 920.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.480804,
+        "center_lon": 80.23923,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        32,
+        181,
+        37,
+        187
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_060",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.5158,
+    "uncertainty": 0.9993,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1582.5,
+        "y_meters": 895.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.480578,
+        "center_lon": 80.25337,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        314,
+        176,
+        319,
+        182
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_061",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4206,
+    "uncertainty": 0.9817,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 565.0,
+        "y_meters": 910.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.480713,
+        "center_lon": 80.243166,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        104,
+        175,
+        122,
+        189
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_062",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.4844,
+    "uncertainty": 0.9993,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1672.5,
+        "y_meters": 880.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.480443,
+        "center_lon": 80.254273,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        332,
+        173,
+        337,
+        179
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_063",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.4458,
+    "uncertainty": 0.9915,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1435.0,
+        "y_meters": 877.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.48042,
+        "center_lon": 80.251891,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        284,
+        172,
+        290,
+        179
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_064",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4043,
+    "uncertainty": 0.9734,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 200.0,
+        "y_meters": 872.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.480375,
+        "center_lon": 80.239506,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        37,
+        170,
+        43,
+        179
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_065",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4091,
+    "uncertainty": 0.976,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 582.5,
+        "y_meters": 837.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.480059,
+        "center_lon": 80.243342,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        111,
+        163,
+        122,
+        172
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_066",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.3969,
+    "uncertainty": 0.9691,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 365.0,
+        "y_meters": 827.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.479969,
+        "center_lon": 80.24116,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        70,
+        163,
+        76,
+        168
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_067",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.3961,
+    "uncertainty": 0.9686,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 875.0,
+        "y_meters": 822.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.479924,
+        "center_lon": 80.246275,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        172,
+        162,
+        178,
+        167
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_068",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.3595,
+    "uncertainty": 0.9423,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 425.0,
+        "y_meters": 842.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.480104,
+        "center_lon": 80.241762,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        77,
+        154,
+        93,
+        183
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_069",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4005,
+    "uncertainty": 0.9712,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 232.5,
+        "y_meters": 830.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.479991,
+        "center_lon": 80.239832,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        39,
+        154,
+        54,
+        178
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_070",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4406,
+    "uncertainty": 0.9898,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2420.0,
+        "y_meters": 785.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.479585,
+        "center_lon": 80.261769,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        479,
+        153,
+        489,
+        161
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_071",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.4371,
+    "uncertainty": 0.9886,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 660.0,
+        "y_meters": 780.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.47954,
+        "center_lon": 80.244119,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        129,
+        152,
+        135,
+        160
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_072",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.3772,
+    "uncertainty": 0.9561,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1340.0,
+        "y_meters": 775.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.479495,
+        "center_lon": 80.250938,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        265,
+        151,
+        271,
+        159
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_073",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.3493,
+    "uncertainty": 0.9335,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1057.5,
+        "y_meters": 792.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.479653,
+        "center_lon": 80.248105,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        205,
+        146,
+        218,
+        171
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_074",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.3824,
+    "uncertainty": 0.9597,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1262.5,
+        "y_meters": 707.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.478886,
+        "center_lon": 80.250161,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        249,
+        139,
+        256,
+        144
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_075",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4031,
+    "uncertainty": 0.9727,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1730.0,
+        "y_meters": 792.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.479653,
+        "center_lon": 80.25485,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        332,
+        138,
+        360,
+        179
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_076",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.4086,
+    "uncertainty": 0.9758,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 857.5,
+        "y_meters": 707.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.478886,
+        "center_lon": 80.2461,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        168,
+        138,
+        175,
+        145
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_077",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.4287,
+    "uncertainty": 0.9853,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1162.5,
+        "y_meters": 692.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.47875,
+        "center_lon": 80.249158,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        230,
+        135,
+        235,
+        142
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_078",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4387,
+    "uncertainty": 0.9891,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1492.5,
+        "y_meters": 777.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.479517,
+        "center_lon": 80.252468,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        281,
+        133,
+        316,
+        178
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_079",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.3716,
+    "uncertainty": 0.9519,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 762.5,
+        "y_meters": 680.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.478637,
+        "center_lon": 80.245147,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        148,
+        126,
+        157,
+        146
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_080",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.3887,
+    "uncertainty": 0.9639,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2240.0,
+        "y_meters": 622.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.478118,
+        "center_lon": 80.259964,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        444,
+        121,
+        452,
+        128
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_081",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.4898,
+    "uncertainty": 0.9997,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1737.5,
+        "y_meters": 517.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.477171,
+        "center_lon": 80.254925,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        344,
+        98,
+        351,
+        109
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_082",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.3564,
+    "uncertainty": 0.9396,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 277.5,
+        "y_meters": 500.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.477013,
+        "center_lon": 80.240283,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        53,
+        97,
+        58,
+        103
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_083",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.406,
+    "uncertainty": 0.9744,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2135.0,
+        "y_meters": 450.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.476562,
+        "center_lon": 80.258911,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        423,
+        86,
+        431,
+        94
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_084",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.3981,
+    "uncertainty": 0.9698,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1540.0,
+        "y_meters": 535.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.477329,
+        "center_lon": 80.252944,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        284,
+        79,
+        332,
+        135
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_085",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.397,
+    "uncertainty": 0.9692,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1262.5,
+        "y_meters": 380.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.47593,
+        "center_lon": 80.250161,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        250,
+        73,
+        255,
+        79
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_086",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.3982,
+    "uncertainty": 0.9699,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1420.0,
+        "y_meters": 327.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.475456,
+        "center_lon": 80.251741,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        281,
+        63,
+        287,
+        68
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_087",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.3783,
+    "uncertainty": 0.9568,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 217.5,
+        "y_meters": 327.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.475456,
+        "center_lon": 80.239681,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        40,
+        61,
+        47,
+        70
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_088",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.3532,
+    "uncertainty": 0.9369,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1292.5,
+        "y_meters": 312.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.475321,
+        "center_lon": 80.250462,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        253,
+        57,
+        264,
+        68
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_089",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "urban_building_construction",
+    "confidence": 0.4714,
+    "uncertainty": 0.9976,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 967.5,
+        "y_meters": 302.5,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.47523,
+        "center_lon": 80.247203,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        184,
+        51,
+        203,
+        70
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_090",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.403,
+    "uncertainty": 0.9727,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 2180.0,
+        "y_meters": 165.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.473989,
+        "center_lon": 80.259363,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        432,
+        28,
+        440,
+        38
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_091",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "vegetation_clearing",
+    "confidence": 0.4351,
+    "uncertainty": 0.9878,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1005.0,
+        "y_meters": 155.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.473899,
+        "center_lon": 80.247579,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        188,
+        14,
+        214,
+        48
+      ]
+    }
+  },
+  {
+    "schema_version": "v1.0.0",
+    "candidate_id": "cand_sq_levir_092",
+    "image_pair_id": "pair_zoomed_kanpur_panki_industrial",
+    "timestamp": "2023-12-24T05:12:29.024000Z",
+    "predicted_change": "natural_variation",
+    "confidence": 0.4519,
+    "uncertainty": 0.9933,
+    "region": {
+      "crs": "local_meter_grid",
+      "local_grid": {
+        "x_meters": 1180.0,
+        "y_meters": 85.0,
+        "z_meters": 60.0
+      },
+      "coordinates": {
+        "center_lat": 26.473267,
+        "center_lon": 80.249334,
+        "altitude_m": 180.0
+      },
+      "bbox_pixels": [
+        232,
+        11,
+        240,
+        23
+      ]
+    }
+  }
+]
