@@ -1,0 +1,143 @@
+{
+  "hotspot_key": "delhi_cybercity_expressway",
+  "name": "Delhi NCR / Gurugram Cyber City & DLF Commercial Hub",
+  "description": "High-density commercial corridor showing high-rise building foundations, transit walkways, and road infrastructure modifications.",
+  "dates": {
+    "t1": "2020-12-16",
+    "t2": "2024-12-12"
+  },
+  "resolution": "0.59 m/pixel (Sub-meter Ultra-HD)",
+  "subpixel_shift": {
+    "dx_px": -7.67,
+    "dy_px": 10.31
+  },
+  "total_candidates_detected": 317,
+  "total_change_footprint_m2": 131295.0,
+  "total_change_footprint_ha": 13.129,
+  "top_inspections": [
+    {
+      "rank": 1,
+      "candidate_id": "cand_sq_levir_283",
+      "chip_file": "chip_1_cand_sq_levir_283.png",
+      "area_m2": 21014.100799999997,
+      "confidence": 0.4268,
+      "uncertainty": 0.9845,
+      "local_grid": {
+        "x_meters": 185.85,
+        "y_meters": 121.54,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        217,
+        52,
+        413,
+        360
+      ]
+    },
+    {
+      "rank": 2,
+      "candidate_id": "cand_sq_levir_147",
+      "chip_file": "chip_2_cand_sq_levir_147.png",
+      "area_m2": 9210.725999999999,
+      "confidence": 0.4426,
+      "uncertainty": 0.9905,
+      "local_grid": {
+        "x_meters": 287.33,
+        "y_meters": 247.8,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        382,
+        357,
+        592,
+        483
+      ]
+    },
+    {
+      "rank": 3,
+      "candidate_id": "cand_sq_levir_144",
+      "chip_file": "chip_3_cand_sq_levir_144.png",
+      "area_m2": 5892.636799999999,
+      "confidence": 0.4323,
+      "uncertainty": 0.9867,
+      "local_grid": {
+        "x_meters": 371.7,
+        "y_meters": 243.67,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        538,
+        367,
+        722,
+        459
+      ]
+    },
+    {
+      "rank": 4,
+      "candidate_id": "cand_sq_levir_039",
+      "chip_file": "chip_4_cand_sq_levir_039.png",
+      "area_m2": 4370.3955,
+      "confidence": 0.47,
+      "uncertainty": 0.9974,
+      "local_grid": {
+        "x_meters": 39.825,
+        "y_meters": 415.655,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        0,
+        658,
+        135,
+        751
+      ]
+    },
+    {
+      "rank": 5,
+      "candidate_id": "cand_sq_levir_290",
+      "chip_file": "chip_5_cand_sq_levir_290.png",
+      "area_m2": 4134.383699999999,
+      "confidence": 0.4529,
+      "uncertainty": 0.9936,
+      "local_grid": {
+        "x_meters": 407.985,
+        "y_meters": 51.035,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        638,
+        31,
+        745,
+        142
+      ]
+    },
+    {
+      "rank": 6,
+      "candidate_id": "cand_sq_levir_082",
+      "chip_file": "chip_6_cand_sq_levir_082.png",
+      "area_m2": 3435.747,
+      "confidence": 0.4849,
+      "uncertainty": 0.9993,
+      "local_grid": {
+        "x_meters": 160.775,
+        "y_meters": 339.84,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        220,
+        529,
+        325,
+        623
+      ]
+    }
+  ],
+  "output_directory": "E:\\ORBITRA\\SatQuery\\exports\\submeter_change_verification\\delhi_cybercity_expressway",
+  "files": {
+    "pre_image": "delhi_cybercity_expressway_pre_t1.png",
+    "post_image": "delhi_cybercity_expressway_post_t2.png",
+    "change_heatmap": "delhi_cybercity_expressway_change_heatmap.png",
+    "binary_mask": "delhi_cybercity_expressway_binary_mask.png",
+    "annotated_changes": "delhi_cybercity_expressway_change_annotations.png",
+    "ultra_hd_montage": "delhi_cybercity_expressway_ultra_hd_montage.png",
+    "candidates_json": "delhi_cybercity_expressway_candidates.json"
+  }
+}

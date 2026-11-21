@@ -1,0 +1,143 @@
+{
+  "hotspot_key": "kanpur_bhauti_psit",
+  "name": "Kanpur / Bhauti PSIT Campus & NH-19 Corridor",
+  "description": "Ultra-sharp 0.59 m/pixel view directly over PSIT Kanpur campus and the National Highway 19 frontage, revealing individual educational building construction, lane additions, and boundary expansions.",
+  "dates": {
+    "t1": "2020-12-16",
+    "t2": "2024-12-12"
+  },
+  "resolution": "0.59 m/pixel (Sub-meter Ultra-HD)",
+  "subpixel_shift": {
+    "dx_px": 0.98,
+    "dy_px": -1.99
+  },
+  "total_candidates_detected": 204,
+  "total_change_footprint_m2": 195985.9,
+  "total_change_footprint_ha": 19.599,
+  "top_inspections": [
+    {
+      "rank": 1,
+      "candidate_id": "cand_sq_levir_148",
+      "chip_file": "chip_1_cand_sq_levir_148.png",
+      "area_m2": 52549.17599999999,
+      "confidence": 0.3816,
+      "uncertainty": 0.9592,
+      "local_grid": {
+        "x_meters": 75.225,
+        "y_meters": 278.48,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        0,
+        176,
+        255,
+        768
+      ]
+    },
+    {
+      "rank": 2,
+      "candidate_id": "cand_sq_levir_168",
+      "chip_file": "chip_2_cand_sq_levir_168.png",
+      "area_m2": 37754.5779,
+      "confidence": 0.3653,
+      "uncertainty": 0.947,
+      "local_grid": {
+        "x_meters": 250.455,
+        "y_meters": 149.565,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        249,
+        99,
+        600,
+        408
+      ]
+    },
+    {
+      "rank": 3,
+      "candidate_id": "cand_sq_levir_151",
+      "chip_file": "chip_3_cand_sq_levir_151.png",
+      "area_m2": 14968.3,
+      "confidence": 0.3914,
+      "uncertainty": 0.9657,
+      "local_grid": {
+        "x_meters": 402.38,
+        "y_meters": 165.79,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        596,
+        156,
+        768,
+        406
+      ]
+    },
+    {
+      "rank": 4,
+      "candidate_id": "cand_sq_levir_106",
+      "chip_file": "chip_4_cand_sq_levir_106.png",
+      "area_m2": 13322.483199999999,
+      "confidence": 0.3693,
+      "uncertainty": 0.9502,
+      "local_grid": {
+        "x_meters": 305.62,
+        "y_meters": 279.66,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        414,
+        382,
+        622,
+        566
+      ]
+    },
+    {
+      "rank": 5,
+      "candidate_id": "cand_sq_levir_203",
+      "chip_file": "chip_5_cand_sq_levir_203.png",
+      "area_m2": 7847.914499999999,
+      "confidence": 0.3456,
+      "uncertainty": 0.9301,
+      "local_grid": {
+        "x_meters": 39.825,
+        "y_meters": 49.265,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        0,
+        0,
+        135,
+        167
+      ]
+    },
+    {
+      "rank": 6,
+      "candidate_id": "cand_sq_levir_034",
+      "chip_file": "chip_6_cand_sq_levir_034.png",
+      "area_m2": 7804.401999999999,
+      "confidence": 0.3301,
+      "uncertainty": 0.915,
+      "local_grid": {
+        "x_meters": 375.83,
+        "y_meters": 418.31,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        542,
+        650,
+        732,
+        768
+      ]
+    }
+  ],
+  "output_directory": "E:\\ORBITRA\\SatQuery\\exports\\submeter_change_verification\\kanpur_bhauti_psit",
+  "files": {
+    "pre_image": "kanpur_bhauti_psit_pre_t1.png",
+    "post_image": "kanpur_bhauti_psit_post_t2.png",
+    "change_heatmap": "kanpur_bhauti_psit_change_heatmap.png",
+    "binary_mask": "kanpur_bhauti_psit_binary_mask.png",
+    "annotated_changes": "kanpur_bhauti_psit_change_annotations.png",
+    "ultra_hd_montage": "kanpur_bhauti_psit_ultra_hd_montage.png",
+    "candidates_json": "kanpur_bhauti_psit_candidates.json"
+  }
+}

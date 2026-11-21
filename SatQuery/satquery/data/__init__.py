@@ -7,6 +7,7 @@ from .image_resolver import ImagePairResolver, ResolvedImagePair
 from .mission_gallery import MissionGalleryGenerator, compute_shannon_entropy
 from .dashboard_generator import MissionDashboardGenerator
 from .zoomed_scene_loader import ZOOMED_MISSION_HOTSPOTS, ZoomedSceneLoader
+from .submeter_highres_loader import SUBMETER_HOTSPOTS, SubmeterHighresSceneLoader
 
 __all__ = [
     "ChangeDetectionDataset",
@@ -20,4 +21,6 @@ __all__ = [
     "MissionDashboardGenerator",
     "ZOOMED_MISSION_HOTSPOTS",
     "ZoomedSceneLoader",
+    "SUBMETER_HOTSPOTS",
+    "SubmeterHighresSceneLoader",
 ]

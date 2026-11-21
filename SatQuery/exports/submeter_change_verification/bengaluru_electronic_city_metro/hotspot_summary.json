@@ -1,0 +1,143 @@
+{
+  "hotspot_key": "bengaluru_electronic_city_metro",
+  "name": "Bengaluru Electronic City \u2014 Hosur Road Metro Viaduct",
+  "description": "Sub-meter resolution of the elevated Namma Metro Yellow Line viaduct, station superstructures, and tech park infrastructure developments.",
+  "dates": {
+    "t1": "2020-12-16",
+    "t2": "2024-12-12"
+  },
+  "resolution": "0.59 m/pixel (Sub-meter Ultra-HD)",
+  "subpixel_shift": {
+    "dx_px": 1.64,
+    "dy_px": 1.62
+  },
+  "total_candidates_detected": 166,
+  "total_change_footprint_m2": 35812.2,
+  "total_change_footprint_ha": 3.581,
+  "top_inspections": [
+    {
+      "rank": 1,
+      "candidate_id": "cand_sq_levir_148",
+      "chip_file": "chip_1_cand_sq_levir_148.png",
+      "area_m2": 4073.8142999999995,
+      "confidence": 0.4085,
+      "uncertainty": 0.9757,
+      "local_grid": {
+        "x_meters": 35.105,
+        "y_meters": 85.255,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        18,
+        74,
+        101,
+        215
+      ]
+    },
+    {
+      "rank": 2,
+      "candidate_id": "cand_sq_levir_142",
+      "chip_file": "chip_2_cand_sq_levir_142.png",
+      "area_m2": 2628.8511999999996,
+      "confidence": 0.4144,
+      "uncertainty": 0.9788,
+      "local_grid": {
+        "x_meters": 319.19,
+        "y_meters": 83.485,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        477,
+        112,
+        605,
+        171
+      ]
+    },
+    {
+      "rank": 3,
+      "candidate_id": "cand_sq_levir_159",
+      "chip_file": "chip_3_cand_sq_levir_159.png",
+      "area_m2": 2029.0748999999998,
+      "confidence": 0.5252,
+      "uncertainty": 0.9982,
+      "local_grid": {
+        "x_meters": 427.455,
+        "y_meters": 19.765,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        681,
+        0,
+        768,
+        67
+      ]
+    },
+    {
+      "rank": 4,
+      "candidate_id": "cand_sq_levir_132",
+      "chip_file": "chip_4_cand_sq_levir_132.png",
+      "area_m2": 1917.3347999999999,
+      "confidence": 0.4804,
+      "uncertainty": 0.9989,
+      "local_grid": {
+        "x_meters": 302.67,
+        "y_meters": 99.71,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        462,
+        142,
+        564,
+        196
+      ]
+    },
+    {
+      "rank": 5,
+      "candidate_id": "cand_sq_levir_130",
+      "chip_file": "chip_5_cand_sq_levir_130.png",
+      "area_m2": 1483.9502999999997,
+      "confidence": 0.5889,
+      "uncertainty": 0.9771,
+      "local_grid": {
+        "x_meters": 45.725,
+        "y_meters": 110.035,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        53,
+        143,
+        102,
+        230
+      ]
+    },
+    {
+      "rank": 6,
+      "candidate_id": "cand_sq_levir_038",
+      "chip_file": "chip_6_cand_sq_levir_038.png",
+      "area_m2": 1305.3749999999998,
+      "confidence": 0.4672,
+      "uncertainty": 0.9969,
+      "local_grid": {
+        "x_meters": 8.85,
+        "y_meters": 364.325,
+        "z_meters": 60.0
+      },
+      "bbox": [
+        0,
+        555,
+        30,
+        680
+      ]
+    }
+  ],
+  "output_directory": "E:\\ORBITRA\\SatQuery\\exports\\submeter_change_verification\\bengaluru_electronic_city_metro",
+  "files": {
+    "pre_image": "bengaluru_electronic_city_metro_pre_t1.png",
+    "post_image": "bengaluru_electronic_city_metro_post_t2.png",
+    "change_heatmap": "bengaluru_electronic_city_metro_change_heatmap.png",
+    "binary_mask": "bengaluru_electronic_city_metro_binary_mask.png",
+    "annotated_changes": "bengaluru_electronic_city_metro_change_annotations.png",
+    "ultra_hd_montage": "bengaluru_electronic_city_metro_ultra_hd_montage.png",
+    "candidates_json": "bengaluru_electronic_city_metro_candidates.json"
+  }
+}

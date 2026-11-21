@@ -24,7 +24,6 @@ import cv2
 import numpy as np
 from PIL import Image
 
-from ..pipeline import SatQueryPipeline
 from ..vision.georeferencing import MissionGeoreferencer
 from ..schemas.candidate_record import SatQueryCandidateRecord
 
@@ -242,6 +241,7 @@ class ZoomedSceneLoader:
         )
 
         # Run Change Detection Pipeline
+        from ..pipeline import SatQueryPipeline
         pipeline = SatQueryPipeline(georeferencer=geo, threshold=threshold, min_pixel_area=min_pixel_area)
         pair_id = f"pair_zoomed_{hotspot_key}"
         res = pipeline.process_pair(

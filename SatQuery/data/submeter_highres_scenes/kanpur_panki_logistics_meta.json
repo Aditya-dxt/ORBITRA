@@ -1,0 +1,31 @@
+{
+  "hotspot_key": "kanpur_panki_logistics",
+  "name": "Kanpur / Panki Industrial Estate & Logistics Sheds",
+  "description": "High-resolution industrial hub showing individual factory shed erections, roof replacements, and freight logistics earthworks.",
+  "home_coordinates": {
+    "lat": 26.4725,
+    "lon": 80.2375
+  },
+  "zoom": 18,
+  "grid_size": 3,
+  "image_dimensions": [
+    768,
+    768
+  ],
+  "gsd_m_per_px": 0.59,
+  "pre_epoch": {
+    "release_id": 29260,
+    "date": "2020-12-16"
+  },
+  "post_epoch": {
+    "release_id": 16453,
+    "date": "2024-12-12"
+  },
+  "source": "Esri World Imagery Wayback (Maxar / High-Res Aerial Surveys, ~0.59m/pixel)",
+  "bounding_box_wgs84": [
+    80.23590087890625,
+    26.470573022375085,
+    80.24002075195312,
+    26.474260922876052
+  ]
+}

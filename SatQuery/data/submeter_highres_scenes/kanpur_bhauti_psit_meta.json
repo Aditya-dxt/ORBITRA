@@ -1,0 +1,31 @@
+{
+  "hotspot_key": "kanpur_bhauti_psit",
+  "name": "Kanpur / Bhauti PSIT Campus & NH-19 Corridor",
+  "description": "Ultra-sharp 0.59 m/pixel view directly over PSIT Kanpur campus and the National Highway 19 frontage, revealing individual educational building construction, lane additions, and boundary expansions.",
+  "home_coordinates": {
+    "lat": 26.4475,
+    "lon": 80.1975
+  },
+  "zoom": 18,
+  "grid_size": 3,
+  "image_dimensions": [
+    768,
+    768
+  ],
+  "gsd_m_per_px": 0.59,
+  "pre_epoch": {
+    "release_id": 29260,
+    "date": "2020-12-16"
+  },
+  "post_epoch": {
+    "release_id": 16453,
+    "date": "2024-12-12"
+  },
+  "source": "Esri World Imagery Wayback (Maxar / High-Res Aerial Surveys, ~0.59m/pixel)",
+  "bounding_box_wgs84": [
+    80.19607543945312,
+    26.44598399885638,
+    80.2001953125,
+    26.44967268715772
+  ]
+}

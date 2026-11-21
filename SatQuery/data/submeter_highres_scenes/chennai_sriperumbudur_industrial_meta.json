@@ -1,0 +1,31 @@
+{
+  "hotspot_key": "chennai_sriperumbudur_industrial",
+  "name": "Chennai / Sriperumbudur Automotive Manufacturing Zone",
+  "description": "Sub-meter satellite view of industrial automotive manufacturing footprints, assembly shed expansions, and commercial plots.",
+  "home_coordinates": {
+    "lat": 12.9825,
+    "lon": 79.9575
+  },
+  "zoom": 18,
+  "grid_size": 3,
+  "image_dimensions": [
+    768,
+    768
+  ],
+  "gsd_m_per_px": 0.59,
+  "pre_epoch": {
+    "release_id": 29260,
+    "date": "2020-12-16"
+  },
+  "post_epoch": {
+    "release_id": 16453,
+    "date": "2024-12-12"
+  },
+  "source": "Esri World Imagery Wayback (Maxar / High-Res Aerial Surveys, ~0.59m/pixel)",
+  "bounding_box_wgs84": [
+    79.95574951171875,
+    12.980471333463804,
+    79.95986938476562,
+    12.984485897654398
+  ]
+}

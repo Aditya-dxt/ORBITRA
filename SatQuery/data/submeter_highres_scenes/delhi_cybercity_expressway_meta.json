@@ -1,0 +1,31 @@
+{
+  "hotspot_key": "delhi_cybercity_expressway",
+  "name": "Delhi NCR / Gurugram Cyber City & DLF Commercial Hub",
+  "description": "High-density commercial corridor showing high-rise building foundations, transit walkways, and road infrastructure modifications.",
+  "home_coordinates": {
+    "lat": 28.4825,
+    "lon": 77.0775
+  },
+  "zoom": 18,
+  "grid_size": 3,
+  "image_dimensions": [
+    768,
+    768
+  ],
+  "gsd_m_per_px": 0.59,
+  "pre_epoch": {
+    "release_id": 29260,
+    "date": "2020-12-16"
+  },
+  "post_epoch": {
+    "release_id": 16453,
+    "date": "2024-12-12"
+  },
+  "source": "Esri World Imagery Wayback (Maxar / High-Res Aerial Surveys, ~0.59m/pixel)",
+  "bounding_box_wgs84": [
+    77.07595825195312,
+    28.480762902990314,
+    77.080078125,
+    28.484384115665023
+  ]
+}

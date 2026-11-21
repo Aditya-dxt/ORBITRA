@@ -1,0 +1,31 @@
+{
+  "hotspot_key": "bengaluru_electronic_city_metro",
+  "name": "Bengaluru Electronic City \u2014 Hosur Road Metro Viaduct",
+  "description": "Sub-meter resolution of the elevated Namma Metro Yellow Line viaduct, station superstructures, and tech park infrastructure developments.",
+  "home_coordinates": {
+    "lat": 12.8475,
+    "lon": 77.6675
+  },
+  "zoom": 18,
+  "grid_size": 3,
+  "image_dimensions": [
+    768,
+    768
+  ],
+  "gsd_m_per_px": 0.59,
+  "pre_epoch": {
+    "release_id": 29260,
+    "date": "2020-12-16"
+  },
+  "post_epoch": {
+    "release_id": 16453,
+    "date": "2024-12-12"
+  },
+  "source": "Esri World Imagery Wayback (Maxar / High-Res Aerial Surveys, ~0.59m/pixel)",
+  "bounding_box_wgs84": [
+    77.66510009765625,
+    12.845276619410978,
+    77.66921997070312,
+    12.849293356308964
+  ]
+}
